@@ -20,7 +20,14 @@ just fab                # gerbers, drill, BOM, position files into out/fab/
 
 `kicad-cli` is exposed through `bin/kicad-cli` (the AppImage dispatches on the first argument).
 Freerouting (`~/.local/share/freerouting/freerouting-2.4.1.jar`) auto-routes the signal nets;
-all power copper is placed explicitly by `tools/gen_pcb.py`.
+all power copper is placed explicitly by `tools/gen_pcb.py`. During routing `tools/route.py`
+hides the outer GND pours and covers every VS/LOAD/+12V zone with a temporary keep-out so the
+router drops vias to the inner GND plane and never cuts a power strip; the pours come back and
+are refilled afterwards.
+
+**3D view**: standard parts use KiCad's own 3D library (the full AppImage in `mise.toml`
+ships it). The three project footprints have generated VRML bodies in `lib/eswitch.3dshapes`
+(`tools/gen_models.py`); `tools/add_models.py` refreshes them on an already-routed board.
 
 ## Design decisions (from the Q&A)
 
@@ -72,8 +79,10 @@ all power copper is placed explicitly by `tools/gen_pcb.py`.
 3. The Keystone 8196 terminals accept #10 ring lugs; the +12 V lug points toward the top edge,
    the GND lug toward the bottom edge.
 4. Fuse clip pin geometry comes from Keystone drawing 3557 rev H (2 pins on 3.4 mm, 1.6 mm
-   holes, pins 2.1 mm outboard of the blade). Print `lib/eswitch.pretty` at 1:1 and check a
-   real fuse against it before committing to a panel.
+   holes, pins 2.1 mm outboard of the blade). The three blade slots are evenly spaced at
+   9.27 mm; the pad pattern looks uneven only because each clip's pins sit 2.1 mm to one side
+   of its blade (centre clip toward the BYPASS side). Print `lib/eswitch.pretty` at 1:1 and
+   check a real fuse against three loose clips before committing to a panel.
 
 ## Files
 

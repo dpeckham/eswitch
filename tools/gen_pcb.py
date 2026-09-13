@@ -179,6 +179,7 @@ class Board:
         z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL if full else pcbnew.ZONE_CONNECTION_THERMAL)
         z.SetMinThickness(FromMM(min_th))
         z.SetLocalClearance(FromMM(clearance))
+        z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
         z.SetZoneName(f"{net}_{pcbnew.BOARD.GetStandardLayerName(layer)}_{len(list(self.b.Zones()))}")
         self.b.Add(z)
         return z
@@ -278,7 +279,7 @@ def build():
     x_bus_end = CX[7] + 7.62
     bd.rect_zone(pcbnew.F_Cu, "+12V", X_BUS0, Y_BAND[0], x_bus_end, Y_BAND[1], priority=2)
     bd.rect_zone(pcbnew.In2_Cu, "+12V", X_BUS0, Y_BAND[0] - 0.5, x_bus_end, Y_BAND[1] + 0.3, priority=2)
-    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, Y_BAND[0], CELL0 - 0.5, 32.5, priority=2)
+    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, Y_BAND[0], CELL0 - 0.5, 35.0, priority=2)
 
     # ------------------------------------------------------------- I/O parts (top side THT)
     bd.place("J1", CX[0] - 3.81, Y_TERM, 0, "F")
@@ -389,7 +390,9 @@ def build():
     bd.place("D2", 24.5, 39.0, 0, "B")
     bd.place("D3", 32.0, 33.5, 0, "B")
     # USB
-    bd.place("J4", 5.0, 51.5, 90, "B")
+    j4 = bd.place("J4", 5.0, 51.5, 270, "B")
+    # receptacle opening must face the left board edge: the SMD pad row sits at the rear (inboard)
+    assert bd.pad_pos("J4", "A4")[0] > 5.0, "J4 orientation: pad row must be inboard of the connector centre"
     bd.place("U11", 14.0, 47.5, 0, "B")
     bd.place("R7", 13.0, 52.5, 90, "B")
     bd.place("R8", 15.5, 52.5, 90, "B")
@@ -400,8 +403,18 @@ def build():
     bd.text("G 3 T R", 30.5, 46.5, size=0.8, rot=90)
 
     # +12V feed for the logic fuse: B.Cu track from F9 pad 1 into the +12V patch under the stud
-    px, py = bd.pad_pos("F9", "1")
-    bd.track(pcbnew.B_Cu, "+12V", [(px, py), (37.5, py)], 0.6)
+    for ref in ("F9", "D3"):
+        px, py = bd.pad_pos(ref, "1")
+        bd.track(pcbnew.B_Cu, "+12V", [(px, py), (37.5, py)], 0.6)
+    # USB-C: bridge the two VBUS pad pairs behind the pad row (router cannot fit between pads)
+    fp = bd.fps["J4"]
+    c = fp.GetPosition()
+    p4, p9 = bd.pad_pos("J4", "A4"), bd.pad_pos("J4", "A9")
+    mx, my = (p4[0] + p9[0]) / 2, (p4[1] + p9[1]) / 2
+    dx, dy = mx - pcbnew.ToMM(c.x), my - pcbnew.ToMM(c.y)
+    L = (dx * dx + dy * dy) ** 0.5
+    dx, dy = dx / L * 1.3, dy / L * 1.3
+    bd.track(pcbnew.B_Cu, "VBUS", [p4, (p4[0] + dx, p4[1] + dy), (p9[0] + dx, p9[1] + dy), p9], 0.3)
     b.BuildConnectivity()
     filler = pcbnew.ZONE_FILLER(b)
     filler.Fill(b.Zones())

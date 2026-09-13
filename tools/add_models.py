@@ -14,10 +14,10 @@ LIB = os.path.join(ROOT, "lib", "eswitch.pretty")
 b = pcbnew.LoadBoard(PCB)
 n = 0
 for fp in b.GetFootprints():
-    fpid = fp.GetFPID()
-    if fpid.GetLibNickname() != "eswitch":
+    name = str(fp.GetFPID().GetLibItemName())
+    if not os.path.exists(os.path.join(LIB, name + ".kicad_mod")):
         continue
-    src = pcbnew.FootprintLoad(LIB, str(fpid.GetLibItemName()))
+    src = pcbnew.FootprintLoad(LIB, name)
     models = fp.Models()
     models.clear()
     for m in src.Models():

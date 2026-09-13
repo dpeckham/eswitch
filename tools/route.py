@@ -16,6 +16,50 @@ SES = os.path.join(ROOT, "out", "eswitch.ses")
 JAR = os.path.expanduser("~/.local/share/freerouting/freerouting-2.4.1.jar")
 
 
+def stitch_islands(b):
+    """Add a via to every outer-layer GND pour island that has no via or through-hole pad."""
+    FromMM = pcbnew.FromMM
+    vias = [t.GetPosition() for t in b.GetTracks() if t.GetClass() == "PCB_VIA" and t.GetNetname() == "GND"]
+    pth = [p.GetPosition() for fp in b.GetFootprints() for p in fp.Pads()
+           if p.GetNetname() == "GND" and p.GetAttribute() == pcbnew.PAD_ATTRIB_PTH]
+    added = 0
+    for z in list(b.Zones()):
+        if z.GetNetname() != "GND" or z.GetLayer() not in (pcbnew.F_Cu, pcbnew.B_Cu):
+            continue
+        polys = z.GetFilledPolysList(z.GetLayer())
+        for i in range(polys.OutlineCount()):
+            ol = polys.Outline(i)
+            if any(ol.PointInside(p) for p in vias) or any(ol.PointInside(p) for p in pth):
+                continue
+            bb = ol.BBox()
+            best, bestd = None, 0
+            step = FromMM(0.4)
+            x = bb.GetLeft()
+            while x <= bb.GetRight():
+                y = bb.GetTop()
+                while y <= bb.GetBottom():
+                    pt = pcbnew.VECTOR2I(x, y)
+                    if ol.PointInside(pt):
+                        d = ol.Distance(pt)
+                        if d > bestd:
+                            best, bestd = pt, d
+                    y += step
+                x += step
+            if best is None or bestd < FromMM(0.65):
+                continue
+            v = pcbnew.PCB_VIA(b)
+            v.SetPosition(best)
+            v.SetDrill(FromMM(0.35))
+            v.SetWidth(FromMM(0.7))
+            v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+            v.SetNet(z.GetNet())
+            b.Add(v)
+            vias.append(best)
+            added += 1
+    print("island stitching vias added:", added)
+    return added
+
+
 def main():
     passes = int(sys.argv[1]) if len(sys.argv) > 1 else 40
     sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -71,6 +115,10 @@ def main():
         b.Add(z)
     b.BuildConnectivity()
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())
+    n = stitch_islands(b)
+    if n:
+        b.BuildConnectivity()
+        pcbnew.ZONE_FILLER(b).Fill(b.Zones())
     pcbnew.SaveBoard(PCB, b)
     print("routed board saved:", PCB)
 
