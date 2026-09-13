@@ -84,6 +84,14 @@ def apply_rules(b):
         ns.SetNetclassPatternAssignment(pat, "Power")
 
 
+def persist_project_rules(pcb_path):
+    """Reload the board with its project and store constraints/net classes in eswitch.kicad_pro."""
+    b = pcbnew.LoadBoard(pcb_path)
+    apply_rules(b)
+    ok = pcbnew.GetSettingsManager().SaveProject()
+    print("project rules saved:", ok)
+
+
 class Board:
     def __init__(self):
         self.b = pcbnew.BOARD()
@@ -406,21 +414,37 @@ def build():
     for ref in ("F9", "D3"):
         px, py = bd.pad_pos(ref, "1")
         bd.track(pcbnew.B_Cu, "+12V", [(px, py), (37.5, py)], 0.6)
-    # USB-C: bridge the two VBUS pad pairs behind the pad row (router cannot fit between pads)
+    # USB-C pad row (0.5 mm pitch): D+ (A6,B6) and D- (A7,B7) interleave, so tie D+ behind the
+    # row (connector-body side) and D- in front (inboard); VBUS pads A4/A9 are joined on In2.Cu.
     fp = bd.fps["J4"]
     c = fp.GetPosition()
-    p4, p9 = bd.pad_pos("J4", "A4"), bd.pad_pos("J4", "A9")
-    mx, my = (p4[0] + p9[0]) / 2, (p4[1] + p9[1]) / 2
+    P = {n: bd.pad_pos("J4", n) for n in ("A4", "A9", "A5", "B5", "A6", "A7", "B6", "B7")}
+    mx, my = (P["A4"][0] + P["A9"][0]) / 2, (P["A4"][1] + P["A9"][1]) / 2
     dx, dy = mx - pcbnew.ToMM(c.x), my - pcbnew.ToMM(c.y)
     L = (dx * dx + dy * dy) ** 0.5
-    dx, dy = dx / L * 1.3, dy / L * 1.3
-    bd.track(pcbnew.B_Cu, "VBUS", [p4, (p4[0] + dx, p4[1] + dy), (p9[0] + dx, p9[1] + dy), p9], 0.3)
+    ux, uy = dx / L, dy / L                      # unit vector from the row toward the board interior
+
+    def off(pt, d):
+        return (pt[0] + ux * d, pt[1] + uy * d)
+    B = pcbnew.B_Cu
+    bd.track(B, "USB_D+", [P["A6"], off(P["A6"], -1.0), off(P["B6"], -1.0), P["B6"]], 0.25)
+    bd.track(B, "USB_D+", [P["B6"], off(P["B6"], 2.2)], 0.25)
+    bd.track(B, "USB_D-", [P["A7"], off(P["A7"], 1.0), off(P["B7"], 1.0), P["B7"]], 0.25)
+    m7 = ((P["A7"][0] + P["B7"][0]) / 2, (P["A7"][1] + P["B7"][1]) / 2)
+    bd.track(B, "USB_D-", [off(m7, 1.0), off(m7, 2.2)], 0.25)
+    bd.track(B, "CC1", [P["A5"], off(P["A5"], 2.2)], 0.25)
+    bd.track(B, "CC2", [P["B5"], off(P["B5"], 2.2)], 0.25)
+    for n in ("A4", "A9"):
+        bd.track(B, "VBUS", [P[n], off(P[n], 2.9)], 0.3)
+        bd.via("VBUS", *off(P[n], 2.9), 0.7, 0.35)
+    bd.track(pcbnew.In2_Cu, "VBUS", [off(P["A4"], 2.9), off(P["A9"], 2.9)], 0.5)
     b.BuildConnectivity()
     filler = pcbnew.ZONE_FILLER(b)
     filler.Fill(b.Zones())
     nf = sum(1 for z in b.Zones() if z.IsFilled())
     print("zones filled:", nf, "/", len(list(b.Zones())))
     pcbnew.SaveBoard(OUT_PCB, b)
+    persist_project_rules(OUT_PCB)
     print("wrote", OUT_PCB, "footprints:", len(list(b.GetFootprints())), "zones:", len(list(b.Zones())))
     missing = [r for r in bd.comps if r not in bd.fps]
     if missing:

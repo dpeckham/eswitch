@@ -2,7 +2,7 @@
 kicad := "kicad"
 
 # Generate everything: libraries, schematic, netlist check, ERC, board, routing, DRC, renders
-all: libs sch netlist erc pcb route drc render
+all: libs sch netlist erc pcb route finish drc render
 
 libs:
     python3 tools/gen_libs.py
@@ -25,6 +25,13 @@ pcb:
 # Auto-route signal nets with freerouting (passes optional)
 route passes="30":
     {{kicad}} python3.11 tools/route.py {{passes}}
+
+# Post-route clean-up: prune router leftovers, apply manual fix-ups, stitch GND islands
+finish:
+    for i in 1 2 3 4; do {{kicad}} python3.11 tools/finish.py prune && break; done
+    {{kicad}} python3.11 tools/finish.py fix
+    {{kicad}} python3.11 tools/stitch.py
+    {{kicad}} python3.11 tools/add_models.py
 
 drc:
     kicad-cli pcb drc --severity-all --format json -o out/drc.json eswitch.kicad_pcb

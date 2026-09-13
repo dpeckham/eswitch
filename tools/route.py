@@ -23,6 +23,20 @@ def stitch_islands(b):
     pth = [p.GetPosition() for fp in b.GetFootprints() for p in fp.Pads()
            if p.GetNetname() == "GND" and p.GetAttribute() == pcbnew.PAD_ATTRIB_PTH]
     added = 0
+    foreign_tracks = [t for t in b.GetTracks() if t.GetClass() == "PCB_TRACK" and t.GetNetname() != "GND"]
+    foreign_vias = [t.GetPosition() for t in b.GetTracks() if t.GetClass() == "PCB_VIA" and t.GetNetname() != "GND"]
+
+    def clear_of_foreign(pt):
+        need = FromMM(0.3 + 0.25)
+        for t in foreign_tracks:
+            seg = pcbnew.SEG(t.GetStart(), t.GetEnd())
+            if seg.Distance(pt) < need + t.GetWidth() // 2:
+                return False
+        for v in foreign_vias:
+            if (v - pt).EuclideanNorm() < need + FromMM(0.45):
+                return False
+        return True
+
     for z in list(b.Zones()):
         if z.GetNetname() != "GND" or z.GetLayer() not in (pcbnew.F_Cu, pcbnew.B_Cu):
             continue
@@ -33,24 +47,25 @@ def stitch_islands(b):
                 continue
             bb = ol.BBox()
             best, bestd = None, 0
-            step = FromMM(0.4)
+            step = FromMM(0.25)
             x = bb.GetLeft()
             while x <= bb.GetRight():
                 y = bb.GetTop()
                 while y <= bb.GetBottom():
                     pt = pcbnew.VECTOR2I(x, y)
-                    if ol.PointInside(pt):
-                        d = ol.Distance(pt)
+                    if ol.PointInside(pt) and clear_of_foreign(pt):
+                        d = ol.Distance(pt, True)
                         if d > bestd:
                             best, bestd = pt, d
                     y += step
                 x += step
-            if best is None or bestd < FromMM(0.65):
+            if best is None or bestd < FromMM(0.42):
+                print("  island without room for a via at", pcbnew.ToMM(bb.GetLeft()), pcbnew.ToMM(bb.GetTop()))
                 continue
             v = pcbnew.PCB_VIA(b)
             v.SetPosition(best)
-            v.SetDrill(FromMM(0.35))
-            v.SetWidth(FromMM(0.7))
+            v.SetDrill(FromMM(0.3))
+            v.SetWidth(FromMM(0.6))
             v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
             v.SetNet(z.GetNet())
             b.Add(v)
@@ -63,7 +78,7 @@ def stitch_islands(b):
 def main():
     passes = int(sys.argv[1]) if len(sys.argv) > 1 else 40
     sys.path.insert(0, os.path.join(ROOT, "tools"))
-    from gen_pcb import apply_rules
+    from gen_pcb import apply_rules, persist_project_rules
     b = pcbnew.LoadBoard(PCB)
     apply_rules(b)
     if os.path.exists(SES):
@@ -120,6 +135,7 @@ def main():
         b.BuildConnectivity()
         pcbnew.ZONE_FILLER(b).Fill(b.Zones())
     pcbnew.SaveBoard(PCB, b)
+    persist_project_rules(PCB)
     print("routed board saved:", PCB)
 
 
