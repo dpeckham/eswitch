@@ -2,7 +2,7 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "468d6fcd-aa52-4f66-8056-ed0ace0271a2")
+	(uuid "131888ba-6a10-4b90-8bb7-2f44f83e1e92")
 	(paper "A2")
 	(title_block
 		(title "eswitch - 8ch PROFET load switch")
@@ -14112,7 +14112,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6443fd1b-ba4d-42f9-883a-8cfd6495744f"
+				(path "/13021aa0-83d7-4940-b525-df9234c4c64b"
 					(reference "#PWR063")
 					(unit 1)
 				)
@@ -14189,7 +14189,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ed5b8bdc-a1ea-448c-ae86-b12a22beec83"
+				(path "/ae0de1cf-9b19-4cd9-b484-9b3307ecfb96"
 					(reference "#PWR003")
 					(unit 1)
 				)
@@ -14271,6 +14271,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 265.43 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 265.43 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0c53c103-71d4-50a3-9011-ba1f0b4159b7")
 		)
@@ -14279,7 +14301,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/86cff933-29d5-4a9e-a08c-2c77f95b00ee"
+				(path "/db458115-6cd1-434e-b7ba-ee30d5be43ba"
 					(reference "R406")
 					(unit 1)
 				)
@@ -14356,7 +14378,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/44e8a23a-0c5f-4636-a906-cf4a9d2b34ca"
+				(path "/f175c08d-0638-4bb2-b681-6814dc46b03a"
 					(reference "#PWR049")
 					(unit 1)
 				)
@@ -14427,6 +14449,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 386.08 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GRM32ER71H475KA88L"
+			(at 386.08 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5c7dbc82-40ce-514d-830e-177f14976626")
 		)
@@ -14435,7 +14479,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/19254f21-6f53-4eac-add5-ea0c70a5ce8d"
+				(path "/0ea69159-eb4e-48f2-927b-543de924e35d"
 					(reference "C2")
 					(unit 1)
 				)
@@ -14506,6 +14550,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 421.64 176.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-075K1L"
+			(at 421.64 176.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f559cc8a-bfd3-57a6-ad87-8a10bef9a87a")
 		)
@@ -14514,7 +14580,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/13211a2c-11d7-4a04-a7c7-a6fe1ac79dd0"
+				(path "/5d3fdf1b-cffa-432c-a0b7-654be930be64"
 					(reference "R8")
 					(unit 1)
 				)
@@ -14596,6 +14662,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 213.36 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 213.36 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c3c5cdab-dc91-588b-998a-3153d524fa6f")
 		)
@@ -14604,7 +14692,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e72f4761-b3a0-4168-8f35-ba24da046ffb"
+				(path "/7085be60-5300-4ee5-8543-54d8c54fa7fa"
 					(reference "C703")
 					(unit 1)
 				)
@@ -14686,6 +14774,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 255.27 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 255.27 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "62cec0e6-c5a4-5d69-80c8-e6188034a499")
 		)
@@ -14694,7 +14804,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/86a9e708-1372-4c62-9ecf-a7a9e1c515ba"
+				(path "/bca0d367-78e1-458a-adaa-901104f48383"
 					(reference "R803")
 					(unit 1)
 				)
@@ -14776,6 +14886,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 265.43 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 265.43 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4525ed95-a8c6-5376-a68e-335b52302a66")
 		)
@@ -14784,7 +14916,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/9bf89bc4-8fca-4209-b1c8-2fe8bb7d7367"
+				(path "/a53f3f89-0ce9-4656-9e3a-723d13bbd52a"
 					(reference "R404")
 					(unit 1)
 				)
@@ -14861,7 +14993,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8d5d2101-c11e-4a84-900c-b59edb22f810"
+				(path "/31fe9a54-a8ae-4af2-b6d4-20f689adc9b9"
 					(reference "#PWR050")
 					(unit 1)
 				)
@@ -14943,6 +15075,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 63.5 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6b5f21ac-71aa-5314-9ad2-0ffed5e3c147")
 		)
@@ -14990,7 +15133,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/96b538d7-66ee-4a7c-909d-11a8436c756b"
+				(path "/7861b6cd-42b2-418d-9475-b55210b77054"
 					(reference "U1")
 					(unit 1)
 				)
@@ -15067,7 +15210,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/89bafa2c-ab5a-4cb7-828c-ec2d3d25bc32"
+				(path "/f8c62853-3abe-4570-bd46-a5a69ec51eb8"
 					(reference "#PWR021")
 					(unit 1)
 				)
@@ -15144,7 +15287,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/88354f7c-4b50-4b72-b40e-1a3e6622cdaa"
+				(path "/a13854af-54ee-4f5c-a3e9-2105afebff54"
 					(reference "#PWR069")
 					(unit 1)
 				)
@@ -15226,6 +15369,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 130.81 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 130.81 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f70576ec-6ade-5019-8a25-1b5097902f5e")
 		)
@@ -15234,7 +15399,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0bc539be-bedc-4397-a480-7b6089efd02b"
+				(path "/14ddb24b-2e3b-48e1-969b-02192bcb9235"
 					(reference "C602")
 					(unit 1)
 				)
@@ -15311,7 +15476,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6d423d41-9806-412f-8830-143660fc7b69"
+				(path "/696290d5-65ae-45bf-8432-62ae16a50999"
 					(reference "#PWR043")
 					(unit 1)
 				)
@@ -15388,7 +15553,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/aa4a932d-275a-4e95-868a-3aa8bb15b5ca"
+				(path "/ceff05a9-54c0-4686-a47b-ea6ac3316b82"
 					(reference "#PWR002")
 					(unit 1)
 				)
@@ -15466,7 +15631,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3834e0b4-bc05-4e0e-8a1c-7dea420dcddf"
+				(path "/d51625f0-46da-4b19-89d5-4e163de68b54"
 					(reference "#FLG1")
 					(unit 1)
 				)
@@ -15543,7 +15708,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/bc503918-837a-4164-95ad-b9358d0c0959"
+				(path "/22295230-0d14-4225-af3a-e49febb3b96f"
 					(reference "#PWR026")
 					(unit 1)
 				)
@@ -15625,6 +15790,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 240.03 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 240.03 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "3104ceb0-625c-5071-9ed8-ff723ea24a56")
 		)
@@ -15636,7 +15823,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2d13a1da-f5c0-4283-a582-7ebbecf6618c"
+				(path "/168fff50-5ef0-4f7b-8382-812fe6ec2daf"
 					(reference "D801")
 					(unit 1)
 				)
@@ -15718,6 +15905,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 193.04 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 193.04 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "553e32bf-26df-55a5-a200-ca4a1dcc1071")
 		)
@@ -15726,7 +15935,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/41aafb45-9e9a-4e4b-b5ae-29e02bab8164"
+				(path "/a5a20ad1-6a8a-4237-a82e-992fe232fe3d"
 					(reference "R706")
 					(unit 1)
 				)
@@ -15808,6 +16017,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 140.97 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 140.97 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "fb5d77f0-7a01-5030-bd1d-a3eda7489f0f")
 		)
@@ -15816,7 +16047,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7da02220-2004-42cf-ae7f-3c8c0eb79a2d"
+				(path "/084a5794-90cf-49b2-9345-d947eb4f4733"
 					(reference "C203")
 					(unit 1)
 				)
@@ -15893,7 +16124,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5084d390-fb11-42ed-8bdb-408badfcda66"
+				(path "/b1b47ac7-14cf-46c7-b0d3-557915a176ac"
 					(reference "#PWR012")
 					(unit 1)
 				)
@@ -15970,7 +16201,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/964ac39d-3dc2-4146-82a7-c3d61c520048"
+				(path "/41afef85-ecb1-49a2-b200-b88afc52cf04"
 					(reference "#PWR090")
 					(unit 1)
 				)
@@ -16047,7 +16278,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/70db8766-4bf7-4a24-a893-5a00437e631a"
+				(path "/64e71b2e-e13d-4f87-a02c-4e2ecf5f75e7"
 					(reference "#PWR062")
 					(unit 1)
 				)
@@ -16124,7 +16355,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3f618fac-2adc-40e2-be89-1f03a612d46e"
+				(path "/dca53a85-d940-4fcf-9bb7-0ddfa5d702c0"
 					(reference "#PWR059")
 					(unit 1)
 				)
@@ -16201,7 +16432,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1c446ea7-92b1-4237-bec9-3c72de0f3560"
+				(path "/1440c275-2eb2-4695-b3b4-795532dae47b"
 					(reference "#PWR072")
 					(unit 1)
 				)
@@ -16283,6 +16514,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 17.78 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 17.78 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "af1cde54-ec9f-5e60-bf4e-47f31f84f547")
 		)
@@ -16291,7 +16544,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0db1b4c5-e8de-41b2-9b3b-c7052d063aba"
+				(path "/89e07023-e668-434d-9efe-9bef7c5544ab"
 					(reference "R501")
 					(unit 1)
 				)
@@ -16368,7 +16621,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/58f91c5c-6b31-405b-89cf-f3021257edfc"
+				(path "/a979f05a-dd5f-4e87-8010-e114df238cd3"
 					(reference "#PWR083")
 					(unit 1)
 				)
@@ -16445,7 +16698,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a5ceb0f3-0e9b-4998-b65a-6bf13b86c503"
+				(path "/944b6325-5259-4d1e-ae68-2b7ca28ccf78"
 					(reference "#PWR039")
 					(unit 1)
 				)
@@ -16522,7 +16775,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e41da34d-5b7d-4409-b6ae-11a6aea58ac7"
+				(path "/645a7324-6dbb-4214-ad7c-6f2bef2fa49c"
 					(reference "#PWR035")
 					(unit 1)
 				)
@@ -16604,6 +16857,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 120.65 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 120.65 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a2a4650a-9c64-54db-9cd1-52e2b917d574")
 		)
@@ -16612,7 +16887,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b1bfa1fc-01ab-455c-9d08-fe88775edba6"
+				(path "/564722ad-d7ec-4922-a340-d6cb7bc50ece"
 					(reference "R206")
 					(unit 1)
 				)
@@ -16689,7 +16964,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/764a0456-ae81-42bd-ab07-89173f09186e"
+				(path "/8ae4cd8b-6342-4465-a520-feed5b6e648a"
 					(reference "#PWR075")
 					(unit 1)
 				)
@@ -16766,7 +17041,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2732c94e-48ed-44ad-8063-309031b97e23"
+				(path "/a8d0c382-34c0-44ea-a663-29a20ce8c999"
 					(reference "#PWR076")
 					(unit 1)
 				)
@@ -16843,7 +17118,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/48af6a2c-d814-45e7-a737-3ea6368ce256"
+				(path "/d5459a05-128b-40e9-967e-b6c5dda0a8a7"
 					(reference "#PWR089")
 					(unit 1)
 				)
@@ -16920,7 +17195,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/83ffc44c-61c5-4a24-a922-1ee39860ae9e"
+				(path "/e820924d-d09d-4cf2-856b-c668fc84047a"
 					(reference "#PWR068")
 					(unit 1)
 				)
@@ -16997,7 +17272,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8a948bab-d6da-49bd-a325-336f504f4b6d"
+				(path "/b48fe3bf-ac0f-49a7-98bc-c4e13aace39d"
 					(reference "#PWR065")
 					(unit 1)
 				)
@@ -17079,6 +17354,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 140.97 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 140.97 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2771e977-0bd6-51a4-a95d-eb3cc0ce8bf8")
 		)
@@ -17087,7 +17384,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/14a4affd-0eb1-497f-833f-b15bb630e957"
+				(path "/e707f75a-77a5-4eac-aef0-9344fdfa32b5"
 					(reference "R607")
 					(unit 1)
 				)
@@ -17158,6 +17455,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 406.4 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071KL"
+			(at 406.4 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "be407362-fd1b-5057-841c-e70f9586eb04")
 		)
@@ -17166,7 +17485,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/07097673-65be-45ff-99a2-8c0794f1d33c"
+				(path "/17c672e2-5c8d-4f9f-a6bf-d6307b9a6e83"
 					(reference "R9")
 					(unit 1)
 				)
@@ -17243,7 +17562,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ee39157c-6e30-4a31-899e-f8c965c38157"
+				(path "/138df510-c38c-4909-b429-b5ab18e6a878"
 					(reference "#PWR091")
 					(unit 1)
 				)
@@ -17320,7 +17639,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/37158265-d7bf-4691-8d2d-1104bb61ff31"
+				(path "/7bb56fd6-8cbc-4cc1-a486-973a3e26e7ff"
 					(reference "#PWR017")
 					(unit 1)
 				)
@@ -17402,6 +17721,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 255.27 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 255.27 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "cc54f459-def8-55d5-be79-620b86ee58e7")
 		)
@@ -17410,7 +17751,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/fcfb7219-1f50-4b76-bc54-27d1da023c13"
+				(path "/7d78476f-6e7c-4cec-91e3-9ca93c14b5af"
 					(reference "C801")
 					(unit 1)
 				)
@@ -17492,6 +17833,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 265.43 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 265.43 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "62976687-65ef-5fa6-870b-ed074feaa31c")
 		)
@@ -17500,7 +17863,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/91234eef-4ee4-483c-9ecd-0e0e258d4745"
+				(path "/dfd9c6d4-5b6f-4cb2-87e5-c3476780b39e"
 					(reference "R804")
 					(unit 1)
 				)
@@ -17577,7 +17940,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6f1d211a-c232-4afd-8d56-29912eb51882"
+				(path "/a0878c8c-bdde-46dc-a12d-7f0bafd66625"
 					(reference "#PWR008")
 					(unit 1)
 				)
@@ -17654,7 +18017,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/58f35017-8af8-496a-83c8-90bda6365ea2"
+				(path "/349c0ce5-4668-4262-92ac-72012f16eb91"
 					(reference "#PWR092")
 					(unit 1)
 				)
@@ -17736,6 +18099,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 78.74 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 78.74 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7098de23-e01a-59b3-998d-999b387635c4")
 		)
@@ -17744,7 +18129,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/9f7c34b3-3c5e-4101-acd5-ab31bd21995c"
+				(path "/5ac21b89-ba3a-4f6c-8140-51eccaff9b9a"
 					(reference "D102")
 					(unit 1)
 				)
@@ -17826,6 +18211,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 295.91 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 295.91 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4f865423-f75c-5645-9d63-7184540eb7ce")
 		)
@@ -17834,7 +18241,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7c40d920-7704-4f26-9271-d040e96d7ea1"
+				(path "/c40ab5f0-b571-4df1-be80-de8bd6cdc1f8"
 					(reference "D802")
 					(unit 1)
 				)
@@ -17907,7 +18314,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/612cab6b-3b99-442c-849f-794577c2654c"
+				(path "/8aac782e-21c3-4224-a481-90f7f02269b7"
 					(reference "H3")
 					(unit 1)
 				)
@@ -17984,7 +18391,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e4ceb66b-519f-4222-aaff-30314130edf9"
+				(path "/fc1c1d99-7c21-4177-baf2-8724163f2237"
 					(reference "#PWR087")
 					(unit 1)
 				)
@@ -18066,6 +18473,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 151.13 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 151.13 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "04cccedb-49a2-5e7c-b826-5b5a76b068bd")
 		)
@@ -18074,7 +18503,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0f27dd2f-aac9-4395-859e-db660a9b21b6"
+				(path "/f95d0a81-2326-4aa0-ace4-faabf70ea2ee"
 					(reference "D602")
 					(unit 1)
 				)
@@ -18156,6 +18585,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 203.2 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 203.2 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f8b0578d-7689-5c9b-9139-3d1f61888fea")
 		)
@@ -18164,7 +18615,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5e6f53c2-77d5-4539-bf05-a4159ab2c697"
+				(path "/8c72d227-d75e-436a-8ba6-6b0d448b8ae5"
 					(reference "C702")
 					(unit 1)
 				)
@@ -18241,7 +18692,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/67927974-28fd-4768-87c6-7e9edba77d9c"
+				(path "/c759b9c4-1972-4bc4-a34c-f15abb50fe42"
 					(reference "#PWR036")
 					(unit 1)
 				)
@@ -18323,6 +18774,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 22.86 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 22.86 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5bfc3929-10a4-579f-a962-6caa5b8eecbd")
 		)
@@ -18334,7 +18807,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f70a99ca-a3a3-4180-8347-0cea65e4d899"
+				(path "/98998059-cfec-4e50-83db-1ddc4076011f"
 					(reference "D501")
 					(unit 1)
 				)
@@ -18416,6 +18889,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 110.49 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 110.49 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "abedf26e-2596-50cc-9f6e-12b16fbfe54d")
 		)
@@ -18424,7 +18919,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/37f782b5-deb5-4f9d-9734-970af1fb5d03"
+				(path "/59b05556-77ac-4452-830a-4bf82687626a"
 					(reference "C601")
 					(unit 1)
 				)
@@ -18501,7 +18996,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f4830cc9-7f28-4476-a309-a171421154d3"
+				(path "/281e6c00-ee28-46f9-8ddc-d825d6bfa441"
 					(reference "#PWR009")
 					(unit 1)
 				)
@@ -18574,7 +19069,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8eee5ca7-6f38-497a-803a-f1a2a38c12ae"
+				(path "/4c60a625-bad6-40b8-b6d3-254add4067a7"
 					(reference "H4")
 					(unit 1)
 				)
@@ -18656,6 +19151,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 27.94 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 27.94 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "aa78887b-ef0d-537c-be72-1714e7388903")
 		)
@@ -18664,7 +19181,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d6b7a96e-2c25-4000-b3d7-ae7ff636b4ca"
+				(path "/c4bd9290-9789-4ac7-950a-d7d903b9cbc9"
 					(reference "R102")
 					(unit 1)
 				)
@@ -18741,7 +19258,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ed250669-a339-4660-908c-20949262e1de"
+				(path "/583459af-399b-4437-977e-ec7c6f7a672f"
 					(reference "#PWR034")
 					(unit 1)
 				)
@@ -18818,7 +19335,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ab06c747-a09a-453b-997e-752a716b8680"
+				(path "/9dce93e4-4cce-407d-bac7-4d653d1a0673"
 					(reference "#PWR055")
 					(unit 1)
 				)
@@ -18896,7 +19413,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5479a10b-d903-4ad1-b0b4-e71efe8fc8db"
+				(path "/0db3a9be-26b9-4054-87f7-647fa0a05ff3"
 					(reference "#FLG5")
 					(unit 1)
 				)
@@ -18973,7 +19490,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/400b4990-b500-4fc4-97a8-cbb5f05b860b"
+				(path "/848ffe36-da6f-48d7-a64f-5b8fe06566b3"
 					(reference "#PWR023")
 					(unit 1)
 				)
@@ -19050,7 +19567,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/08797702-4d5e-41e8-94a9-2c4995e5bf6b"
+				(path "/635d6891-9f57-494d-a8c8-65fd3c938548"
 					(reference "#PWR085")
 					(unit 1)
 				)
@@ -19127,7 +19644,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5a4a565b-1dc2-40d4-83f1-42b94a39cc1b"
+				(path "/9fe4d09e-392b-4d9c-a85c-36b8331d43e5"
 					(reference "#PWR042")
 					(unit 1)
 				)
@@ -19209,6 +19726,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 48.26 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 48.26 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2cbda265-374d-5df8-9caa-c210a989a673")
 		)
@@ -19217,7 +19756,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f39ebfb3-f861-4285-b4ad-5cb8de9acc8e"
+				(path "/829dd009-7cbe-451f-b8d3-c359cf9f54e8"
 					(reference "R504")
 					(unit 1)
 				)
@@ -19288,7 +19827,18 @@
 				)
 			)
 		)
-		(property "MPN" "GCT USB4105-GF-A"
+		(property "MPN" "USB4105-GF-A"
+			(at 340.36 176.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "GCT"
 			(at 340.36 176.53 0)
 			(hide yes)
 			(show_name no)
@@ -19352,7 +19902,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/71f46f34-124c-4db7-bc80-c7822a3094bc"
+				(path "/8d2b1f39-3548-4ac3-a6fd-d676c9949266"
 					(reference "J4")
 					(unit 1)
 				)
@@ -19429,7 +19979,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/154d4c3d-b86f-4c42-8812-f7b1ff95d716"
+				(path "/930313fc-f35a-4519-b35c-efcbb56386ba"
 					(reference "#PWR015")
 					(unit 1)
 				)
@@ -19511,6 +20061,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 285.75 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 285.75 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "b3e43f6c-7c99-552d-a889-32347520a9e3")
 		)
@@ -19519,7 +20091,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/96fe12c6-c71f-4d20-9344-9cb9850edb89"
+				(path "/5ba35c00-3969-4d73-a1ee-6dc4f41ece85"
 					(reference "R807")
 					(unit 1)
 				)
@@ -19601,6 +20173,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 151.13 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 151.13 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0b0392b8-4e75-5dc6-948e-af6c94709b37")
 		)
@@ -19609,7 +20203,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3e40f04d-d3b4-4a3d-b4a5-b361ce28742b"
+				(path "/429e2aea-1dbe-4859-8ade-696eca5d880c"
 					(reference "D202")
 					(unit 1)
 				)
@@ -19691,6 +20285,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 295.91 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 295.91 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5a314392-95f5-5811-88cb-17f4b53636ec")
 		)
@@ -19699,7 +20315,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/44343fd2-e278-432e-aa6b-8b79d419c970"
+				(path "/20b26dc8-d7e5-433f-b004-24dff0421860"
 					(reference "D402")
 					(unit 1)
 				)
@@ -19781,6 +20397,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 193.04 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 193.04 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0b615bc2-db8a-5397-82f1-89e7cf474deb")
 		)
@@ -19789,7 +20427,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/29c37e4f-56bb-4b9d-859f-31208798b25e"
+				(path "/19f877bf-cda0-4598-9bab-60ca5fd2c943"
 					(reference "R704")
 					(unit 1)
 				)
@@ -19871,6 +20509,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 223.52 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 223.52 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5c9b3ad1-f72a-578e-88e4-aaef3127bf9e")
 		)
@@ -19879,7 +20539,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/874a4082-21a2-48c6-aef8-758e2899e80b"
+				(path "/da4d0f15-7e27-40e3-a344-ba0ad3a1294f"
 					(reference "D302")
 					(unit 1)
 				)
@@ -19956,7 +20616,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7405210f-c563-4d02-9176-c48113817d7b"
+				(path "/77b8f2e2-cc73-45c1-aac3-013ca1febd9f"
 					(reference "#PWR047")
 					(unit 1)
 				)
@@ -20027,7 +20687,18 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 8196"
+		(property "MPN" "8196"
+			(at 386.08 340.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 386.08 340.36 0)
 			(hide yes)
 			(show_name no)
@@ -20043,7 +20714,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/82f615ce-aeef-40f2-96e6-f48cc523ffcf"
+				(path "/98743f0e-b18e-4226-91cb-0da97f4b3bf5"
 					(reference "J2")
 					(unit 1)
 				)
@@ -20120,7 +20791,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2702e4b7-6225-43d9-b052-a37f82bbe2c8"
+				(path "/a288e55f-0323-4ccd-8670-d80610b083ad"
 					(reference "#PWR005")
 					(unit 1)
 				)
@@ -20202,6 +20873,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 90.17 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 90.17 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "cb886c4d-46b1-5ed5-9026-154c56b4cd7d")
 		)
@@ -20210,7 +20903,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/73cea9f3-c604-409a-89d4-b3ab3b7e2437"
+				(path "/f372509c-1476-475f-ab03-46035d7938a6"
 					(reference "R601")
 					(unit 1)
 				)
@@ -20287,7 +20980,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7b253ccb-55da-4186-9a3b-748be5b33aab"
+				(path "/4db18997-c47c-418c-a9b8-678be10f4d54"
 					(reference "#PWR077")
 					(unit 1)
 				)
@@ -20369,6 +21062,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 120.65 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 120.65 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "3deef7eb-e4b2-573f-9871-86b0974d694e")
 		)
@@ -20377,7 +21092,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8dd10dd8-e006-4112-a40e-e6f53254e091"
+				(path "/3e496294-3416-46f5-b7c2-84597b6632ca"
 					(reference "R606")
 					(unit 1)
 				)
@@ -20459,6 +21174,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 245.11 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 245.11 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7c8be772-e905-5b49-883d-45f89a64c4e2")
 		)
@@ -20467,7 +21204,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/bb27718d-9cf3-42bc-90af-bf2c6cd15abe"
+				(path "/28af41a1-62d6-4425-8ee0-c2079c1e6cd5"
 					(reference "R802")
 					(unit 1)
 				)
@@ -20538,6 +21275,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 365.76 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10B105KO8NNNC"
+			(at 365.76 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6280478a-4a46-54be-85ce-8a49ead89ef1")
 		)
@@ -20546,7 +21305,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/94a7abe4-d4a0-4262-b070-c99b54c007d0"
+				(path "/fd0e59ca-3f73-4efb-b003-423db106734d"
 					(reference "C11")
 					(unit 1)
 				)
@@ -20628,6 +21387,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 68.58 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 68.58 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "3d796b7e-0f05-5b38-8313-e4b27a943b98")
 		)
@@ -20636,7 +21417,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6db0f107-2f11-4f6d-95c0-4596a5bbc68a"
+				(path "/11c6c862-19f7-4ba9-9663-0da28cabe699"
 					(reference "C103")
 					(unit 1)
 				)
@@ -20713,7 +21494,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/cfe9d7d3-549c-48e3-b34a-833aa6b0e16c"
+				(path "/1a4cfe2f-d2ba-442a-a962-7f0fdaf6fa01"
 					(reference "#PWR010")
 					(unit 1)
 				)
@@ -20795,6 +21576,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 63.5 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6d4f41a1-b5b6-50ea-b64f-05d2c181de28")
 		)
@@ -20842,7 +21634,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/beaf1548-ec13-4a65-9e36-fe895ba89cd7"
+				(path "/4a15f734-c3b0-4b34-a1e4-cb8637606af0"
 					(reference "U5")
 					(unit 1)
 				)
@@ -20913,6 +21705,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 403.86 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-073K9L"
+			(at 403.86 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "70a635e2-18c7-5a42-9ad9-9fa9a152f2f5")
 		)
@@ -20921,7 +21735,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/bdab8754-16d7-4844-9ca6-c3fb35b6ad02"
+				(path "/fe547c77-1471-487b-9a67-af45430370c1"
 					(reference "R4")
 					(unit 1)
 				)
@@ -21003,6 +21817,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 167.64 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 167.64 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c5d4cd02-73ac-5fa4-b352-629204c829d5")
 		)
@@ -21014,7 +21850,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/69c10142-defb-4902-a60a-173e03d62720"
+				(path "/8f112204-8799-49ba-9a76-993eff16f578"
 					(reference "D701")
 					(unit 1)
 				)
@@ -21091,7 +21927,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7fe5603a-d498-429e-8072-6d6743aa2461"
+				(path "/9af3806d-7a0a-47e5-ba47-7dda0139e595"
 					(reference "#PWR027")
 					(unit 1)
 				)
@@ -21173,6 +22009,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 68.58 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 68.58 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1ef214a9-ed85-5215-bee2-bd5dad1243c8")
 		)
@@ -21181,7 +22039,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/866ee9d8-747c-4593-956a-99019c3d9d5e"
+				(path "/0a12a7fa-fd91-48dd-a481-babc193579d0"
 					(reference "R107")
 					(unit 1)
 				)
@@ -21258,7 +22116,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/57df5991-9820-484d-aebf-79fbc8853438"
+				(path "/0acee40f-56df-4dcb-a8c4-94fb16224fe6"
 					(reference "#PWR004")
 					(unit 1)
 				)
@@ -21335,7 +22193,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/02e622da-5ec9-4d32-9d0f-bb1437f49265"
+				(path "/d2f56ffb-1540-41d2-b8e3-f7ddb39bbcc2"
 					(reference "#PWR038")
 					(unit 1)
 				)
@@ -21417,6 +22275,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 17.78 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 17.78 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "49d42941-1826-50e6-9cf4-8776e3fe787c")
 		)
@@ -21425,7 +22305,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2b4ae2f3-9a23-4cc4-9354-65dae3a37e90"
+				(path "/046b2630-de46-4c41-9d2e-f814d1733c06"
 					(reference "R101")
 					(unit 1)
 				)
@@ -21507,6 +22387,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 355.6 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B360-13-F"
+			(at 355.6 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "efa85a80-9112-58a5-9306-024352b5a816")
 		)
@@ -21515,7 +22417,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d1e47a96-868d-4265-a2f0-b528a2915366"
+				(path "/ff603606-2907-4345-977b-10a6630d0e73"
 					(reference "D2")
 					(unit 1)
 				)
@@ -21592,7 +22494,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/254fb623-98ff-4115-a132-7e93dbbb61f3"
+				(path "/c560cab9-202f-4cac-b647-344b35959b76"
 					(reference "#PWR018")
 					(unit 1)
 				)
@@ -21669,7 +22571,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/9f600e90-2cc9-48f4-ad8d-c43f998f033c"
+				(path "/cfe2415e-236d-4915-af4c-700d166398ef"
 					(reference "#PWR060")
 					(unit 1)
 				)
@@ -21751,6 +22653,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 48.26 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 48.26 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "928165e4-6398-5268-bed5-d07a3b59b983")
 		)
@@ -21759,7 +22683,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/dae5b6f3-96be-469e-a5a0-4cb5da2d7013"
+				(path "/9d3a0576-a85b-4a26-b863-2c563fb558bb"
 					(reference "R104")
 					(unit 1)
 				)
@@ -21841,6 +22765,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 213.36 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 213.36 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "924795f0-bdd1-5c21-a88d-80e8c0716504")
 		)
@@ -21849,7 +22795,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ef7f40c0-59a1-469d-be06-cbbb94fb3a6a"
+				(path "/f47acab3-1241-4373-ace2-c4048dae7bd4"
 					(reference "R307")
 					(unit 1)
 				)
@@ -21926,7 +22872,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0c4855bb-ac4c-41ef-8484-3ee8b4c75bca"
+				(path "/dbf97eb1-1d98-4a5b-80af-2f225c23931e"
 					(reference "#PWR093")
 					(unit 1)
 				)
@@ -22003,7 +22949,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4e3c4eaf-c3ed-4244-97c4-ba854112d413"
+				(path "/2f48cbd2-536c-4585-be1e-94732cd29f54"
 					(reference "#PWR053")
 					(unit 1)
 				)
@@ -22085,6 +23031,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 193.04 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 193.04 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "073d1c16-1d9a-580a-9087-06410e376ddd")
 		)
@@ -22093,7 +23061,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/18f24468-d63f-4214-8023-698f5fb15a01"
+				(path "/a2673140-0fda-434c-bab9-075a95eab47c"
 					(reference "R304")
 					(unit 1)
 				)
@@ -22175,6 +23143,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 172.72 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 172.72 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5ffcb781-4709-5f4b-9e2f-4cb4099b01ec")
 		)
@@ -22183,7 +23173,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/41683398-e12f-420f-9f7e-b68254fac4b2"
+				(path "/5e107366-47ec-4e83-b0ea-f8e3d575bcf9"
 					(reference "R702")
 					(unit 1)
 				)
@@ -22265,6 +23255,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 182.88 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 182.88 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1c3431a8-7aef-52b3-add7-82bab7408480")
 		)
@@ -22273,7 +23285,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/fafeab7f-8004-4473-8637-e6a569c237b7"
+				(path "/c1cae190-2eab-4e89-9376-bcf8a69cceb4"
 					(reference "C301")
 					(unit 1)
 				)
@@ -22350,7 +23362,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/81f1222b-92ca-432c-97b0-06fa1f09ec15"
+				(path "/6d83d39b-dfc3-44cd-bef7-d84057699d95"
 					(reference "#PWR070")
 					(unit 1)
 				)
@@ -22432,6 +23444,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 182.88 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 182.88 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "bc22aebd-9c1b-50a6-a67f-82869bddca90")
 		)
@@ -22440,7 +23474,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7c637ccd-477b-42ec-aa8e-37dd3c327112"
+				(path "/6cb06d6f-5649-4b61-9b90-8b026e0ec2a5"
 					(reference "R703")
 					(unit 1)
 				)
@@ -22522,6 +23556,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 203.2 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 203.2 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "feecdd82-b435-5219-b057-30f283e72bf7")
 		)
@@ -22530,7 +23586,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/47f4068c-c672-4f5c-ba32-148694676e23"
+				(path "/f77fadbd-f8a5-4a96-b237-b1f1a9597e43"
 					(reference "R305")
 					(unit 1)
 				)
@@ -22612,6 +23668,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 48.26 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 48.26 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "34f5fd4f-ec51-5b71-a0da-b0fdd59b1a4e")
 		)
@@ -22620,7 +23698,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7ae7106b-1054-4db4-8ff6-ecf89f482cb4"
+				(path "/dc4e23a6-e9ac-4f43-8ec3-641877f90646"
 					(reference "R106")
 					(unit 1)
 				)
@@ -22702,6 +23780,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 130.81 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 130.81 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5eaec07e-33a6-5280-a1db-9f0d0033d775")
 		)
@@ -22710,7 +23810,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8af7b5a4-64fe-4794-ab92-d161a2bad9ec"
+				(path "/de4f0dfe-74e5-4228-9817-1d5bb069d8f7"
 					(reference "R605")
 					(unit 1)
 				)
@@ -22792,6 +23892,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 110.49 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 110.49 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c3479f7c-54f0-5e27-90c4-653579d37187")
 		)
@@ -22800,7 +23922,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2d1eed75-53f3-4e66-a1e6-1407b42a7b21"
+				(path "/962bb35c-2372-4a1b-ae76-94ec9d272bbd"
 					(reference "R603")
 					(unit 1)
 				)
@@ -22882,6 +24004,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 68.58 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 68.58 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7fa66aca-b07a-5958-9d5c-8173fb724bb3")
 		)
@@ -22890,7 +24034,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b55bee9d-e361-498f-b9db-3dc4494f1997"
+				(path "/257621c4-713c-4fb8-95af-c59a794951b9"
 					(reference "C503")
 					(unit 1)
 				)
@@ -22961,6 +24105,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 396.24 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GRM32ER71A226KE20L"
+			(at 396.24 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "715ac9ef-5600-5ea8-8eee-f3f43df9b15a")
 		)
@@ -22969,7 +24135,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/c3533a85-f6f2-4b9c-be3d-2729b8271be5"
+				(path "/1b7f8ba0-44ee-422d-9be3-aa07d39559b5"
 					(reference "C8")
 					(unit 1)
 				)
@@ -23046,7 +24212,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7c3292c9-cbb9-4891-8ca8-0ac4e74e974e"
+				(path "/f9a371e1-0d09-43f8-a894-5bc10660d188"
 					(reference "#PWR037")
 					(unit 1)
 				)
@@ -23128,6 +24294,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 95.25 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 95.25 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "367748c9-09c7-51b0-bbfd-5819c87b9fd6")
 		)
@@ -23139,7 +24327,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/15a7299b-4a7a-44ee-84a6-cfb8845bffd9"
+				(path "/e4498f16-d69d-4164-8cd7-3e7320f36c19"
 					(reference "D201")
 					(unit 1)
 				)
@@ -23210,7 +24398,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 170.18 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -23221,7 +24409,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 170.18 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 170.18 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -23243,7 +24442,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ec4413fb-1253-485a-98b3-02237ba3a7ad"
+				(path "/1bf7ef82-bc65-46be-a69f-75f8a652c75c"
 					(reference "F7")
 					(unit 1)
 				)
@@ -23325,6 +24524,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 22.86 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 22.86 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "64cfa036-6e5c-5ab0-b5da-968de969ffc6")
 		)
@@ -23336,7 +24557,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1bbb1627-7916-493e-aa8f-86f02549c9d4"
+				(path "/0ba9b3ae-c7bb-46fc-ab84-1bb9ff9c920f"
 					(reference "D101")
 					(unit 1)
 				)
@@ -23418,6 +24639,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "C&K"
+			(at 396.24 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "b05a2ef1-6c82-5333-8351-99cd7169e96a")
 		)
@@ -23426,7 +24658,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b6d92a65-0d29-45bc-b06f-6574153c2a22"
+				(path "/7cb29392-be62-45a0-814f-90ffc80cf8e6"
 					(reference "SW2")
 					(unit 1)
 				)
@@ -23508,6 +24740,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 58.42 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 58.42 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "876fb867-9f92-5bd6-9240-e3085ebd83cf")
 		)
@@ -23516,7 +24770,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1db16f3d-7a92-4fe0-b2a6-c7514ba4fdc3"
+				(path "/b9820669-e222-4480-b0ab-92dd9871bd6f"
 					(reference "R505")
 					(unit 1)
 				)
@@ -23593,7 +24847,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/90ff863b-d8eb-4472-b48f-785c04af7c4e"
+				(path "/6c70d207-1217-44a9-8b23-09aae9c06bd0"
 					(reference "#PWR044")
 					(unit 1)
 				)
@@ -23675,6 +24929,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 110.49 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 110.49 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0d21e776-d7e2-53ae-b89b-e608551f2a3b")
 		)
@@ -23683,7 +24959,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/81df534c-2163-41f3-8967-16138c7506bc"
+				(path "/b29e5c9f-5aef-46b9-bde1-508747c69635"
 					(reference "C201")
 					(unit 1)
 				)
@@ -23765,6 +25041,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 208.28 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ac38d614-fe5a-5364-9862-1528dfc281a1")
 		)
@@ -23812,7 +25099,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/91682c81-0346-4faa-bb33-78d6897e482b"
+				(path "/93715891-8b7c-4c76-8f50-6d92d5732c92"
 					(reference "U7")
 					(unit 1)
 				)
@@ -23894,6 +25181,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 110.49 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 110.49 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "015ebf80-8761-59d1-a481-174218a04f9b")
 		)
@@ -23902,7 +25211,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/baf75eac-7342-4cb1-a988-3404824490b8"
+				(path "/e01c537a-0377-4641-ad95-9517714da540"
 					(reference "R203")
 					(unit 1)
 				)
@@ -23979,7 +25288,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e2344ca1-1762-469e-9c96-400ce6f78cd2"
+				(path "/fe40d5f5-f3f3-4ead-a3c8-bf9be1aa8872"
 					(reference "#PWR001")
 					(unit 1)
 				)
@@ -24050,6 +25359,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 411.48 176.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-075K1L"
+			(at 411.48 176.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c21ab53d-a7f5-5fb1-a8f0-570529fce557")
 		)
@@ -24058,7 +25389,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f3463887-e105-4c1b-8e6d-a6c8e7805962"
+				(path "/16b041b6-7b5c-4f60-b0b1-c84915e61458"
 					(reference "R7")
 					(unit 1)
 				)
@@ -24135,7 +25466,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/cdf79c86-8241-4fc1-8d4c-1db3f4b45a93"
+				(path "/ad782b34-861f-4ba4-a3b5-426748ccee1a"
 					(reference "#PWR057")
 					(unit 1)
 				)
@@ -24217,6 +25548,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 167.64 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 167.64 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "cbf735b1-850c-5d83-a84c-2996c742ea5b")
 		)
@@ -24228,7 +25581,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2661b29a-2ac7-42dd-97b1-78aa2e45575a"
+				(path "/4151e76e-62f0-45b5-b38e-73a3c57377e3"
 					(reference "D301")
 					(unit 1)
 				)
@@ -24305,7 +25658,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/df7f37f5-dbde-4e60-9ea0-70d6e6b32de0"
+				(path "/e5d7a001-7cb8-4c91-851b-c18d9f2c598d"
 					(reference "#PWR022")
 					(unit 1)
 				)
@@ -24387,6 +25740,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 58.42 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 58.42 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "756645e4-968d-5cd3-99bd-5b068a216199")
 		)
@@ -24395,7 +25770,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8848f815-6992-4941-9a1a-9b07d9e1e34b"
+				(path "/0248eb65-321b-448a-b6e1-d7e20ae4aeed"
 					(reference "R105")
 					(unit 1)
 				)
@@ -24477,6 +25852,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 162.56 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 162.56 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f43e20f8-d826-504b-9422-aec13e646b3d")
 		)
@@ -24485,7 +25882,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/74080ee7-0071-4a99-a5a5-15128a8cd39d"
+				(path "/565693c4-5d73-4d79-b386-32468a4aba90"
 					(reference "R301")
 					(unit 1)
 				)
@@ -24562,7 +25959,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b302272d-14a2-4631-ae8e-6dec0ca05967"
+				(path "/576299e8-7c28-420c-b56a-06c0b1f4ab63"
 					(reference "#PWR011")
 					(unit 1)
 				)
@@ -24644,6 +26041,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 58.42 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 58.42 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0a99dfe1-f225-5dd3-b902-5332e092ecee")
 		)
@@ -24652,7 +26071,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/bbee666a-4fea-483c-a1d8-7cb1e538dd27"
+				(path "/df2fd8d8-fff4-4ba0-af6c-84f00240a4fb"
 					(reference "C102")
 					(unit 1)
 				)
@@ -24734,6 +26153,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 162.56 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 162.56 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5cfa15a1-ade6-5670-886e-a4acb7156505")
 		)
@@ -24742,7 +26183,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8a6a22a3-3c90-460f-a453-8eb6b80b1003"
+				(path "/fd4e186a-d6ee-4cb8-b1a3-6f904c036d93"
 					(reference "R701")
 					(unit 1)
 				)
@@ -24819,7 +26260,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/096ab33e-e754-4e84-89bf-efe02d3c572c"
+				(path "/f2f60b5b-9e85-42e7-9b9a-fc25c0ff1183"
 					(reference "#PWR058")
 					(unit 1)
 				)
@@ -24896,7 +26337,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1b4dbbf4-579a-4191-abc4-d4d4834fef74"
+				(path "/09972b5b-dd31-4166-85bd-a7a8c74d143a"
 					(reference "#PWR064")
 					(unit 1)
 				)
@@ -24978,6 +26419,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 95.25 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 95.25 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6954cbd4-74cd-53d5-b61c-d05c4dbedba9")
 		)
@@ -24989,7 +26452,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/262c685f-f5de-4bb5-b046-96b75220f499"
+				(path "/4d6a59f2-a6aa-4a36-8f10-583986167c48"
 					(reference "D601")
 					(unit 1)
 				)
@@ -25066,7 +26529,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3f351726-2a51-4231-9731-856738aad279"
+				(path "/ebf4793d-065a-4832-940a-5b87bf77db62"
 					(reference "#PWR033")
 					(unit 1)
 				)
@@ -25148,6 +26611,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 27.94 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 27.94 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1f733adf-8653-51c0-8337-75f0aa3b1b52")
 		)
@@ -25156,7 +26641,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/99abbd57-47c3-4e37-ad6e-41dfe2afacec"
+				(path "/a6aafbfc-4730-462f-b923-9d7822f1b488"
 					(reference "R502")
 					(unit 1)
 				)
@@ -25238,6 +26723,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 130.81 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 130.81 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1c5a7954-17e5-5254-8b09-e8638cd10edf")
 		)
@@ -25246,7 +26753,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/af5eb4a5-0f1e-4b02-8660-0904f770e0a4"
+				(path "/21e14aab-6063-4dea-9660-2b59f24c4873"
 					(reference "R205")
 					(unit 1)
 				)
@@ -25323,7 +26830,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5ad8fdb3-959b-48e3-9fa8-0851eab6ac79"
+				(path "/d49b61e2-6192-44be-984e-a1decb2f2990"
 					(reference "#PWR025")
 					(unit 1)
 				)
@@ -25400,7 +26907,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5f103836-f2e5-40b1-ba0c-3d4d8c9dad97"
+				(path "/7377ae8d-2310-490a-b4d8-31a737a97cde"
 					(reference "#PWR006")
 					(unit 1)
 				)
@@ -25471,7 +26978,18 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 8196"
+		(property "MPN" "8196"
+			(at 386.08 350.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 386.08 350.52 0)
 			(hide yes)
 			(show_name no)
@@ -25487,7 +27005,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d55108b2-a4b3-4a6b-ae7b-3b3721dba87a"
+				(path "/625e4c1a-704e-4863-87d8-36f2ca720f18"
 					(reference "J3")
 					(unit 1)
 				)
@@ -25564,7 +27082,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ff7ab278-8a0f-4369-8a03-ed9793afc9d0"
+				(path "/c712c3e4-0f35-447e-b041-707f5ec92ab9"
 					(reference "#PWR078")
 					(unit 1)
 				)
@@ -25646,6 +27164,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 140.97 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 140.97 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "56786e4d-d00b-5709-8c25-ab87cf9bbe0e")
 		)
@@ -25654,7 +27194,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/94479177-1574-4385-8789-3d4cf9882384"
+				(path "/5e89dcfd-5f67-4f54-96f4-2ca35b1ebdce"
 					(reference "C603")
 					(unit 1)
 				)
@@ -25731,7 +27271,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1885bdce-9e44-451c-8181-df719d67ac49"
+				(path "/e7c0ec6b-61c6-4a99-a61c-945589c60333"
 					(reference "#PWR088")
 					(unit 1)
 				)
@@ -25808,7 +27348,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/27b8fe91-df7e-47bb-b06c-885305950047"
+				(path "/54d60ea2-b0d3-4325-9acd-2d5416eebf1b"
 					(reference "#PWR061")
 					(unit 1)
 				)
@@ -25879,6 +27419,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 335.28 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21A106KPFNNNE"
+			(at 335.28 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a51c0e7c-b16c-5e4b-b56a-04cbb6d16035")
 		)
@@ -25887,7 +27449,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b545b708-556a-4a22-8550-24a611fccd6b"
+				(path "/753d0b3f-338f-4e1f-9b0b-2766037bb193"
 					(reference "C9")
 					(unit 1)
 				)
@@ -25964,7 +27526,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f160ec99-6cea-478b-93b6-86c4fbeca201"
+				(path "/d131dbd2-8983-4a62-a458-5e7f415c90d6"
 					(reference "#PWR040")
 					(unit 1)
 				)
@@ -26041,7 +27603,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5c459bec-8c5f-4f48-8980-4278ecb1cf04"
+				(path "/2e822ea5-4bdb-4330-8c34-0a43db8e4e25"
 					(reference "#PWR052")
 					(unit 1)
 				)
@@ -26123,6 +27685,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 436.88 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "61300411121"
+			(at 436.88 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "de6121ab-9356-5b92-a076-827688ebc53b")
 		)
@@ -26137,7 +27721,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8092282e-8d4d-4221-8128-4a9990eaa6d2"
+				(path "/926233d9-a46b-4073-8fee-1b1989ab2516"
 					(reference "J5")
 					(unit 1)
 				)
@@ -26219,6 +27803,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "C&K"
+			(at 375.92 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d46f12a1-2663-5059-9a58-02f102b78ffc")
 		)
@@ -26227,7 +27822,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a361aa07-3bfa-4f69-92e3-0860eb318a5f"
+				(path "/cf577d20-7b48-47f4-8c50-fcfb0e4579a8"
 					(reference "SW1")
 					(unit 1)
 				)
@@ -26304,7 +27899,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ff0da6b2-db43-4315-82d3-0b2053438869"
+				(path "/e4d91b40-5b57-41c1-9a7e-4f5629882410"
 					(reference "#PWR028")
 					(unit 1)
 				)
@@ -26386,6 +27981,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 265.43 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 265.43 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8010b1f5-53aa-59f3-a971-a483979c7ebf")
 		)
@@ -26394,7 +28011,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2b1c856d-335a-4d62-8caf-81b8b106068c"
+				(path "/f11824c4-a720-482e-97d8-24b4d9ce8adc"
 					(reference "R806")
 					(unit 1)
 				)
@@ -26476,6 +28093,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 100.33 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 100.33 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f14bd7af-c42d-54da-954f-e6a6dcd3f90e")
 		)
@@ -26484,7 +28123,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/da185014-1e7f-41e2-9228-d399f21976b3"
+				(path "/ac5a9f40-00f1-4f8b-944b-3ee19279d8d4"
 					(reference "R602")
 					(unit 1)
 				)
@@ -26566,6 +28205,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 275.59 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 275.59 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ebc53e5c-2f23-5872-b136-d1872874ef51")
 		)
@@ -26574,7 +28235,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ccfee063-53cc-4d4d-acab-6d5f19d8393c"
+				(path "/773a41a6-22ef-4ad2-85fa-566f66433580"
 					(reference "C802")
 					(unit 1)
 				)
@@ -26647,7 +28308,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b836aaca-da51-4d40-a798-03245ecd25c3"
+				(path "/afcdfffe-7585-4a4b-9fcd-68d4af166e39"
 					(reference "H1")
 					(unit 1)
 				)
@@ -26724,7 +28385,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/766252ec-9447-4268-b50b-d27bbbda9bc8"
+				(path "/8f6d4d78-8713-4869-8898-e174e1c54496"
 					(reference "#PWR019")
 					(unit 1)
 				)
@@ -26806,6 +28467,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 38.1 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 38.1 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "19bd4f79-27ab-5189-95e3-7adfc94cb209")
 		)
@@ -26814,7 +28497,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/efa3cec3-f068-49f0-9198-37e7da70eecd"
+				(path "/a9e30c13-97e1-4f19-9606-ab585d26cbac"
 					(reference "R503")
 					(unit 1)
 				)
@@ -26896,6 +28579,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 203.2 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 203.2 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6cdf70bc-b9f1-5f06-acbd-3c50066cdbc4")
 		)
@@ -26904,7 +28609,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a65c18b0-1a5e-433e-a855-e02fc40627e4"
+				(path "/2a321d68-afba-4cc3-ac73-411f14c8354d"
 					(reference "R705")
 					(unit 1)
 				)
@@ -26981,7 +28686,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/60e00536-15cb-4bdb-bc6c-7f368fd7f50e"
+				(path "/84283b72-342b-4ac7-8310-2ba21350895e"
 					(reference "#PWR080")
 					(unit 1)
 				)
@@ -27052,6 +28757,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 386.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710KL"
+			(at 386.08 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "eb3f5529-47e4-522b-bae6-96f28e85e5d4")
 		)
@@ -27060,7 +28787,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d00e0a74-c394-4382-8ddb-aa51bfed1ad1"
+				(path "/48ea79bf-174c-433d-8fa4-85e53fd2968d"
 					(reference "R6")
 					(unit 1)
 				)
@@ -27142,6 +28869,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 38.1 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 38.1 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "fb4f9ce2-b25d-5c67-a959-7596064beb51")
 		)
@@ -27150,7 +28899,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/462ee750-c3f1-40ae-9d9f-f0b04b7f8438"
+				(path "/e57aac39-26b4-4ec3-b684-05ac09682c68"
 					(reference "C501")
 					(unit 1)
 				)
@@ -27227,7 +28976,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/86b0a887-3cfc-4424-86c4-f007997082da"
+				(path "/05cfd5fd-fa39-42ec-83f3-28511002b1c0"
 					(reference "#PWR031")
 					(unit 1)
 				)
@@ -27304,7 +29053,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/05cec95a-7dbd-459b-bb14-3d54e7f73bea"
+				(path "/707e95d1-c4f4-43e7-83e5-739a5a3b068c"
 					(reference "#PWR067")
 					(unit 1)
 				)
@@ -27386,6 +29135,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 355.6 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B360-13-F"
+			(at 355.6 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "974208fc-1b84-583c-a188-e489b6c49352")
 		)
@@ -27394,7 +29165,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/eb2b20e8-3d9f-4e2f-afb2-4ecf3015d26d"
+				(path "/0654b8a6-60d3-4928-9e74-2a5f34472af2"
 					(reference "D4")
 					(unit 1)
 				)
@@ -27476,6 +29247,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 255.27 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 255.27 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0de2d8b4-090a-5f93-b0eb-ee5b1bd2b5ad")
 		)
@@ -27484,7 +29277,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a03a7175-13a5-456a-b2e9-615d12445d77"
+				(path "/27630726-0f94-4309-a2d3-d599421c6315"
 					(reference "R403")
 					(unit 1)
 				)
@@ -27561,7 +29354,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6a1539aa-9e37-4022-89b8-6f74ba7a1cda"
+				(path "/3437b102-6f4c-4ab8-bc58-211472650f01"
 					(reference "#PWR084")
 					(unit 1)
 				)
@@ -27643,6 +29436,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 193.04 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 193.04 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2daa72ce-c97f-51cd-b615-ca88d2f47240")
 		)
@@ -27651,7 +29466,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/98425fde-65e6-4f0d-b576-706acf8403a1"
+				(path "/32113a37-d16f-4f56-ba9f-e5daf8de2e43"
 					(reference "R306")
 					(unit 1)
 				)
@@ -27733,6 +29548,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 182.88 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 182.88 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d452243b-7aeb-526a-adf0-14ab9f1ed362")
 		)
@@ -27741,7 +29578,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3b60b39d-ad2f-4d96-8989-4aa1a6726aae"
+				(path "/660c7397-f0d6-4353-9a71-187d3e8b8852"
 					(reference "R303")
 					(unit 1)
 				)
@@ -27823,6 +29660,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 280.67 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1911c8d5-20d7-5aa5-93d5-682d47f4c5d6")
 		)
@@ -27870,7 +29718,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/af94b2ca-e133-4cd5-ae4c-6b0dac44a5d0"
+				(path "/7b83e903-10ee-4577-b4c6-b63c7d5ea223"
 					(reference "U4")
 					(unit 1)
 				)
@@ -27952,6 +29800,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 38.1 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0805FR-0747RL"
+			(at 38.1 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ea9bbe48-e16b-5dac-a417-4a228563ceb2")
 		)
@@ -27960,7 +29830,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/edb8f119-8d5c-4fde-af8f-ba5d91a8a260"
+				(path "/52691a5f-c103-4ef5-a474-03c0e96ec0d6"
 					(reference "R103")
 					(unit 1)
 				)
@@ -28042,6 +29912,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 78.74 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 78.74 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a0dfdbaa-f6bd-5bcf-9d3d-7e0acd3b29f4")
 		)
@@ -28050,7 +29942,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f97ab061-39d7-4d4a-9f5d-dfde3ffbef04"
+				(path "/1618e0a7-7aaa-4812-85d5-27f11c65d6fe"
 					(reference "D502")
 					(unit 1)
 				)
@@ -28132,6 +30024,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 275.59 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 275.59 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "227e2ca1-b2cd-51a5-bd58-89bbc8119473")
 		)
@@ -28140,7 +30054,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d051fa01-03c3-467f-8b15-22140e20c278"
+				(path "/734effc9-4591-4f57-92d5-e7a06b1474ef"
 					(reference "R405")
 					(unit 1)
 				)
@@ -28222,6 +30136,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 280.67 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c258bba3-50e8-5482-aa5a-0d5992e82205")
 		)
@@ -28269,7 +30194,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b87cd014-5f22-4195-a7ee-ce51e76810f5"
+				(path "/3cc5ba59-bb06-4ed2-9f03-d15c42fd29d9"
 					(reference "U8")
 					(unit 1)
 				)
@@ -28351,6 +30276,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 416.56 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060BS75000"
+			(at 416.56 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "cae138d6-0641-55c1-884f-330f5acf0945")
 		)
@@ -28359,7 +30306,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4bb29d00-ba9c-4bca-ae77-626af7a69260"
+				(path "/b90e078a-1a94-4039-a26f-248d907e5a66"
 					(reference "D5")
 					(unit 1)
 				)
@@ -28430,6 +30377,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 414.02 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10B273KB8NNNC"
+			(at 414.02 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "b8d125e9-4e7c-5015-a76c-aa073be17ad3")
 		)
@@ -28438,7 +30407,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/61187575-6f76-4020-9ff8-e11e3cc903ab"
+				(path "/08b59ec8-1490-4824-964c-cee231b154dd"
 					(reference "C5")
 					(unit 1)
 				)
@@ -28515,7 +30484,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/9605b3d6-f8dc-4ac4-bd51-4553a6518831"
+				(path "/036b80ad-d40e-4aec-8e14-a1c8b74381e2"
 					(reference "#PWR048")
 					(unit 1)
 				)
@@ -28592,7 +30561,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b6421628-ac2f-4386-8687-3948d9d8162b"
+				(path "/0433c6e8-e89f-417b-8657-11867b68e03c"
 					(reference "#PWR016")
 					(unit 1)
 				)
@@ -28674,6 +30643,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 275.59 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 275.59 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "17413505-14e7-5850-a36d-a2468c0a196a")
 		)
@@ -28682,7 +30673,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/96ccacd2-c570-4f37-9675-ee7917d4dc2d"
+				(path "/9d3e5fce-158a-42a1-9e71-bb68aa3601e5"
 					(reference "C402")
 					(unit 1)
 				)
@@ -28759,7 +30750,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/8c0641c3-4626-4923-b8eb-1365053c96d1"
+				(path "/69e4f97c-4e50-48d4-abdc-fca46923cd14"
 					(reference "#PWR051")
 					(unit 1)
 				)
@@ -28836,7 +30827,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/961c1217-1df9-4b92-8d03-ea1f4906c37f"
+				(path "/db438bcc-c189-4d61-9116-ff28f0592ee2"
 					(reference "#PWR054")
 					(unit 1)
 				)
@@ -28907,6 +30898,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 375.92 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710K2L"
+			(at 375.92 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ec9cc204-f9c6-56fe-bb0a-5cc0de948e07")
 		)
@@ -28915,7 +30928,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f78a5096-f418-441d-beec-73d7eb89974b"
+				(path "/4634d94b-c69b-4071-b4cf-e7b952e38d8b"
 					(reference "R3")
 					(unit 1)
 				)
@@ -28986,6 +30999,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 424.18 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C151JB8NNNC"
+			(at 424.18 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4507f6be-6d7e-5077-8921-f48becece0ba")
 		)
@@ -28994,7 +31029,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5934d072-ca41-498e-8dea-0613f875804e"
+				(path "/ebdc24e9-b963-461c-8594-f73c7b383378"
 					(reference "C6")
 					(unit 1)
 				)
@@ -29072,7 +31107,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/090c9227-6c8e-4c6c-8b9d-f8138e36dfad"
+				(path "/bc93cb90-faec-4a1d-9797-26f2fa4e9762"
 					(reference "#FLG4")
 					(unit 1)
 				)
@@ -29149,7 +31184,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0e891aac-6399-421e-8b37-6405104507e4"
+				(path "/d4353d18-4b23-40ea-a3ab-953cc870d4bc"
 					(reference "#PWR071")
 					(unit 1)
 				)
@@ -29220,6 +31255,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 365.76 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0731K6L"
+			(at 365.76 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c987bf02-e260-58ee-a9dc-799a0abe20dc")
 		)
@@ -29228,7 +31285,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/760c3962-ce7f-4f55-b83b-def6639035ec"
+				(path "/aad1c582-6cd4-435e-afdb-36599a2867c5"
 					(reference "R2")
 					(unit 1)
 				)
@@ -29310,6 +31367,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 213.36 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 213.36 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "300dcf57-6513-59e3-bf4e-eb14dbf04912")
 		)
@@ -29318,7 +31397,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/3997b180-4713-4e13-98f9-5cf1029b494a"
+				(path "/059c40dd-1d2c-4d7d-ae6e-a96ae35bde00"
 					(reference "C303")
 					(unit 1)
 				)
@@ -29400,6 +31479,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "STMicroelectronics"
+			(at 391.16 165.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "00a7669a-5638-51c6-984b-08008566fc0c")
 		)
@@ -29420,7 +31510,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/0200fa88-4ab4-4e76-b2cc-4f878a6a32b0"
+				(path "/20973794-6028-443e-ad15-8228e097b0b4"
 					(reference "U11")
 					(unit 1)
 				)
@@ -29497,7 +31587,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4fb3b6da-a701-4913-b56b-87cbd6c9e885"
+				(path "/0d38559e-aa71-44d8-8a23-d0dd23f2b707"
 					(reference "#PWR079")
 					(unit 1)
 				)
@@ -29579,6 +31669,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 172.72 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 172.72 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ca487d96-d1b2-5abb-bc24-f1d8ff9bf690")
 		)
@@ -29587,7 +31699,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/03f1d93e-c58c-48a8-b1c8-a116ee7a52e2"
+				(path "/5b670238-98a6-47b5-8b31-4788c25ed52a"
 					(reference "R302")
 					(unit 1)
 				)
@@ -29669,6 +31781,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 234.95 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 234.95 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "18043d8a-ad71-50df-9d7d-495242bd398c")
 		)
@@ -29677,7 +31811,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/51654f67-8937-4253-8ff8-c0205d46ea69"
+				(path "/8ead5877-51a0-457e-beff-9ea01a6aa5ba"
 					(reference "R401")
 					(unit 1)
 				)
@@ -29754,7 +31888,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4efdd00e-7ad8-4b0c-a3c7-e5b1358a8e6c"
+				(path "/11647da3-a8da-4860-9577-ee670c15c94c"
 					(reference "#PWR045")
 					(unit 1)
 				)
@@ -29831,7 +31965,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/60ed5703-884c-44b3-b308-c6c8c62d8d76"
+				(path "/d3859468-2fcd-4ccd-a374-5d13f1b3197a"
 					(reference "#PWR007")
 					(unit 1)
 				)
@@ -29902,7 +32036,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 97.79 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -29913,7 +32047,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 97.79 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 97.79 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -29935,7 +32080,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/7caccc2f-ea4a-40c3-b823-7887cebb1d65"
+				(path "/631df7b4-aee6-4a71-9d65-1c4a328b15b9"
 					(reference "F2")
 					(unit 1)
 				)
@@ -30007,6 +32152,17 @@
 			)
 		)
 		(property "MPN" "ESP32-S3-WROOM-1-N8"
+			(at 381 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Espressif"
 			(at 381 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -30142,7 +32298,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4b1bda08-ddb5-4946-9bc3-eface2c65802"
+				(path "/94661c31-2bf8-4a74-851e-0fef13280037"
 					(reference "U10")
 					(unit 1)
 				)
@@ -30213,6 +32369,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 393.7 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10B104KB8NNNC"
+			(at 393.7 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a555d92c-701d-54a6-ab3b-54bda8705028")
 		)
@@ -30221,7 +32399,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/794e0424-8760-4255-a1ba-57f4560ee4cd"
+				(path "/c44a5a21-9904-4139-a2a2-644f1b8df86f"
 					(reference "C4")
 					(unit 1)
 				)
@@ -30303,6 +32481,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 213.36 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 213.36 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "b6f35bd1-66b6-567c-9880-5f87704e070d")
 		)
@@ -30311,7 +32511,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a20a8a73-afe3-4d95-9158-06c1ea2a81cf"
+				(path "/5c10fd60-e077-473b-85bc-f46a4a3c4119"
 					(reference "R707")
 					(unit 1)
 				)
@@ -30388,7 +32588,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/85b819f8-4245-4330-abc3-f0b35b6b8f51"
+				(path "/8d0d827c-765e-40ac-9f91-1bb2db6ba6fd"
 					(reference "#PWR032")
 					(unit 1)
 				)
@@ -30470,6 +32670,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 350.52 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8a79eaf6-0198-591d-b72d-d70016cab65b")
 		)
@@ -30499,7 +32710,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/deebd4bc-f2d4-452f-a5d4-630dc709d435"
+				(path "/35b3192d-c5c3-4fbe-857c-de01b4e7a340"
 					(reference "U9")
 					(unit 1)
 				)
@@ -30576,7 +32787,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/958fb907-be6e-41bc-9f1d-de4f5eb486d4"
+				(path "/89f7f607-c984-48dc-b8b9-ad9937267630"
 					(reference "#PWR041")
 					(unit 1)
 				)
@@ -30658,6 +32869,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Nexperia"
+			(at 240.03 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAT54S,215"
+			(at 240.03 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4212c0c6-7b34-5dd8-8de8-c2514c04556d")
 		)
@@ -30669,7 +32902,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/faa17677-3559-4e14-b7fb-d93af8b2a9d0"
+				(path "/7a0cf0e4-75a5-4fe4-a5c4-8bf92edeb725"
 					(reference "D401")
 					(unit 1)
 				)
@@ -30746,7 +32979,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/50c71f74-7329-4cd6-a4a9-50dc5ed0e25c"
+				(path "/c0bd54ec-15dd-4d01-9083-a3f5d7e43c04"
 					(reference "#PWR014")
 					(unit 1)
 				)
@@ -30828,6 +33061,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 68.58 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 68.58 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "854d6845-77e9-53f1-b135-b3cc9e836f91")
 		)
@@ -30836,7 +33091,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/57d67e33-0c5e-4a6c-bbb0-2bc3eb0d3caf"
+				(path "/d02d819d-6d4d-4116-9a72-af3281f0b4e2"
 					(reference "R507")
 					(unit 1)
 				)
@@ -30907,6 +33162,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 375.92 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GRM32ER71H475KA88L"
+			(at 375.92 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "fa4f7e34-6127-59c1-b9ce-95b1e5283fc6")
 		)
@@ -30915,7 +33192,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a1eddb4c-096f-4976-8101-c582832610ba"
+				(path "/b7e6de53-d476-436b-8c09-418b13efb4c4"
 					(reference "C1")
 					(unit 1)
 				)
@@ -30992,7 +33269,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b97c9016-89f6-47d6-9fb9-fc5fbd7c7b7b"
+				(path "/958fa9fa-e0be-4578-b4ff-7d324d2d4fec"
 					(reference "#PWR081")
 					(unit 1)
 				)
@@ -31074,6 +33351,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 140.97 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 140.97 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e5574cb0-544c-5442-ac06-01fe8cd3c7fe")
 		)
@@ -31082,7 +33381,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b2693e2b-f2b6-4871-8d18-9a1d794151dc"
+				(path "/e7321312-4d92-4929-8968-56acc4af1fec"
 					(reference "R207")
 					(unit 1)
 				)
@@ -31164,6 +33463,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 182.88 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 182.88 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "b1d7bba1-5fb9-596f-92f4-9dfa86f2b216")
 		)
@@ -31172,7 +33493,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a9342048-d3f9-4c1e-bbda-70cdf24c5773"
+				(path "/91e30ab4-fafc-4289-8a0e-ea84bf259982"
 					(reference "C701")
 					(unit 1)
 				)
@@ -31243,6 +33564,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata"
+			(at 386.08 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GRM32ER71A226KE20L"
+			(at 386.08 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7d290680-fd69-548f-b71f-4cdd62af1a5c")
 		)
@@ -31251,7 +33594,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/03de0763-d09e-42c5-9ebd-2348e1fab220"
+				(path "/0fd4d91c-2cc8-4532-91d5-09c6d3d39123"
 					(reference "C7")
 					(unit 1)
 				)
@@ -31328,7 +33671,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/73264348-dddd-41e5-b6eb-1530e0627327"
+				(path "/f1c73b29-75e2-4488-bf85-66d229d000fd"
 					(reference "#PWR082")
 					(unit 1)
 				)
@@ -31405,7 +33748,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1c57e2c4-fbaa-484c-80f2-1ce9f5f96029"
+				(path "/c41fcc46-35bc-4888-b653-4c6db77c05df"
 					(reference "#PWR086")
 					(unit 1)
 				)
@@ -31476,7 +33819,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 242.57 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -31487,7 +33830,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 242.57 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 242.57 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -31509,7 +33863,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f21761de-267e-4af6-83cf-baf167b97e78"
+				(path "/ecd22902-96e6-42b7-936d-0020f3810f93"
 					(reference "F8")
 					(unit 1)
 				)
@@ -31591,6 +33945,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 245.11 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 245.11 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e44cfad6-6b58-50c6-a850-6e8fa9ac093f")
 		)
@@ -31599,7 +33975,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/fecf3685-8782-47eb-8d3a-30ef7a7b86e5"
+				(path "/4642d30a-f52f-43b7-9990-9a42a9c685bb"
 					(reference "R402")
 					(unit 1)
 				)
@@ -31670,6 +34046,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 396.24 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10B104KB8NNNC"
+			(at 396.24 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "37351765-d7a4-58ea-b2cd-40221dbe662a")
 		)
@@ -31678,7 +34076,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/866a6871-0fcd-44ff-822a-aac0b87ea455"
+				(path "/c3dd4649-dfb9-4092-9d81-7dfc04ac03da"
 					(reference "C3")
 					(unit 1)
 				)
@@ -31760,6 +34158,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 208.28 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "fbdcaf27-107c-57e8-9f42-d126b47390e4")
 		)
@@ -31807,7 +34216,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d89fa587-a5e2-435b-aa0a-dd40bcde7250"
+				(path "/262b77ce-8347-4507-b37d-427daeb16265"
 					(reference "U3")
 					(unit 1)
 				)
@@ -31889,6 +34298,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 223.52 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "150060GS75000"
+			(at 223.52 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "ce0dee3f-087d-5b3d-ae2f-4c0b5939276a")
 		)
@@ -31897,7 +34328,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/4e2fc3aa-f16a-400f-b83f-af39ec12d80e"
+				(path "/f7d3ff13-baf6-4a1a-b1b0-c8d97b849d08"
 					(reference "D702")
 					(unit 1)
 				)
@@ -31979,6 +34410,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 345.44 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "B360-13-F"
+			(at 345.44 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e08852f8-1222-527e-bc59-e1cd6026701a")
 		)
@@ -31987,7 +34440,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f6d446fc-d97a-4fbd-ae22-8aa55e0936d1"
+				(path "/70a161ec-e7b2-4351-b6dd-a29c46daf074"
 					(reference "D1")
 					(unit 1)
 				)
@@ -32058,6 +34511,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 355.6 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0710KL"
+			(at 355.6 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "965c53b4-570c-5a1c-a3c9-f70d671a769a")
 		)
@@ -32066,7 +34541,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/55cee99a-225b-4558-99a6-5a1389d7f18d"
+				(path "/c3d1e553-4d7b-4927-81fb-9a8d12b47810"
 					(reference "R5")
 					(unit 1)
 				)
@@ -32148,6 +34623,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 48.26 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-0747KL"
+			(at 48.26 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "6b9d5245-d68c-59ad-80e3-19ff0fa42a25")
 		)
@@ -32156,7 +34653,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ba76a7a9-e4b0-4c9e-b044-c489e87c6b9e"
+				(path "/78f7c7cd-104c-482c-82a9-fef6eb36b173"
 					(reference "R506")
 					(unit 1)
 				)
@@ -32227,7 +34724,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 170.18 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -32238,7 +34735,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 170.18 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 170.18 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -32260,7 +34768,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2a139677-5a96-4677-a7d7-19215b253571"
+				(path "/6d21a5c1-9cf2-4810-b76e-242fcfb5d76a"
 					(reference "F3")
 					(unit 1)
 				)
@@ -32342,6 +34850,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 383.54 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-07200KL"
+			(at 383.54 274.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8d961792-8913-52bb-a39d-c03dff469d7c")
 		)
@@ -32350,7 +34880,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b151482c-9038-40fc-8406-7dc76565dcd2"
+				(path "/27e90549-07ad-4d08-b338-d8ffe0731dc7"
 					(reference "R1")
 					(unit 1)
 				)
@@ -32432,6 +34962,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 203.2 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 203.2 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8d30220a-3205-53e6-947a-17e6f12c43ca")
 		)
@@ -32440,7 +34992,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e2ecba29-8764-46f2-89f5-e115f05f7ebd"
+				(path "/0335d422-83b5-469e-a584-9903b5bfa729"
 					(reference "C302")
 					(unit 1)
 				)
@@ -32518,7 +35070,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d04932d2-31dd-436f-bc09-e71b04cbe4fe"
+				(path "/1fa5270f-64a5-4fa1-abfb-d9c54fed8744"
 					(reference "#FLG3")
 					(unit 1)
 				)
@@ -32595,7 +35147,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/819002b9-c4c8-411c-ba05-1a682bf43c3a"
+				(path "/dfbce6a5-bcdc-4dad-8b63-e687bd145b2b"
 					(reference "#PWR024")
 					(unit 1)
 				)
@@ -32672,7 +35224,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e8125a98-9a96-474b-bd0d-63cde2c6145c"
+				(path "/d3dad376-6d1f-4b93-b876-a74123ec74ad"
 					(reference "#PWR030")
 					(unit 1)
 				)
@@ -32743,7 +35295,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 242.57 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -32754,7 +35306,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 242.57 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 242.57 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -32776,7 +35339,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e8a83ccf-2e91-418d-a41b-da78d58acec0"
+				(path "/3eceadc0-5106-4392-9d33-d452705a6c47"
 					(reference "F4")
 					(unit 1)
 				)
@@ -32858,6 +35421,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 120.65 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 120.65 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "da006d68-1123-5d8b-a94c-66d326212fcc")
 		)
@@ -32866,7 +35451,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/e327bc97-d1b6-43ac-8d4f-b296cccca074"
+				(path "/1118f4e2-900c-4d14-adbb-dfa60f3a9f00"
 					(reference "R604")
 					(unit 1)
 				)
@@ -32937,7 +35522,7 @@
 				)
 			)
 		)
-		(property "MPN" "Littelfuse 0466002.NR"
+		(property "MPN" "0466002.NR"
 			(at 335.28 240.03 0)
 			(hide yes)
 			(show_name no)
@@ -32959,6 +35544,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Littelfuse"
+			(at 335.28 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5056377a-b367-5bdc-ab1d-8316d9eb9364")
 		)
@@ -32967,7 +35563,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b5846cec-41f2-411f-86f0-98860ce9bdd6"
+				(path "/51e8eb29-b5db-48cb-9ff6-8b3ae55e56e0"
 					(reference "F9")
 					(unit 1)
 				)
@@ -33049,6 +35645,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 275.59 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 275.59 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "1728e791-26db-5e15-8c5a-5579aec27ba6")
 		)
@@ -33057,7 +35675,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/079b8658-40bf-43f9-98e1-a14c47727bcc"
+				(path "/dd071e18-0cce-4d7a-a74b-793083b70e58"
 					(reference "R805")
 					(unit 1)
 				)
@@ -33139,6 +35757,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 234.95 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 234.95 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "12e91d32-6150-5de1-b42c-be13146a6f0f")
 		)
@@ -33147,7 +35787,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2cc44d21-997a-4f43-be5b-a253088b2323"
+				(path "/d54bca6d-7f8c-434c-b60c-c1341d5e15ba"
 					(reference "R801")
 					(unit 1)
 				)
@@ -33224,7 +35864,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/59c196f3-6ec9-4cbb-86c1-dd0a6d97936b"
+				(path "/76f9cd08-aba4-4d02-a47e-8714d49775fe"
 					(reference "#PWR074")
 					(unit 1)
 				)
@@ -33301,7 +35941,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f10c3e9b-879a-4e68-a8a8-bfae47ecd721"
+				(path "/9c502de4-bc40-4060-98bf-ac125e07607f"
 					(reference "#PWR073")
 					(unit 1)
 				)
@@ -33383,6 +36023,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 120.65 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-071K2L"
+			(at 120.65 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5972559e-ffe4-5e65-99a4-e407054264a7")
 		)
@@ -33391,7 +36053,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/a0eb1f97-460d-416b-a415-4ebb38d4153b"
+				(path "/d3a56b79-7803-4b93-a709-a88e0a6b8651"
 					(reference "R204")
 					(unit 1)
 				)
@@ -33464,7 +36126,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/73fd3360-9986-45ec-9491-54b57dd42c90"
+				(path "/c9d8856b-3ca5-4497-a1ad-3fc203deaa93"
 					(reference "H2")
 					(unit 1)
 				)
@@ -33535,6 +36197,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 345.44 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10B104KB8NNNC"
+			(at 345.44 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "da97e5bf-d50a-5499-959e-df02e2fef41d")
 		)
@@ -33543,7 +36227,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/6c421ffb-a29e-457b-9f0c-5b7b47ad48f6"
+				(path "/96516536-fd54-4ecf-814e-ead98a136e1e"
 					(reference "C10")
 					(unit 1)
 				)
@@ -33625,6 +36309,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Littelfuse"
+			(at 365.76 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "SMBJ26A"
+			(at 365.76 240.03 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "35754999-0d4a-55e8-a832-fddc538d5b20")
 		)
@@ -33633,7 +36339,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ecfc3943-e8c1-4770-af0e-af396101cc04"
+				(path "/ad252fcd-d550-4bcb-a2d8-8b93d282aa0b"
 					(reference "D3")
 					(unit 1)
 				)
@@ -33715,6 +36421,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 135.89 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "9b7ef537-7823-55fb-9aae-08f8795daefd")
 		)
@@ -33762,7 +36479,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/05c204cd-3b6d-46af-854d-a815e4182a25"
+				(path "/e6ad01b3-812d-40b2-b52b-f5ca55203db2"
 					(reference "U2")
 					(unit 1)
 				)
@@ -33844,6 +36561,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 100.33 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 100.33 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e4a88338-3f75-5575-826b-c636065fe217")
 		)
@@ -33852,7 +36591,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/76ed7ebb-f842-405e-a382-d36ea41b98d0"
+				(path "/cb9235f7-5665-40b3-a6c9-5be5b6571a90"
 					(reference "R202")
 					(unit 1)
 				)
@@ -33923,7 +36662,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 97.79 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -33934,7 +36673,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 97.79 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 97.79 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -33956,7 +36706,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/1796007b-fac4-4091-9a59-445f9347d079"
+				(path "/697e919a-230d-45fa-bdab-514a76e6953b"
 					(reference "F6")
 					(unit 1)
 				)
@@ -34038,6 +36788,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 285.75 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 285.75 140.97 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "9f6f4451-e78e-5025-b938-89b8fb79ed79")
 		)
@@ -34046,7 +36818,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/2e8d9405-19ae-424b-bb0b-688702ec33cd"
+				(path "/36048f90-4457-4c92-8161-7447b978b544"
 					(reference "C803")
 					(unit 1)
 				)
@@ -34117,7 +36889,18 @@
 				)
 			)
 		)
-		(property "MPN" "Bourns SRP7028A-100M"
+		(property "MPN" "SRP7028A-100M"
+			(at 340.36 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Bourns"
 			(at 340.36 299.72 0)
 			(hide yes)
 			(show_name no)
@@ -34136,7 +36919,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/315e1b09-6ec5-4c09-b38a-32cf7e039ac9"
+				(path "/a2452fa3-6e65-4c95-9759-2222cd2ea023"
 					(reference "L1")
 					(unit 1)
 				)
@@ -34218,6 +37001,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 285.75 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-072K2L"
+			(at 285.75 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4cc2df89-b7d9-53ec-9f26-420d02fcd6d0")
 		)
@@ -34226,7 +37031,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d252b871-81a3-4d51-af6b-5278d46a7517"
+				(path "/bf43aa89-7b5c-4715-8e9a-e3e9a28f8c29"
 					(reference "R407")
 					(unit 1)
 				)
@@ -34319,6 +37124,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Wurth Elektronik"
+			(at 350.52 358.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "e7079f4d-b968-598c-bd99-7be4b7d1a695")
 		)
@@ -34369,7 +37185,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/ec26cd71-3e44-45a3-b3a8-42ad28cf019c"
+				(path "/0b6597e1-f6df-444e-8763-33db5d305d78"
 					(reference "J1")
 					(unit 1)
 				)
@@ -34451,6 +37267,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 38.1 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 38.1 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2ee0de30-3706-5a9a-a42c-0f3a9ad3af5d")
 		)
@@ -34459,7 +37297,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/fc62157a-f279-43e8-96ff-fa0aee29e375"
+				(path "/e53709f2-ecf4-4b14-a331-fc018cdfd042"
 					(reference "C101")
 					(unit 1)
 				)
@@ -34541,6 +37379,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 255.27 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B104KBCNNNC"
+			(at 255.27 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "12b9df05-62ab-5420-8b58-ac8ad9b5e867")
 		)
@@ -34549,7 +37409,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/47ea83fd-441e-486f-b5db-917887bb0725"
+				(path "/d5ebe692-e0a4-416b-99b6-acbe23f8a077"
 					(reference "C401")
 					(unit 1)
 				)
@@ -34627,7 +37487,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/c64cb6fa-1204-4370-9410-9889bee03282"
+				(path "/c0610780-512e-4e12-a59d-ba9099c34e2d"
 					(reference "#FLG2")
 					(unit 1)
 				)
@@ -34709,6 +37569,17 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Infineon"
+			(at 135.89 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f6733ac9-8b6f-5fea-b3ad-cdbb997ac8e0")
 		)
@@ -34756,7 +37627,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/c2b55add-b543-4640-9031-dcb15dbe4f2e"
+				(path "/0a40975a-ade0-4848-af5c-ae9a9391aaa5"
 					(reference "U6")
 					(unit 1)
 				)
@@ -34833,7 +37704,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/c10e6554-108d-49e5-a990-bcd0533d7cfd"
+				(path "/d7ae368e-c0dc-4a01-b3ba-453723aa752f"
 					(reference "#PWR046")
 					(unit 1)
 				)
@@ -34915,6 +37786,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "YAGEO"
+			(at 90.17 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "RC0603FR-074K7L"
+			(at 90.17 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7667c921-9bfc-5785-8796-ec9dcb51f000")
 		)
@@ -34923,7 +37816,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/043f5374-136d-4f94-b840-3a162d388df1"
+				(path "/0e876ab1-402b-4495-aafd-0c65f174f95d"
 					(reference "R201")
 					(unit 1)
 				)
@@ -35005,6 +37898,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 130.81 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 130.81 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a5fdf7e7-dfcc-50ce-9353-ec93c1187bbc")
 		)
@@ -35013,7 +37928,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/eec7beac-9eab-4756-91a6-0894623e9588"
+				(path "/420e1ec8-754b-4e1f-816f-cf3dd4fc491f"
 					(reference "C202")
 					(unit 1)
 				)
@@ -35090,7 +38005,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/f9ebb313-ff83-439b-9f00-96cd40c97e05"
+				(path "/c0b9f761-e610-4c84-85af-4fb50c611d2d"
 					(reference "#PWR013")
 					(unit 1)
 				)
@@ -35161,7 +38076,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 25.4 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -35172,7 +38087,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 25.4 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 25.4 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -35194,7 +38120,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/b17e1ee6-6573-4891-b1d7-d17ecacd6409"
+				(path "/8f1f5c3a-fbb4-46d6-ad41-e4e2513e2a09"
 					(reference "F5")
 					(unit 1)
 				)
@@ -35271,7 +38197,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/48905674-5407-4a9c-b212-b9db76f0be6b"
+				(path "/c785209b-f749-48d3-930a-9d3d9eb65247"
 					(reference "#PWR066")
 					(unit 1)
 				)
@@ -35342,7 +38268,7 @@
 				)
 			)
 		)
-		(property "MPN" "Keystone 3557 (x3)"
+		(property "MPN" "3557"
 			(at 25.4 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -35353,7 +38279,18 @@
 				)
 			)
 		)
-		(property "Note" "AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+		(property "Note" "3 clips per position; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD"
+			(at 25.4 35.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Keystone Electronics"
 			(at 25.4 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -35375,7 +38312,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5c788e1e-ee3e-44ea-a201-aad74e81a181"
+				(path "/1dc453a1-218c-4e5b-8632-451ce0963b2d"
 					(reference "F1")
 					(unit 1)
 				)
@@ -35452,7 +38389,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d2457aa7-97d3-4958-b267-43ab4d293e3e"
+				(path "/fcb3eb04-6bbd-4720-bc46-c0e9537ed29c"
 					(reference "#PWR020")
 					(unit 1)
 				)
@@ -35534,6 +38471,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 58.42 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL21B103KBANNNC"
+			(at 58.42 163.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "eafd9833-6227-591f-bd17-d4d03ad002cf")
 		)
@@ -35542,7 +38501,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/447a4b29-4563-4d11-a670-dfeeab497538"
+				(path "/610ca86d-8a55-416d-9e0f-d944918b1fda"
 					(reference "C502")
 					(unit 1)
 				)
@@ -35624,6 +38583,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 285.75 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "CL10C221JB8NNNC"
+			(at 285.75 58.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "46d75287-c72a-573a-8c73-565ec9c83930")
 		)
@@ -35632,7 +38613,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/5b1849d4-ac47-4375-9309-44796056e089"
+				(path "/00a04eff-1334-41f7-a5a6-a96823b2b8bb"
 					(reference "C403")
 					(unit 1)
 				)
@@ -35709,7 +38690,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/d6eed2de-a60a-454e-82dd-466042617206"
+				(path "/00d5c666-d214-4d11-8bf8-54edfc7f28ae"
 					(reference "#PWR056")
 					(unit 1)
 				)
@@ -35786,7 +38767,7 @@
 		)
 		(instances
 			(project "eswitch"
-				(path "/c7147b19-78e2-4684-b90d-3db7a1274445"
+				(path "/0f030cc9-e888-4c54-803c-c18088b240da"
 					(reference "#PWR029")
 					(unit 1)
 				)

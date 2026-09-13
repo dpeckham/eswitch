@@ -48,6 +48,13 @@ LCSC = {
     ("BLUE", "LED_0603"): "C72041",
 }
 
+# Off-board items to order with the parts (not in the schematic)
+EXTRAS = [
+    (8, "0287015.PXCN", "Littelfuse", "F1-F8 fuse", "ATO blade fuse 15 A (size per load; 15 A max)"),
+    (2, "0287003.PXCN", "Littelfuse", "spare", "ATO blade fuse 3 A spare"),
+    (4, "R30-1001002", "Harwin", "H1-H4", "M3 x 10 mm hex standoff (or any M3 standoff)"),
+]
+
 STACKUP_NOTE = """eswitch rev A - fabrication notes
 ==================================
 Layers:            4 (F.Cu, In1.Cu=GND plane, In2.Cu=PWR, B.Cu)
@@ -104,7 +111,7 @@ def main():
     run("pcb", "export", "pos", "-o", os.path.join(OUT, "eswitch-pos-smd.csv"), "--format", "csv", "--units", "mm",
         "--use-drill-file-origin", "--smd-only", PCB)
     run("sch", "export", "bom", "-o", os.path.join(OUT, "eswitch-bom.csv"),
-        "--fields", "Reference,Value,Footprint,MPN,Note,${QUANTITY}", "--group-by", "Value,Footprint,MPN", SCH)
+        "--fields", "Reference,Value,Footprint,Manufacturer,MPN,Note,${QUANTITY}", "--group-by", "Value,Footprint,MPN", SCH)
     with open(os.path.join(OUT, "README-fab.txt"), "w") as f:
         f.write(STACKUP_NOTE)
 
@@ -160,15 +167,29 @@ def main():
         for i, r in enumerate(bom, 1):
             refs = expand(r["Reference"])
             typ = "SMD" if refs[0] in smd_refs else "Through-hole"
-            mfr = r["MPN"].split(" ")[0] if r["MPN"] and not r["MPN"][0].isdigit() and r["MPN"][0] != "C" else ""
-            w.writerow([i, ",".join(refs), len(refs), mfr, r["MPN"], r["Value"], pkg_name(r["Footprint"]), typ,
-                        r["Note"]])
+            w.writerow([i, ",".join(refs), len(refs), r["Manufacturer"], r["MPN"], r["Value"],
+                        pkg_name(r["Footprint"]), typ, r["Note"]])
     with open(os.path.join(FAB, "pcbway", "eswitch-cpl.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Designator", "Footprint", "Mid X", "Mid Y", "Layer", "Rotation"])
         for ref, r in sorted(pos.items()):
             w.writerow([ref, r["Package"], f"{float(r['PosX']):.3f}", f"{float(r['PosY']):.3f}",
                         "Top" if r["Side"] == "top" else "Bottom", f"{float(r['Rot']):.1f}"])
+    # DigiKey myLists upload: Quantity, Manufacturer Part Number, Customer Reference, Description
+    os.makedirs(os.path.join(FAB, "digikey"), exist_ok=True)
+    with open(os.path.join(FAB, "digikey", "eswitch-digikey-bom.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Quantity", "Manufacturer Part Number", "Manufacturer", "Customer Reference", "Description"])
+        for r in bom:
+            if r["Reference"].startswith("H"):
+                continue
+            qty = int(r["QUANTITY"])
+            if r["MPN"] == "3557":
+                qty *= 3
+            w.writerow([qty, r["MPN"], r["Manufacturer"], r["Reference"],
+                        f"{r['Value']} {pkg_name(r['Footprint'])} {r['Note']}".strip()])
+        for qty, mpn, mfr, ref, desc in EXTRAS:
+            w.writerow([qty, mpn, mfr, ref, desc])
     shutil.copy(os.path.join(OUT, "README-fab.txt"), os.path.join(FAB, "README-fab.txt"))
     print("wrote", FAB)
 

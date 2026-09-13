@@ -175,7 +175,70 @@ def build():
             (406.4 + i * 10.16, 340.36))
     for i, net in enumerate(["+12V", "GND", "VBUS", "VIN", "+3V3"]):
         add(f"#FLG{i + 1}", "power:PWR_FLAG", "PWR_FLAG", "", {1: net}, (406.4 + i * 10.16, 358.14))
+    apply_part_numbers()
     return PARTS
+
+
+# Manufacturer / MPN by (value, footprint). Applied to every part after build(); explicit
+# MPN= arguments in add() take precedence.
+PART_NUMBERS = {
+    ("4.7k", R0603): ("YAGEO", "RC0603FR-074K7L"),
+    ("10k", R0603): ("YAGEO", "RC0603FR-0710KL"),
+    ("1k", R0603): ("YAGEO", "RC0603FR-071KL"),
+    ("5.1k", R0603): ("YAGEO", "RC0603FR-075K1L"),
+    ("2.2k", R0603): ("YAGEO", "RC0603FR-072K2L"),
+    ("47k", R0603): ("YAGEO", "RC0603FR-0747KL"),
+    ("1.2k 1%", R0603): ("YAGEO", "RC0603FR-071K2L"),
+    ("3.9k", R0603): ("YAGEO", "RC0603FR-073K9L"),
+    ("200k 1%", R0603): ("YAGEO", "RC0603FR-07200KL"),
+    ("31.6k 1%", R0603): ("YAGEO", "RC0603FR-0731K6L"),
+    ("10.2k 1%", R0603): ("YAGEO", "RC0603FR-0710K2L"),
+    ("47R", R0805): ("YAGEO", "RC0805FR-0747RL"),
+    ("100nF 50V", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
+    ("100nF 25V", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
+    ("100nF", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
+    ("1uF", C0603): ("Samsung Electro-Mechanics", "CL10B105KO8NNNC"),
+    ("220pF 50V", C0603): ("Samsung Electro-Mechanics", "CL10C221JB8NNNC"),
+    ("27nF", C0603): ("Samsung Electro-Mechanics", "CL10B273KB8NNNC"),
+    ("150pF", C0603): ("Samsung Electro-Mechanics", "CL10C151JB8NNNC"),
+    ("100nF 50V", C0805): ("Samsung Electro-Mechanics", "CL21B104KBCNNNC"),
+    ("10nF 50V", C0805): ("Samsung Electro-Mechanics", "CL21B103KBANNNC"),
+    ("10uF 10V", C0805): ("Samsung Electro-Mechanics", "CL21A106KPFNNNE"),
+    ("4.7uF 50V", C1210): ("Murata", "GRM32ER71H475KA88L"),
+    ("22uF 10V", C1210): ("Murata", "GRM32ER71A226KE20L"),
+    ("SS36", SMA): ("Diodes Incorporated", "B360-13-F"),
+    ("SMBJ26A", SMB): ("Littelfuse", "SMBJ26A"),
+    ("BAT54S", SOT23): ("Nexperia", "BAT54S,215"),
+    ("GREEN", LED0603): ("Wurth Elektronik", "150060GS75000"),
+    ("BLUE", LED0603): ("Wurth Elektronik", "150060BS75000"),
+}
+MANUFACTURERS = {
+    "BTS70081EPRXUMA1": "Infineon", "ESP32-S3-WROOM-1-N8": "Espressif", "TPS54360BDDAR": "Texas Instruments",
+    "USBLC6-2SC6": "STMicroelectronics", "Keystone 3557 (x3)": "Keystone Electronics",
+    "Keystone 8196": "Keystone Electronics", "691311400116": "Wurth Elektronik",
+    "GCT USB4105-GF-A": "GCT", "Bourns SRP7028A-100M": "Bourns", "Littelfuse 0466002.NR": "Littelfuse",
+    "PTS645SM43SMTR92": "C&K",
+}
+MPN_CLEAN = {"Keystone 3557 (x3)": "3557", "Keystone 8196": "8196", "GCT USB4105-GF-A": "USB4105-GF-A",
+             "Bourns SRP7028A-100M": "SRP7028A-100M", "Littelfuse 0466002.NR": "0466002.NR"}
+
+
+def apply_part_numbers():
+    for p in PARTS:
+        if p.ref.startswith("#") or p.ref.startswith("H"):
+            continue
+        if p.fields.get("MPN"):
+            raw = p.fields["MPN"]
+            p.fields["Manufacturer"] = MANUFACTURERS.get(raw, p.fields.get("Manufacturer", ""))
+            p.fields["MPN"] = MPN_CLEAN.get(raw, raw)
+            if raw == "Keystone 3557 (x3)":
+                p.fields["Note"] = "3 clips per position; " + p.fields.get("Note", "")
+            continue
+        key = (p.value, p.footprint)
+        if key in PART_NUMBERS:
+            p.fields["Manufacturer"], p.fields["MPN"] = PART_NUMBERS[key]
+        elif p.ref == "J5":
+            p.fields["Manufacturer"], p.fields["MPN"] = "Wurth Elektronik", "61300411121"
 
 
 def nets():
