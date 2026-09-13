@@ -1,0 +1,7 @@
+out/
+*-backups/
+*.kicad_prl
+fp-info-cache
+~*.lck
+AppDir/
+squashfs-root/

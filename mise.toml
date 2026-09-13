@@ -1,0 +1,7 @@
+[tools]
+"http:kicad" = { version = "10.0.6", url = "https://mirrors.mit.edu/kicad/appimage/stable/kicad-{{version}}-x86_64-lite.AppImage.tar", rename_exe = "kicad" }
+java = "temurin-25"
+just = "1"
+
+[env]
+_.path = ["bin"]
