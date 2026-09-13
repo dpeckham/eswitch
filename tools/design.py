@@ -8,6 +8,21 @@ from dataclasses import dataclass, field
 N_CH = 8
 GRID = 1.27
 
+# Per-channel rating -> PROFET variant (all PG-TSDSO-14, identical pinout) and sense resistor.
+# CH8 (last cell, far from the stud) is the 20 A channel: it gets extra inner-layer copper.
+CHANNELS = {
+    1: (10, "BTS7004-1EPP", "2.2k 1%"),
+    2: (10, "BTS7004-1EPP", "2.2k 1%"),
+    3: (5, "BTS7008-1EPP", "3.3k 1%"),
+    4: (5, "BTS7008-1EPP", "3.3k 1%"),
+    5: (5, "BTS7008-1EPP", "3.3k 1%"),
+    6: (5, "BTS7008-1EPP", "3.3k 1%"),
+    7: (5, "BTS7008-1EPP", "3.3k 1%"),
+    8: (20, "BTS7002-1EPP", "1.2k 1%"),
+}
+PROFET_MPN = {"BTS7002-1EPP": "BTS70021EPPXUMA1", "BTS7004-1EPP": "BTS70041EPPXUMA1",
+              "BTS7008-1EPP": "BTS70081EPRXUMA1"}
+
 
 def g(v):
     """Snap to the 1.27 mm schematic grid."""
@@ -67,19 +82,20 @@ def build():
         bx, by = 12.7 + c * 72.39, 22.86 + r * 82.55
         VS, LOAD, IN, INR, DENR = f"VS{n}", f"LOAD{n}", f"IN{n}", f"INR{n}", f"DENR{n}"
         ISP, IS, UGND, LEDK = f"ISP{n}", f"IS{n}", f"UGND{n}", f"LEDK{n}"
-        add(f"F{n}", "eswitch:FuseHolder_ATO_3pos", "ATO 15A",
+        rating, profet, rsense = CHANNELS[n]
+        add(f"F{n}", "eswitch:FuseHolder_ATO_3pos", f"ATO {rating}A",
             "eswitch:Fuseholder_ATO_3pos_Keystone_3557",
             {1: VS, 2: "+12V", 3: LOAD}, (bx + 12.7, by + 12.7),
-            MPN="Keystone 3557 (x3)", Note="AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD")
-        add(f"U{n}", "eswitch:BTS7008-1EPP", "BTS7008-1EPP", "Package_SO:Infineon_PG-TSDSO-14-22",
+            MPN="Keystone 3557 (x3)", Note=f"CH{n} {rating} A; AUTO: fuse in COM-SW; BYPASS: fuse in COM-LOAD")
+        add(f"U{n}", f"eswitch:{profet}", profet, "Package_SO:Infineon_PG-TSDSO-14-22",
             {1: UGND, 2: INR, 3: DENR, 4: ISP, 8: LOAD, 15: VS}, (bx + 50.8, by + 12.7),
-            MPN="BTS70081EPRXUMA1")
+            MPN=PROFET_MPN[profet], Note=f"CH{n} {rating} A")
         row2 = by + 35.56
         xs = [bx + 5.08 + i * 10.16 for i in range(6)]
         add(f"R{n}01", "Device:R", "4.7k", R0603, {1: IN, 2: INR}, (xs[0], row2), Note="RIN")
         add(f"R{n}02", "Device:R", "4.7k", R0603, {1: "DEN", 2: DENR}, (xs[1], row2), Note="RDEN")
         add(f"R{n}03", "Device:R", "47R", R0805, {1: UGND, 2: "GND"}, (xs[2], row2), Note="RGND (ReverseON)")
-        add(f"R{n}04", "Device:R", "1.2k 1%", R0603, {1: ISP, 2: "GND"}, (xs[3], row2), Note="RSENSE")
+        add(f"R{n}04", "Device:R", rsense, R0603, {1: ISP, 2: "GND"}, (xs[3], row2), Note="RSENSE")
         add(f"R{n}05", "Device:R", "4.7k", R0603, {1: ISP, 2: IS}, (xs[4], row2), Note="RADC")
         add(f"C{n}03", "Device:C", "220pF 50V", C0603, {1: IS, 2: "GND"}, (xs[5], row2), Note="CSENSE")
         row3 = by + 58.42
@@ -189,6 +205,8 @@ PART_NUMBERS = {
     ("2.2k", R0603): ("YAGEO", "RC0603FR-072K2L"),
     ("47k", R0603): ("YAGEO", "RC0603FR-0747KL"),
     ("1.2k 1%", R0603): ("YAGEO", "RC0603FR-071K2L"),
+    ("2.2k 1%", R0603): ("YAGEO", "RC0603FR-072K2L"),
+    ("3.3k 1%", R0603): ("YAGEO", "RC0603FR-073K3L"),
     ("3.9k", R0603): ("YAGEO", "RC0603FR-073K9L"),
     ("200k 1%", R0603): ("YAGEO", "RC0603FR-07200KL"),
     ("31.6k 1%", R0603): ("YAGEO", "RC0603FR-0731K6L"),
@@ -213,7 +231,7 @@ PART_NUMBERS = {
     ("BLUE", LED0603): ("Wurth Elektronik", "150060BS75000"),
 }
 MANUFACTURERS = {
-    "BTS70081EPRXUMA1": "Infineon", "ESP32-S3-WROOM-1-N8": "Espressif", "TPS54360BDDAR": "Texas Instruments",
+    "BTS70081EPRXUMA1": "Infineon", "BTS70041EPPXUMA1": "Infineon", "BTS70021EPPXUMA1": "Infineon", "ESP32-S3-WROOM-1-N8": "Espressif", "TPS54360BDDAR": "Texas Instruments",
     "USBLC6-2SC6": "STMicroelectronics", "Keystone 3557 (x3)": "Keystone Electronics",
     "Keystone 8196": "Keystone Electronics", "691311400116": "Wurth Elektronik",
     "GCT USB4105-GF-A": "GCT", "Bourns SRP7028A-100M": "Bourns", "Littelfuse 0466002.NR": "Littelfuse",

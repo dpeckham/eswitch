@@ -33,14 +33,14 @@ ships it). The three project footprints have generated VRML bodies in `lib/eswit
 
 | Item | Choice |
 |---|---|
-| Channel rating | 15 A per channel design point, 60 A board total |
+| Channel rating | CH1-CH2 10 A (BTS7004-1EPP), CH3-CH7 5 A (BTS7008-1EPP), CH8 20 A (BTS7002-1EPP); 65 A board total |
 | Fuse holder wiring | Centre clip = +12 V bus; outer clips = switch input (AUTO) and load (BYPASS) |
 | Output connector | Wuerth WR-TBL 3114, 16 pos, 7.62 mm, 20 A; odd pins GND, even pins LOAD+ |
 | Input | 2x Keystone 8196 #10-32 screw terminals (30 A each, ring lugs) |
 | MCU | ESP32-S3-WROOM-1-N8, native USB-C, BOOT/RESET buttons, UART header |
 | Diagnostics | Per-channel IS current sense into 8 ADC1 inputs, one shared DEN line |
 | Indicators | Per-channel LED on the load node (lights in both AUTO and BYPASS) |
-| Board | 4 layers, 181 x 57.5 mm, THT parts on top (hand solder), all SMD on the bottom |
+| Board | 4 layers, 1 oz copper, 181 x 57.5 mm, THT parts on top (hand solder), all SMD on the bottom |
 
 ## Electrical notes
 
@@ -48,7 +48,9 @@ ships it). The three project footprints have generated VRML bodies in `lib/eswit
   (ReverseON path), RSENSE 1.2 k, RADC 4.7 k + 220 pF (τ ≈ 1 µs), RPD 47 k, COUT 10 nF, CVS 100 nF.
   A BAT54S clamps each ADC input to 3V3/GND because the IS fault current (≥ 4.4 mA) would
   otherwise push the sense node above 3.3 V.
-* **Current sense scaling**: kILIS ≈ 14 800 → 1 A ≈ 81 mV at the ADC with 1.2 k. 15 A ≈ 1.2 V.
+* **Current sense scaling**: RSENSE is 3.3 k on 5 A channels, 2.2 k on 10 A, 1.2 k on 20 A so each
+  channel's rated current lands near 1 V at the ADC (kILIS ≈ 14 800 for BTS7008, see the
+  BTS7004/BTS7002 datasheets for theirs; calibrate per channel in firmware).
 * **Logic supply**: +12 V → 2 A fuse → SS36 → VIN ← SS36 ← USB VBUS, so the board runs from
   USB alone for programming. TPS54360B buck (4.5–60 V in) at 500 kHz (RT = 200 k),
   L = 10 µH, FB 31.6 k / 10.2 k → 3.3 V, compensation 3.9 k + 27 nF + 150 pF (calculated per
@@ -68,7 +70,9 @@ ships it). The three project footprints have generated VRML bodies in `lib/eswit
 * **B.Cu (bottom)**: PROFETs, all passives, ESP32 module, buck, USB-C. Per cell a 5.6 mm wide
   VS strip carries the fused input from clip 1 to the PROFET exposed pad, and a 5 mm OUT strip
   carries the switched output from the PROFET to clip 3 and the LOAD+ terminal pin.
-* Order the board as **4 layer, 2 oz outer / 1 oz inner copper, 1.6 mm**.
+* Order the board as **4 layer, 1 oz copper, 1.6 mm** (standard stack-up). The 20 A channel
+  (CH8, last cell) gets parallel copper on In2.Cu for its input and output strips; the inner
+  +12 V region under CH1-CH7 is ~37 mm tall so the 65 A input stretch stays cool at 1 oz.
 
 ## Things to check before ordering
 

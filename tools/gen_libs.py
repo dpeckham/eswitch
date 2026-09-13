@@ -238,11 +238,19 @@ def sym_fuseholder():
     return s
 
 
-def sym_bts7008():
+PROFETS = {
+    "BTS7002-1EPP": ("2 mOhm, 21 A nominal", "infineon-bts7002-1epp-datasheet-en.pdf"),
+    "BTS7004-1EPP": ("4 mOhm, 15 A nominal", "infineon-bts7004-1epp-datasheet-en.pdf"),
+    "BTS7008-1EPP": ("8 mOhm, 11 A nominal", "infineon-bts7008-1epp-datasheet-en.pdf"),
+}
+
+
+def sym_bts7008(new="BTS7008-1EPP"):
     src = kicad_env.symbol_file("Power_Management", "BTS7004-1EPP")
     lib = parse_one(open(src).read())
     sym = find(lib, "symbol")
-    old, new = "BTS7004-1EPP", "BTS7008-1EPP"
+    old = "BTS7004-1EPP"
+    spec, ds = PROFETS[new]
 
     def rename(node):
         if isinstance(node, list):
@@ -260,20 +268,20 @@ def sym_bts7008():
         if p[1] == "Value":
             p[2] = new
         elif p[1] == "Datasheet":
-            p[2] = ("https://www.infineon.com/assets/row/public/documents/10/49/"
-                    "infineon-bts7008-1epp-datasheet-en.pdf")
+            p[2] = "https://www.infineon.com/assets/row/public/documents/10/49/" + ds
         elif p[1] == "Description":
-            p[2] = ("PROFET+2 12V smart high-side power switch, 1 channel, 8 mOhm, 11 A nominal, "
+            p[2] = (f"PROFET+2 12V smart high-side power switch, 1 channel, {spec}, "
                     "current sense (IS), PG-TSDSO-14")
         elif p[1] == "ki_keywords":
-            p[2] = "BTS7008 PROFET high side switch"
+            p[2] = new.split("-")[0] + " PROFET high side switch"
     return dump(sym, 1) + "\n"
 
 
 def write_symlib():
     s = '(kicad_symbol_lib\n\t(version 20251024)\n\t(generator "eswitch_gen_libs")\n\t(generator_version "10.0")\n'
     s += sym_fuseholder()
-    s += sym_bts7008()
+    for name in PROFETS:
+        s += sym_bts7008(name)
     s += ")\n"
     os.makedirs(os.path.dirname(SYMLIB), exist_ok=True)
     with open(SYMLIB, "w") as f:

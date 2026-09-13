@@ -15,19 +15,13 @@ ZONE_NETS = ("GND", "+12V", "VS", "LOAD")
 # Manual fix-ups (net, layer, points, width) and vias (net, x, y, dia, drill) for nets the
 # router could not finish. Coordinates in mm on the final placement.
 TRACKS = [
-    ("CC2", pcbnew.B_Cu, [(8.68, 49.75), (10.6, 49.75)], 0.25),
-    ("CC2", pcbnew.F_Cu, [(10.6, 49.75), (15.5, 50.5)], 0.25),
-    ("CC2", pcbnew.B_Cu, [(15.5, 50.5), (15.5, 51.67)], 0.25),
     # GND island of C3: via spot chosen automatically near the pad (see AUTO_VIAS)
 ]
 AUTO_VIAS = [
     # (net, pad ref, pad number, search box (x1, y1, x2, y2), via dia, drill)
     ("GND", "C3", "2", (34.3, 8.9, 35.55, 10.9), 0.5, 0.3),
 ]
-VIAS = [
-    ("CC2", 10.6, 49.75, 0.6, 0.3),
-    ("CC2", 15.5, 50.5, 0.6, 0.3),
-]
+VIAS = []
 
 
 def V(x, y):

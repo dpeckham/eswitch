@@ -20,6 +20,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 from sexp import parse_one, find, find_all  # noqa: E402
 import kicad_env  # noqa: E402
+import design  # noqa: E402
 
 NETLIST = os.path.join(ROOT, "out", "eswitch.net")
 OUT_PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
@@ -283,11 +284,17 @@ def build():
     zb = bd.rect_zone(pcbnew.B_Cu, "GND", 0, 0, W, H, priority=0, full=False)
     zf.SetPadConnection(pcbnew.ZONE_CONNECTION_THT_THERMAL)
     zb.SetPadConnection(pcbnew.ZONE_CONNECTION_THT_THERMAL)
-    # +12V bus: band on F.Cu, wide region on In2.Cu, small B.Cu patch under the 12V stud
+    # +12V bus (1 oz copper): band on F.Cu across all cells; a tall In2.Cu region under cells 1-7
+    # (the 20 A CH8 cell keeps In2 free for its own wide VS/OUT copper and is fed by the F.Cu
+    # band alone); the stud column carries the full input current on three layers.
     x_bus_end = CX[7] + 7.62
+    x_in2_end = CX[6] + 7.62
     bd.rect_zone(pcbnew.F_Cu, "+12V", X_BUS0, Y_BAND[0], x_bus_end, Y_BAND[1], priority=2)
-    bd.rect_zone(pcbnew.In2_Cu, "+12V", X_BUS0, Y_BAND[0] - 0.5, x_bus_end, Y_BAND[1] + 0.3, priority=2)
-    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, Y_BAND[0], CELL0 - 0.5, 35.0, priority=2)
+    bd.rect_zone(pcbnew.F_Cu, "+12V", X_BUS0, 3.0, CELL0 - 0.3, 33.0, priority=3)
+    # In2 region stops at y=34 so the In2 signal corridor (y 34.5..50) under the cells stays open
+    bd.rect_zone(pcbnew.In2_Cu, "+12V", X_BUS0, Y_BAND[0] - 0.5, x_in2_end, 34.0, priority=2)
+    bd.rect_zone(pcbnew.In2_Cu, "+12V", X_BUS0, 3.0, CELL0 - 0.3, 33.0, priority=3)
+    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, 3.0, CELL0 - 0.5, 35.0, priority=2)
 
     # ------------------------------------------------------------- I/O parts (top side THT)
     bd.place("J1", CX[0] - 3.81, Y_TERM, 0, "F")
@@ -298,8 +305,8 @@ def build():
     bd.place("J5", 33.5, 46.5, 0, "F")
     bd.place("H1", 43.0, 30.6, 0, "F")
     bd.place("H2", 3.0, 37.5, 0, "F")
-    bd.place("H3", W - 3.2, 3.2, 0, "F")
-    bd.place("H4", W - 3.2, H - 3.5, 0, "F")
+    bd.place("H3", W - 2.5, 3.2, 0, "F")
+    bd.place("H4", W - 2.5, H - 3.5, 0, "F")
     bd.text("+12V IN", STUD_12V[0], STUD_12V[1] - 8.6, size=1.2)
     bd.text("GND IN", STUD_GND[0], STUD_GND[1] - 8.6, size=1.2)
     bd.text("eswitch rev A", 20.0, 44.0, size=1.0, rot=90)
@@ -359,11 +366,29 @@ def build():
         # CVS pad 1 -> VS connector
         px, py = bd.pad_pos(f"C{i}01", "1")
         bd.track(pcbnew.B_Cu, VS, [(px, py), (px, 31.3)], 0.5)
+        if n == 8:
+            # 20 A channel: parallel copper on In2.Cu for both the fused input and the output,
+            # stitched to the B.Cu strips, and a wider output strip toward the board edge.
+            bd.zone(pcbnew.In2_Cu, VS, [
+                (cx - 7.1, 3.8), (cx + 3.4, 3.8), (cx + 3.4, 16.4), (cx - 3.5, 16.4),
+                (cx - 3.5, 22.6), (cx + 1.3, 22.6), (cx + 1.3, 25.7), (cx - 3.5, 25.7),
+                (cx - 3.5, 31.8), (cx - 7.1, 31.8)], priority=3, min_th=0.3)
+            for vy in (10.0, 13.0, 16.0, 19.0, 22.0, 25.0):
+                bd.via(VS, cx - 5.0, vy, 0.9, 0.45)
+                bd.via(VS, cx - 6.3, vy, 0.9, 0.45)
+            bd.rect_zone(pcbnew.B_Cu, LOAD, cx + 2.0, 27.0, cx + 10.5, 53.8, priority=4, min_th=0.3)
+            bd.zone(pcbnew.In2_Cu, LOAD, [
+                (cx - 3.1, 26.9), (cx + 10.5, 26.9), (cx + 10.5, 53.8), (cx + 2.0, 53.8),
+                (cx + 2.0, 30.3), (cx - 3.1, 30.3)], priority=3, min_th=0.3)
+            for vy in (33.0, 37.0, 41.0, 45.0, 49.0):
+                bd.via(LOAD, cx + 6.0, vy, 0.9, 0.45)
+                bd.via(LOAD, cx + 8.8, vy, 0.9, 0.45)
         # silkscreen
-        bd.text(f"CH{n}", cx, 47.0, size=1.5)
+        rating = design.CHANNELS[n][0]
+        bd.text(f"CH{n} {rating}A", cx, 47.0, size=1.2)
         bd.text("+", cx + 3.81, 49.3, size=1.2, thick=0.25)
         bd.text("-", cx - 3.81, 49.3, size=1.2, thick=0.25)
-        bd.text(f"CH{n}", cx + 5.0, 12.0, layer=pcbnew.B_SilkS, size=1.0, rot=90)
+        bd.text(f"CH{n} {rating}A", cx + 5.0, 12.0, layer=pcbnew.B_SilkS, size=1.0, rot=90)
 
     # ------------------------------------------------------------- ESP32 / power section (bottom)
     bd.place("U10", 12.0, 8.6, 0, "B")
@@ -401,9 +426,17 @@ def build():
     j4 = bd.place("J4", 5.0, 51.5, 270, "B")
     # receptacle opening must face the left board edge: the SMD pad row sits at the rear (inboard)
     assert bd.pad_pos("J4", "A4")[0] > 5.0, "J4 orientation: pad row must be inboard of the connector centre"
-    bd.place("U11", 14.0, 47.5, 0, "B")
-    bd.place("R7", 13.0, 52.5, 90, "B")
-    bd.place("R8", 15.5, 52.5, 90, "B")
+    bd.place("U11", 15.5, 46.3, 0, "B")
+    # CC pull-downs sit in line with the CC1/CC2 escape stubs (pad 1 on the stub end)
+    bd.place("R7", 11.9, 52.75, 0, "B")
+    bd.place("R8", 11.9, 49.75, 0, "B")
+    for r in ("R7", "R8"):
+        f = bd.fps[r]
+        pads = {p.GetNumber(): p.GetPosition() for p in f.Pads()}
+        if pads["1"].x > pads["2"].x:
+            pos = f.GetPosition()
+            f.SetOrientationDegrees(f.GetOrientationDegrees() + 180)
+            f.SetPosition(pos)
 
     bd.text("USB", 5.0, 44.5, layer=pcbnew.B_SilkS, size=1.0)
     bd.text("RESET", 12.5, 25.2, size=0.8)
@@ -434,10 +467,17 @@ def build():
     bd.track(B, "USB_D-", [off(m7, 1.0), off(m7, 2.2)], 0.25)
     bd.track(B, "CC1", [P["A5"], off(P["A5"], 2.2)], 0.25)
     bd.track(B, "CC2", [P["B5"], off(P["B5"], 2.2)], 0.25)
-    for n in ("A4", "A9"):
-        bd.track(B, "VBUS", [P[n], off(P[n], 2.9)], 0.3)
-        bd.via("VBUS", *off(P[n], 2.9), 0.7, 0.35)
-    bd.track(pcbnew.In2_Cu, "VBUS", [off(P["A4"], 2.9), off(P["A9"], 2.9)], 0.5)
+    # VBUS: tie A4/A9 on the body side (dog-leg around the alignment pegs), one inboard stub
+    rx, ry = (P["A4"][0] - P["A9"][0]), (P["A4"][1] - P["A9"][1])
+    Lr = (rx * rx + ry * ry) ** 0.5
+    rx, ry = rx / Lr, ry / Lr                      # unit vector along the row from A9 to A4
+    def rowpt(pad, t, r):
+        """Point t mm on the body side of pad `pad` and r mm along the row (toward A4)."""
+        x, y = P[pad]
+        return (x - ux * t + rx * r, y - uy * t + ry * r)
+    bd.track(B, "VBUS", [P["A4"], rowpt("A4", 0.55, 0), rowpt("A4", 1.75, -0.6),
+                         rowpt("A9", 1.75, 0.6), rowpt("A9", 0.55, 0), P["A9"]], 0.3)
+    bd.track(B, "VBUS", [P["A4"], off(P["A4"], 2.2)], 0.3)
     # placement/drill origin at the board's bottom-left corner so vendor CPL coordinates are positive
     b.GetDesignSettings().SetAuxOrigin(V(0, H))
     b.BuildConnectivity()

@@ -35,6 +35,9 @@ def stitch_islands(b):
         for v in foreign_vias:
             if (v - pt).EuclideanNorm() < need + FromMM(0.45):
                 return False
+        for v in vias:  # same-net vias: keep hole-to-hole spacing
+            if (v - pt).EuclideanNorm() < FromMM(1.1):
+                return False
         return True
 
     for z in list(b.Zones()):
@@ -96,7 +99,7 @@ def main():
             k = pcbnew.ZONE(b)
             k.SetIsRuleArea(True)
             k.SetDoNotAllowTracks(True)
-            k.SetDoNotAllowVias(True)
+            k.SetDoNotAllowVias(z.GetNetname().startswith(("VS", "LOAD")))
             k.SetDoNotAllowZoneFills(False)
             k.SetLayer(z.GetLayer())
             outline = z.Outline().COutline(0)

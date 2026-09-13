@@ -50,8 +50,10 @@ LCSC = {
 
 # Off-board items to order with the parts (not in the schematic)
 EXTRAS = [
-    (8, "0287015.PXCN", "Littelfuse", "F1-F8 fuse", "ATO blade fuse 15 A (size per load; 15 A max)"),
-    (2, "0287003.PXCN", "Littelfuse", "spare", "ATO blade fuse 3 A spare"),
+    (5, "0287005.PXCN", "Littelfuse", "F3-F7 fuse", "ATO blade fuse 5 A (CH3-CH7)"),
+    (2, "0287010.PXCN", "Littelfuse", "F1,F2 fuse", "ATO blade fuse 10 A (CH1, CH2)"),
+    (1, "0287020.PXCN", "Littelfuse", "F8 fuse", "ATO blade fuse 20 A (CH8)"),
+    (3, "0287005.PXCN", "Littelfuse", "spare", "ATO blade fuse 5 A spare"),
     (4, "R30-1001002", "Harwin", "H1-H4", "M3 x 10 mm hex standoff (or any M3 standoff)"),
 ]
 
@@ -60,7 +62,7 @@ STACKUP_NOTE = """eswitch rev A - fabrication notes
 Layers:            4 (F.Cu, In1.Cu=GND plane, In2.Cu=PWR, B.Cu)
 Board size:        181.0 x 57.5 mm
 Thickness:         1.6 mm
-Copper weight:     2 oz outer, 1 oz inner (high-current bus and load strips on the outer layers)
+Copper weight:     1 oz all layers (standard 4-layer stack-up)
 Material:          FR-4 TG150 or better
 Surface finish:    ENIG preferred (HASL acceptable)
 Solder mask:       green; silkscreen white
