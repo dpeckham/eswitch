@@ -51,4 +51,5 @@
 	(fp_text user "${REFERENCE}" (at 0.000 3.600 0) (layer "F.Fab") (effects (font (size 0.7 0.7) (thickness 0.12))))
 	(fp_rect (start -7.700 -7.700) (end 7.700 7.700) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd"))
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/eswitch.3dshapes/ScrewTerminal_Keystone_8196_10-32.wrl" (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))
 )

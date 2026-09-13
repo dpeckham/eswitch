@@ -83,7 +83,9 @@ def npth(x, y, d):
 def write_fp(name, body, descr, tags, datasheet="", ref=(0, -1.5), val=(0, 1.5)):
     s = FP_HEADER.format(name=name, descr=descr, tags=tags, datasheet=datasheet,
                          refx=ref[0], refy=ref[1], valx=val[0], valy=val[1])
-    s += body + "\t(embedded_fonts no)\n)\n"
+    s += body + "\t(embedded_fonts no)\n"
+    s += ('\t(model "${KIPRJMOD}/lib/eswitch.3dshapes/%s.wrl" (offset (xyz 0 0 0)) '
+          '(scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))\n)\n' % name)
     os.makedirs(PRETTY, exist_ok=True)
     with open(os.path.join(PRETTY, name + ".kicad_mod"), "w") as f:
         f.write(s)

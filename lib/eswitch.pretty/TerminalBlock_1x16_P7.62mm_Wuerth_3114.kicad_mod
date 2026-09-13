@@ -102,4 +102,5 @@
 	(fp_text user "${REFERENCE}" (at 57.150 -2.200 0) (layer "F.Fab") (effects (font (size 0.8 0.8) (thickness 0.12))))
 	(fp_rect (start -4.050 -4.050) (end 118.350 4.950) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd"))
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/eswitch.3dshapes/TerminalBlock_1x16_P7.62mm_Wuerth_3114.wrl" (offset (xyz 0 0 0)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))
 )
