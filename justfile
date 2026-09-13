@@ -42,6 +42,10 @@ render:
     kicad-cli pcb render -o out/render_bottom.png --side bottom --width 2400 --height 900 --zoom 1.0 eswitch.kicad_pcb
     kicad-cli sch export pdf -o out/eswitch.pdf eswitch.kicad_sch
 
+# Vendor upload packages (gerber zip + JLCPCB/PCBWay BOM and CPL) into fab/
+package:
+    python3 tools/fab_package.py
+
 # Fabrication outputs (gerbers, drill, BOM, position files)
 fab:
     mkdir -p out/fab

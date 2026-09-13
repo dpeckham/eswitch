@@ -438,6 +438,8 @@ def build():
         bd.track(B, "VBUS", [P[n], off(P[n], 2.9)], 0.3)
         bd.via("VBUS", *off(P[n], 2.9), 0.7, 0.35)
     bd.track(pcbnew.In2_Cu, "VBUS", [off(P["A4"], 2.9), off(P["A9"], 2.9)], 0.5)
+    # placement/drill origin at the board's bottom-left corner so vendor CPL coordinates are positive
+    b.GetDesignSettings().SetAuxOrigin(V(0, H))
     b.BuildConnectivity()
     filler = pcbnew.ZONE_FILLER(b)
     filler.Fill(b.Zones())
