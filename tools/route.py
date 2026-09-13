@@ -29,6 +29,24 @@ def main():
     hidden = [z for z in b.Zones() if z.GetNetname() == "GND" and z.GetLayer() in (pcbnew.F_Cu, pcbnew.B_Cu)]
     for z in hidden:
         b.Remove(z)
+    # Temporary keep-out rule areas over every explicit power zone (VS*, LOAD*, +12V) so the
+    # router cannot cut them with foreign tracks or vias. Removed again after import.
+    keepouts = []
+    for z in list(b.Zones()):
+        if z.GetNetname().startswith(("VS", "LOAD", "+12V")):
+            k = pcbnew.ZONE(b)
+            k.SetIsRuleArea(True)
+            k.SetDoNotAllowTracks(True)
+            k.SetDoNotAllowVias(True)
+            k.SetDoNotAllowZoneFills(False)
+            k.SetLayer(z.GetLayer())
+            outline = z.Outline().COutline(0)
+            pts = pcbnew.VECTOR_VECTOR2I([outline.CPoint(i) for i in range(outline.PointCount())])
+            k.AddPolygon(pts)
+            k.SetZoneName("tmp_keepout_" + z.GetZoneName())
+            b.Add(k)
+            keepouts.append(k)
+    print("temporary keepouts:", len(keepouts))
     # drop any previous auto-routed tracks/vias (keep the explicitly generated ones: width 0.5 mm stubs)
     pcbnew.ExportSpecctraDSN(b, DSN)
     import shutil
@@ -47,6 +65,8 @@ def main():
         sys.exit(1)
     if not pcbnew.ImportSpecctraSES(b, SES):
         print("SES import failed"); sys.exit(1)
+    for k in keepouts:
+        b.Remove(k)
     for z in hidden:
         b.Add(z)
     b.BuildConnectivity()

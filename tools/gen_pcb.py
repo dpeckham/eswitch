@@ -205,6 +205,30 @@ class Board:
         v.SetNet(self.nets[net])
         self.b.Add(v)
 
+    def stitch_gnd_pads(self):
+        """Give every SMD GND pad its own via to the inner GND plane (short stub + via)."""
+        n = 0
+        for fp in self.b.GetFootprints():
+            if fp.GetReference() == "U10":
+                continue  # module GND pads: the big centre pad already carries thermal vias
+            c = fp.GetPosition()
+            for pad in fp.Pads():
+                if pad.GetNetname() != "GND" or pad.GetAttribute() != pcbnew.PAD_ATTRIB_SMD:
+                    continue
+                p = pad.GetPosition()
+                dx, dy = pcbnew.ToMM(p.x - c.x), pcbnew.ToMM(p.y - c.y)
+                L = (dx * dx + dy * dy) ** 0.5
+                if L < 0.1:
+                    dx, dy, L = 0.0, 1.0, 1.0
+                ux, uy = dx / L, dy / L
+                off = 0.95 + max(pcbnew.ToMM(pad.GetSize().x), pcbnew.ToMM(pad.GetSize().y)) / 2
+                vx, vy = pcbnew.ToMM(p.x) + ux * off, pcbnew.ToMM(p.y) + uy * off
+                self.track(pcbnew.B_Cu if fp.GetLayer() == pcbnew.B_Cu else pcbnew.F_Cu, "GND",
+                           [(pcbnew.ToMM(p.x), pcbnew.ToMM(p.y)), (vx, vy)], 0.3)
+                self.via("GND", vx, vy, 0.7, 0.35)
+                n += 1
+        print("GND stitch vias:", n)
+
     # ----------------------------------------------------------------- graphics
     def edge_rect(self):
         for (x1, y1), (x2, y2) in [((0, 0), (W, 0)), ((W, 0), (W, H)), ((W, H), (0, H)), ((0, H), (0, 0))]:
@@ -254,7 +278,7 @@ def build():
     x_bus_end = CX[7] + 7.62
     bd.rect_zone(pcbnew.F_Cu, "+12V", X_BUS0, Y_BAND[0], x_bus_end, Y_BAND[1], priority=2)
     bd.rect_zone(pcbnew.In2_Cu, "+12V", X_BUS0, Y_BAND[0] - 0.5, x_bus_end, Y_BAND[1] + 0.3, priority=2)
-    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, Y_BAND[0], CELL0 - 0.5, Y_BAND[1], priority=2)
+    bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, Y_BAND[0], CELL0 - 0.5, 32.5, priority=2)
 
     # ------------------------------------------------------------- I/O parts (top side THT)
     bd.place("J1", CX[0] - 3.81, Y_TERM, 0, "F")
@@ -375,6 +399,9 @@ def build():
     bd.text("BOOT", 12.5, 43.0, size=0.9)
     bd.text("G 3 T R", 30.5, 46.5, size=0.8, rot=90)
 
+    # +12V feed for the logic fuse: B.Cu track from F9 pad 1 into the +12V patch under the stud
+    px, py = bd.pad_pos("F9", "1")
+    bd.track(pcbnew.B_Cu, "+12V", [(px, py), (37.5, py)], 0.6)
     b.BuildConnectivity()
     filler = pcbnew.ZONE_FILLER(b)
     filler.Fill(b.Zones())
