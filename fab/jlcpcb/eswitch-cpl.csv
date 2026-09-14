@@ -1,10 +1,10 @@
 Designator,Mid X,Mid Y,Layer,Rotation
 C1,28.500mm,54.500mm,Bottom,180.0
-C10,24.000mm,51.500mm,Bottom,-90.0
+C10,23.400mm,55.500mm,Bottom,180.0
 C101,52.620mm,22.900mm,Bottom,-90.0
 C102,58.820mm,16.900mm,Bottom,-90.0
 C103,52.420mm,8.300mm,Bottom,-90.0
-C11,24.000mm,41.600mm,Bottom,-90.0
+C11,12.000mm,27.500mm,Bottom,180.0
 C2,33.500mm,54.500mm,Bottom,180.0
 C201,67.860mm,22.900mm,Bottom,-90.0
 C202,74.060mm,16.900mm,Bottom,-90.0
@@ -33,7 +33,7 @@ C8,29.500mm,31.500mm,Bottom,180.0
 C801,159.300mm,22.900mm,Bottom,-90.0
 C802,165.500mm,16.900mm,Bottom,-90.0
 C803,159.100mm,8.300mm,Bottom,-90.0
-C9,24.000mm,48.000mm,Bottom,-90.0
+C9,24.000mm,44.800mm,Bottom,-90.0
 D1,24.500mm,22.500mm,Bottom,180.0
 D101,56.020mm,9.900mm,Bottom,180.0
 D102,63.920mm,34.100mm,Bottom,90.0
@@ -90,7 +90,7 @@ R404,98.140mm,14.700mm,Bottom,-90.0
 R405,98.140mm,11.500mm,Bottom,-90.0
 R406,104.540mm,13.300mm,Bottom,-90.0
 R407,109.640mm,38.500mm,Bottom,-90.0
-R5,24.000mm,44.800mm,Bottom,-90.0
+R5,9.000mm,27.500mm,Bottom,180.0
 R501,115.780mm,17.900mm,Bottom,-90.0
 R502,115.780mm,14.700mm,Bottom,-90.0
 R503,113.380mm,17.900mm,Bottom,-90.0
@@ -98,7 +98,7 @@ R504,113.380mm,14.700mm,Bottom,-90.0
 R505,113.380mm,11.500mm,Bottom,-90.0
 R506,119.780mm,13.300mm,Bottom,-90.0
 R507,124.880mm,38.500mm,Bottom,-90.0
-R6,24.000mm,38.400mm,Bottom,-90.0
+R6,15.000mm,27.500mm,Bottom,180.0
 R601,131.020mm,17.900mm,Bottom,-90.0
 R602,131.020mm,14.700mm,Bottom,-90.0
 R603,128.620mm,17.900mm,Bottom,-90.0
@@ -106,7 +106,7 @@ R604,128.620mm,14.700mm,Bottom,-90.0
 R605,128.620mm,11.500mm,Bottom,-90.0
 R606,135.020mm,13.300mm,Bottom,-90.0
 R607,140.120mm,38.500mm,Bottom,-90.0
-R7,13.000mm,5.000mm,Bottom,-90.0
+R7,11.900mm,4.750mm,Bottom,0.0
 R701,146.260mm,17.900mm,Bottom,-90.0
 R702,146.260mm,14.700mm,Bottom,-90.0
 R703,143.860mm,17.900mm,Bottom,-90.0
@@ -114,7 +114,7 @@ R704,143.860mm,14.700mm,Bottom,-90.0
 R705,143.860mm,11.500mm,Bottom,-90.0
 R706,150.260mm,13.300mm,Bottom,-90.0
 R707,155.360mm,38.500mm,Bottom,-90.0
-R8,15.500mm,5.000mm,Bottom,-90.0
+R8,11.900mm,7.750mm,Bottom,0.0
 R801,161.500mm,17.900mm,Bottom,-90.0
 R802,161.500mm,14.700mm,Bottom,-90.0
 R803,159.100mm,17.900mm,Bottom,-90.0
@@ -127,7 +127,7 @@ SW1,12.500mm,27.500mm,Top,0.0
 SW2,12.500mm,19.000mm,Top,0.0
 U1,58.620mm,22.500mm,Bottom,0.0
 U10,12.000mm,48.900mm,Bottom,180.0
-U11,14.000mm,10.000mm,Bottom,180.0
+U11,14.500mm,15.500mm,Bottom,180.0
 U2,73.860mm,22.500mm,Bottom,0.0
 U3,89.100mm,22.500mm,Bottom,0.0
 U4,104.340mm,22.500mm,Bottom,0.0

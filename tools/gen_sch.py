@@ -268,7 +268,7 @@ def main():
         c, r = (n - 1) % 4, (n - 1) // 4
         bx, by = 12.7 + c * 72.39, 22.86 + r * 82.55
         items.append(text(f"CHANNEL {n}", (bx, by - 1.27), 2.5))
-    items.append(text("MCU: ESP32-S3-WROOM-1  (IS1-8 -> ADC1 IO1,2,4-9; IN1-8 -> IO10-14,21,47,48; DEN -> IO38; STAT LED -> IO41)",
+    items.append(text("MCU: ESP32-S3-WROOM-1  (IS1-8 -> ADC1 IO1,3,4,2,6,10,8,9; IN1-8 -> IO7,11,12,13,14,21,47,48; DEN -> IO38; STAT LED -> IO41)",
                       (330.2, 34.29), 2.0))
     items.append(text("POWER: +12V -> F9 -> D1 -> VIN <- D2 <- USB VBUS;  TPS54360B 500 kHz buck -> +3V3", (330.2, 226.06), 2.0))
     items.append(text("I/O: J1 load terminals (odd=LOAD+, even=GND), J2/J3 #10 screw terminals", (330.2, 328.93), 2.0))

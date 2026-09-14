@@ -56,7 +56,7 @@ ships it). The three project footprints have generated VRML bodies in `lib/eswit
   L = 10 µH, FB 31.6 k / 10.2 k → 3.3 V, compensation 3.9 k + 27 nF + 150 pF (calculated per
   datasheet §8.2.2.11 for ~1 A; verify in WEBENCH if you change Cout).
 * **Transients**: SMBJ26A TVS across the bus at the input. The PROFET is rated 35 V load dump.
-* **ESP32-S3 pins**: IS1-8 → IO1, IO2, IO4-IO9 (ADC1); IN1-8 → IO10-14, IO21, IO47, IO48;
+* **ESP32-S3 pins**: IS1-8 → IO1, IO3, IO4, IO2, IO6, IO10, IO8, IO9 (all ADC1); IN1-8 → IO7, IO11-14, IO21, IO47, IO48;
   DEN → IO38; status LED → IO41; USB on IO19/20; UART0 on the header.
 
 ## PCB structure

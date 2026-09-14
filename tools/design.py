@@ -65,11 +65,11 @@ SMA = "Diode_SMD:D_SMA"
 SMB = "Diode_SMD:D_SMB"
 
 # ESP32-S3-WROOM-1 module pin numbers used
-ESP_IS = ["39", "38", "4", "5", "6", "7", "12", "17"]        # IO1 IO2 IO4 IO5 IO6 IO7 IO8 IO9 (ADC1)
-ESP_IN = ["18", "19", "20", "21", "22", "23", "24", "25"]    # IO10 IO11 IO12 IO13 IO14 IO21 IO47 IO48
+ESP_IS = ["39", "15", "4", "38", "6", "18", "12", "17"]      # IO1 IO3 IO4 IO2 IO6 IO10 IO8 IO9 (all ADC1)
+ESP_IN = ["7", "19", "20", "21", "22", "23", "24", "25"]     # IO7 IO11 IO12 IO13 IO14 IO21 IO47 IO48
 ESP_DEN = "31"     # IO38
 ESP_STAT = "34"    # IO41
-ESP_IO_NAMES = {"39": "IO1", "38": "IO2", "4": "IO4", "5": "IO5", "6": "IO6", "7": "IO7", "12": "IO8",
+ESP_IO_NAMES = {"39": "IO1", "15": "IO3", "4": "IO4", "38": "IO2", "6": "IO6", "7": "IO7", "12": "IO8",
                 "17": "IO9", "18": "IO10", "19": "IO11", "20": "IO12", "21": "IO13", "22": "IO14",
                 "23": "IO21", "24": "IO47", "25": "IO48", "31": "IO38", "34": "IO41"}
 

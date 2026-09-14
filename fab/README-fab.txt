@@ -3,7 +3,7 @@ eswitch rev A - fabrication notes
 Layers:            4 (F.Cu, In1.Cu=GND plane, In2.Cu=PWR, B.Cu)
 Board size:        181.0 x 57.5 mm
 Thickness:         1.6 mm
-Copper weight:     2 oz outer, 1 oz inner (high-current bus and load strips on the outer layers)
+Copper weight:     1 oz all layers (standard 4-layer stack-up)
 Material:          FR-4 TG150 or better
 Surface finish:    ENIG preferred (HASL acceptable)
 Solder mask:       green; silkscreen white

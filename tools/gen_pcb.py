@@ -392,11 +392,11 @@ def build():
 
     # ------------------------------------------------------------- ESP32 / power section (bottom)
     bd.place("U10", 12.0, 8.6, 0, "B")
-    bd.place("C10", 24.0, 6.0, 90, "B")
-    bd.place("C9", 24.0, 9.5, 90, "B")
-    bd.place("R5", 24.0, 12.7, 90, "B")
-    bd.place("C11", 24.0, 15.9, 90, "B")
-    bd.place("R6", 24.0, 19.1, 90, "B")
+    bd.place("C10", 23.4, 2.0, 0, "B")      # 100 nF right at the module's 3V3 pin
+    bd.place("C9", 24.0, 12.7, 90, "B")     # 10 uF, below the IS pin group
+    bd.place("R5", 9.0, 30.0, 0, "B")       # EN pull-up
+    bd.place("C11", 12.0, 30.0, 0, "B")     # EN cap
+    bd.place("R6", 15.0, 30.0, 0, "B")      # IO0 pull-up
     bd.place("D5", 5.0, 25.0, 0, "B")
     bd.place("R9", 8.5, 25.0, 0, "B")
     bd.place("SW1", 12.5, 30.0, 0, "F")
@@ -426,7 +426,7 @@ def build():
     j4 = bd.place("J4", 5.0, 51.5, 270, "B")
     # receptacle opening must face the left board edge: the SMD pad row sits at the rear (inboard)
     assert bd.pad_pos("J4", "A4")[0] > 5.0, "J4 orientation: pad row must be inboard of the connector centre"
-    bd.place("U11", 15.5, 46.3, 0, "B")
+    bd.place("U11", 14.5, 42.0, 0, "B")
     # CC pull-downs sit in line with the CC1/CC2 escape stubs (pad 1 on the stub end)
     bd.place("R7", 11.9, 52.75, 0, "B")
     bd.place("R8", 11.9, 49.75, 0, "B")

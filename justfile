@@ -8,7 +8,7 @@ libs:
     python3 tools/gen_libs.py
 
 sch:
-    python3 tools/gen_sch.py
+    {{kicad}} python3.11 tools/gen_sch.py
 
 netlist:
     mkdir -p out
