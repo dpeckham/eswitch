@@ -15,7 +15,7 @@
 		(layer "F.Fab")
 		(effects (font (size 1 1) (thickness 0.15)))
 	)
-	(property "Datasheet" "https://www.keyelco.com/product.cfm/product_id/1289"
+	(property "Datasheet" "https://www.keyelco.com/product.cfm/product_id/1533"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")

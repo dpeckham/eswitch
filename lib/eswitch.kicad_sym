@@ -806,7 +806,7 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "BTS7008-1EPP"
+(symbol "BTS7008-1EPR"
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -822,7 +822,7 @@
 				)
 			)
 		)
-		(property "Value" "BTS7008-1EPP"
+		(property "Value" "BTS7008-1EPR"
 			(at 7.62 6.35 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -843,7 +843,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epp-datasheet-en.pdf"
+		(property "Datasheet" "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf"
 			(at 0 -12.7 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -854,7 +854,7 @@
 				)
 			)
 		)
-		(property "Description" "PROFET+2 12V smart high-side power switch, 1 channel, 8 mOhm, 11 A nominal, current sense (IS), PG-TSDSO-14"
+		(property "Description" "PROFET+2 12V smart high-side power switch, 1 channel, 8.8 mOhm typical, 11 A nominal, current sense (IS), PG-TSDSO-14"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -887,7 +887,7 @@
 				)
 			)
 		)
-		(symbol "BTS7008-1EPP_0_1"
+		(symbol "BTS7008-1EPR_0_1"
 			(rectangle
 				(start -5.08 5.08)
 				(end 5.08 -5.08)
@@ -900,7 +900,7 @@
 				)
 			)
 		)
-		(symbol "BTS7008-1EPP_1_1"
+		(symbol "BTS7008-1EPR_1_1"
 			(pin passive line
 				(at 0 -7.62 90)
 				(length 2.54)

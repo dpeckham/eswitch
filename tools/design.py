@@ -13,15 +13,21 @@ GRID = 1.27
 CHANNELS = {
     1: (10, "BTS7004-1EPP", "2.2k 1%"),
     2: (10, "BTS7004-1EPP", "2.2k 1%"),
-    3: (5, "BTS7008-1EPP", "3.3k 1%"),
-    4: (5, "BTS7008-1EPP", "3.3k 1%"),
-    5: (5, "BTS7008-1EPP", "3.3k 1%"),
-    6: (5, "BTS7008-1EPP", "3.3k 1%"),
-    7: (5, "BTS7008-1EPP", "3.3k 1%"),
+    3: (5, "BTS7008-1EPR", "3.3k 1%"),
+    4: (5, "BTS7008-1EPR", "3.3k 1%"),
+    5: (5, "BTS7008-1EPR", "3.3k 1%"),
+    6: (5, "BTS7008-1EPR", "3.3k 1%"),
+    7: (5, "BTS7008-1EPR", "3.3k 1%"),
     8: (20, "BTS7002-1EPP", "1.2k 1%"),
 }
 PROFET_MPN = {"BTS7002-1EPP": "BTS70021EPPXUMA1", "BTS7004-1EPP": "BTS70041EPPXUMA1",
-              "BTS7008-1EPP": "BTS70081EPRXUMA1"}
+              "BTS7008-1EPR": "BTS70081EPRXUMA1"}
+OUTPUT_REFS = ["J1", "J6", "J7", "J8", "J9", "J10", "J11", "J12"]
+OUTPUT_FOOTPRINT = "eswitch:TerminalBlock_1x02_P7.62mm_Wuerth_2184"
+INPUT_FOOTPRINT = "eswitch:ScrewTerminal_Wuerth_74650195_M5"
+BUILD_QUANTITY = 3
+CONTINUOUS_TOTAL_TARGET_A = 40
+ASSEMBLY_METHOD = "Manual; paste and hot air/hot plate for exposed pads; iron for THT"
 
 
 def g(v):
@@ -104,7 +110,8 @@ def build():
         add(f"C{n}01", "Device:C", "100nF 50V", C0805, {1: VS, 2: "GND"}, (bx + 25.4, row3), Note="CVS")
         add(f"R{n}06", "Device:R", "47k", R0603, {1: LOAD, 2: "GND"}, (bx + 35.56, row3), Note="RPD")
         add(f"C{n}02", "Device:C", "10nF 50V", C0805, {1: LOAD, 2: "GND"}, (bx + 45.72, row3), Note="COUT")
-        add(f"R{n}07", "Device:R", "2.2k", R0603, {1: LOAD, 2: LEDK}, (bx + 55.88, row3), Note="RLED")
+        add(f"R{n}07", "Device:R", "10k", R0603, {1: LOAD, 2: LEDK}, (bx + 55.88, row3),
+            Note="RLED; <=78.4 mW at 28 V even with LED shorted")
         add(f"D{n}02", "Device:LED", "GREEN", LED0603, {1: "GND", 2: LEDK}, (bx + 66.04, row3), rot=90,
             Note="load ON indicator")
 
@@ -137,9 +144,11 @@ def build():
          "A4": "VBUS", "A9": "VBUS", "B4": "VBUS", "B9": "VBUS", "A5": "CC1", "B5": "CC2",
          "A6": "USB_D+", "B6": "USB_D+", "A7": "USB_D-", "B7": "USB_D-"},
         (340.36, 176.53), MPN="GCT USB4105-GF-A")
-    add("U11", "Power_Protection:USBLC6-2P6", "USBLC6-2SC6", SOT236,
+    add("U11", "Power_Protection:SRV05-4", "SRV05-4HTG-D", SOT236,
         {1: "USB_D+", 6: "USB_D+", 3: "USB_D-", 4: "USB_D-", 2: "GND", 5: "VBUS"}, (391.16, 165.1),
-        MPN="USBLC6-2SC6")
+        MPN="SRV05-4HTG-D", Manufacturer="Littelfuse",
+        Datasheet="https://www.littelfuse.com/assetdocs/littelfuse-tvs-diode-array-srv05-4htg-d-datasheet?assetguid=d716fc4c-0484-4b67-97d8-cf719554d89a",
+        Note="Four independent steering channels; pair 1+6 and 3+4 externally; pin 2 GND, pin 5 VBUS; placement review open")
     add("R7", "Device:R", "5.1k", R0603, {1: "CC1", 2: "GND"}, (411.48, 176.53))
     add("R8", "Device:R", "5.1k", R0603, {1: "CC2", 2: "GND"}, (421.64, 176.53))
     add("J5", "Connector_Generic:Conn_01x04", "UART", "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
@@ -150,8 +159,8 @@ def build():
     xs = [335.28 + i * 10.16 for i in range(7)]
     add("F9", "Device:Fuse", "2A 1206", "Fuse:Fuse_1206_3216Metric", {1: "+12V", 2: "V12F"}, (xs[0], yr),
         MPN="Littelfuse 0466002.NR", Note="logic supply fuse")
-    add("D1", "Device:D_Schottky", "SS36", SMA, {2: "V12F", 1: "VIN"}, (xs[1], yr), rot=90, Note="12V -> VIN")
-    add("D2", "Device:D_Schottky", "SS36", SMA, {2: "VBUS", 1: "VIN"}, (xs[2], yr), rot=90, Note="USB -> VIN")
+    add("D1", "Device:D_Schottky", "B360A", SMA, {2: "V12F", 1: "VIN"}, (xs[1], yr), rot=90, Note="12V -> VIN")
+    add("D2", "Device:D_Schottky", "B360A", SMA, {2: "VBUS", 1: "VIN"}, (xs[2], yr), rot=90, Note="USB -> VIN; low-VBUS margin unresolved")
     add("D3", "Device:D_Zener", "SMBJ26A", SMB, {1: "+12V", 2: "GND"}, (xs[3], yr), rot=270, Note="bus TVS")
     add("C1", "Device:C", "4.7uF 50V", C1210, {1: "VIN", 2: "GND"}, (xs[4], yr))
     add("C2", "Device:C", "4.7uF 50V", C1210, {1: "VIN", 2: "GND"}, (xs[5], yr))
@@ -169,23 +178,24 @@ def build():
     yr = 299.72
     add("L1", "Device:L", "10uH 4A", "Inductor_SMD:L_Bourns_SRP7028A_7.3x6.6mm", {1: "SW", 2: "+3V3"},
         (340.36, yr), rot=90, MPN="Bourns SRP7028A-100M")
-    add("D4", "Device:D_Schottky", "SS36", SMA, {1: "SW", 2: "GND"}, (355.6, yr), rot=270, Note="catch diode")
+    add("D4", "Device:D_Schottky", "B360A", SMA, {1: "SW", 2: "GND"}, (355.6, yr), rot=270, Note="catch diode")
     add("R2", "Device:R", "31.6k 1%", R0603, {1: "+3V3", 2: "FB"}, (365.76, yr))
     add("R3", "Device:R", "10.2k 1%", R0603, {1: "FB", 2: "GND"}, (375.92, yr))
     add("C7", "Device:C", "22uF 10V", C1210, {1: "+3V3", 2: "GND"}, (386.08, yr))
     add("C8", "Device:C", "22uF 10V", C1210, {1: "+3V3", 2: "GND"}, (396.24, yr))
 
     # ------------------------------------------------------------------ I/O, mechanical, flags
-    j1 = {}
     for n in range(1, N_CH + 1):
-        j1[2 * n - 1] = "GND"
-        j1[2 * n] = f"LOAD{n}"
-    add("J1", "Connector:Screw_Terminal_01x16", "Wuerth 691311400116", "eswitch:TerminalBlock_1x16_P7.62mm_Wuerth_3114",
-        j1, (350.52, 358.14), MPN="691311400116", Note="odd pins = GND, even pins = LOAD+")
-    add("J2", "Connector:Screw_Terminal_01x01", "+12V IN", "eswitch:ScrewTerminal_Keystone_8196_10-32",
-        {1: "+12V"}, (386.08, 340.36), MPN="Keystone 8196")
-    add("J3", "Connector:Screw_Terminal_01x01", "GND IN", "eswitch:ScrewTerminal_Keystone_8196_10-32",
-        {1: "GND"}, (386.08, 350.52), MPN="Keystone 8196")
+        col, row = (n - 1) % 4, (n - 1) // 4
+        add(OUTPUT_REFS[n - 1], "Connector:Screw_Terminal_01x02", "691218410002", OUTPUT_FOOTPRINT,
+            {1: "GND", 2: f"LOAD{n}"}, (340.36 + 30.48 * col, 373.38 + 15.24 * row),
+            MPN="691218410002", Datasheet="https://www.we-online.com/components/products/datasheet/691218410002.pdf",
+            Note=f"CH{n}: pin 1 GND, pin 2 LOAD+; direct-entry screw clamp; 30 A per pole; 24-10 AWG")
+    for ref, net, y in (("J2", "+12V", 340.36), ("J3", "GND", 350.52)):
+        add(ref, "Connector:Screw_Terminal_01x01", net + " IN", INPUT_FOOTPRINT,
+            {1: net}, (386.08, y), MPN="74650195", Manufacturer="Wurth Elektronik",
+            Datasheet="https://www.we-online.com/components/products/datasheet/74650195.pdf",
+            Note="M5 ring-lug terminal, 85 A at 20 C component rating; PCB/wire/ambient limit applies; screw not included")
     for i in range(4):
         add(f"H{i + 1}", "Mechanical:MountingHole", "M3", "MountingHole:MountingHole_3.2mm_M3", {},
             (406.4 + i * 10.16, 340.36))
@@ -201,43 +211,44 @@ PART_NUMBERS = {
     ("4.7k", R0603): ("YAGEO", "RC0603FR-074K7L"),
     ("10k", R0603): ("YAGEO", "RC0603FR-0710KL"),
     ("1k", R0603): ("YAGEO", "RC0603FR-071KL"),
-    ("5.1k", R0603): ("YAGEO", "RC0603FR-075K1L"),
+    ("5.1k", R0603): ("Panasonic", "ERJ-3EKF5101V"),
     ("2.2k", R0603): ("YAGEO", "RC0603FR-072K2L"),
     ("47k", R0603): ("YAGEO", "RC0603FR-0747KL"),
     ("1.2k 1%", R0603): ("YAGEO", "RC0603FR-071K2L"),
     ("2.2k 1%", R0603): ("YAGEO", "RC0603FR-072K2L"),
     ("3.3k 1%", R0603): ("YAGEO", "RC0603FR-073K3L"),
     ("3.9k", R0603): ("YAGEO", "RC0603FR-073K9L"),
-    ("200k 1%", R0603): ("YAGEO", "RC0603FR-07200KL"),
+    ("200k 1%", R0603): ("Panasonic", "ERJ-3EKF2003V"),
     ("31.6k 1%", R0603): ("YAGEO", "RC0603FR-0731K6L"),
     ("10.2k 1%", R0603): ("YAGEO", "RC0603FR-0710K2L"),
     ("47R", R0805): ("YAGEO", "RC0805FR-0747RL"),
-    ("100nF 50V", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
-    ("100nF 25V", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
-    ("100nF", C0603): ("Samsung Electro-Mechanics", "CL10B104KB8NNNC"),
-    ("1uF", C0603): ("Samsung Electro-Mechanics", "CL10B105KO8NNNC"),
-    ("220pF 50V", C0603): ("Samsung Electro-Mechanics", "CL10C221JB8NNNC"),
-    ("27nF", C0603): ("Samsung Electro-Mechanics", "CL10B273KB8NNNC"),
+    ("100nF 50V", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
+    ("100nF 25V", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
+    ("100nF", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
+    ("1uF", C0603): ("YAGEO", "CC0603KRX7R7BB105"),
+    ("220pF 50V", C0603): ("Samsung Electro-Mechanics", "CL10C221JB8NFNC"),
+    ("27nF", C0603): ("YAGEO", "CC0603KRX7R9BB273"),
     ("150pF", C0603): ("Samsung Electro-Mechanics", "CL10C151JB8NNNC"),
     ("100nF 50V", C0805): ("Samsung Electro-Mechanics", "CL21B104KBCNNNC"),
     ("10nF 50V", C0805): ("Samsung Electro-Mechanics", "CL21B103KBANNNC"),
-    ("10uF 10V", C0805): ("Samsung Electro-Mechanics", "CL21A106KPFNNNE"),
+    ("10uF 10V", C0805): ("YAGEO", "CC0805KKX5R6BB106"),
     ("4.7uF 50V", C1210): ("Murata", "GRM32ER71H475KA88L"),
     ("22uF 10V", C1210): ("Murata", "GRM32ER71A226KE20L"),
-    ("SS36", SMA): ("Diodes Incorporated", "B360-13-F"),
+    ("B360A", SMA): ("Diodes Incorporated", "B360A-13-F"),
     ("SMBJ26A", SMB): ("Littelfuse", "SMBJ26A"),
-    ("BAT54S", SOT23): ("Nexperia", "BAT54S,215"),
+    ("BAT54S", SOT23): ("Nexperia", "BAT54S-QR"),
     ("GREEN", LED0603): ("Wurth Elektronik", "150060GS75000"),
     ("BLUE", LED0603): ("Wurth Elektronik", "150060BS75000"),
 }
 MANUFACTURERS = {
     "BTS70081EPRXUMA1": "Infineon", "BTS70041EPPXUMA1": "Infineon", "BTS70021EPPXUMA1": "Infineon", "ESP32-S3-WROOM-1-N8": "Espressif", "TPS54360BDDAR": "Texas Instruments",
     "USBLC6-2SC6": "STMicroelectronics", "Keystone 3557 (x3)": "Keystone Electronics",
-    "Keystone 8196": "Keystone Electronics", "691311400116": "Wurth Elektronik",
+    "Keystone 8196": "Keystone Electronics", "691218410002": "Wurth Elektronik",
     "GCT USB4105-GF-A": "GCT", "Bourns SRP7028A-100M": "Bourns", "Littelfuse 0466002.NR": "Littelfuse",
     "PTS645SM43SMTR92": "C&K",
 }
 MPN_CLEAN = {"Keystone 3557 (x3)": "3557", "Keystone 8196": "8196", "GCT USB4105-GF-A": "USB4105-GF-A",
+             "PTS645SM43SMTR92": "PTS645SM43SMTR92 LFS",
              "Bourns SRP7028A-100M": "SRP7028A-100M", "Littelfuse 0466002.NR": "0466002.NR"}
 
 

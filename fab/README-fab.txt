@@ -1,16 +1,21 @@
-eswitch rev A - fabrication notes
-==================================
-Layers:            4 (F.Cu, In1.Cu=GND plane, In2.Cu=PWR, B.Cu)
-Board size:        181.0 x 57.5 mm
-Thickness:         1.6 mm
-Copper weight:     1 oz all layers (standard 4-layer stack-up)
-Material:          FR-4 TG150 or better
-Surface finish:    ENIG preferred (HASL acceptable)
-Solder mask:       green; silkscreen white
-Min track/space:   0.15 / 0.20 mm
-Min via:           0.5 mm pad / 0.3 mm drill (module thermal vias 0.2 mm drill)
-Drill file:        Excellon, PTH and NPTH merged (eswitch.drl), plus .drl map
-Gerber layer map:  eswitch-F_Cu / eswitch-GND (In1) / eswitch-PWR (In2) / eswitch-B_Cu,
-                   F/B_Mask, F/B_Paste, F/B_Silkscreen, Edge_Cuts, eswitch-job.gbrjob
-Assembly:          all SMD parts on the BOTTOM side; through-hole parts on the top are
-                   hand-soldered (fuse clips, terminal block, screw terminals, header).
+PCB ORDER ON HOLD — NOT A RELEASE PACKAGE
+
+digikey/ contains the current exact-MPN purchasing list for three manually
+assembled boards, with dated inventory evidence. This is not a purchase or a
+reservation; stock and the design can change before the review is closed.
+
+legacy-f76c39e/ preserves obsolete Gerbers and vendor assembly files unchanged
+for historical reference. DO NOT ORDER THEM. They do not match the corrected
+components, terminals, drill/edge rules, or circuit-number/max-fuse silkscreen.
+Their embedded fabrication notes are also obsolete.
+
+See ../docs/critical-review.md for the outstanding electrical, routing, thermal,
+fuse-coordination and mechanical checks, and ../docs/assembly.md for manual
+assembly constraints. The existing OSH Park upload is not this revision.
+
+The intended OSH Park standard four-layer stackup is 1/0.5/0.5/1 oz, not 1 oz on
+every layer. Current constraints include 0.254 mm minimum finished through-drill
+and 0.4 mm copper-to-edge clearance. These do not establish 40 A capability.
+
+New fabrication outputs are blocked by tools/check_release.py. After all release
+conditions are met, use `mise exec -- just package`; do not reuse legacy outputs.

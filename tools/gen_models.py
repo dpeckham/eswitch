@@ -79,18 +79,31 @@ def screw_terminal_8196():
 
 
 def terminal_block_16():
+    # Conservative body envelope, not a manufacturer's detailed mechanical model.
     w = Wrl()
-    N, P = 16, 7.62
-    x1, x2 = -3.8, (N - 1) * P + 3.8
-    w.box(x1, x2, -3.8, 4.7, 0.0, 12.0, GREEN)
+    N, P = 2, 7.62
+    x1, x2 = -3.81, (N - 1) * P + 3.81
+    w.box(x1, x2, -4.6, 7.9, 0.0, 21.3, GREEN)
     for i in range(N):
         x = i * P
-        w.cyl(x, -1.0, 1.7, 12.0, 12.3, STEEL)          # screw heads
-        w.box(x - 2.2, x + 2.2, 4.7, 5.0, 2.5, 8.0, DARK)  # wire openings on the front face
-    w.write("TerminalBlock_1x16_P7.62mm_Wuerth_3114")
+        w.cyl(x, 0.0, 2.3, 21.3, 21.5, STEEL)
+        w.box(x - 2.5, x + 2.5, 7.9, 8.0, 3.0, 10.0, DARK)
+    w.write("TerminalBlock_1x02_P7.62mm_Wuerth_2184")
+
+
+def input_terminal():
+    # Body envelope only; M5 screw and lug stack are installation hardware.
+    w = Wrl()
+    w.box(-5, 5, -5, 5, 0.5, 6.5, TIN)
+    for x in (-4.435, 0, 4.435):
+        for y in (-4.435, 0, 4.435):
+            w.box(x - 0.75, x + 0.75, y - 0.75, y + 0.75, -3.0, 0.5, TIN)
+    w.cyl(0, 0, 2.5, 6.5, 6.51, DARK)
+    w.write("ScrewTerminal_Wuerth_74650195_M5")
 
 
 if __name__ == "__main__":
     fuseholder()
     screw_terminal_8196()
+    input_terminal()
     terminal_block_16()

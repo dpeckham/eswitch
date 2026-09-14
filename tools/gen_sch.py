@@ -159,10 +159,11 @@ def symbol_instance(lib_id, ref, value, footprint, at, rot, pins, extra_fields=N
     node.append(prop("Reference", ref, rx, ry, hide=ref.startswith("#"), rot=rr))
     node.append(prop("Value", value, vx, vy, hide=hide_value, rot=vr))
     node.append(prop("Footprint", footprint, x, y, hide=True))
-    node.append(prop("Datasheet", datasheet, x, y, hide=True))
-    node.append(prop("Description", desc, x, y, hide=True))
+    node.append(prop("Datasheet", (extra_fields or {}).get("Datasheet", datasheet), x, y, hide=True))
+    node.append(prop("Description", (extra_fields or {}).get("Description", desc), x, y, hide=True))
     for k, v in (extra_fields or {}).items():
-        node.append(prop(k, v, x, y, hide=True))
+        if k not in ("Datasheet", "Description"):
+            node.append(prop(k, v, x, y, hide=True))
     for num in pins:
         node.append(S("pin", num, S("uuid", uid())))
     node.append(S("instances", S("project", PROJECT, S("path", "/" + ROOT_UUID, S("reference", ref), S("unit", 1)))))
@@ -271,8 +272,9 @@ def main():
     items.append(text("MCU: ESP32-S3-WROOM-1  (IS1-8 -> ADC1 IO1,3,4,2,6,10,8,9; IN1-8 -> IO7,11,12,13,14,21,47,48; DEN -> IO38; STAT LED -> IO41)",
                       (330.2, 34.29), 2.0))
     items.append(text("POWER: +12V -> F9 -> D1 -> VIN <- D2 <- USB VBUS;  TPS54360B 500 kHz buck -> +3V3", (330.2, 226.06), 2.0))
-    items.append(text("I/O: J1 load terminals (odd=LOAD+, even=GND), J2/J3 #10 screw terminals", (330.2, 328.93), 2.0))
-    items.append(text("8-channel PROFET+2 (BTS7008-1EPP) 12 V load switch with 3-position ATO fuse bypass", (12.7, 12.7), 3.5))
+    items.append(text("I/O: J1, J6-J12 direct-entry load terminals: pin 1=GND, pin 2=LOAD+", (330.2, 328.93), 2.0))
+    items.append(text("SUPPLY: boat house battery via battery-side feeder fuse; DC-DC charging; input protection under review", (330.2, 335.28), 1.5))
+    items.append(text("8-channel PROFET+2 12 V load switch with 3-position ATO fuse bypass", (12.7, 12.7), 3.5))
 
     doc = S("kicad_sch", S("version", SCH_VERSION), S("generator", "eeschema"), S("generator_version", "9.0"),
             S("uuid", ROOT_UUID), S("paper", "A2"),

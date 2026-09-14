@@ -5,7 +5,8 @@ kicad := "kicad"
 all: libs sch netlist erc pcb route finish drc render
 
 libs:
-    python3 tools/gen_libs.py
+    {{kicad}} python3.11 tools/gen_libs.py
+    python3 tools/gen_models.py
 
 sch:
     {{kicad}} python3.11 tools/gen_sch.py
@@ -16,7 +17,7 @@ netlist:
     python3 tools/check_netlist.py out/eswitch.net
 
 erc:
-    kicad-cli sch erc --severity-all -o out/erc.txt eswitch.kicad_sch
+    kicad-cli sch erc --severity-all --exit-code-violations -o out/erc.txt eswitch.kicad_sch
 
 # Unrouted board with all power copper placed
 pcb:
@@ -35,24 +36,42 @@ finish:
 
 drc:
     kicad-cli pcb drc --severity-all --format json -o out/drc.json eswitch.kicad_pcb
-    python3 -c "import json,collections; d=json.load(open('out/drc.json')); print(dict(collections.Counter(v['type'] for v in d['violations']))); print('unconnected:', len(d['unconnected_items']))"
+    python3 -c "import json,collections; d=json.load(open('out/drc.json')); print(dict(collections.Counter(v['type'] for v in d['violations']))); print('unconnected:', len(d['unconnected_items'])); raise SystemExit(bool(d['unconnected_items'] or any(v['severity']=='error' for v in d['violations'])))"
+
+# Three-board manual-assembly purchasing list; fails if stock evidence is stale/insufficient.
+bom:
+    python3 tools/manual_bom.py
+
+check-silk:
+    {{kicad}} python3.11 tools/check_fuse_silk.py
+
+check-board:
+    {{kicad}} python3.11 tools/check_board_netlist.py
+
+# Exact native KiCad naming/metadata parity is a separate release requirement.
+parity:
+    kicad-cli pcb drc --schematic-parity --severity-all --format json -o out/drc-parity.json eswitch.kicad_pcb
+    python3 -c "import json; d=json.load(open('out/drc-parity.json')); print('parity issues:', len(d['schematic_parity'])); raise SystemExit(bool(d['schematic_parity']))"
 
 render:
     kicad-cli pcb render -o out/render_top.png --side top --width 2400 --height 900 --zoom 1.0 eswitch.kicad_pcb
     kicad-cli pcb render -o out/render_bottom.png --side bottom --width 2400 --height 900 --zoom 1.0 eswitch.kicad_pcb
     kicad-cli sch export pdf -o out/eswitch.pdf eswitch.kicad_sch
 
-# Vendor upload packages (gerber zip + JLCPCB/PCBWay BOM and CPL) into fab/
-package:
+# Released bare-board upload plus exact-MPN three-board manual-assembly BOM.
+package: release-check netlist erc check-board drc parity check-silk
     python3 tools/fab_package.py
 
 # Fabrication outputs (gerbers, drill, BOM, position files)
-fab:
+fab: release-check netlist erc check-board drc parity check-silk
     mkdir -p out/fab
     kicad-cli pcb export gerbers -o out/fab/ --board-plot-params eswitch.kicad_pcb
     kicad-cli pcb export drill -o out/fab/ eswitch.kicad_pcb
     kicad-cli pcb export pos -o out/fab/eswitch-pos.csv --format csv --units mm --use-drill-file-origin eswitch.kicad_pcb
     kicad-cli sch export bom -o out/fab/eswitch-bom.csv --fields "Reference,Value,Footprint,MPN,Note,${QUANTITY}" --group-by Value,Footprint,MPN eswitch.kicad_sch
+
+release-check:
+    python3 tools/check_release.py
 
 # Bring the generated files up to the native KiCad 10 format
 upgrade:

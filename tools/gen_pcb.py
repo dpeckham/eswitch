@@ -45,6 +45,18 @@ X_BUS0 = 36.0                   # left end of the bus band / stud column
 STUD_12V = (43.0, 17.3)
 STUD_GND = (43.0, 44.0)
 
+
+def fuse_silk_labels():
+    """Circuit identity and maximum fuse size, on the fuse's assembly side."""
+    labels = [
+        (f"CH{n} MAX FUSE {rating}A", CX[n - 1] + 5.2, 9.4,
+         pcbnew.F_SilkS, 0.9, 90)
+        for n, (rating, _, _) in design.CHANNELS.items()
+    ]
+    labels.append(("LOGIC MAX 2A", 20.7, 31.5, pcbnew.B_SilkS, 0.8, 90))
+    return labels
+
+
 # --------------------------------------------------------------------------- netlist
 def read_netlist(path):
     doc = parse_one(open(path).read())
@@ -65,8 +77,8 @@ def apply_rules(b):
     ds.m_MinClearance = FromMM(0.2)
     ds.m_TrackMinWidth = FromMM(0.15)
     ds.m_ViasMinSize = FromMM(0.5)
-    ds.m_MinThroughDrill = FromMM(0.2)
-    ds.m_CopperEdgeClearance = FromMM(0.3)
+    ds.m_MinThroughDrill = FromMM(0.254)
+    ds.m_CopperEdgeClearance = FromMM(0.4)
     ds.m_HoleClearance = FromMM(0.15)
     ds.m_HoleToHoleMin = FromMM(0.25)
     ns = ds.m_NetSettings
@@ -86,11 +98,33 @@ def apply_rules(b):
 
 
 def persist_project_rules(pcb_path):
-    """Reload the board with its project and store constraints/net classes in eswitch.kicad_pro."""
+    """Persist fabrication constraints, including in headless AppImage sessions.
+
+    KiCad's SaveProject() can return False without writing anything in headless
+    Python. Explicitly update these rule keys so later CLI DRC uses the same
+    constraints as the zone filler. Preserve all unrelated project settings.
+    """
     b = pcbnew.LoadBoard(pcb_path)
     apply_rules(b)
-    ok = pcbnew.GetSettingsManager().SaveProject()
-    print("project rules saved:", ok)
+    project = os.path.splitext(pcb_path)[0] + ".kicad_pro"
+    with open(project) as f:
+        data = json.load(f)
+    rules = data["board"]["design_settings"]["rules"]
+    ds = b.GetDesignSettings()
+    for key, value in {
+        "min_clearance": ds.m_MinClearance,
+        "min_track_width": ds.m_TrackMinWidth,
+        "min_via_diameter": ds.m_ViasMinSize,
+        "min_through_hole_diameter": ds.m_MinThroughDrill,
+        "min_copper_edge_clearance": ds.m_CopperEdgeClearance,
+        "min_hole_clearance": ds.m_HoleClearance,
+        "min_hole_to_hole": ds.m_HoleToHoleMin,
+    }.items():
+        rules[key] = pcbnew.ToMM(value)
+    with open(project, "w") as f:
+        json.dump(data, f, indent=2)
+        f.write("\n")
+    print("project fabrication rules saved")
 
 
 class Board:
@@ -124,6 +158,7 @@ class Board:
         fp = pcbnew.FootprintLoad(path, name)
         if fp is None:
             raise RuntimeError(f"footprint not found: {fpid}")
+        fp.SetFPID(pcbnew.LIB_ID(lib, name))
         return fp
 
     def place(self, ref, x, y, rot=0, side="B"):
@@ -146,6 +181,10 @@ class Board:
             r.SetWidth(FromMM(0.05))
             fp.Add(r)
         for pad in fp.Pads():
+            if ref in ("J2", "J3"):
+                pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
+            if ref == "U10" and 0 < pad.GetDrillSize().x < FromMM(0.254):
+                pad.SetDrillSize(V(0.254, 0.254))
             net = self.pad_net.get((ref, pad.GetNumber()))
             if net:
                 pad.SetNet(self.nets[net])
@@ -297,7 +336,9 @@ def build():
     bd.rect_zone(pcbnew.B_Cu, "+12V", X_BUS0, 3.0, CELL0 - 0.5, 35.0, priority=2)
 
     # ------------------------------------------------------------- I/O parts (top side THT)
-    bd.place("J1", CX[0] - 3.81, Y_TERM, 0, "F")
+    for i, ref in enumerate(design.OUTPUT_REFS):
+        bd.place(ref, CX[i] - 3.81, Y_TERM, 0, "F")
+        bd.fps[ref].Reference().SetVisible(False)
     bd.place("J2", STUD_12V[0], STUD_12V[1], 0, "F")
     bd.place("J3", STUD_GND[0], STUD_GND[1], 0, "F")
     for r in ("J1", "J2", "J3"):
@@ -385,10 +426,10 @@ def build():
                 bd.via(LOAD, cx + 8.8, vy, 0.9, 0.45)
         # silkscreen
         rating = design.CHANNELS[n][0]
-        bd.text(f"CH{n} {rating}A", cx, 47.0, size=1.2)
-        bd.text("+", cx + 3.81, 49.3, size=1.2, thick=0.25)
-        bd.text("-", cx - 3.81, 49.3, size=1.2, thick=0.25)
-        bd.text(f"CH{n} {rating}A", cx + 5.0, 12.0, layer=pcbnew.B_SilkS, size=1.0, rot=90)
+        bd.text(f"CH{n}", cx, 43.8, size=1.2)
+        bd.text("+", cx + 3.81, 46.0, size=1.2, thick=0.25)
+        bd.text("-", cx - 3.81, 46.0, size=1.2, thick=0.25)
+        bd.text(f"CH{n}", cx + 5.0, 12.0, layer=pcbnew.B_SilkS, size=1.0, rot=90)
 
     # ------------------------------------------------------------- ESP32 / power section (bottom)
     bd.place("U10", 12.0, 8.6, 0, "B")
@@ -442,6 +483,8 @@ def build():
     bd.text("RESET", 12.5, 25.2, size=0.8)
     bd.text("BOOT", 12.5, 43.0, size=0.9)
     bd.text("G 3 T R", 30.5, 46.5, size=0.8, rot=90)
+    for label, x, y, layer, size, rot in fuse_silk_labels():
+        bd.text(label, x, y, layer=layer, size=size, rot=rot)
 
     # +12V feed for the logic fuse: B.Cu track from F9 pad 1 into the +12V patch under the stud
     for ref in ("F9", "D3"):

@@ -151,36 +151,60 @@ def fp_screw_terminal_8196():
     write_fp("ScrewTerminal_Keystone_8196_10-32", b,
              "Keystone 8196 heavy duty PC screw terminal, #10-32 x 3/8 screw, 30 A, six 1.52 mm legs in 2.6 mm holes on 5.2 x 10.8 mm pattern",
              "screw terminal Keystone 8196 10-32 ring lug",
-             "https://www.keyelco.com/product.cfm/product_id/1289", ref=(0, -8.6), val=(0, 8.6))
+             "https://www.keyelco.com/product.cfm/product_id/1533", ref=(0, -8.6), val=(0, 8.6))
+
+
+def fp_input_terminal():
+    """Wuerth 74650195, drawing 002.002: nine PTH pins; M5 blind thread.
+
+    1.85 mm finished holes at 4.435 mm pitch; recommended 3.2 mm pads.
+    All nine pins are the same electrical terminal, not nine current ratings.
+    """
+    b = ""
+    for x in (-4.435, 0.0, 4.435):
+        for y in (-4.435, 0.0, 4.435):
+            b += tht("1", x, y, 3.2, 1.85)
+    b += rect(-5, -5, 5, 5, "F.Fab", 0.1)
+    b += circle(0, 0, 4.75, "F.Fab", 0.1)
+    b += circle(0, 0, 2.5, "F.Fab", 0.1)
+    b += text("M5", 0, -3.6, "F.Fab", 0.7)
+    b += rect(-6.55, -6.55, 6.55, 6.55, "F.CrtYd", 0.05)
+    write_fp("ScrewTerminal_Wuerth_74650195_M5", b,
+             "Wuerth 74650195 REDCUBE THR M5 blind-hole terminal; 9 pins; 85 A at 20 C component rating",
+             "screw terminal Wuerth REDCUBE M5 ring lug",
+             "https://www.we-online.com/components/products/datasheet/74650195.pdf",
+             ref=(0, -7), val=(0, 7))
 
 
 def fp_terminal_block_16():
-    """16-position 7.62 mm pitch PCB screw terminal block, side wire entry toward +Y.
+    """Two-pole modular direct-entry block; eight interlock into the output row.
 
-    Matches Wuerth WR-TBL 3114 (691311400116): 1.0 mm square pins in 1.6 mm holes, body
-    3.8 mm behind and 4.7 mm in front of the pin row, 12 mm tall, 20 A.
+    Wuerth 691218410002, drawing 002.002 (2024-01-30): 1 x 0.8 mm pins,
+    1.6 mm finished holes, 15.24 x 12.5 x 21.5 mm body. Pin row is 4.6 mm
+    from the back, wire entry faces +Y. Interlocking ends share a courtyard
+    boundary; the front/back include 0.5 mm for body tolerance and clearance.
     """
-    N = 16
+    N = 2
     P = 7.62
     b = ""
     for i in range(N):
-        b += tht(str(i + 1), i * P, 0.0, 2.6, 1.6, "rect" if i == 0 else "circle")
-    x1, x2 = -3.8, (N - 1) * P + 3.8
-    b += rect(x1, -3.8, x2, 4.7, "F.Fab", 0.1)
-    b += rect(x1 - 0.12, -3.92, x2 + 0.12, 4.82, "F.SilkS", 0.12)
+        b += tht(str(i + 1), i * P, 0.0, 2.6, 1.6)
+    x1, x2 = -3.81, (N - 1) * P + 3.81
+    b += rect(x1, -4.6, x2, 7.9, "F.Fab", 0.1)
+    # No front silkscreen: the wire-entry face deliberately overhangs the PCB.
+    b += line(x1, -4.8, x2, -4.8, "F.SilkS", 0.12)
     for i in range(N):
-        b += line(i * P - 3.0, 4.7, i * P - 3.0, 1.0, "F.Fab", 0.1)
-        b += line(i * P + 3.0, 4.7, i * P + 3.0, 1.0, "F.Fab", 0.1)
-        b += circle(i * P, -1.0, 1.4, "F.Fab", 0.1)
-    b += line(x1 - 0.12, -3.92, x1 - 0.12, -5.0, "F.SilkS", 0.12)  # pin-1 marker
-    b += line(x1 - 0.12, -5.0, 1.0, -5.0, "F.SilkS", 0.12)
+        b += line(i * P - 2.5, 7.9, i * P - 2.5, 4.5, "F.Fab", 0.1)
+        b += line(i * P + 2.5, 7.9, i * P + 2.5, 4.5, "F.Fab", 0.1)
+        b += circle(i * P, 0.0, 2.3, "F.Fab", 0.1)
+    b += line(x1, -4.8, x1, -5.3, "F.SilkS", 0.12)
     b += text("${REFERENCE}", (N - 1) * P / 2, -2.2, "F.Fab", 0.8)
-    b += rect(x1 - 0.25, -4.05, x2 + 0.25, 4.95, "F.CrtYd", 0.05)
-    write_fp("TerminalBlock_1x16_P7.62mm_Wuerth_3114", b,
-             "16-position 7.62 mm PCB screw terminal block, side entry, Wuerth WR-TBL 3114 691311400116 (20 A)",
-             "terminal block 7.62mm 16 Wuerth 3114 691311400116",
-             "https://www.we-online.com/components/products/datasheet/691311400116.pdf",
-             ref=(57.15, -6.0), val=(57.15, 6.2))
+    b += rect(x1, -5.1, x2, 8.4, "F.CrtYd", 0.05)
+    write_fp("TerminalBlock_1x02_P7.62mm_Wuerth_2184", b,
+             "2-pole direct-entry screw terminal, Wuerth 691218410002, 30 A/pole; interlocking ends share courtyard boundaries",
+             "terminal block screw clamp 7.62mm 2 Wuerth 2184 691218410002",
+             "https://www.we-online.com/components/products/datasheet/691218410002.pdf",
+             ref=(3.81, -6.0), val=(3.81, 9.2))
 
 
 # --------------------------------------------------------------------------- symbols
@@ -241,11 +265,11 @@ def sym_fuseholder():
 PROFETS = {
     "BTS7002-1EPP": ("2 mOhm, 21 A nominal", "infineon-bts7002-1epp-datasheet-en.pdf"),
     "BTS7004-1EPP": ("4 mOhm, 15 A nominal", "infineon-bts7004-1epp-datasheet-en.pdf"),
-    "BTS7008-1EPP": ("8 mOhm, 11 A nominal", "infineon-bts7008-1epp-datasheet-en.pdf"),
+    "BTS7008-1EPR": ("8.8 mOhm typical, 11 A nominal", "infineon-bts7008-1epr-datasheet-en.pdf"),
 }
 
 
-def sym_bts7008(new="BTS7008-1EPP"):
+def sym_bts7008(new="BTS7008-1EPR"):
     src = kicad_env.symbol_file("Power_Management", "BTS7004-1EPP")
     lib = parse_one(open(src).read())
     sym = find(lib, "symbol")
@@ -292,5 +316,6 @@ def write_symlib():
 if __name__ == "__main__":
     fp_fuseholder()
     fp_screw_terminal_8196()
+    fp_input_terminal()
     fp_terminal_block_16()
     write_symlib()
