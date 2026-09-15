@@ -1,4 +1,4 @@
-# Critical review — 2026-09-14
+# Critical review — 2026-09-15
 
 **HOLD the PCB order.** Confirmed part/connector/fabrication-rule corrections are
 implemented, but the electrical/layout redesign is not complete. A clean ERC/DRC
@@ -23,8 +23,10 @@ plate available. Exact BOM parts must be in stock at DigiKey in build quantities
 | LED resistor power margin | R107–R807 become 10 kΩ: 28²/10000 = 78.4 mW even with a shorted LED. Ambient derating still applies. |
 | Fuse identification | Each channel holder has its circuit number and maximum fuse rating: CH1–2 10 A, CH3–7 5 A, CH8 20 A. F9 is marked LOGIC MAX 2A on the SMD side. Output labels identify channels without implying a qualified continuous-current rating. |
 | Fabrication minima | Copper-edge clearance 0.4 mm; minimum through-drill 0.254 mm; enlarged ESP32 thermal holes; project rules now persist reliably. |
+| Connectivity and parity | The terminal migration is fully routed. Native KiCad reports 0 unrouted connections and 0 schematic/PCB parity issues; the independent 497-pin assignment check agrees. |
+| ESP32 antenna | Restored an all-copper/pad/via keepout over the portion of the antenna region that overlaps the PCB, moved C10/C1/C2 clear, and rerouted VIN/3V3. The module antenna remains intentionally beyond the board edge. |
 | U3–U7 identification | BTS70081EPRXUMA1 is **BTS7008-1EPR**, not EPP. Correct symbol/value/datasheet. Pinout matches, but use EPR specifications: 8.8 mΩ typical, 16 mΩ maximum at 150 °C, nominal kILIS 14500. [Datasheet pp. 2, 5–6](https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf) |
-| Stock/assembly | Replace unavailable same-value/package order codes, include LFS button suffix, and generate a three-board purchasing list with dated stock evidence. U11 becomes SRV05-4HTG-D, four steering channels paired externally onto two data nets. [Littelfuse datasheet](https://www.littelfuse.com/assetdocs/littelfuse-tvs-diode-array-srv05-4htg-d-datasheet?assetguid=d716fc4c-0484-4b67-97d8-cf719554d89a) |
+| Stock/assembly | Replace unavailable same-value/package order codes, include LFS button suffix, and generate a three-board purchasing list with dated stock evidence. U11 becomes SRV05-4HTG-D, four steering channels paired externally onto two data nets. The newly unavailable CC0603KRX7R9BB104 is replaced by the same-size/value/voltage X7R Yageo CC0603JRX7R9BB104 with tighter ±5% tolerance. [Littelfuse datasheet](https://www.littelfuse.com/assetdocs/littelfuse-tvs-diode-array-srv05-4htg-d-datasheet?assetguid=d716fc4c-0484-4b67-97d8-cf719554d89a), [Yageo specification](https://www.yageogroup.com/download/specsheet/CC0603JRX7R9BB104) |
 
 The BOM contains 46 line items including branch fuse inserts and standoffs. Its
 stock observations are not reservations. See [assembly notes](assembly.md),
@@ -62,19 +64,15 @@ falls below that requirement, so USB-only startup is not guaranteed. Correcting
 the diode package does not fix this. Use a topology with guaranteed low-voltage
 headroom and test startup/load steps, USB current limits and enumeration behavior.
 
-### Antenna and USB layout
-
-`gen_pcb.py` deletes the ESP32 footprint's antenna keepout while some antenna area
-still overlaps the PCB. Restore an all-copper keepout or move the full antenna
-region beyond the board edge, then reroute and check enclosure clearance.
-[Espressif layout guidance](https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/pcb-layout-design.html).
+### USB layout
 
 U11 is about 13 mm from J4 and the data traces are not a deliberately controlled
 differential pair. Move ESD protection to the connector with a short ground path,
 route over continuous reference copper and verify impedance on the actual stackup.
 Review series-resistor provisions near the MCU. The ESD part substitution is not
-port-level ESD qualification. Self-powered operation also needs VBUS detection and
-correct detach/re-attach behavior; the circuit currently has no dedicated sense.
+port-level ESD qualification. Initial programming is explicitly USB-only with the
+house bank disconnected, so simultaneous self-powered attach is outside the agreed
+operating mode. If that changes, add VBUS detection and verify detach/re-attach.
 [Espressif USB guidance](https://docs.espressif.com/projects/esp-usb/en/latest/esp32s3/usb_device.html).
 
 ### Current, thermal performance and branch fuses
@@ -129,21 +127,20 @@ layer order/polarity, finished holes, annular rings, slots and clipped labels on
 
 ## Release conditions
 
-Current routed snapshot: ERC passes, copper DRC has no errors, but **eight
-connections remain unrouted** after the new input terminal pin-field migration.
-These are on +3V3, IS2/IS4/IS7 and IN5/IN6. The DRC recipe fails on these gaps;
-they must be routed and checked before release. Existing silkscreen warnings and
-the modified ESP32 footprint warning also remain for review. The nine new fuse
-labels themselves have no reported silkscreen collisions.
+Current routed snapshot: ERC reports 0 violations; copper DRC reports 0 errors and
+0 unrouted items; native schematic/PCB parity reports 0 issues; the independent
+assignment check matches all 497 physical pins; and the fuse-silk checker verifies
+all eight circuit/max-fuse labels plus the 2 A logic-fuse label.
 
-Native KiCad parity also reports 363 warnings: 199 local-net name differences
-(the legacy generator drops the root `/`), 160 field differences and four
-mounting-hole BOM-attribute differences. These need generator/metadata alignment,
-not suppression. The independent pad-assignment check normalizes only the root
-prefix and is not a substitute for native parity or copper connectivity.
+The 26 remaining DRC warnings were inspected: two are the intentionally clipped
+silk outline of the overhanging U10 antenna, one is the deliberately modified U10
+footprint (larger thermal drills/body-only courtyard), 14 are duplicate outline
+ends where adjacent output-terminal bodies touch, and nine are cosmetic reference
+text/outline or mask clipping on the SMD side. None involves copper clearance or
+the fuse labels. They should still be reinspected on the final vendor preview.
 
-Pass schematic/design net comparison, ERC, PCB connectivity/parity and copper DRC;
-inspect all warnings and final plots. Close the electrical/layout and physical-fit
-blockers before producing a prototype order. Bench qualification remains required
-before claiming continuous ratings or marine-service suitability. Fabrication is
-gated by `release-status.json`; archived packages are not current releases.
+The PCB/database checks and final plots now pass their release recipes. Close the
+remaining electrical/layout and physical-fit blockers before producing a prototype
+order. The owner has deferred bench testing; it remains required before claiming
+continuous ratings or marine-service suitability. Fabrication is gated by
+`release-status.json`; archived packages are not current releases.

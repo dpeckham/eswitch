@@ -23,7 +23,7 @@ for v in report["violations"]:
 b = pcbnew.LoadBoard(path)
 victims = [t for t in b.GetTracks() if t.m_Uuid.AsString() in ids]
 for t in victims:
-    assert t.GetNetname().startswith(("IN", "IS", "DEN", "+3V3")), t.GetNetname()
+    assert t.GetNetname().removeprefix("/").startswith(("IN", "IS", "DEN", "+3V3")), t.GetNetname()
 for t in victims:
     b.Remove(t)
 pcbnew.SaveBoard(path, b)

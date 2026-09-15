@@ -1,15 +1,22 @@
 {
   "fabrication_approved": false,
-  "review_date": "2026-09-14",
+  "review_date": "2026-09-15",
   "board_quantity": 3,
   "continuous_total_target_a": 40,
+  "pcb_checks": {
+    "erc_violations": 0,
+    "drc_errors": 0,
+    "drc_unrouted": 0,
+    "schematic_parity_issues": 0,
+    "drc_warnings_reviewed": 26,
+    "fuse_silk_verified": true,
+    "antenna_keepout_verified": true,
+    "three_board_bom_stock_audit_passed": true
+  },
   "blockers": [
-    "Eight remaining connections after the input terminal hole-pattern migration",
-    "Native KiCad schematic/PCB net-name, field and mounting-hole BOM parity",
     "Input reverse-polarity and transient protection coordination",
     "Buck hot-loop and feedback layout; USB-only minimum-voltage margin",
-    "ESP32 antenna copper keepout",
-    "USB ESD placement, differential routing and self-powered VBUS detection",
+    "USB ESD placement and deliberate differential routing",
     "40 A common-path and CH8 thermal design qualification",
     "Branch fuse derating and load/wire coordination",
     "Physical 1:1 fit check of custom fuse clips and terminal footprints"

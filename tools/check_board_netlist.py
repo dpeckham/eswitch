@@ -48,7 +48,7 @@ def main():
     for key, name in actual.items():
         assert key in expected or not name, (key, "unexpected pad net", name)
     print(f"PCB pad assignments match schematic ({len(expected)} pins, root '/' normalized)")
-    print("Native parity metadata/naming warnings and unrouted copper remain separate release checks")
+    print("Native schematic parity and copper DRC remain separate release checks")
 
 
 if __name__ == "__main__":

@@ -21,6 +21,7 @@ sys.path.insert(0, HERE)
 from sexp import parse_one, find, find_all  # noqa: E402
 import kicad_env  # noqa: E402
 import design  # noqa: E402
+from pcb_nets import sync_metadata
 
 NETLIST = os.path.join(ROOT, "out", "eswitch.net")
 OUT_PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
@@ -66,7 +67,7 @@ def read_netlist(path):
         comps[ref] = {"value": find(c, "value")[1], "footprint": find(c, "footprint")[1]}
     nets = {}
     for net in find_all(find(doc, "nets"), "net"):
-        name = find(net, "name")[1].lstrip("/")
+        name = find(net, "name")[1]
         nets[name] = [(find(n, "ref")[1], str(find(n, "pin")[1])) for n in find_all(net, "node")]
     return comps, nets
 
@@ -95,6 +96,7 @@ def apply_rules(b):
     ns.SetNetclass("Power", pwr)
     for pat in ["+3V3", "VIN", "SW", "V12F", "+12V", "GND"]:
         ns.SetNetclassPatternAssignment(pat, "Power")
+        ns.SetNetclassPatternAssignment("/" + pat, "Power")
 
 
 def persist_project_rules(pcb_path):
@@ -141,11 +143,11 @@ class Board:
         for name in self.netlist:
             ni = pcbnew.NETINFO_ITEM(b, name)
             b.Add(ni)
-            self.nets[name] = ni
+            self.nets[name.removeprefix("/")] = ni
         self.pad_net = {}
         for name, nodes in self.netlist.items():
             for ref, pin in nodes:
-                self.pad_net[(ref, pin)] = name
+                self.pad_net[(ref, pin)] = name.removeprefix("/")
         self.fps = {}
 
     # ----------------------------------------------------------------- footprints
@@ -167,12 +169,11 @@ class Board:
         fp.SetReference(ref)
         fp.SetValue(c["value"])
         if ref == "U10":
-            # replace the huge antenna-keepout courtyard / rule area with the module body outline
+            # Replace the huge antenna courtyard with the module body outline, but retain
+            # the library rule area: it is the required all-copper antenna keepout.
             for it in list(fp.GraphicalItems()):
                 if it.GetLayer() in (pcbnew.F_CrtYd, pcbnew.B_CrtYd) or it.GetLayer() == pcbnew.Cmts_User:
                     fp.Remove(it)
-            for z in list(fp.Zones()):
-                fp.Remove(z)
             r = pcbnew.PCB_SHAPE(fp)
             r.SetShape(pcbnew.SHAPE_T_RECT)
             r.SetStart(V(-9.3, -13.05))
@@ -433,7 +434,9 @@ def build():
 
     # ------------------------------------------------------------- ESP32 / power section (bottom)
     bd.place("U10", 12.0, 8.6, 0, "B")
-    bd.place("C10", 23.4, 2.0, 0, "B")      # 100 nF right at the module's 3V3 pin
+    # Clear the part of the ESP32 antenna keepout that overlaps the board.  C10 is
+    # flipped end-for-end so its 3V3 pad faces the module pin.
+    bd.place("C10", 23.4, 4.6, 180, "B")
     bd.place("C9", 24.0, 12.7, 90, "B")     # 10 uF, below the IS pin group
     bd.place("R5", 9.0, 30.0, 0, "B")       # EN pull-up
     bd.place("C11", 12.0, 30.0, 0, "B")     # EN cap
@@ -443,9 +446,9 @@ def build():
     bd.place("SW1", 12.5, 30.0, 0, "F")
     bd.place("SW2", 12.5, 38.5, 0, "F")
     # buck
-    bd.place("C1", 28.5, 3.0, 0, "B")
-    bd.place("C2", 33.5, 3.0, 0, "B")
-    bd.place("U9", 29.8, 9.0, 0, "B")
+    bd.place("C1", 28.5, 3.48, 0, "B")
+    bd.place("C2", 34.5, 3.48, 0, "B")
+    bd.place("U9", 29.8, 9.0, 0, "B").Reference().SetVisible(False)
     bd.place("C3", 34.8, 9.0, 90, "B")
     bd.place("C4", 34.8, 12.5, 90, "B")
     bd.place("R1", 34.8, 15.7, 90, "B")
@@ -523,6 +526,7 @@ def build():
     bd.track(B, "VBUS", [P["A4"], off(P["A4"], 2.2)], 0.3)
     # placement/drill origin at the board's bottom-left corner so vendor CPL coordinates are positive
     b.GetDesignSettings().SetAuxOrigin(V(0, H))
+    sync_metadata(b, NETLIST)
     b.BuildConnectivity()
     filler = pcbnew.ZONE_FILLER(b)
     filler.Fill(b.Zones())

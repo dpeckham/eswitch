@@ -1,5 +1,5 @@
 {
-  "note": "DigiKey US product-page observations made 2026-09-14; not reserved inventory. Only exact listed manufacturer parts; cut tape/tube/bulk small-quantity offerings. Recheck at checkout.",
+  "note": "DigiKey US product-page observations made 2026-09-14 and targeted recheck 2026-09-15; not reserved inventory. Only exact listed manufacturer parts; cut tape/tube/bulk small-quantity offerings. Recheck at checkout.",
   "parts": [
     {
       "mpn": "BTS70041EPPXUMA1",
@@ -134,10 +134,10 @@
       "checked": "2026-09-14"
     },
     {
-      "mpn": "CC0603KRX7R9BB104",
-      "url": "https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R9BB104/2103082",
-      "stock": 89,
-      "checked": "2026-09-14"
+      "mpn": "CC0603JRX7R9BB104",
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0603JRX7R9BB104/5195681",
+      "stock": 142694,
+      "checked": "2026-09-15"
     },
     {
       "mpn": "PTS645SM43SMTR92 LFS",

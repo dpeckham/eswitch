@@ -5,7 +5,7 @@ Run after `just libs sch netlist` with KiCad's Python. This migrates the origina
 16-pole output footprint into eight two-pole blocks at exactly the same holes,
 updates input terminal hole patterns and assembly fields, and applies the
 reviewed edge/drill constraints. Input terminal changes require local rerouting.
-It does not reroute the buck, USB, antenna area, or input protection.
+It does not redesign the buck, USB, antenna area, or input protection.
 """
 import os
 
@@ -14,6 +14,7 @@ import pcbnew
 import design
 from gen_pcb import CX, Y_TERM, V, apply_rules, persist_project_rules, fuse_silk_labels
 from sexp import parse_one, find, find_all
+from pcb_nets import find_net, short_name, sync_metadata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
@@ -26,7 +27,7 @@ def main():
     if str(old.GetFPID().GetLibItemName()) == "TerminalBlock_1x16_P7.62mm_Wuerth_3114":
         expected = {}
         for p in old.Pads():
-            expected[int(p.GetNumber())] = (p.GetPosition().x, p.GetPosition().y, p.GetNetname())
+            expected[int(p.GetNumber())] = (p.GetPosition().x, p.GetPosition().y, short_name(p))
         replacements = []
         for i, ref in enumerate(design.OUTPUT_REFS):
             if ref != "J1" and b.FindFootprintByReference(ref):
@@ -42,7 +43,7 @@ def main():
                 x, y, old_net = expected[2 * i + n]
                 assert (pad.GetPosition() - pcbnew.VECTOR2I(x, y)).EuclideanNorm() <= 1
                 assert net == old_net, (ref, n, net, old_net)
-                pad.SetNet(b.FindNet(net))
+                pad.SetNet(find_net(b, net))
             replacements.append(fp)
         b.Remove(old)
         for fp in replacements:
@@ -74,7 +75,7 @@ def main():
         fp.SetPosition(position)
         fp.Reference().SetVisible(False)
         for pad in fp.Pads():
-            pad.SetNet(b.FindNet(parts[ref].pins["1"]))
+            pad.SetNet(find_net(b, parts[ref].pins["1"]))
             # The common 40 A path must not depend on narrow thermal spokes.
             pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
         b.Remove(old)
@@ -126,6 +127,7 @@ def main():
         t.SetTextThickness(pcbnew.FromMM(0.15))
         t.SetTextAngleDegrees(rot)
         t.SetMirrored(layer == pcbnew.B_SilkS)
+    sync_metadata(b, os.path.join(ROOT, "out", "eswitch.net"))
     apply_rules(b)
     b.BuildConnectivity()
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())

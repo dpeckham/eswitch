@@ -27389,7 +27389,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CC0603KRX7R9BB104"
+		(property "MPN" "CC0603JRX7R9BB104"
 			(at 345.44 125.73 0)
 			(effects
 				(font
@@ -31309,7 +31309,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CC0603KRX7R9BB104"
+		(property "MPN" "CC0603JRX7R9BB104"
 			(at 396.24 240.03 0)
 			(effects
 				(font
@@ -32070,7 +32070,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CC0603KRX7R9BB104"
+		(property "MPN" "CC0603JRX7R9BB104"
 			(at 393.7 274.32 0)
 			(effects
 				(font
@@ -35100,7 +35100,7 @@
 		(at 406.4 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "c96b208d-289b-527a-88bd-04e3781f5958")
@@ -35161,7 +35161,7 @@
 		(at 416.56 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "f6a0197b-ee59-5ec1-a864-635cb5511d89")
@@ -35222,7 +35222,7 @@
 		(at 426.72 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2230bac7-2db4-5b3c-a4a4-062a2e8a4838")
@@ -35283,7 +35283,7 @@
 		(at 436.88 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "7be5c9a4-65a2-599d-a15b-7d159e09b063")

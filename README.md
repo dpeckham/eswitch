@@ -29,6 +29,7 @@ The separate logic fuse is marked `LOGIC MAX 2A` on the underside.
 ## Files and checks
 
 - [Critical review and sources](docs/critical-review.md)
+- [Confirmed scope and deferred installation inputs](docs/design-constraints.md)
 - [Manual assembly and physical fit checks](docs/assembly.md)
 - [Three-board DigiKey BOM](fab/digikey/eswitch-digikey-bom.csv) and
   [dated stock evidence](fab/digikey/stock-audit.csv)
@@ -43,6 +44,7 @@ mise exec -- just bom       # quantities for 3 boards; rejects stale/missing sto
 mise exec -- just netlist erc drc
 mise exec -- just check-silk
 mise exec -- just render
+mise exec -- just repair-gaps # only for permitted low-speed signal gaps; native DRC guards each route
 mise exec -- just all       # deliberately replaces the PCB and routing
 mise exec -- just fab       # blocked until electrical review is closed
 ```

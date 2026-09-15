@@ -95,11 +95,11 @@ def main():
     # router cannot cut them with foreign tracks or vias. Removed again after import.
     keepouts = []
     for z in list(b.Zones()):
-        if z.GetNetname().startswith(("VS", "LOAD", "+12V")):
+        if z.GetNetname().removeprefix("/").startswith(("VS", "LOAD", "+12V")):
             k = pcbnew.ZONE(b)
             k.SetIsRuleArea(True)
             k.SetDoNotAllowTracks(True)
-            k.SetDoNotAllowVias(z.GetNetname().startswith(("VS", "LOAD")))
+            k.SetDoNotAllowVias(z.GetNetname().removeprefix("/").startswith(("VS", "LOAD")))
             k.SetDoNotAllowZoneFills(False)
             k.SetLayer(z.GetLayer())
             outline = z.Outline().COutline(0)

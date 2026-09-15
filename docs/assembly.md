@@ -56,6 +56,12 @@ envelopes, not dimensionally complete manufacturer models.
 
 ## Installation is not yet specified
 
+The owner has deferred installation details; see [confirmed scope](design-constraints.md).
+Initial USB programming is with house-bank power disconnected, then updates are
+OTA. External relays remain an optional owner-provided pump interface, not added
+to this PCB/BOM. Suppress their coils and keep pump motor current on the separately
+protected relay-contact circuit when using that arrangement.
+
 No onboard main fuse or MIDI holder is planned. The upstream fuse, holder, feeder,
 ring lugs, M5 fastening stack, enclosure screws and strain relief must be specified
 for the actual bank and installation. A 50 A upstream fuse is only a candidate,

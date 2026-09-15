@@ -222,9 +222,11 @@ PART_NUMBERS = {
     ("31.6k 1%", R0603): ("YAGEO", "RC0603FR-0731K6L"),
     ("10.2k 1%", R0603): ("YAGEO", "RC0603FR-0710K2L"),
     ("47R", R0805): ("YAGEO", "RC0805FR-0747RL"),
-    ("100nF 50V", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
-    ("100nF 25V", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
-    ("100nF", C0603): ("YAGEO", "CC0603KRX7R9BB104"),
+    # ±5 % is a reviewed, tighter-tolerance substitute for the formerly selected
+    # ±10 % CC0603KRX7R9BB104, which went out of stock at DigiKey on 2026-09-15.
+    ("100nF 50V", C0603): ("YAGEO", "CC0603JRX7R9BB104"),
+    ("100nF 25V", C0603): ("YAGEO", "CC0603JRX7R9BB104"),
+    ("100nF", C0603): ("YAGEO", "CC0603JRX7R9BB104"),
     ("1uF", C0603): ("YAGEO", "CC0603KRX7R7BB105"),
     ("220pF 50V", C0603): ("Samsung Electro-Mechanics", "CL10C221JB8NFNC"),
     ("27nF", C0603): ("YAGEO", "CC0603KRX7R9BB273"),

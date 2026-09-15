@@ -27,6 +27,12 @@ pcb:
 route passes="30":
     {{kicad}} python3.11 tools/route.py {{passes}}
 
+# Guarded repair for signal gaps left by routing/migrations; not for power or USB nets.
+repair-gaps:
+    mkdir -p out/py311
+    python3 -m pip install --disable-pip-version-check --upgrade --only-binary=:all: --platform manylinux2014_x86_64 --implementation cp --python-version 3.11 --abi cp311 --target out/py311 -r requirements-route-gaps.txt
+    {{kicad}} python3.11 tools/route_gaps.py
+
 # Post-route clean-up: prune router leftovers, apply manual fix-ups, stitch GND islands
 finish:
     for i in 1 2 3 4; do {{kicad}} python3.11 tools/finish.py prune && break; done

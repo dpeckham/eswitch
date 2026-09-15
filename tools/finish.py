@@ -7,6 +7,7 @@ import pcbnew
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from gen_pcb import apply_rules, persist_project_rules  # noqa: E402
+from pcb_nets import find_net
 
 PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
 FromMM = pcbnew.FromMM
@@ -29,7 +30,7 @@ def V(x, y):
 
 
 def is_zone_net(name):
-    return name.startswith(ZONE_NETS)
+    return name.removeprefix("/").startswith(ZONE_NETS)
 
 
 def prune_dangling(b):
@@ -89,7 +90,7 @@ def prune_dangling(b):
 def find_via_spot(b, net, box, dia):
     """Point in `box` (mm) farthest from copper of other nets on any layer (tracks, vias, pads, zones)."""
     x1, y1, x2, y2 = box
-    net_code = b.FindNet(net).GetNetCode()
+    net_code = find_net(b, net).GetNetCode()
     items = []
     allvias = []
     for t in b.Tracks():
@@ -153,7 +154,7 @@ def main():
             t.SetEnd(V(x2, y2))
             t.SetWidth(FromMM(w))
             t.SetLayer(layer)
-            t.SetNet(b.FindNet(net))
+            t.SetNet(find_net(b, net))
             b.Add(t)
     for net, x, y, dia, drill in VIAS:
         v = pcbnew.PCB_VIA(b)
@@ -161,7 +162,7 @@ def main():
         v.SetDrill(FromMM(drill))
         v.SetWidth(FromMM(dia))
         v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
-        v.SetNet(b.FindNet(net))
+        v.SetNet(find_net(b, net))
         b.Add(v)
     b.BuildConnectivity()
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())
@@ -248,7 +249,9 @@ def _clear_segment(b, net_code, layer, p1, p2, width):
             if seg.Distance(p.GetPosition()) < need + max(p.GetSize().x, p.GetSize().y) // 2:
                 return False
     for z in b.Zones():
-        if z.GetIsRuleArea() or z.GetNetCode() == net_code or z.GetNetname() == "GND" or not z.IsOnLayer(layer):
+        # Filled copper pours are repoured after routing, so they must not be treated as
+        # immutable obstacles here. Tracks, pads, and keepouts remain hard obstacles.
+        if z.GetIsRuleArea() or z.GetNetCode() == net_code or is_zone_net(z.GetNetname()) or not z.IsOnLayer(layer):
             continue
         polys = z.GetFilledPolysList(layer)
         if polys.OutlineCount() and polys.Collide(seg, need):
@@ -281,7 +284,7 @@ def lane_route(b, netname, a, b_pt, xa_cands, xb_cands, ym_cands, inner=pcbnew.I
     """Connect B.Cu point `a` to B.Cu point `b_pt` through an inner-layer U path:
     a -(B.Cu)- via(xa, a.y) -(inner)- (xa, ym) - (xb, ym) - (xb, b.y) - via -(B.Cu)- b_pt.
     `a_extra` = optional list of extra B.Cu polylines (mm) that must also be clear/added."""
-    net = b.FindNet(netname)
+    net = find_net(b, netname)
     nc = net.GetNetCode()
     A, Bp = V(*a), V(*b_pt)
     for xa in xa_cands:
@@ -321,7 +324,7 @@ def lane_route(b, netname, a, b_pt, xa_cands, xb_cands, ym_cands, inner=pcbnew.I
 
 def inner_route(b, netname, a_poly, via_a, via_b, b_poly, ym_cands, inner=pcbnew.In2_Cu, width=0.25):
     """a_poly: B.Cu polyline from a pad to via_a; b_poly: from via_b to a pad. Inner U path at ym."""
-    net = b.FindNet(netname)
+    net = find_net(b, netname)
     nc = net.GetNetCode()
     A = [V(*p) for p in a_poly]
     Bl = [V(*p) for p in b_poly]
@@ -362,7 +365,7 @@ def frange(a, b, step):
 
 def direct_route(b, netname, candidates, width=0.25, layer=pcbnew.B_Cu):
     """Add the first candidate polyline (list of (x, y) mm) that clears other-net copper."""
-    net = b.FindNet(netname)
+    net = find_net(b, netname)
     nc = net.GetNetCode()
     for poly in candidates:
         pts = [V(*p) for p in poly]
@@ -396,10 +399,10 @@ def manual():
     a, bp = pad_xy(b, "R405", "2"), pad_xy(b, "U10", "5")
     # IS4 now lives on IO2 (module pin 38, left column): move the net on the board pads, then
     # route along the free left-edge strip and an F.Cu lane in the corridor.
-    net_is4 = b.FindNet("IS4")
+    net_is4 = find_net(b, "IS4")
     for fp_ in b.GetFootprints():
         if fp_.GetReference() == "U10":
-            fp_.FindPadByNumber("5").SetNet(b.FindNet("unconnected-(U10-IO5-Pad5)") or b.FindNet(""))
+            fp_.FindPadByNumber("5").SetNet(find_net(b, "unconnected-(U10-IO5-Pad5)") or find_net(b, ""))
             fp_.FindPadByNumber("38").SetNet(net_is4)
     b.BuildConnectivity()
     bp = pad_xy(b, "U10", "38")
@@ -419,7 +422,7 @@ def manual():
             _add_via(b, net_is4, V(*via_b))
             _add_track(b, net_is4, pcbnew.B_Cu, V(*via_b), V(*bp), 0.25)
     # +3V3 at D401 pad 2: the inner-layer lane lost its via; put one at the pad's B.Cu stub end
-    net3 = b.FindNet("+3V3")
+    net3 = find_net(b, "+3V3")
     pd = V(*pad_xy(b, "D401", "2"))
     end = None
     for t in b.Tracks():
@@ -449,7 +452,7 @@ def manual():
             print("+3V3 D401: no clear via spot")
     # USB D-: the router parked the D+ via in the D- escape lane. Move the D+ via 1 mm and
     # give D- its own via + inner path to the already-routed D- fragment.
-    dp, dm = b.FindNet("USB_D+"), b.FindNet("USB_D-")
+    dp, dm = find_net(b, "USB_D+"), find_net(b, "USB_D-")
     for t in list(b.Tracks()):
         if t.GetNetCode() == dp.GetNetCode():
             if t.GetClass() == "PCB_VIA" and (t.GetPosition() - V(11.86, 51.49)).EuclideanNorm() < FromMM(0.05):
@@ -487,7 +490,7 @@ def manual():
 
 
 def _try_polyline(b, netname, layer, pts, width=0.25):
-    net = b.FindNet(netname)
+    net = find_net(b, netname)
     nc = net.GetNetCode()
     P = [V(*p) for p in pts]
     for p1, p2 in zip(P, P[1:]):
@@ -533,7 +536,7 @@ def grid_route(b, netname, layer, start, goal, region, step=0.2, width=0.25, tur
     start/goal: (x, y) mm (must be free cells). region: (x0, y0, x1, y1) mm. Returns polyline or None.
     """
     import heapq
-    net = b.FindNet(netname)
+    net = find_net(b, netname)
     nc = net.GetNetCode()
     x0, y0, x1, y1 = region
     nx, ny = int((x1 - x0) / step) + 1, int((y1 - y0) / step) + 1
@@ -580,7 +583,8 @@ def grid_route(b, netname, layer, start, goal, region, step=0.2, width=0.25, tur
                 mark_circle(mm(p.GetPosition().x), mm(p.GetPosition().y),
                             (mm(p.GetSize().x) ** 2 + mm(p.GetSize().y) ** 2) ** 0.5 / 2 + half)
     for z in b.Zones():
-        if z.GetIsRuleArea() or z.GetNetCode() == nc or z.GetNetname() == "GND" or not z.IsOnLayer(layer):
+        # Power/ground pours will pull back to the routed track during the final refill.
+        if z.GetIsRuleArea() or z.GetNetCode() == nc or is_zone_net(z.GetNetname()) or not z.IsOnLayer(layer):
             continue
         polys = z.GetFilledPolysList(layer)
         if not polys.OutlineCount():

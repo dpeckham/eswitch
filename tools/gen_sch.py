@@ -152,7 +152,7 @@ def symbol_instance(lib_id, ref, value, footprint, at, rot, pins, extra_fields=N
                     hide_value=False, sym=None):
     x, y = at
     node = S("symbol", S("lib_id", lib_id), S("at", x, y, rot), S("unit", 1),
-             S("exclude_from_sim", Sym("no")), S("in_bom", Sym("yes")), S("on_board", Sym("yes")),
+             S("exclude_from_sim", Sym("no")), S("in_bom", Sym("no" if ref.startswith("H") else "yes")), S("on_board", Sym("yes")),
              S("dnp", Sym("no")), S("uuid", uid()))
     rx, ry, rr = text_pos(sym, "Reference", at, rot) if sym else (x + 2.54, y - 2.54, 0)
     vx, vy, vr = text_pos(sym, "Value", at, rot) if sym else (x + 2.54, y, 0)
