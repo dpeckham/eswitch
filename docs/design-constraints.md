@@ -1,6 +1,8 @@
-# Confirmed scope — 2026-09-15
+# Confirmed scope — 2026-09-16
 
 - Nominal 12 V house-bank distribution; 40 A simultaneous continuous **target**.
+- Guaranteed operating-input design range: **9.5–16 V**, revised with the owner's
+  approval on 2026-09-16 to provide headroom for the latch-off controller.
 - Eight channels retain their maximum branch fuse sizes: 10/10/5/5/5/5/5/20 A.
 - Mostly VHF/GPS and other electronics, lights, and intermittently operated pumps.
   Exact models, inrush/stall currents and channel allocation are unspecified.
@@ -14,6 +16,14 @@
 - Three manually assembled boards; paste and hot air/hot plate are available.
   All exact BOM parts must be available from DigiKey in the required quantities.
 - Direct-entry screw output terminals; upstream main fusing, no onboard MIDI fuse.
+- Power may be applied with a **mixture of AUTO and BYPASS fuse positions**.
+  Unloaded startup is not an allowed design assumption. Review startup and
+  automatic recovery with connected loads, including MOSFET linear-mode SOA;
+  parallel MOSFETs must not be assumed to share startup current equally.
+  Fuse positions are changed only with battery power disconnected, never live.
+- Excessive startup current or an input-stage overcurrent fault must **latch the
+  whole board off until battery power is cycled** (owner decision, 2026-09-16).
+  No automatic retry, and no reliance on ESP32 firmware to enforce the latch.
 
 ## Deliberately outside this review's supplied inputs
 
@@ -22,13 +32,16 @@ fuse/feeder details, enclosure/location or mechanical restrictions. These remain
 **unknown**, not verified safe. Do not silently infer battery fault current,
 transient amplitude/energy, ambient temperature or available cooling. Board-level
 corrections can proceed without treating installation qualification as complete.
-The existing board outline is retained unless a necessary layout correction is
-explicitly documented.
+On 2026-09-15 the owner authorized enlarging the PCB for electrical reliability,
+selecting a fabrication service with heavier copper, and initially designing for 9–16 V
+operation with reverse-polarity blocking and overvoltage disconnection around
+17 V. The lower operating limit is now 9.5 V as recorded above. Higher-voltage
+charging/equalization is allowed to disconnect the outputs.
 
-The owner has elected to perform physical-fit, thermal and load testing later.
-That testing is deferred, not waived: it remains required before assigning a
-continuous-current or marine-service rating and before using a board for a
-safety-critical load.
+The earlier request to defer hardware testing referred to the **host PC freeze
+investigation**, not PCB validation. Prototype bring-up and thermal/load testing
+remain necessary before assigning a measured continuous-current or marine-service
+rating. Ordering prototype bare boards precedes those tests.
 
 ## Pump and relay boundary
 

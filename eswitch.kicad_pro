@@ -152,8 +152,8 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.254,
-        "min_track_width": 0.15,
+        "min_through_hole_diameter": 0.3,
+        "min_track_width": 0.18,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
         "solder_mask_to_copper_clearance": 0.0,
@@ -320,7 +320,15 @@
       },
       {
         "netclass": "Power",
+        "pattern": "/+3V3"
+      },
+      {
+        "netclass": "Power",
         "pattern": "VIN"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/VIN"
       },
       {
         "netclass": "Power",
@@ -328,7 +336,15 @@
       },
       {
         "netclass": "Power",
+        "pattern": "/SW"
+      },
+      {
+        "netclass": "Power",
         "pattern": "V12F"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/V12F"
       },
       {
         "netclass": "Power",
@@ -336,7 +352,15 @@
       },
       {
         "netclass": "Power",
+        "pattern": "/+12V"
+      },
+      {
+        "netclass": "Power",
         "pattern": "GND"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "/GND"
       }
     ]
   },

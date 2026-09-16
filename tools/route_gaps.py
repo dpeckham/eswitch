@@ -21,8 +21,9 @@ sys.path.insert(0, str(ROOT / "out" / "py311"))
 import numpy as np
 import pcbnew
 
-from gen_pcb import V, apply_rules
+from gen_pcb import V, W, H, apply_rules
 from pcb_nets import short_name
+from pcb_io import save_board
 
 PCB = ROOT / "eswitch.kicad_pcb"
 CANDIDATE = ROOT / "out/route-candidate.kicad_pcb"
@@ -30,7 +31,7 @@ REPORT = ROOT / "out/route-gaps-drc.json"
 LAYERS = [pcbnew.F_Cu, pcbnew.In2_Cu, pcbnew.B_Cu]
 STEP = 0.1
 GUARD = 0.025
-NX, NY = 1811, 576
+NX, NY = round(W / STEP) + 1, round(H / STEP) + 1
 SIZE = NX * NY
 mm = pcbnew.ToMM
 
@@ -81,9 +82,9 @@ class Raster:
 
     def edge(self, margin):
         self.data[:, np.arange(NX) * STEP < margin] = True
-        self.data[:, np.arange(NX) * STEP > 181 - margin] = True
+        self.data[:, np.arange(NX) * STEP > W - margin] = True
         self.data[np.arange(NY) * STEP < margin, :] = True
-        self.data[np.arange(NY) * STEP > 57.5 - margin, :] = True
+        self.data[np.arange(NY) * STEP > H - margin, :] = True
 
 
 def polygons(polyset):
@@ -147,7 +148,9 @@ def obstacles(board, code, width, diameter):
                 for layer, raster in layers.items():
                     if zone.IsOnLayer(layer):
                         raster.polygon(polygon, half)
-            if not rule or zone.GetDoNotAllowVias():
+            # A sparse signal via is allowed through the broad power spreaders.
+            # KiCad clears it from foreign pours. Tracks still cannot cut a pour.
+            if rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_")):
                 via.polygon(polygon, via_radius)
     for raster in layers.values():
         raster.edge(0.4 + width / 2 + GUARD)
@@ -290,7 +293,7 @@ def add_route(board, net, path, starts, goals, width, diameter, drill):
 def drc(board):
     board.BuildConnectivity()
     pcbnew.ZONE_FILLER(board).Fill(board.Zones())
-    pcbnew.SaveBoard(str(CANDIDATE), board)
+    save_board(CANDIDATE, board)
     subprocess.run(["kicad-cli", "pcb", "drc", "--severity-all", "--format", "json",
                     "-o", str(REPORT), str(CANDIDATE)], cwd=ROOT, check=True, capture_output=True)
     return json.loads(REPORT.read_text())
@@ -302,17 +305,30 @@ def main():
     apply_rules(board)
     report = drc(board)
     assert not any(v["severity"] == "error" for v in report["violations"]), "Resolve existing copper errors first"
-    for attempt in range(20):
+    failed = set()
+    def signal_gaps(result):
+        # Routing can divide an outer GND pour into islands. Those still must be
+        # stitched before release, but must not hide genuine signal progress.
+        return sum(not all("[GND]" in i["description"] for i in gap["items"])
+                   for gap in result["unconnected_items"])
+    for attempt in range(100):
         if not report["unconnected_items"]:
             break
-        items = {item.m_Uuid.AsString(): item for item in board.GetTracks()}
-        items.update({pad.m_Uuid.AsString(): pad for fp in board.GetFootprints() for pad in fp.Pads()})
         progress = False
         for gap in report["unconnected_items"]:
+            key = tuple(sorted(item["uuid"] for item in gap["items"]))
+            if key in failed:
+                continue
+            # A rejected candidate reloads the board. Do not reuse SWIG pointers
+            # into the previous board when considering the next gap.
+            items = {item.m_Uuid.AsString(): item for item in board.GetTracks()}
+            items.update({pad.m_Uuid.AsString(): pad for fp in board.GetFootprints() for pad in fp.Pads()})
+            if any(item["uuid"] not in items for item in gap["items"]):
+                continue  # ground-plane island stitching is a separate step
             a, b = [items[item["uuid"]] for item in gap["items"]]
             name = short_name(a)
             assert a.GetNetCode() == b.GetNetCode()
-            assert name.startswith(("IN", "IS", "DEN", "+3V3")), f"Not a permitted signal repair: {name}"
+            assert name.startswith(("IN", "IS", "DEN", "UGND", "+3V3")), f"Not a permitted signal repair: {name}"
             print(f"Routing {name}; {len(report['unconnected_items'])} gaps remain", flush=True)
             width, diameter, drill = (0.5, 0.8, 0.4) if name == "+3V3" else (0.25, 0.6, 0.3)
             blocked, via_blocked = obstacles(board, a.GetNetCode(), width, diameter)
@@ -320,19 +336,22 @@ def main():
             goals = anchors(component(board, b), blocked)
             print(f"  anchors {len(starts)} -> {len(goals)}", flush=True)
             if not starts or not goals:
+                failed.add(key)
                 continue
             path = search(blocked, via_blocked, starts, goals)
             if path is None:
+                failed.add(key)
                 continue
             add_route(board, a.GetNet(), path, starts, goals, width, diameter, drill)
             candidate_report = drc(board)
             errors = [v for v in candidate_report["violations"] if v["severity"] == "error"]
-            if errors or len(candidate_report["unconnected_items"]) >= len(report["unconnected_items"]):
+            if errors or signal_gaps(candidate_report) >= signal_gaps(report):
                 print("Candidate rejected; original board preserved:", errors[:2], flush=True)
                 board = pcbnew.LoadBoard(str(PCB))
                 apply_rules(board)
-                break
-            pcbnew.SaveBoard(str(PCB), board)
+                failed.add(key)
+                continue
+            save_board(PCB, board)
             print("  DRC accepted; saved", flush=True)
             board = pcbnew.LoadBoard(str(PCB))
             apply_rules(board)

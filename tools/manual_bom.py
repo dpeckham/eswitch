@@ -25,7 +25,7 @@ EXTRAS = [
 def rows(boards=design.BUILD_QUANTITY):
     grouped = defaultdict(list)
     for p in design.build():
-        if not p.footprint or p.ref.startswith("H"):
+        if not p.footprint or p.ref.startswith(("H", "NT")):
             continue
         if not p.fields.get("MPN") or not p.fields.get("Manufacturer"):
             raise ValueError(f"Missing exact manufacturer/MPN: {p.ref}")
@@ -79,7 +79,7 @@ def main():
         for p in items:
             writer.writerow([p["mpn"], p["per_board"], args.boards, p["required"], p["stock"], p["checked"], p["url"], p["assembly"]])
     print(f"{len(items)} line items; {args.boards} boards; dated stock covers every required quantity")
-    print("No spare allowance included. No parts purchased/reserved. PCB release remains blocked; see docs/critical-review.md.")
+    print("No spare allowance included. No parts purchased/reserved. See docs/critical-review.md for PCB release status.")
 
 
 if __name__ == "__main__":

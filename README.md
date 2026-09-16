@@ -8,11 +8,16 @@ remaining input-protection, buck/USB, antenna, thermal and fuse-coordination iss
 A clean ERC/DRC does not close these engineering blockers. Old fabrication files
 and the existing OSH Park upload are not approved for this revision.
 
+Work is paused at an **unfinished revision-B checkpoint**. Read the
+[resume handoff](docs/pcb-resume-handoff.md) before regenerating or editing the
+board. The new latch-off input schematic is ahead of the tracked PCB; native
+schematic/PCB parity and fabrication release are not established.
+
 ## Agreed constraints
 
 | Item | Requirement |
 |---|---|
-| Supply | Nominal 12 V boat house bank, DC–DC charged; battery/charger limits to be confirmed |
+| Supply | 9.5–16 V design input range; nominal 12 V house bank, unknown battery/charger details |
 | Simultaneous load | **40 A continuous target**, not a qualified rating or 65 A total |
 | Channels | CH1–2: 10 A target, BTS7004-1EPP; CH3–7: 5 A, BTS7008-1EPR; CH8: 20 A, BTS7002-1EPP |
 | Main fuse | Upstream protection; no onboard MIDI/main fuse; F9 is logic-only |
@@ -20,7 +25,7 @@ and the existing OSH Park upload are not approved for this revision.
 | Inputs | Two Wuerth 74650195 M5 ring-lug terminals; component rating is not board rating |
 | Assembly | Three boards, manual; paste + hot air/hot plate for exposed pads |
 | Procurement | Exact DigiKey-stocked parts for all three builds; recheck at checkout |
-| PCB | 181 × 57.5 mm, four layers; OSH Park 1/0.5/0.5/1 oz, nominal 1.6 mm |
+| PCB | In progress: tracked 221 × 75 mm; new input-stage target 253 × 75 mm; JLCPCB four-layer 2 oz outer/inner, 1.6 mm |
 
 Each channel holder is marked with its circuit number and maximum fuse value
 (for example, `CH1 MAX FUSE 10A`). These are not guaranteed continuous currents.
@@ -45,10 +50,11 @@ mise exec -- just netlist erc drc
 mise exec -- just check-silk
 mise exec -- just render
 mise exec -- just repair-gaps # only for permitted low-speed signal gaps; native DRC guards each route
-mise exec -- just all       # deliberately replaces the PCB and routing
+# Do not run `just all` on this checkpoint: legacy finish/stitch steps need updating.
 mise exec -- just fab       # blocked until electrical review is closed
 ```
 
 Firmware must implement safe reset states and variant-specific calibration/fault
-handling. USB-only power, self-powered USB attach behavior and off-state open-load
-diagnosis are not guaranteed by the current circuit.
+handling. USB is for initial bench programming with the battery disconnected;
+later updates are OTA. USB-only startup/current-budget verification and off-state
+open-load diagnosis remain review items, not completed qualifications.

@@ -1,8 +1,37 @@
-# Critical review — 2026-09-15
+# Critical review — revision B in progress, 2026-09-16
 
 **HOLD the PCB order.** Confirmed part/connector/fabrication-rule corrections are
 implemented, but the electrical/layout redesign is not complete. A clean ERC/DRC
 does not establish 40 A capability, transient survival or safe marine service.
+
+## Current revision-B status (supersedes the older snapshot below)
+
+**Paused checkpoint, 2026-09-16.** See [resume handoff](pcb-resume-handoff.md)
+for the exact file state, migration failures and next actions. The schematic and
+tracked PCB deliberately do **not** yet match. Do not use this checkpoint to order.
+
+The tracked PCB is 221 × 75 mm, with a selected four-layer 2 oz outer/inner
+JLCPCB stackup. The manufacturer calculator evidence is in
+[fabrication-stackup-evidence.json](fabrication-stackup-evidence.json).
+The new input-stage generator targets **253 × 75 mm**; that candidate has not
+been promoted. The buck module, USB-only ideal-diode supply, input protection,
+local PROFET networks, placement and routing are still being checked. The earlier 497-pin,
+zero-unrouted and 26-warning figures below describe revision A, **not this board**.
+Do not order an archived Gerber ZIP or the old OSH Park upload.
+
+**Release blocker: loaded input startup and migration.** AUTO and BYPASS may be
+mixed at power-up. The owner approved 9.5–16 V and hardware latch-off on excessive
+startup current/overcurrent. The schematic now uses LM74800 reverse protection,
+a TPS2492PWR latch-off/power-limit controller, a four-terminal 1 mΩ shunt and
+PSMN1R8-80SSEJ pass MOSFETs. The tracked PCB still has the superseded input stage.
+Neither the new layout nor quantitative worst-case startup/fault/SOA analysis
+is complete. See [input-protection review](input-protection-review.md).
+
+The 55-line current BOM has a three-board DigiKey stock audit dated 2026-09-16;
+this is not a reservation and must be revised with any further component changes.
+Initial USB programming remains **bench-only, with the battery disconnected**.
+
+## Historical revision-A review (2026-09-15)
 
 ## Owner's requirements
 

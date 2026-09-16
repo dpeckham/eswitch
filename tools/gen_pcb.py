@@ -34,17 +34,17 @@ def V(x, y):
 
 
 # --------------------------------------------------------------------------- geometry
-W, H = 181.0, 57.5              # board outline
+W, H = 253.0, 75.0              # revision B: reverse + power-limited latch-off stages
 PITCH = 15.24
-CELL0 = 51.0                    # left edge of cell 0
+CELL0 = 123.0                   # left edge of cell 0
 CX = [CELL0 + PITCH / 2 + i * PITCH for i in range(8)]   # cell centres
 Y_FUSE = 17.5                   # fuse holder origin (COM blade) y
 Y_BAND = (8.0, 27.0)            # +12V bus band on F.Cu / In2.Cu
-Y_TERM = 52.3                   # terminal block pin row
+Y_TERM = 69.8                   # terminal block pin row
 Y_BTS = 35.0                    # PROFET centre
-X_BUS0 = 36.0                   # left end of the bus band / stud column
+X_BUS0 = 99.0                   # protected power bus begins after Q3/Q4
 STUD_12V = (43.0, 17.3)
-STUD_GND = (43.0, 44.0)
+STUD_GND = (51.0, 52.0)
 
 
 def fuse_silk_labels():
@@ -54,7 +54,7 @@ def fuse_silk_labels():
          pcbnew.F_SilkS, 0.9, 90)
         for n, (rating, _, _) in design.CHANNELS.items()
     ]
-    labels.append(("LOGIC MAX 2A", 20.7, 31.5, pcbnew.B_SilkS, 0.8, 90))
+    labels.append(("LOGIC MAX 2A", 91.0, 46.2, pcbnew.B_SilkS, 0.8, 0))
     return labels
 
 
@@ -76,9 +76,9 @@ def apply_rules(b):
     """Design constraints and net classes (must be re-applied after LoadBoard: classes live in the project)."""
     ds = b.GetDesignSettings()
     ds.m_MinClearance = FromMM(0.2)
-    ds.m_TrackMinWidth = FromMM(0.15)
+    ds.m_TrackMinWidth = FromMM(0.18)
     ds.m_ViasMinSize = FromMM(0.5)
-    ds.m_MinThroughDrill = FromMM(0.254)
+    ds.m_MinThroughDrill = FromMM(0.3)
     ds.m_CopperEdgeClearance = FromMM(0.4)
     ds.m_HoleClearance = FromMM(0.15)
     ds.m_HoleToHoleMin = FromMM(0.25)
@@ -182,10 +182,10 @@ class Board:
             r.SetWidth(FromMM(0.05))
             fp.Add(r)
         for pad in fp.Pads():
-            if ref in ("J2", "J3"):
+            if ref in ("J2", "J3", *design.OUTPUT_REFS):
                 pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
-            if ref == "U10" and 0 < pad.GetDrillSize().x < FromMM(0.254):
-                pad.SetDrillSize(V(0.254, 0.254))
+            if ref == "U10" and 0 < pad.GetDrillSize().x < FromMM(0.3):
+                pad.SetDrillSize(V(0.3, 0.3))
             net = self.pad_net.get((ref, pad.GetNumber()))
             if net:
                 pad.SetNet(self.nets[net])
@@ -542,4 +542,5 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    from layout_revision_b import build as build_revision_b
+    build_revision_b()

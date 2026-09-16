@@ -1,24 +1,31 @@
 {
   "fabrication_approved": false,
-  "review_date": "2026-09-15",
+  "review_date": "2026-09-16",
+  "status": "paused_unfinished_revision_b_checkpoint",
+  "handoff": "docs/pcb-resume-handoff.md",
   "board_quantity": 3,
   "continuous_total_target_a": 40,
+  "operating_input_v": [9.5, 16],
   "pcb_checks": {
     "erc_violations": 0,
-    "drc_errors": 0,
-    "drc_unrouted": 0,
-    "schematic_parity_issues": 0,
-    "drc_warnings_reviewed": 26,
-    "fuse_silk_verified": true,
-    "antenna_keepout_verified": true,
-    "three_board_bom_stock_audit_passed": true
+    "erc_report_date": "2026-09-16T08:48:46",
+    "drc_errors": null,
+    "drc_unrouted": null,
+    "schematic_parity_issues": null,
+    "drc_warnings_reviewed": null,
+    "fuse_silk_verified": false,
+    "antenna_keepout_verified": false,
+    "three_board_bom_stock_audit_passed": true,
+    "bom_stock_observation_date": "2026-09-16",
+    "note": "Historical zero-DRC/parity results are not valid for this checkpoint. Schematic and tracked PCB differ; the new layout candidate is not approved."
   },
   "blockers": [
-    "Input reverse-polarity and transient protection coordination",
-    "Buck hot-loop and feedback layout; USB-only minimum-voltage margin",
-    "USB ESD placement and deliberate differential routing",
-    "40 A common-path and CH8 thermal design qualification",
-    "Branch fuse derating and load/wire coordination",
-    "Physical 1:1 fit check of custom fuse clips and terminal footprints"
+    "Complete 253 mm input-stage migration; tracked 221 mm PCB does not match new latch-off schematic",
+    "Resolve migration SWIG failure, stage routing errors, remaining signal gaps and ground islands",
+    "Complete worst-case loaded startup, single-FET hot SOA, fault timing and transient/clamp coordination analysis",
+    "Verify 40 A source and return paths, CH8 copper and thermal design; prototype rating remains unqualified",
+    "Verify buck effective output capacitance and USB-only startup/current budget/reference plane",
+    "Run fresh ERC, copper DRC, native parity, independent net checks, fuse silk and manufacturing review",
+    "Update legacy build/fabrication scripts, assembly documentation and release evidence; generate new checked fabrication package"
   ]
 }

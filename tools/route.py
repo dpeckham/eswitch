@@ -8,6 +8,7 @@ import subprocess
 import sys
 
 import pcbnew
+from pcb_io import save_board
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
@@ -95,11 +96,13 @@ def main():
     # router cannot cut them with foreign tracks or vias. Removed again after import.
     keepouts = []
     for z in list(b.Zones()):
-        if z.GetNetname().removeprefix("/").startswith(("VS", "LOAD", "+12V")):
+        if z.GetNetname().removeprefix("/").startswith(("VS", "LOAD", "+12V", "BATT_RAW", "BATT_MID")):
             k = pcbnew.ZONE(b)
             k.SetIsRuleArea(True)
             k.SetDoNotAllowTracks(True)
-            k.SetDoNotAllowVias(z.GetNetname().removeprefix("/").startswith(("VS", "LOAD")))
+            # Sparse signal vias may pass through broad spreaders; tracks may not
+            # cut the current path. Inspect the resulting plane necks at release.
+            k.SetDoNotAllowVias(False)
             k.SetDoNotAllowZoneFills(False)
             k.SetLayer(z.GetLayer())
             outline = z.Outline().COutline(0)
@@ -108,6 +111,34 @@ def main():
             k.SetZoneName("tmp_keepout_" + z.GetZoneName())
             b.Add(k)
             keepouts.append(k)
+    # Keep a continuous In2 ground reference below the manually routed USB pair.
+    # These are router-only guards: the intentional connector/ESD escape vias
+    # have already been reviewed and are not newly generated routing.
+    for track in b.GetTracks():
+        track.SetLocked(True)
+        if track.GetClass() != "PCB_TRACK" or track.GetNetname().removeprefix("/") not in ("USB_D+", "USB_D-", "USB_MCU_D+", "USB_MCU_D-"):
+            continue
+        x1,y1=pcbnew.ToMM(track.GetStart().x),pcbnew.ToMM(track.GetStart().y)
+        x2,y2=pcbnew.ToMM(track.GetEnd().x),pcbnew.ToMM(track.GetEnd().y)
+        import math
+        length=math.hypot(x2-x1,y2-y1)
+        if not length:
+            continue
+        dx,dy=(x2-x1)/length,(y2-y1)/length
+        margin=.9
+        pts=[(x1-dx*margin-dy*margin,y1-dy*margin+dx*margin),
+             (x2+dx*margin-dy*margin,y2+dy*margin+dx*margin),
+             (x2+dx*margin+dy*margin,y2+dy*margin-dx*margin),
+             (x1-dx*margin+dy*margin,y1-dy*margin-dx*margin)]
+        k=pcbnew.ZONE(b)
+        k.SetIsRuleArea(True)
+        k.SetLayer(pcbnew.In2_Cu)
+        k.SetDoNotAllowTracks(True)
+        k.SetDoNotAllowVias(True)
+        k.SetDoNotAllowZoneFills(False)
+        k.AddPolygon(pcbnew.VECTOR_VECTOR2I([pcbnew.VECTOR2I(pcbnew.FromMM(x),pcbnew.FromMM(y)) for x,y in pts]))
+        b.Add(k)
+        keepouts.append(k)
     print("temporary keepouts:", len(keepouts))
     # drop any previous auto-routed tracks/vias (keep the explicitly generated ones: width 0.5 mm stubs)
     pcbnew.ExportSpecctraDSN(b, DSN)
@@ -116,8 +147,8 @@ def main():
     if java is None:
         r0 = subprocess.run(["mise", "which", "java"], cwd=ROOT, text=True, capture_output=True)
         java = r0.stdout.strip() or "java"
-    cmd = [java, "-jar", JAR, "--gui.enabled=false", "-de", DSN, "-do", SES, "-mp", str(passes),
-           "-mt", "4", "--router.layers.routable=true,false,true,true"]
+    cmd = [java, "-Xmx2g", "-XX:ActiveProcessorCount=2", "-jar", JAR, "--gui.enabled=false", "-de", DSN, "-do", SES, "-mp", str(passes),
+           "-mt", "1", "--router.layers.routable=true,false,true,true"]
     print(" ".join(cmd))
     r = subprocess.run(cmd, cwd=os.path.join(ROOT, "out"), text=True, capture_output=True)
     tail = "\n".join(l for l in r.stdout.splitlines() if "nalytics" not in l)[-3000:]
@@ -133,11 +164,9 @@ def main():
         b.Add(z)
     b.BuildConnectivity()
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())
-    n = stitch_islands(b)
-    if n:
-        b.BuildConnectivity()
-        pcbnew.ZONE_FILLER(b).Fill(b.Zones())
-    pcbnew.SaveBoard(PCB, b)
+    # Stitching is a separate diagnostic pass; do not run its full-board search
+    # in the router process on a host with unresolved hard freezes.
+    save_board(PCB, b)
     persist_project_rules(PCB)
     print("routed board saved:", PCB)
 

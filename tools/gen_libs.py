@@ -301,11 +301,128 @@ def sym_bts7008(new="BTS7008-1EPR"):
     return dump(sym, 1) + "\n"
 
 
+def sym_ic(name, footprint, pins, datasheet, prefix="U"):
+    """Unstacked, explicitly numbered review symbols; every physical pin is visible."""
+    s = f'\t(symbol "{name}"\n\t\t(in_bom yes)\n\t\t(on_board yes)\n'
+    s += prop("Reference", prefix, 0, 24.13)
+    s += prop("Value", name, 0, 21.59)
+    s += prop("Footprint", footprint, 0, 0, True)
+    s += prop("Datasheet", datasheet, 0, 0, True)
+    s += f'\t\t(symbol "{name}_0_1"\n'
+    s += '\t\t\t(rectangle (start -10.16 19.05) (end 10.16 -19.05) (stroke (width 0.254) (type default)) (fill (type background)))\n\t\t)\n'
+    s += f'\t\t(symbol "{name}_1_1"\n'
+    half = (len(pins) + 1) // 2
+    for i, (num, label, typ) in enumerate(pins):
+        left = i < half
+        y = round((half - 1) * 1.27 - (i % half) * 2.54, 4)
+        s += pin(typ, -12.7 if left else 12.7, y, 0 if left else 180, 2.54, label, str(num))
+    return s + "\t\t)\n\t)\n"
+
+
+def fp_tpsm63603():
+    """TI RDH0030A land pattern, drawing 4226150/B, pp. 42–44.
+
+    Corner L lands use two overlapping rectangles with the same number. No open
+    drill in paste pads: thermal vias are placed just outside by the PCB generator.
+    """
+    name = "TI_RDH0030A_TPSM63603"
+    s = FP_HEADER.format(name=name, descr="TI RDH0030A TPSM63603, 4x6mm, 30 lands",
+        tags="power module", datasheet="https://www.ti.com/lit/ds/symlink/tpsm63603.pdf",
+        refx=0, refy=-4, valx=0, valy=4).replace("(attr through_hole)", "(attr smd)")
+    s += rect(-2, -3, 2, 3, "F.Fab", 0.1) + rect(-2.475, -3.4, 2.475, 3.4, "F.CrtYd", 0.05)
+    s += line(-1.5, -3.25, 1.5, -3.25, "F.SilkS")
+    s += circle(-2.3, -3.25, 0.12, "F.SilkS")
+    def pad(n, x, y, w, h):
+        return (f'\t(pad "{n}" smd roundrect (at {x} {y}) (size {w} {h}) '
+                '(layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.1))\n')
+    # Left column, top to bottom; right column, bottom to top.
+    for n, y in zip(range(2, 8), (-1.775, -.975, -.325, .475, 1.125, 1.775)):
+        s += pad(n, -1.775, y, .85, .25)
+    for n, y in zip(range(15, 21), (1.775, 1.125, .475, -.325, -.975, -1.775)):
+        s += pad(n, 1.775, y, .85, .25)
+    for n, x in zip(range(9, 14), (-1, -.5, 0, .5, 1)):
+        s += pad(n, x, 2.85, .25, .7)
+    for n, x in zip(range(22, 27), (1, .5, 0, -.5, -1)):
+        s += pad(n, x, -2.85, .25, .7)
+    for n, x, y in ((1, -1.775, -2.425), (8, -1.775, 2.425),
+                    (14, 1.775, 2.425), (21, 1.775, -2.425)):
+        sx, sy = (-1 if x < 0 else 1), (-1 if y < 0 else 1)
+        # Three overlapping rectangles reproduce the stepped corner in 4226150/B:
+        # 0.825 wide arm, 0.5 x 0.625 shoulder, 0.25 x 0.95 end-row leg.
+        s += pad(n, sx * 1.7875, y, .825, .25)
+        s += pad(n, sx * 1.625, sy * 2.5625, .5, .625)
+        s += pad(n, sx * 1.5, sy * 2.725, .25, .95)
+    s += pad(27, 0, -1.925, 1.25, .74)
+    s += pad(28, 0, -.6, 1.6, 1.0)
+    s += pad(29, 0, .6, 1.6, 1.0)
+    s += pad(30, 0, 1.925, 1.25, .74)
+    s += ")\n"
+    with open(os.path.join(PRETTY, name + ".kicad_mod"), "w") as f:
+        f.write(s)
+
+
+def fp_kelvin_shunt():
+    """CSS4J-4026 manufacturer solder lands, 10.60 x 7.30 mm envelope.
+
+    Power lands 2.55 x 5.60, sense lands 2.55 x .90, .80 mm isolation.
+    The inward sense-trace fingers in the drawing are PCB routing, not additional
+    solder contacts. Pins 1/3 are one end; 2/4 the other. Never join them on PCB.
+    """
+    name = "Bourns_CSS4J_4026"
+    s = FP_HEADER.format(name=name, descr="Bourns CSS4J-4026 four-terminal Kelvin shunt",
+        tags="shunt Kelvin", datasheet="https://bourns.com/docs/product-datasheets/css4j-4026.pdf",
+        refx=0, refy=-4.6, valx=0, valy=4.6).replace("(attr through_hole)", "(attr smd)")
+    s += rect(-5.03, -3.30, 5.03, 3.30, "F.Fab", .1)
+    s += rect(-5.55, -3.9, 5.55, 3.9, "F.CrtYd", .05)
+    for n,x,y,w,h in ((1,-4.025,.85,2.55,5.6),(2,4.025,.85,2.55,5.6),
+                       (3,-4.025,-3.2,2.55,.9),(4,4.025,-3.2,2.55,.9)):
+        s += (f'\t(pad "{n}" smd rect (at {x} {y}) (size {w} {h}) '
+              '(layers "F.Cu" "F.Paste" "F.Mask"))\n')
+    s += ")\n"
+    with open(os.path.join(PRETTY, name + ".kicad_mod"), "w") as f:
+        f.write(s)
+
+
 def write_symlib():
     s = '(kicad_symbol_lib\n\t(version 20251024)\n\t(generator "eswitch_gen_libs")\n\t(generator_version "10.0")\n'
     s += sym_fuseholder()
     for name in PROFETS:
         s += sym_bts7008(name)
+    s += sym_ic("LM74800", "Package_SON:WSON-12-1EP_3x3mm_P0.5mm_EP1.5x2.5mm",
+        [(n, label, typ) for n, label, typ in (
+            (1,"DGATE","output"),(2,"A","input"),(3,"VSNS","input"),(4,"SW","passive"),
+            (5,"OV","input"),(6,"EN/UVLO","input"),(7,"GND","power_in"),(8,"HGATE","output"),
+            (9,"OUT","input"),(10,"VS","power_in"),(11,"CAP","passive"),(12,"C","input"),
+            (13,"RTN_FLOAT","no_connect"))], "https://www.ti.com/lit/ds/symlink/lm7480-q1.pdf")
+    power_names = {1:"RT",2:"EN/SYNC",3:"VIN",4:"VIN",5:"PGND",6:"PGND",7:"VOUT",8:"VOUT",
+        9:"VOUT",10:"VOUT",11:"SW_NC",12:"VOUT",13:"VOUT",14:"VOUT",15:"VOUT",16:"PGND",17:"PGND",
+        18:"VIN",19:"VIN",20:"CBOOT_NC",21:"RBOOT_NC",22:"VLDOIN",23:"VCC",24:"AGND",25:"FB",
+        26:"PG",27:"AGND",28:"PGND",29:"PGND",30:"VOUT"}
+    types = {"VIN":"power_in", "PGND":"power_in", "AGND":"power_in", "VOUT":"power_out",
+             "VCC":"power_out", "PG":"open_collector", "SW_NC":"no_connect"}
+    # Multiple VOUT pins share the integrated inductor; only one is an ERC driver.
+    s += sym_ic("TPSM63603V3", "eswitch:TI_RDH0030A_TPSM63603",
+        [(n, label, "passive" if label == "VOUT" and n != 7 else types.get(label,"input"))
+         for n, label in power_names.items()], "https://www.ti.com/lit/ds/symlink/tpsm63603.pdf")
+    s += sym_ic("BSC016N06NS", "Package_SON:Infineon_PG-TDSON-8_6.15x5.15mm",
+        [(n, "S" if n <= 3 else "G" if n == 4 else "D", "input" if n == 4 else "passive")
+         for n in range(1,6)],
+        "https://www.infineon.com/assets/row/public/documents/24/49/infineon-bsc016n06ns-datasheet-en.pdf", "Q")
+    s += sym_ic("PSMN1R8-80SSE", "Package_TO_SOT_SMD:LFPAK88",
+        [(1,"G","input"),(2,"S","passive"),(3,"S","passive"),(4,"S","passive"),(5,"D_MB","passive")],
+        "https://assets.nexperia.com/documents/data-sheet/PSMN1R8-80SSE.pdf", "Q")
+    s += sym_ic("TPS2492", "Package_SO:TSSOP-14_4.4x5mm_P0.65mm",
+        [(1,"UVEN","input"),(2,"VREF","output"),(3,"PROG","input"),(4,"TIMER","passive"),
+         (5,"OV","input"),(6,"IMON","output"),(7,"GND","power_in"),(8,"PG_N","open_collector"),
+         (9,"FLT_N","open_collector"),(10,"NC","no_connect"),(11,"OUT","input"),
+         (12,"GATE","output"),(13,"SENSE","input"),(14,"VCC","power_in")],
+        "https://www.ti.com/lit/ds/symlink/tps2492.pdf")
+    s += sym_ic("Kelvin_Shunt", "eswitch:Bourns_CSS4J_4026",
+        [(1,"I_IN","passive"),(3,"S_IN","passive"),(2,"I_OUT","passive"),(4,"S_OUT","passive")],
+        "https://bourns.com/docs/product-datasheets/css4j-4026.pdf", "R")
+    s += sym_ic("STPS41L60C", "Package_TO_SOT_SMD:TO-263-2",
+        [(1,"A1","passive"),(2,"K_TAB","passive"),(3,"A2","passive")],
+        "https://www.st.com/resource/en/datasheet/stps41l60c.pdf", "D")
     s += ")\n"
     os.makedirs(os.path.dirname(SYMLIB), exist_ok=True)
     with open(SYMLIB, "w") as f:
@@ -318,4 +435,6 @@ if __name__ == "__main__":
     fp_screw_terminal_8196()
     fp_input_terminal()
     fp_terminal_block_16()
+    fp_tpsm63603()
+    fp_kelvin_shunt()
     write_symlib()
