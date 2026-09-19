@@ -192,12 +192,12 @@ def fp_terminal_block_16():
     x1, x2 = -3.81, (N - 1) * P + 3.81
     b += rect(x1, -4.6, x2, 7.9, "F.Fab", 0.1)
     # No front silkscreen: the wire-entry face deliberately overhangs the PCB.
-    b += line(x1, -4.8, x2, -4.8, "F.SilkS", 0.12)
+    b += line(x1 + .15, -4.8, x2 - .15, -4.8, "F.SilkS", 0.12)
     for i in range(N):
         b += line(i * P - 2.5, 7.9, i * P - 2.5, 4.5, "F.Fab", 0.1)
         b += line(i * P + 2.5, 7.9, i * P + 2.5, 4.5, "F.Fab", 0.1)
         b += circle(i * P, 0.0, 2.3, "F.Fab", 0.1)
-    b += line(x1, -4.8, x1, -5.3, "F.SilkS", 0.12)
+    b += line(x1 + .15, -4.8, x1 + .15, -5.3, "F.SilkS", 0.12)
     b += text("${REFERENCE}", (N - 1) * P / 2, -2.2, "F.Fab", 0.8)
     b += rect(x1, -5.1, x2, 8.4, "F.CrtYd", 0.05)
     write_fp("TerminalBlock_1x02_P7.62mm_Wuerth_2184", b,
@@ -205,6 +205,45 @@ def fp_terminal_block_16():
              "terminal block screw clamp 7.62mm 2 Wuerth 2184 691218410002",
              "https://www.we-online.com/components/products/datasheet/691218410002.pdf",
              ref=(3.81, -6.0), val=(3.81, 9.2))
+
+
+def fp_esp32_edge():
+    """Project variant: 0.30 mm thermal drills, body courtyard and edge silk.
+
+    The antenna rule area is retained. Only the printed outline is clipped at
+    the intended overhanging board edge; fabrication/body outlines stay intact.
+    """
+    import pcbnew
+    fp = pcbnew.FootprintLoad(kicad_env.footprint_lib_dir("RF_Module"), "ESP32-S3-WROOM-1")
+    name = "ESP32-S3-WROOM-1_Edge"
+    fp.SetFPID(pcbnew.LIB_ID("eswitch", name))
+    detached = []
+    for item in list(fp.GraphicalItems()):
+        if item.GetLayer() in (pcbnew.F_CrtYd, pcbnew.B_CrtYd, pcbnew.Cmts_User):
+            fp.Remove(item)
+            detached.append(item)
+        elif item.GetLayer() == pcbnew.F_SilkS and item.GetClass() == "PCB_SHAPE":
+            a, b = item.GetStart(), item.GetEnd()
+            ax, ay, bx, by = a.x, a.y, b.x, b.y
+            edge = pcbnew.FromMM(-8.1)
+            if max(ay, by) < edge:
+                fp.Remove(item)
+                detached.append(item)
+            elif min(ay, by) < edge:
+                assert ax == bx, "Review nonvertical antenna outline before clipping"
+                item.SetStart(pcbnew.VECTOR2I(ax, max(ay, edge)))
+                item.SetEnd(pcbnew.VECTOR2I(bx, max(by, edge)))
+    shape = pcbnew.PCB_SHAPE(fp)
+    shape.SetShape(pcbnew.SHAPE_T_RECT)
+    shape.SetStart(pcbnew.VECTOR2I(pcbnew.FromMM(-9.3), pcbnew.FromMM(-13.05)))
+    shape.SetEnd(pcbnew.VECTOR2I(pcbnew.FromMM(9.3), pcbnew.FromMM(13.05)))
+    shape.SetLayer(pcbnew.F_CrtYd)
+    shape.SetWidth(pcbnew.FromMM(.05))
+    fp.Add(shape)
+    for pad in fp.Pads():
+        if 0 < pad.GetDrillSize().x < pcbnew.FromMM(.3):
+            pad.SetDrillSize(pcbnew.VECTOR2I(pcbnew.FromMM(.3), pcbnew.FromMM(.3)))
+    pcbnew.FootprintSave(PRETTY, fp)
 
 
 # --------------------------------------------------------------------------- symbols
@@ -330,7 +369,7 @@ def fp_tpsm63603():
         tags="power module", datasheet="https://www.ti.com/lit/ds/symlink/tpsm63603.pdf",
         refx=0, refy=-4, valx=0, valy=4).replace("(attr through_hole)", "(attr smd)")
     s += rect(-2, -3, 2, 3, "F.Fab", 0.1) + rect(-2.475, -3.4, 2.475, 3.4, "F.CrtYd", 0.05)
-    s += line(-1.5, -3.25, 1.5, -3.25, "F.SilkS")
+    s += line(-1.5, -3.55, 1.5, -3.55, "F.SilkS")
     s += circle(-2.3, -3.25, 0.12, "F.SilkS")
     def pad(n, x, y, w, h):
         return (f'\t(pad "{n}" smd roundrect (at {x} {y}) (size {w} {h}) '
@@ -437,4 +476,5 @@ if __name__ == "__main__":
     fp_terminal_block_16()
     fp_tpsm63603()
     fp_kelvin_shunt()
+    fp_esp32_edge()
     write_symlib()

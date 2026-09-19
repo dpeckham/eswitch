@@ -6,6 +6,7 @@ so the routed board picks them up without regenerating (and losing) the routing.
 """
 import os
 import pcbnew
+from pcb_io import save_board
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PCB = os.path.join(ROOT, "eswitch.kicad_pcb")
@@ -23,5 +24,5 @@ for fp in b.GetFootprints():
     for m in src.Models():
         models.push_back(m)
     n += 1
-pcbnew.SaveBoard(PCB, b)
+save_board(PCB, b)
 print("updated models on", n, "footprints")

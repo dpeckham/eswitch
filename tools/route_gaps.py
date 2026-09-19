@@ -7,6 +7,7 @@ by native DRC before replacing the working board; electrical/thermal review is
 still required. This is not a power-stage or controlled-impedance router.
 """
 import heapq
+import argparse
 import json
 import math
 from pathlib import Path
@@ -23,7 +24,7 @@ import pcbnew
 
 from gen_pcb import V, W, H, apply_rules
 from pcb_nets import short_name
-from pcb_io import save_board
+from pcb_io import save_board, fill_zones
 
 PCB = ROOT / "eswitch.kicad_pcb"
 CANDIDATE = ROOT / "out/route-candidate.kicad_pcb"
@@ -291,8 +292,7 @@ def add_route(board, net, path, starts, goals, width, diameter, drill):
 
 
 def drc(board):
-    board.BuildConnectivity()
-    pcbnew.ZONE_FILLER(board).Fill(board.Zones())
+    fill_zones(board)
     save_board(CANDIDATE, board)
     subprocess.run(["kicad-cli", "pcb", "drc", "--severity-all", "--format", "json",
                     "-o", str(REPORT), str(CANDIDATE)], cwd=ROOT, check=True, capture_output=True)
@@ -300,7 +300,15 @@ def drc(board):
 
 
 def main():
-    shutil.copyfile(ROOT / "eswitch.kicad_pro", CANDIDATE.with_suffix(".kicad_pro"))
+    global PCB, CANDIDATE, REPORT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--board", type=Path, default=PCB,
+                        help="Working board to repair; defaults to the tracked PCB")
+    args = parser.parse_args()
+    PCB = args.board.resolve()
+    CANDIDATE = ROOT / "out" / f"{PCB.stem}-route-candidate.kicad_pcb"
+    REPORT = ROOT / "out" / f"{PCB.stem}-route-drc.json"
+    shutil.copyfile(PCB.with_suffix(".kicad_pro"), CANDIDATE.with_suffix(".kicad_pro"))
     board = pcbnew.LoadBoard(str(PCB))
     apply_rules(board)
     report = drc(board)
@@ -328,6 +336,8 @@ def main():
             a, b = [items[item["uuid"]] for item in gap["items"]]
             name = short_name(a)
             assert a.GetNetCode() == b.GetNetCode()
+            if name == "GND":
+                continue  # Ground connections require separate reviewed stitching.
             assert name.startswith(("IN", "IS", "DEN", "UGND", "+3V3")), f"Not a permitted signal repair: {name}"
             print(f"Routing {name}; {len(report['unconnected_items'])} gaps remain", flush=True)
             width, diameter, drill = (0.5, 0.8, 0.4) if name == "+3V3" else (0.25, 0.6, 0.3)

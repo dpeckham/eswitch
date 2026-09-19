@@ -26736,7 +26736,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RF_Module:ESP32-S3-WROOM-1"
+		(property "Footprint" "eswitch:ESP32-S3-WROOM-1_Edge"
 			(at 381 80.01 0)
 			(effects
 				(font
@@ -32603,7 +32603,7 @@
 				)
 			)
 		)
-		(property "Value" "22uF 10V"
+		(property "Value" "47uF 6.3V X7R"
 			(at 386.715 302.26 0)
 			(effects
 				(font
@@ -32647,7 +32647,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM32ER71A226KE20L"
+		(property "MPN" "GCM32ER70J476KE19L"
 			(at 386.08 299.72 0)
 			(effects
 				(font
@@ -32840,7 +32840,7 @@
 				)
 			)
 		)
-		(property "Value" "22uF 10V"
+		(property "Value" "47uF 6.3V X7R"
 			(at 396.875 302.26 0)
 			(effects
 				(font
@@ -32884,7 +32884,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM32ER71A226KE20L"
+		(property "MPN" "GCM32ER70J476KE19L"
 			(at 396.24 299.72 0)
 			(effects
 				(font
@@ -34981,7 +34981,7 @@
 				)
 			)
 		)
-		(property "Value" "22uF 10V"
+		(property "Value" "47uF 6.3V X7R"
 			(at 417.195 302.26 0)
 			(effects
 				(font
@@ -35025,7 +35025,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM32ER71A226KE20L"
+		(property "MPN" "GCM32ER70J476KE19L"
 			(at 416.56 299.72 0)
 			(effects
 				(font
@@ -35218,7 +35218,7 @@
 				)
 			)
 		)
-		(property "Value" "22uF 10V"
+		(property "Value" "47uF 6.3V X7R"
 			(at 427.355 302.26 0)
 			(effects
 				(font
@@ -35262,7 +35262,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM32ER71A226KE20L"
+		(property "MPN" "GCM32ER70J476KE19L"
 			(at 426.72 299.72 0)
 			(effects
 				(font

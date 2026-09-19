@@ -181,8 +181,8 @@ def build():
     add("D4", "Device:D_Schottky", "B360A", SMA, {1: "SW", 2: "GND"}, (355.6, yr), rot=270, Note="catch diode")
     add("R2", "Device:R", "31.6k 1%", R0603, {1: "+3V3", 2: "FB"}, (365.76, yr))
     add("R3", "Device:R", "10.2k 1%", R0603, {1: "FB", 2: "GND"}, (375.92, yr))
-    add("C7", "Device:C", "22uF 10V", C1210, {1: "+3V3", 2: "GND"}, (386.08, yr))
-    add("C8", "Device:C", "22uF 10V", C1210, {1: "+3V3", 2: "GND"}, (396.24, yr))
+    add("C7", "Device:C", "47uF 6.3V X7R", C1210, {1: "+3V3", 2: "GND"}, (386.08, yr))
+    add("C8", "Device:C", "47uF 6.3V X7R", C1210, {1: "+3V3", 2: "GND"}, (396.24, yr))
 
     # ------------------------------------------------------------------ I/O, mechanical, flags
     for n in range(1, N_CH + 1):
@@ -215,6 +215,7 @@ def apply_revision_b():
     removed = {"D2", "D4", "L1", "C4", "C5", "C6", "R2", "R3", "R4", "#FLG5"}
     PARTS[:] = [p for p in PARTS if p.ref not in removed]
     parts = {p.ref: p for p in PARTS}
+    parts["U10"].footprint = "eswitch:ESP32-S3-WROOM-1_Edge"
     parts["J2"].pins["1"] = "BATT_RAW"
     parts["J2"].value = "BATT+ 9.5-16V"
     parts["D3"].value = "SMCJ24CA"
@@ -235,9 +236,10 @@ def apply_revision_b():
     parts["R1"].value = "16.5k 1%"
     parts["R1"].pins["2"] = "AGND_BUCK"
     parts["R1"].fields = dict(Note="800 kHz per TPSM63603 table 7-4")
-    # Four existing 22 uF X7R capacitors give margin over the 40 uF effective minimum.
+    # Four 47 uF X7R parts; exact bias/temperature model and engineering reserve
+    # are checked by buck_analysis.py. Bench stability/startup still need testing.
     for ref, x in (("C12", 416.56), ("C13", 426.72)):
-        add(ref, "Device:C", "22uF 10V", C1210, {1: "+3V3", 2: "GND"}, (x, 299.72))
+        add(ref, "Device:C", "47uF 6.3V X7R", C1210, {1: "+3V3", 2: "GND"}, (x, 299.72))
     add("C14", "Device:C", "1uF", C0603, {1: "VCC_BUCK", 2: "GND"}, (405.13, 274.32))
     add("NT1", "Device:NetTie_2", "AGND STAR", "NetTie:NetTie-2_SMD_Pad0.5mm",
         {1: "AGND_BUCK", 2: "GND"}, (426.72, 274.32),
@@ -380,7 +382,7 @@ PART_NUMBERS = {
     ("10nF 50V", C0805): ("Samsung Electro-Mechanics", "CL21B103KBANNNC"),
     ("10uF 10V", C0805): ("YAGEO", "CC0805KKX5R6BB106"),
     ("4.7uF 50V", C1210): ("Murata", "GRM32ER71H475KA88L"),
-    ("22uF 10V", C1210): ("Murata", "GRM32ER71A226KE20L"),
+    ("47uF 6.3V X7R", C1210): ("Murata", "GCM32ER70J476KE19L"),
     ("B360A", SMA): ("Diodes Incorporated", "B360A-13-F"),
     ("SMBJ26A", SMB): ("Littelfuse", "SMBJ26A"),
     ("BAT54S", SOT23): ("Nexperia", "BAT54S-QR"),

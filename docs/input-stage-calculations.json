@@ -1,0 +1,422 @@
+{
+  "status": "engineering_screening_not_qualified",
+  "design_sha256": "7014a1cc3c9d7a18a9c0ff32a5342e7e9eec5fbaaca96660b0e234b821025eae",
+  "component_values": {
+    "R12": "115k 0.1%",
+    "R13": "10k 0.1%",
+    "R14": "56.2k 0.1%",
+    "R15": "10k 0.1%",
+    "R17": "8.25k 1%",
+    "R18": "1k",
+    "C18": "10nF 50V C0G 5%",
+    "R20": "1mR 1% 4W",
+    "U14": "TPS2492 (LATCH)"
+  },
+  "sources": {
+    "controller": "https://www.ti.com/lit/gpn/TPS2492",
+    "mosfet": "https://assets.nexperia.com/documents/data-sheet/PSMN1R8-80SSE.pdf",
+    "shunt": "https://bourns.com/docs/product-datasheets/css4j-4026.pdf",
+    "ti_power_accuracy_clarification": "https://e2e.ti.com/support/power-management-group/power-management/f/power-management-forum/1074250/tps2492-how-precise-is-the-constant-power-engine-what-measurement-method-will-best-match-the-designed-power-limit"
+  },
+  "assumptions": [
+    "Initial resistor/capacitor tolerance; temperature drift and ageing not included",
+    "Controller min/max electrical characteristics across its specified temperature range",
+    "Power-engine 17/25..33/25 ratios extrapolated from published test points; not a guaranteed limit at this PROG setting",
+    "Resistive BYPASS load only; arbitrary constant-power loads and motors are not represented",
+    "Ideal instantaneous limiting; no gate-charge delay, parasitics, overshoot or timer residual charge"
+  ],
+  "current_limit_a": [
+    44.55445544554455,
+    55.55555555555556
+  ],
+  "prog_v": [
+    0.4097349557522124,
+    0.4557064423862708
+  ],
+  "nominal_power_limit_w": 216.21621621621622,
+  "power_limit_screen_w": [
+    137.9305791641111,
+    303.8042949241805
+  ],
+  "timer_from_zero_ms": [
+    1.0291666666666666,
+    2.532352941176471
+  ],
+  "timer_residual_sensitivity": [
+    {
+      "initial_timer_v": 0,
+      "minimum_remaining_ms": 1.0291666666666666
+    },
+    {
+      "initial_timer_v": 1.04,
+      "minimum_remaining_ms": 0.7547222222222221
+    },
+    {
+      "initial_timer_v": 2,
+      "minimum_remaining_ms": 0.5013888888888888
+    },
+    {
+      "initial_timer_v": 3,
+      "minimum_remaining_ms": 0.23749999999999996
+    }
+  ],
+  "startup_design_envelope": {
+    "status": "prototype_validation_target_not_measured_rating",
+    "owner_decision": "Lower startup load/latch-off accepted; 40 A continuous target retained",
+    "total_capacitance_definition": "Maximum actual bus plus connected-load capacitance, including tolerance; not nominal part markings",
+    "load_models_are_alternatives_not_additive": true,
+    "initial_timer_v_max": 1.04,
+    "note": "Require TIMER at or below 1.04 V before evaluating successful startup; arbitrary rapid brownouts or residual charge above this may latch off. Gate dynamics require the separate transient review.",
+    "cases": [
+      {
+        "input_v": 9.5,
+        "load_model": "resistive",
+        "full_voltage_load_a": 20,
+        "auxiliary_current_bound_a": 2,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.12382445773593832,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 6.095098141529551
+      },
+      {
+        "input_v": 9.5,
+        "load_model": "constant_current_upper_bound",
+        "full_voltage_load_a": 5,
+        "auxiliary_current_bound_a": 0,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.10337367067194035,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 7.3009134464941
+      },
+      {
+        "input_v": 12,
+        "load_model": "resistive",
+        "full_voltage_load_a": 20,
+        "auxiliary_current_bound_a": 2,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.2159487472664469,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 3.494913639350791
+      },
+      {
+        "input_v": 12,
+        "load_model": "constant_current_upper_bound",
+        "full_voltage_load_a": 5,
+        "auxiliary_current_bound_a": 0,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.17394185930553624,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 4.3389338554586825
+      },
+      {
+        "input_v": 16,
+        "load_model": "resistive",
+        "full_voltage_load_a": 20,
+        "auxiliary_current_bound_a": 2,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.5043994043396733,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 1.4962789720385472
+      },
+      {
+        "input_v": 16,
+        "load_model": "constant_current_upper_bound",
+        "full_voltage_load_a": 5,
+        "auxiliary_current_bound_a": 0,
+        "maximum_total_capacitance_uf": 220,
+        "ideal_charge_ms": 0.3579189777904217,
+        "timer_budget_at_1_04v_ms": 0.7547222222222221,
+        "timer_to_charge_ratio": 2.1086398572141296
+      }
+    ]
+  },
+  "ov_rising_v": [
+    16.230015099900104,
+    17.522117002002
+  ],
+  "uv_rising_v": [
+    8.601346509690313,
+    9.273695439239237
+  ],
+  "shunt_dissipation_at_40a_w": [
+    1.584,
+    1.616
+  ],
+  "maximum_resistive_start_load_at_16v_a": 34.482644791027774,
+  "stall_example": {
+    "input_v": 16,
+    "resistance_ohm": 0.4,
+    "full_voltage_current_a": 40,
+    "peak_required_fet_power_w": 160,
+    "power_branch_equilibrium_output_v": [
+      5.028843939750798,
+      10.971156060249202
+    ],
+    "low_equilibrium_load_a": 12.572109849376995,
+    "note": "Predicted by the ideal low-power model, not a measured board failure; real gate dynamics and timer can interrupt sooner"
+  },
+  "unselected_setting_comparisons": [
+    {
+      "r17_ohm": 8250,
+      "c18_nf": 10,
+      "power_limit_screen_w": [
+        137.9305791641111,
+        303.8042949241805
+      ],
+      "timer_from_zero_ms": [
+        1.0291666666666666,
+        2.532352941176471
+      ],
+      "ideal_16v_40a_1000uf_charge_ms": null,
+      "minimum_timer_to_ideal_charge_ratio": null,
+      "limited_fault_energy_screen_j": 0.7693396997932925,
+      "status": "fitted_unqualified"
+    },
+    {
+      "r17_ohm": 6810,
+      "c18_nf": 100,
+      "power_limit_screen_w": [
+        163.73474463433683,
+        359.0557665432561
+      ],
+      "timer_from_zero_ms": [
+        10.291666666666666,
+        25.323529411764707
+      ],
+      "ideal_16v_40a_1000uf_charge_ms": 7.784053289770702,
+      "minimum_timer_to_ideal_charge_ratio": 1.3221475089580008,
+      "limited_fault_energy_screen_j": 9.092559264521867,
+      "status": "unselected_not_soa_approved"
+    },
+    {
+      "r17_ohm": 6190,
+      "c18_nf": 47,
+      "power_limit_screen_w": [
+        178.03681413129507,
+        389.64121218064565
+      ],
+      "timer_from_zero_ms": [
+        4.837083333333333,
+        11.902058823529414
+      ],
+      "ideal_16v_40a_1000uf_charge_ms": 3.3412306801489753,
+      "minimum_timer_to_ideal_charge_ratio": 1.4476951148783483,
+      "limited_fault_energy_screen_j": 4.63753262744535,
+      "status": "unselected_not_soa_approved"
+    },
+    {
+      "r17_ohm": 5620,
+      "c18_nf": 33,
+      "power_limit_screen_w": [
+        193.55616607023876,
+        422.7993134361658
+      ],
+      "timer_from_zero_ms": [
+        3.3962499999999993,
+        8.356764705882354
+      ],
+      "ideal_16v_40a_1000uf_charge_ms": 2.381919816230589,
+      "minimum_timer_to_ideal_charge_ratio": 1.4258456463805729,
+      "limited_fault_energy_screen_j": 3.533234380194641,
+      "status": "unselected_not_soa_approved"
+    },
+    {
+      "r17_ohm": 5110,
+      "c18_nf": 27,
+      "power_limit_screen_w": [
+        209.90431699328997,
+        457.69386489589
+      ],
+      "timer_from_zero_ms": [
+        2.77875,
+        6.83735294117647
+      ],
+      "ideal_16v_40a_1000uf_charge_ms": 1.9262620478790289,
+      "minimum_timer_to_ideal_charge_ratio": 1.4425607372889009,
+      "limited_fault_energy_screen_j": 3.1294144933043397,
+      "status": "unselected_not_soa_approved"
+    }
+  ],
+  "limited_fault_energy_screen_j": 0.7693396997932925,
+  "gate_charge_reference": {
+    "two_fet_max_qg_nc_at_datasheet_test_point": 816,
+    "q_over_minimum_source_current_ms": 54.4,
+    "note": "Charge arithmetic only, not a startup duration bound; timer runs only while limiting"
+  },
+  "startup_cases": [
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.17009243943272667,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.3618988073034935,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.23426157492473113,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.4984288828185732,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.2980397903744038,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.6341272135625607,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.44462452925082846,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 9.5,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.946009636703893,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.26166930421555534,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.556743200458759,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.3884934128194859,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.8265817294031568,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.5383789858482296,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 1.1454872039324038,
+      "result": "exceeds_minimum_timer"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 1.0098044089304856,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 12.0,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 2.1485200190010234,
+      "result": "exceeds_minimum_timer"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.4524899341259411,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 0,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 0.9627445406934827,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 0.7979027341509567,
+      "result": "ideal_model_only_pass"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 20,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 1.6976653918105415,
+      "result": "exceeds_minimum_timer"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": 1.6155044855109961,
+      "result": "exceeds_minimum_timer"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 30,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": 3.4372435861936452,
+      "result": "exceeds_minimum_timer"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 470.0,
+      "ideal_charge_ms": null,
+      "result": "stalls"
+    },
+    {
+      "input_v": 16.0,
+      "resistive_load_at_full_voltage_a": 40,
+      "capacitance_uf": 1000.0,
+      "ideal_charge_ms": null,
+      "result": "stalls"
+    }
+  ],
+  "production_validation_required": [
+    "Measure the lower startup envelope; full 40 A startup is not required",
+    "Validate the separate single-FET SOA sensitivity study with measured gate/startup/live-short waveforms",
+    "Qualify clamps, negative OUT excursion and cable/load energy for the actual fixture and installation",
+    "Characterize UVEN/UVLO brownout latch reset and residual TIMER charge"
+  ]
+}

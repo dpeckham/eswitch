@@ -23,6 +23,19 @@ def read_netlist(path):
 
 def main(path):
     design.build()
+    doc = parse_one(open(path).read())
+    components = {find(c, "ref")[1]: c for c in find_all(find(doc, "components"), "comp")}
+    for part in design.PARTS:
+        if not part.footprint:
+            continue
+        comp = components[part.ref]
+        assert find(comp, "value")[1] == part.value, (part.ref, "stale schematic value")
+        assert find(comp, "footprint")[1] == part.footprint, (part.ref, "stale schematic footprint")
+        fields = {find(f, "name")[1]: f[2] if len(f) > 2 else ""
+                  for f in find_all(find(comp, "fields"), "field")}
+        for key in ("MPN", "Manufacturer"):
+            if part.fields.get(key):
+                assert fields.get(key) == part.fields[key], (part.ref, "stale schematic", key)
     want = {n: {x for x in s if not x[0].startswith("#")} for n, s in design.nets().items()}
     got = read_netlist(path)
     # stacked hidden OUT pins of the PROFET all land on LOAD; accept them

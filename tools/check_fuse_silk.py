@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Check circuit/fuse identity on the saved PCB. Run with KiCad's Python."""
 import pcbnew
+import argparse
 
 import design
 from gen_pcb import OUT_PCB, V, fuse_silk_labels
 
 
 def main():
-    board = pcbnew.LoadBoard(OUT_PCB)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--board", default=OUT_PCB)
+    args = parser.parse_args()
+    board = pcbnew.LoadBoard(args.board)
     text = [item for item in board.GetDrawings() if item.GetClass() == "PCB_TEXT"]
     expected = fuse_silk_labels()
     assert len(expected) == 9, "Eight branch fuses plus the logic fuse"

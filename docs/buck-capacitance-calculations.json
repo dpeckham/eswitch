@@ -1,0 +1,34 @@
+{
+  "status": "model_screen_pass_prototype_validation_required",
+  "design_sha256": "7014a1cc3c9d7a18a9c0ff32a5342e7e9eec5fbaaca96660b0e234b821025eae",
+  "evidence_sha256": "579ae24a29d793da504fa757a4aee550e6e432d93d8814ceea6c1695186025a5",
+  "mpn": "GCM32ER70J476KE19L",
+  "references": [
+    "C7",
+    "C8",
+    "C12",
+    "C13"
+  ],
+  "nominal_bank_uf": 188,
+  "required_effective_uf": 40,
+  "minimum_sampled_single_cap_uf": 20.502582679747107,
+  "minimum_sample_location": {
+    "temperature_c": -55.0,
+    "dc_v": 0.756
+  },
+  "initial_tolerance_factor": 0.9,
+  "additional_engineering_reserve_factor": 0.8,
+  "guarded_bank_uf": 59.047438117671675,
+  "margin_above_requirement_percent": 47.61859529417918,
+  "limits": [
+    "Exact-part typical curves sampled every 5 C from -55 to 125 C and under 0.04 V from 0 to 3.7 V; not a continuous guaranteed bound",
+    "Curves combine temperature, DC bias and 10 mVrms AC amplitude; do not apply temperature derating a second time",
+    "Additional 20% engineering reserve covers unmodelled variation/ageing; it is not a manufacturer specification",
+    "6.3 V parts are on the 3.3 V rail only; never substitute them on VIN or battery nets",
+    "Larger bank changes regulator startup charge and USB inrush; bench startup, stability and current-budget tests remain required"
+  ],
+  "sources": [
+    "https://ds.murata.com/simsurfing/mlcc.html",
+    "https://www.ti.com/lit/ds/symlink/tpsm63603.pdf"
+  ]
+}

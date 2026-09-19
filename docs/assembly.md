@@ -8,14 +8,14 @@ DigiKey, with enough stock for three complete boards at the recorded check date.
 `fab/digikey/`. Quantities are minimum build quantities, **without spares**. For
 small passives, ordering a few extra is sensible. No purchase has been made.
 The dated audit is not an inventory reservation; refresh it at checkout and after
-any circuit changes. The BOM describes the current design, not an approved release.
+any circuit changes. The BOM matches the prototype release; installation hardware is listed separately below.
 
 ## Assembly sequence
 
 1. Start with one board. Inspect the bare PCB and check resistance between supply
    and ground before applying power. Keep the other two unassembled until bring-up.
 2. Populate the bottom-side SMD with controlled paste volume. Reflow the exposed
-   pads on U1-U9 and the ESP32 module ground pad; an edge fillet alone does not prove
+   pads on U1–U9, the MOSFET mounting bases and the ESP32 module ground pad; an edge fillet alone does not prove
    a sound underside joint. Follow the component moisture/reflow requirements and
    the paste manufacturer's measured temperature profile. Hot-plate dial temperature
    is not the solder-joint temperature. Support the overhanging ESP32 antenna.
@@ -23,7 +23,11 @@ any circuit changes. The BOM describes the current design, not an approved relea
    BOOT/RESET switches without remelting unsupported bottom-side parts.
 4. Fit through-hole connectors, fuse clips and input terminals last. Large copper
    pours and REDCUBE terminals require board preheat and a sufficiently powerful,
-   temperature-controlled iron. Do not increase temperature/dwell indefinitely.
+   temperature-controlled process. Wuerth 74650195 is a THR terminal: use its
+   specified solder process and verify full barrel wetting on all nine pins.
+   A hand-solder process on this heavy-copper board must be demonstrated on the
+   first assembly; a surface fillet does not establish hole fill. Do not increase
+   temperature/dwell indefinitely.
 5. Use a current-limited bench supply for initial logic bring-up, with no branch
    fuses/loads installed. Verify 3V3, reset, programming and all OFF states first.
    Do not perform initial short-circuit or reverse-battery tests on a house bank.
@@ -49,10 +53,36 @@ bottoming the screw; screws/lugs are not included in the component BOM. Provide
 cable strain relief so these soldered terminals do not carry cable bending loads.
 See the [input drawing](https://www.we-online.com/components/products/datasheet/74650195.pdf).
 
-Before ordering PCBs, print both connector footprints and the three-clip fuse
-footprint at 1:1 and fit real parts. The clip footprint uses **1.7 mm finished
+On 2026-09-19 the owner confirmed that real clips and an ATO fuse fit both
+positions of the printed three-clip footprint, and both Wuerth connector types
+fit their printed footprints. This pre-order fit check is complete; repeat it
+if the footprints change. The clip footprint uses **1.7 mm finished
 holes**, not the old README's 1.6 mm claim. Generated 3D bodies are inspection
 envelopes, not dimensionally complete manufacturer models.
+
+## Revision B details
+
+The PCB is **253 × 75 mm**, four layers using JLCPCB JLC041622-3313 with 2 oz
+outer and inner copper. Do not use the obsolete OSH Park files. CAM review packages
+include `assembly-F-1to1.pdf` and `assembly-B-1to1.pdf`; print at actual size,
+without fit-to-page. Each assembly drawing is viewed from its component side:
+the bottom PDF is mirrored for readable bottom-side placement. Part values are
+omitted from these drawings to keep reference designators readable; use the BOM
+for values and exact MPNs. Gerbers retain the manufacturer's standard orientation.
+
+U9 is the fixed-3.3 V TPSM63603V3 module, not the superseded discrete buck.
+Follow its pin-1 orientation and separated VIN, PGND and output lands. U1–U8
+exposed pads are VS. Q3/Q4 LFPAK88 drains are their mounting bases. R20's small
+Kelvin terminals are sense connections, not alternate power terminals. Inspect
+their isolation and continuity. Never substitute TPS2493 for latch-off U14.
+
+C7/C8/C12/C13 are now GCM32ER70J476KE19L (47 µF, 6.3 V X7R), not the
+old 22 µF/10 V parts. These are 3.3 V output capacitors; never fit them on the
+input rails. Their exact-model capacitance screen passes with engineering reserve.
+
+Do the staged checks in [bring-up.md](bring-up.md). Prototype fabrication is
+released under [these limits](prototype-release.md). Physical startup/fault,
+USB current budget, regulator stability and 40 A thermal results remain open.
 
 ## Installation is not yet specified
 

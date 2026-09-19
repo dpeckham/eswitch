@@ -1,11 +1,12 @@
-# Input protection — open engineering review, 2026-09-16
+# Input protection — prototype review, 2026-09-19
 
-**Not approved for fabrication. A replacement topology is selected and present in
-the schematic, but its PCB migration and engineering verification are unfinished.**
-See [resume handoff](pcb-resume-handoff.md). The historical analysis below explains
-the rejected stage; it is not a description of the latest schematic.
+**Released for bounded prototype fabrication; production qualification remains
+open.** The replacement topology is implemented and routed in the main
+schematic/PCB. Read the [prototype release](prototype-release.md),
+[power findings](power-review.md) and [clamp limits](input-clamp-review.md).
+Historical sections below explain the rejected stage and superseded candidates.
 
-## Selected implementation at the paused checkpoint
+## Current implementation
 
 - LM74800 U12 drives only the Q1/Q2 reverse ideal-diode bank.
 - R20: CSS4J-4026R-1L00F, 1 mΩ four-terminal shunt. Separate Kelvin sense traces.
@@ -14,14 +15,14 @@ the rejected stage; it is not a description of the latest schematic.
 - R12/R13: 115 kΩ/10 kΩ, 0.1%, OV divider. R14/R15: 56.2 kΩ/10 kΩ, 0.1%, UV divider.
 - R17/R18: 8.25 kΩ/1 kΩ, 1%, PROG divider; nominal power limit about 216 W.
 - C18: 10 nF C0G, nominal fault timeout about 1.48 ms. These nominal values are
-  **not** a completed worst-case protection or startup qualification.
+  **not** a guaranteed startup or fault-survival rating.
 - D3: SMCJ24CA input clamp; D6: SMCJ16A protected-bus clamp;
-  D7: STPS41L60CG-TR freewheel clamp. Verify coordination, energy and overshoot.
+  D7: STPS41L60CG-TR freewheel clamp. Coordination reviewed; measure energy and overshoot under the prototype plan.
 
 TPS2492 fault latch resets on UVEN-low or internal UVLO, as well as deliberate
 battery removal. A sufficiently deep input brownout therefore resets it; it is
-not a nonvolatile latch. No timed automatic retry is designed in. Review this
-distinction and loaded UV/OV recovery before release.
+not a nonvolatile latch. No timed automatic retry is designed in. Characterize this
+distinction and loaded UV/OV recovery during prototype qualification.
 
 [TI TPS2492 datasheet](https://www.ti.com/lit/ds/symlink/tps2492.pdf),
 [Nexperia PSMN1R8-80SSE datasheet](https://assets.nexperia.com/documents/data-sheet/PSMN1R8-80SSE.pdf),
@@ -81,16 +82,15 @@ not a microsecond/millisecond MOSFET SOA limiter.
   and hardware latch-off (owner-confirmed). This is an additional
   protection function, not a replacement for the upstream battery fuse.
 
-## Required before release
+## Review disposition
 
-1. Set an explicit startup load/capacitance envelope and safe overload behavior.
-2. Calculate worst-case current, voltage and duration against derated single-FET
-   SOA, including component tolerance and hot restart; verify current-sharing
-   assumptions separately for steady conduction.
-3. Check reverse connection, OV/UV transitions, source/cable inductance, secondary
-   TVS coordination and stored energy in external loads.
-4. Implement and verify schematic, footprints, layout, Kelvin sensing where used,
-   BOM stock, ERC, DRC and schematic/PCB parity.
-5. Specify prototype tests: mixed-position cold and hot startup, load steps,
-   brownout/OV recovery, fault disconnection and thermal rise. These physical
-   tests occur after prototype fabrication; they have not been performed.
+The owner accepted lower-load startup latch-off. The selected envelope,
+analytical checks, twelve gate/transient sensitivity cases and derated single-FET
+SOA comparison are recorded in [prototype-release.md](prototype-release.md).
+Schematic, layout, Kelvin sensing, stock, CAD/CAM and owner-confirmed physical
+fit reviews support fabrication of three controlled bench prototypes.
+
+The clamp review establishes voltage coordination and initial test restrictions;
+it does not qualify unspecified cable/load energy. Physical startup, hot restart,
+live-short, negative OUT/clamp, brownout and thermal measurements remain required
+before production release. Follow [bring-up.md](bring-up.md).

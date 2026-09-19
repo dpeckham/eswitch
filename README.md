@@ -3,58 +3,56 @@
 ESP32-S3 controlled high-side switch with one ATO fuse per channel. Each three-clip
 holder accepts a fuse in AUTO (through the PROFET) or BYPASS (direct to the load).
 
-**PCB ORDER ON HOLD.** The [critical review](docs/critical-review.md) identifies
-remaining input-protection, buck/USB, antenna, thermal and fuse-coordination issues.
-A clean ERC/DRC does not close these engineering blockers. Old fabrication files
-and the existing OSH Park upload are not approved for this revision.
+The **253 × 75 mm revision-B layout is now in the main KiCad project**. The
+latch-off input stage, schematic and PCB are reconciled. See the current
+[release record](docs/release-status.json) and [work completed](docs/pcb-resume-handoff.md).
 
-Work is paused at an **unfinished revision-B checkpoint**. Read the
-[resume handoff](docs/pcb-resume-handoff.md) before regenerating or editing the
-board. The new latch-off input schematic is ahead of the tracked PCB; native
-schematic/PCB parity and fabrication release are not established.
-
-## Agreed constraints
+**Ready to order three prototype PCBs.** The [prototype release](docs/prototype-release.md)
+records the startup/SOA screen, controlled bench limits and owner-confirmed
+physical fit. Use [the released package](fab/revision-b/eswitch-revB-gerbers.zip)
+and [three-board BOM](fab/digikey/eswitch-digikey-bom.csv). Assemble one first.
+Production qualification and the measured 40 A continuous rating require the
+[bring-up and thermal tests](docs/bring-up.md).
 
 | Item | Requirement |
 |---|---|
-| Supply | 9.5–16 V design input range; nominal 12 V house bank, unknown battery/charger details |
-| Simultaneous load | **40 A continuous target**, not a qualified rating or 65 A total |
-| Channels | CH1–2: 10 A target, BTS7004-1EPP; CH3–7: 5 A, BTS7008-1EPR; CH8: 20 A, BTS7002-1EPP |
-| Main fuse | Upstream protection; no onboard MIDI/main fuse; F9 is logic-only |
+| Supply | 9.5–16 V; nominal 12 V house bank |
+| Simultaneous load | 40 A continuous target, not a qualified rating |
+| Channels | CH1–2: 10 A fuse maximum; CH3–7: 5 A; CH8: 20 A |
+| Main fuse | Upstream protection; no onboard main fuse; F9 is logic-only, maximum 2 A |
 | Outputs | Eight Wuerth 691218410002 direct-entry blocks; pin 1 GND, pin 2 LOAD+ |
-| Inputs | Two Wuerth 74650195 M5 ring-lug terminals; component rating is not board rating |
-| Assembly | Three boards, manual; paste + hot air/hot plate for exposed pads |
-| Procurement | Exact DigiKey-stocked parts for all three builds; recheck at checkout |
-| PCB | In progress: tracked 221 × 75 mm; new input-stage target 253 × 75 mm; JLCPCB four-layer 2 oz outer/inner, 1.6 mm |
+| Inputs | Two Wuerth 74650195 M5 ring-lug terminals |
+| PCB | 253 × 75 mm, JLCPCB JLC041622-3313, four layers, 2 oz outer/inner, 1.6 mm nominal, ENIG |
+| Assembly | Three boards, manual paste + hot air/hot plate; validate one first |
+| Procurement | Exact DigiKey MPNs; dated stock is not a reservation and must be refreshed |
 
-Each channel holder is marked with its circuit number and maximum fuse value
-(for example, `CH1 MAX FUSE 10A`). These are not guaranteed continuous currents.
-The separate logic fuse is marked `LOGIC MAX 2A` on the underside.
-
-## Files and checks
-
-- [Critical review and sources](docs/critical-review.md)
-- [Confirmed scope and deferred installation inputs](docs/design-constraints.md)
-- [Manual assembly and physical fit checks](docs/assembly.md)
-- [Three-board DigiKey BOM](fab/digikey/eswitch-digikey-bom.csv) and
-  [dated stock evidence](fab/digikey/stock-audit.csv)
-- `tools/design.py`: circuit, exact order codes and schematic placement.
-- `tools/gen_libs.py`, `gen_sch.py`, `gen_pcb.py`: generators. The PCB generator still
-  contains the open layout issues in the review; regeneration does not fix them.
-- `eswitch.kicad_pro`: open in KiCad 10. `out/`: untracked reports/renders.
+Fuse labels identify circuit numbers and maximum fuse values, not guaranteed
+continuous currents. USB is for initial bench programming **with battery power
+disconnected**; subsequent updates are OTA. Mixed AUTO/BYPASS startup is required.
+See [agreed scope](docs/design-constraints.md); deferred installation details have
+not been silently assumed.
 
 ```sh
 mise install
-mise exec -- just bom       # quantities for 3 boards; rejects stale/missing stock evidence
-mise exec -- just netlist erc drc
-mise exec -- just check-silk
-mise exec -- just render
-mise exec -- just repair-gaps # only for permitted low-speed signal gaps; native DRC guards each route
-# Do not run `just all` on this checkpoint: legacy finish/stitch steps need updating.
-mise exec -- just fab       # blocked until electrical review is closed
+mise exec -- just verify          # saved schematic/PCB; ERC, DRC, parity, pin/silk/geometry checks
+mise exec -- just all             # verify + renders; preserves completed routing
+mise exec -- just review-package  # clearly unreleased CAM/BOM/schematic/assembly drawing ZIP
+mise exec -- just bom             # requires fresh stock evidence; fails when stale
+mise exec -- just package         # also requires engineering release for these exact source hashes
+python3 -m unittest discover -s tools -p 'test_*.py'
 ```
 
-Firmware must implement safe reset states and variant-specific calibration/fault
-handling. USB is for initial bench programming with the battery disconnected;
-later updates are OTA. USB-only startup/current-budget verification and off-state
-open-load diagnosis remain review items, not completed qualifications.
+`out/verification/manifest.json` binds verification results to the exact source
+files and report hashes, including the engineering release documents. The
+released prototype ZIP is under `fab/revision-b/`. `out/review/` retains an
+unreleased review snapshot; do not upload that older ZIP. `fab/legacy-f76c39e/` and the old OSH Park upload are obsolete.
+No order or purchase has been made.
+
+The saved PCB is the authoritative routed design. `just pcb` now creates an
+**unrouted candidate under out/**. `just libs` and `just sch` are explicit source
+regeneration operations. Checked finish/routing tools replace the old revision-A
+coordinate patches in the build recipes. Do not run legacy `finish.py`/`stitch.py`
+on revision B. Historical migration requires its documented 221 mm source snapshot.
+
+[Assembly instructions](docs/assembly.md) · [Input protection](docs/input-protection-review.md)
+· [Critical review/history](docs/critical-review.md) · [Three-board BOM](fab/digikey/eswitch-digikey-bom.csv)

@@ -54,7 +54,7 @@ def fuse_silk_labels():
          pcbnew.F_SilkS, 0.9, 90)
         for n, (rating, _, _) in design.CHANNELS.items()
     ]
-    labels.append(("LOGIC MAX 2A", 91.0, 46.2, pcbnew.B_SilkS, 0.8, 0))
+    labels.append(("LOGIC MAX 2A", 98.5, 50.0, pcbnew.B_SilkS, 0.8, 0))
     return labels
 
 
@@ -168,19 +168,7 @@ class Board:
         fp = self.load_fp(c["footprint"])
         fp.SetReference(ref)
         fp.SetValue(c["value"])
-        if ref == "U10":
-            # Replace the huge antenna courtyard with the module body outline, but retain
-            # the library rule area: it is the required all-copper antenna keepout.
-            for it in list(fp.GraphicalItems()):
-                if it.GetLayer() in (pcbnew.F_CrtYd, pcbnew.B_CrtYd) or it.GetLayer() == pcbnew.Cmts_User:
-                    fp.Remove(it)
-            r = pcbnew.PCB_SHAPE(fp)
-            r.SetShape(pcbnew.SHAPE_T_RECT)
-            r.SetStart(V(-9.3, -13.05))
-            r.SetEnd(V(9.3, 13.05))
-            r.SetLayer(pcbnew.F_CrtYd)
-            r.SetWidth(FromMM(0.05))
-            fp.Add(r)
+        # The ESP32 board-edge adaptation is a versioned project footprint.
         for pad in fp.Pads():
             if ref in ("J2", "J3", *design.OUTPUT_REFS):
                 pad.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
@@ -542,5 +530,8 @@ def build():
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", default=os.path.join(ROOT, "out/generated-candidate.kicad_pcb"))
     from layout_revision_b import build as build_revision_b
-    build_revision_b()
+    build_revision_b(parser.parse_args().output)

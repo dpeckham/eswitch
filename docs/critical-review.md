@@ -1,35 +1,23 @@
-# Critical review — revision B in progress, 2026-09-16
+# Critical review — revision B, 2026-09-19
 
-**HOLD the PCB order.** Confirmed part/connector/fabrication-rule corrections are
-implemented, but the electrical/layout redesign is not complete. A clean ERC/DRC
-does not establish 40 A capability, transient survival or safe marine service.
+**Prototype fabrication released; production qualification remains open.**
+The main 253 × 75 mm PCB matches the latch-off schematic. Review closure and
+limits are in [prototype-release.md](prototype-release.md), quantitative findings
+in [power-review.md](power-review.md), and exact source hashes/status in
+[release-status.json](release-status.json).
 
-## Current revision-B status (supersedes the older snapshot below)
+The owner accepted lower-load startup latch-off and confirmed actual fuse/clip
+and connector fit. A bounded startup envelope, twelve transient sensitivity
+cases and a derated single-FET SOA screen support controlled bench prototypes.
+The buck bank passes its exact-part model screen. Live-short/clamp, recovery,
+USB/regulator and 40 A thermal measurements remain production gates.
 
-**Paused checkpoint, 2026-09-16.** See [resume handoff](pcb-resume-handoff.md)
-for the exact file state, migration failures and next actions. The schematic and
-tracked PCB deliberately do **not** yet match. Do not use this checkpoint to order.
+Build/package tools preserve the routed board, require current verification and
+stock evidence, and identify the selected JLCPCB stackup. No tested continuous
+current or marine-service rating is assigned. See [bring-up.md](bring-up.md).
 
-The tracked PCB is 221 × 75 mm, with a selected four-layer 2 oz outer/inner
-JLCPCB stackup. The manufacturer calculator evidence is in
-[fabrication-stackup-evidence.json](fabrication-stackup-evidence.json).
-The new input-stage generator targets **253 × 75 mm**; that candidate has not
-been promoted. The buck module, USB-only ideal-diode supply, input protection,
-local PROFET networks, placement and routing are still being checked. The earlier 497-pin,
-zero-unrouted and 26-warning figures below describe revision A, **not this board**.
-Do not order an archived Gerber ZIP or the old OSH Park upload.
-
-**Release blocker: loaded input startup and migration.** AUTO and BYPASS may be
-mixed at power-up. The owner approved 9.5–16 V and hardware latch-off on excessive
-startup current/overcurrent. The schematic now uses LM74800 reverse protection,
-a TPS2492PWR latch-off/power-limit controller, a four-terminal 1 mΩ shunt and
-PSMN1R8-80SSEJ pass MOSFETs. The tracked PCB still has the superseded input stage.
-Neither the new layout nor quantitative worst-case startup/fault/SOA analysis
-is complete. See [input-protection review](input-protection-review.md).
-
-The 55-line current BOM has a three-board DigiKey stock audit dated 2026-09-16;
-this is not a reservation and must be revised with any further component changes.
-Initial USB programming remains **bench-only, with the battery disconnected**.
+The following revision-A material is history; its old implementation status and
+check counts do not describe the current board.
 
 ## Historical revision-A review (2026-09-15)
 

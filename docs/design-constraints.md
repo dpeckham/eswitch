@@ -21,6 +21,10 @@
   automatic recovery with connected loads, including MOSFET linear-mode SOA;
   parallel MOSFETs must not be assumed to share startup current equally.
   Fuse positions are changed only with battery power disconnected, never live.
+- On 2026-09-19 the owner explicitly accepted **latch-off at a lower startup
+  load while retaining the 40 A continuous target**. Successful full-40-A BYPASS
+  startup is not required. Select and document the lower startup envelope; do
+  not weaken fault protection to force full-load startup.
 - Excessive startup current or an input-stage overcurrent fault must **latch the
   whole board off until battery power is cycled** (owner decision, 2026-09-16).
   No automatic retry, and no reliance on ESP32 firmware to enforce the latch.

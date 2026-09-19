@@ -6,6 +6,7 @@ only that prefix here; this is NOT a waiver of native KiCad parity warnings or a
 test of actual track/zone connectivity (DRC must check the latter).
 """
 from pathlib import Path
+import argparse
 import pcbnew
 
 from sexp import parse_one, find, find_all
@@ -14,6 +15,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--board", type=Path, default=ROOT / "eswitch.kicad_pcb")
+    args = parser.parse_args()
     doc = parse_one((ROOT / "out/eswitch.net").read_text())
     assert len(find_all(find(doc, "design"), "sheet")) == 1, "Normalization requires one root sheet"
     components = {find(c, "ref")[1]: c for c in find_all(find(doc, "components"), "comp")
@@ -25,14 +29,15 @@ def main():
             ref, pin = find(node, "ref")[1], str(find(node, "pin")[1])
             if ref in components:
                 expected[ref, pin] = name
-    board = pcbnew.LoadBoard(str(ROOT / "eswitch.kicad_pcb"))
+    board = pcbnew.LoadBoard(str(args.board.resolve()))
     actual = {}
     footprints = {fp.GetReference(): fp for fp in board.GetFootprints()}
     assert footprints.keys() == components.keys(), "PCB/schematic component references differ"
     for ref, fp in footprints.items():
         component = components[ref]
         assert fp.GetValue() == find(component, "value")[1], (ref, "value")
-        assert str(fp.GetFPID().GetLibItemName()) == find(component, "footprint")[1].split(":")[1], (ref, "footprint")
+        fpid = f"{fp.GetFPID().GetLibNickname()}:{fp.GetFPID().GetLibItemName()}"
+        assert fpid == find(component, "footprint")[1], (ref, "footprint")
         for pad in fp.Pads():
             key = ref, pad.GetNumber()
             name = pad.GetNetname().removeprefix("/")

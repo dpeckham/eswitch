@@ -12,6 +12,7 @@ from gen_pcb import ROOT, NETLIST, OUT_PCB, persist_project_rules, fuse_silk_lab
 from pcb_nets import sync_metadata
 from pcb_io import save_board
 from fabrication_rules import configure_usb
+from production_silk import apply_silk
 
 F, B, I1, I2 = pcbnew.F_Cu, pcbnew.B_Cu, pcbnew.In1_Cu, pcbnew.In2_Cu
 
@@ -359,7 +360,13 @@ def usb_power_routes(bd):
         bd.via("GND",x,y,.5,.3)
 
 
-def build():
+def build(output=None):
+    import shutil
+    output = Path(output or Path(ROOT)/"out/generated-candidate.kicad_pcb").resolve()
+    if output == Path(OUT_PCB).resolve():
+        raise SystemExit("Generate a candidate under out/; preserve the routed project board")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(Path(ROOT)/"eswitch.kicad_pro", output.with_suffix(".kicad_pro"))
     from input_stage import main_power, protection_routes
     bd=Board()
     bd.edge_rect()
@@ -380,6 +387,7 @@ def build():
     bd.text("2oz / 2oz / 2oz / 2oz",65,72,size=.8)
     for label,x,y,layer,size,rot in fuse_silk_labels():
         bd.text(label,x,y,layer=layer,size=size,rot=rot)
+    detached_silk = apply_silk(bd.b)
     missing=[r for r in bd.comps if r not in bd.fps]
     assert not missing, missing
     # Dump pad geometry for independent layout review and route construction.
@@ -391,8 +399,8 @@ def build():
     sync_metadata(bd.b,NETLIST)
     bd.b.BuildConnectivity()
     pcbnew.ZONE_FILLER(bd.b).Fill(bd.b.Zones())
-    save_board(OUT_PCB,bd.b)
-    persist_project_rules(OUT_PCB)
+    save_board(output,bd.b)
+    persist_project_rules(str(output))
     print("Revision B placed:",len(bd.fps),"footprints;",len(list(bd.b.Zones())),"zones")
     return bd
 
