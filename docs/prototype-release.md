@@ -70,16 +70,17 @@ The routed schematic/PCB agree. Recorded CAD checks cover ERC, DRC, unrouted
 nets, native parity, independent pin/value/MPN checks, fuse labeling, antenna
 keepout and USB reference-plane sampling. CAM review covers all four copper
 layers, masks/silkscreen, outline and separate 628 PTH/6 NPTH drills. Assembly
-PDFs are 1:1 component-side views. The 55-MPN purchasing BOM covers three builds;
-September 19 displayed stock covers those quantities and is not reserved.
+PDFs are 1:1 component-side views. The 55-MPN purchasing BOM gives quantities
+for **one complete module**; the purchaser applies the desired build quantity.
+September 19 displayed stock was sufficient for three builds and is not reserved.
 
 Order 253 × 75 mm, four layers, JLCPCB **JLC041622-3313**, ENIG, 2 oz outer **and
 inner**, 1.6 mm nominal / 1.59 mm selected stackup. Do not substitute the stackup.
 Review the manufacturer's upload preview against the supplied dimensions/layers
 and plating before checkout; that vendor-specific preview has not been seen.
 Choose the fabricator's offered bare-board batch quantity covering at least
-three boards; the component BOM covers three assemblies regardless of bare-board
-spares in the batch.
+three boards. The component BOM remains per board regardless of bare-board
+batch quantity or spares.
 
 Production remains blocked until [bring-up and acceptance](bring-up.md) records
 establish startup/fault/recovery behavior, clamp waveforms, USB/current/regulator

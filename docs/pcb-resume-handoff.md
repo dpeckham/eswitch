@@ -22,8 +22,9 @@ owner decisions and controlled bench limits. The September 16 checkpoint under
   and fixture restrictions are recorded; live-short/installation energy is unqualified.
 - Owner confirmed both actual fuse/clip positions and both connector types fit.
   Four-layer CAM and separate 628 PTH/6 NPTH drills were independently reviewed.
-- All 55 exact-MPN BOM lines cover three builds in the September 19 stock audit.
-  Inventory is not reserved. Assembly PDFs show each component side at 1:1.
+- The 55-line exact-MPN purchasing BOM is per board; the purchaser applies build
+  multiples. September 19 stock covered three builds and is not reserved.
+  Assembly PDFs show each component side at 1:1.
 
 ## Order and validate
 

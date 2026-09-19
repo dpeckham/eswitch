@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a three-board manual-assembly BOM from the circuit and dated stock audit.
+"""Generate a per-board manual-assembly BOM from the circuit and dated stock audit.
 
 No scraping or purchasing. Stock is a dated observation, never a reservation.
 Fail for missing parts, insufficient inventory, or an audit older than one day.
@@ -22,7 +22,7 @@ EXTRAS = [
 ]
 
 
-def rows(boards=design.BUILD_QUANTITY):
+def rows():
     grouped = defaultdict(list)
     for p in design.build():
         if not p.footprint or p.ref.startswith(("H", "NT")):
@@ -38,25 +38,22 @@ def rows(boards=design.BUILD_QUANTITY):
         if mpn == "3557":
             description = "ATO holder clips; quantity counts individual clips, three per channel"
         result.append(dict(mpn=mpn, manufacturer=p.fields["Manufacturer"], per_board=qty,
-                           required=qty * boards, references=", ".join(p.ref for p in parts),
+                           required=qty, references=", ".join(p.ref for p in parts),
                            description=description,
                            assembly="THT" if mpn in ("3557", "74650195", "691218410002", "61300411121") else "SMD"))
     for qty, mpn, manufacturer, references, description in EXTRAS:
-        result.append(dict(mpn=mpn, manufacturer=manufacturer, per_board=qty, required=qty * boards,
+        result.append(dict(mpn=mpn, manufacturer=manufacturer, per_board=qty, required=qty,
                            references=references, description=description, assembly="Hardware"))
     return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--boards", type=int, default=design.BUILD_QUANTITY)
     parser.add_argument("--allow-stale", action="store_true", help="Reproduce the historical BOM; not a current stock check")
     args = parser.parse_args()
-    if args.boards < 1:
-        parser.error("--boards must be positive")
     with (ROOT / "docs/digikey-stock.json").open() as f:
         audit = {p["mpn"]: p for p in json.load(f)["parts"]}
-    items = rows(args.boards)
+    items = rows()
     for item in items:
         p = audit.get(item["mpn"])
         if p is None or p["stock"] is None or p["stock"] < item["required"]:
@@ -77,8 +74,9 @@ def main():
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["MPN", "Per board", "Boards", "Required", "DigiKey stock observed", "Checked UTC date", "Product URL", "Assembly"])
         for p in items:
-            writer.writerow([p["mpn"], p["per_board"], args.boards, p["required"], p["stock"], p["checked"], p["url"], p["assembly"]])
-    print(f"{len(items)} line items; {args.boards} boards; dated stock covers every required quantity")
+            writer.writerow([p["mpn"], p["per_board"], 1, p["required"], p["stock"], p["checked"], p["url"], p["assembly"]])
+    print(f"{len(items)} line items; quantities for ONE board; dated stock covers every required quantity")
+    print("Apply your desired build quantity when ordering; no batch multiplier is included.")
     print("No spare allowance included. No parts purchased/reserved. See docs/critical-review.md for PCB release status.")
 
 

@@ -26,7 +26,8 @@ USB: L4 referenced to L3, nominal 90 ohm differential;
 Do not substitute copper weights or stackup without recalculating USB geometry.
 CAD rules: 0.18 mm track, 0.20 mm clearance, 0.30 mm finished through-drill,
            0.40 mm copper-to-edge, 0.10 mm minimum via annular ring.
-Build quantity: three manual assemblies; BOM quantities include all three.
+Planned build: three manual assemblies. BOM quantities are for ONE board only.
+The purchaser applies the desired build quantity; no batch multiplier is included.
 Select the fabricator's offered bare-board batch quantity covering at least three.
 PTH and NPTH drills are separate; preserve plating classification.
 Paste layers are included for stencil preparation; this is not a PCBA order.

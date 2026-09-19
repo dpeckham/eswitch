@@ -47,7 +47,7 @@ drc:
     kicad-cli pcb drc --severity-all --format json -o out/drc.json eswitch.kicad_pcb
     python3 -c "import json,collections; d=json.load(open('out/drc.json')); print(dict(collections.Counter(v['type'] for v in d['violations']))); print('unconnected:', len(d['unconnected_items'])); raise SystemExit(bool(d['unconnected_items'] or any(v['severity']=='error' for v in d['violations'])))"
 
-# Three-board manual-assembly purchasing list; fails if stock evidence is stale/insufficient.
+# Per-board manual-assembly purchasing list; fails if stock evidence is stale/insufficient.
 bom:
     python3 tools/manual_bom.py
 
@@ -70,7 +70,7 @@ render:
     kicad-cli pcb render -o out/render_bottom.png --side bottom --width 2400 --height 900 --zoom 1.0 eswitch.kicad_pcb
     kicad-cli sch export pdf -o out/eswitch.pdf eswitch.kicad_sch
 
-# Released bare-board upload plus exact-MPN three-board manual-assembly BOM.
+# Released bare-board upload plus exact-MPN per-board manual-assembly BOM.
 package: verify release-check
     python3 tools/fab_package.py
 

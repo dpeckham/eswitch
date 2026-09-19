@@ -15,6 +15,8 @@
   access. Simultaneous house-bank/USB operation is not a required operating mode.
 - Three manually assembled boards; paste and hot air/hot plate are available.
   All exact BOM parts must be available from DigiKey in the required quantities.
+  On 2026-09-19 the owner clarified that the published BOM must be **per board**;
+  the owner applies ordering multiples. Never embed the planned batch count in it.
 - Direct-entry screw output terminals; upstream main fusing, no onboard MIDI fuse.
 - Power may be applied with a **mixture of AUTO and BYPASS fuse positions**.
   Unloaded startup is not an allowed design assumption. Review startup and

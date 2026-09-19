@@ -4,8 +4,10 @@ Agreed method: solder paste with hot air or a hot plate is available. Exposed-pa
 devices remain on the BOM; this is not an iron-only design. Procurement is through
 DigiKey, with enough stock for three complete boards at the recorded check date.
 
-`just bom` produces a three-board purchasing CSV and an inventory evidence CSV in
-`fab/digikey/`. Quantities are minimum build quantities, **without spares**. For
+`just bom` produces a **per-board** purchasing CSV and an inventory evidence CSV in
+`fab/digikey/`. Every quantity is for **one complete module**, without a batch
+multiplier. The purchaser chooses how many modules to order. Quantities are
+minimum build quantities, **without spares**. For
 small passives, ordering a few extra is sensible. No purchase has been made.
 The dated audit is not an inventory reservation; refresh it at checkout and after
 any circuit changes. The BOM matches the prototype release; installation hardware is listed separately below.

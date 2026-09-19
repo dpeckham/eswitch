@@ -10,7 +10,7 @@ latch-off input stage, schematic and PCB are reconciled. See the current
 **Ready to order three prototype PCBs.** The [prototype release](docs/prototype-release.md)
 records the startup/SOA screen, controlled bench limits and owner-confirmed
 physical fit. Use [the released package](fab/revision-b/eswitch-revB-gerbers.zip)
-and [three-board BOM](fab/digikey/eswitch-digikey-bom.csv). Assemble one first.
+and [per-board BOM](fab/digikey/eswitch-digikey-bom.csv). Assemble one first.
 Production qualification and the measured 40 A continuous rating require the
 [bring-up and thermal tests](docs/bring-up.md).
 
@@ -55,4 +55,4 @@ coordinate patches in the build recipes. Do not run legacy `finish.py`/`stitch.p
 on revision B. Historical migration requires its documented 221 mm source snapshot.
 
 [Assembly instructions](docs/assembly.md) · [Input protection](docs/input-protection-review.md)
-· [Critical review/history](docs/critical-review.md) · [Three-board BOM](fab/digikey/eswitch-digikey-bom.csv)
+· [Critical review/history](docs/critical-review.md) · [Per-board BOM](fab/digikey/eswitch-digikey-bom.csv)

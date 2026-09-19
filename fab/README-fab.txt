@@ -9,7 +9,7 @@ CAD minima: 0.18 mm track, 0.20 mm clearance, 0.30 mm finished through-drill,
 
 The package includes four copper layers, masks, silkscreens, paste, outline,
 separate PTH/NPTH drills, schematic, 1:1 component-side assembly drawings,
-three-board BOM, verification/source hashes and engineering release conditions.
+per-board BOM, verification/source hashes and engineering release conditions.
 Confirm the manufacturer's upload preview, layer order, outline dimensions,
 plating and selected stackup before checkout. No order has been placed here.
 
@@ -19,7 +19,8 @@ still requires physical qualification. Start with a protected laboratory source.
 
 `mise exec -- just package` verifies the saved board and checks source-specific
 release and fresh BOM evidence. It preserves the routed design. Stock observations
-in digikey/ cover all three builds but are not reservations. Refresh at checkout.
+in digikey/ are dated, not reservations. The CSV quantities are for ONE module;
+the purchaser handles multiples. Refresh inventory at checkout.
 
 Do not upload the unreleased review ZIP under ../out/review/, legacy-f76c39e/,
 or the previous OSH Park files. They are superseded.
