@@ -1,101 +1,108 @@
-# eswitch: 12 V, twelve-channel load controller with integrated fuse bypass
+# eswitch: 12 V Signal K load controller with integrated fuse bypass
 
-Design proposal · 20 September 2026 · Revision 0.1 · For requirements review
+Design proposal · 20 September 2026 · Revision 0.2 · Requirements review
 
-## 1. Recommendation
+## 1. Recommendation and confirmed requirements
 
-Build one serviceable module with twelve protected high-side outputs, seven
-local switch inputs, an isolated CAN interface, and twelve movable blade fuses.
-Each fuse selects **AUTO**, **BYPASS**, or, when removed, **OFF**. BYPASS feeds
-the load directly through its fuse and physically disconnects it from the
-channel's power electronics.
+Build twelve independently protected, **10 A maximum** high-side outputs in one
+package, controlled by an **ESP32 Wi-Fi client connected to a Signal K server**.
+Each channel has one movable fuse selecting AUTO or BYPASS; removing the fuse
+opens the positive feed. BYPASS remains a passive, fuse-protected power path
+that operates without the MCU, Wi-Fi, or server.
 
-**12 V only is confirmed.** Retain the reference product's 2 × 12 A, 6 × 10 A,
-4 × 5 A output capability and 75 A aggregate target unless the actual load list
-allows a cheaper design. These are proposed design targets, not qualified ratings.
+The owner has confirmed:
 
-My starting power stage is one protection/driver IC and two opposing MOSFETs
-per channel. This retains off-state reverse-current blocking, hardware fault
-shutdown, current measurement, and dimming without a separate current-monitor
-IC on every channel. Use inexpensive fuse clips, direct wire terminals, a shared
-microcontroller, and a stock enclosure. Avoid a display, onboard wireless,
-per-channel relays, and a separate bypass board in the base design.
+| Item | Agreed requirement |
+|---|---|
+| Supply | Nominal 12 V only |
+| Channels | Retain twelve; maximum individual load 10 A; detailed load information will follow |
+| Loads | HALO20+ radar, USB charger, LED cabin and navigation lights, Raspberry Pi, NKE electronics, and NKE autopilot |
+| Network | Wireless client of a Signal K server; no NMEA 2000/CAN hardware required |
+| Network power | Signal K host, Wi-Fi access point, or both are powered through eswitch; exact channel/module assignments remain to be identified |
+| Local control inputs | None |
+| Bypass protection | Physical fuse only is acceptable, including possible supply disturbance while a fault clears |
+| Fuse transfer | The affected load may lose power; **other channels must stay powered** |
+| Fuse-transfer duty | Occasional emergency recovery, not routine manual switching |
+| Controller restarts | Outputs may turn off during an MCU restart or firmware update, including navigation lights and autopilot |
+| Ignition protection | Not required |
+| Paralleled outputs | Not required; do not implement |
+| Build | Three units, assembled by the owner using a hot-air soldering station |
+| Publication | Likely open source; licensing and publication timing remain undecided |
 
-**Budget approximately US$200–330 in materials for one hand-assembled enclosed
-prototype.** This is a preliminary allowance, not a quoted BOM. The cost target
-is toward the lower end; the major unknowns are cooling, connectors, and fault
-coordination. Cost details and alternatives appear in section 9.
+Propose making all twelve channels capable of 10 A, with lower configurable
+trip settings for smaller loads. This does **not** mean 120 A simultaneously.
+The aggregate current requirement is still unknown. Retain **75 A only as a
+provisional sizing and cost assumption**, not an owner-confirmed requirement.
 
-This is a new design basis. The previous eight-channel design is retained only
-in Git history at `d1de4a6`. Its voltage limits, special bypass protection,
-component choices, and prototype-release status are not silently carried over.
+Use one integrated protection/driver/current-monitor IC and two opposing MOSFETs
+per channel. Use a shared ADC, one Wi-Fi module, direct wire terminals, an external
+negative bus, and a stock enclosure. The final power-stage choice remains subject
+to a complete comparison against integrated smart switches once loads are known.
 
-## 2. Questions that affect the design
+**Preliminary materials allowance: about $180–300 per unit in a three-unit build,
+plus any extra cost of a qualified live fuse-transfer mechanism.** This is not a
+complete quotation. The live-transfer requirement is now the main unresolved
+mechanical issue; section 4 explains why a cheap fuse-clip assembly is not yet
+an established solution.
 
-Answer these first; the recommendations below let the proposal remain concrete
-without treating unanswered questions as agreement.
+The old eight-channel hardware remains only in Git history at `d1de4a6`. Revision
+0.1 of this proposal is in commit `ad722bb`. Neither is the hardware specification
+for this revised design. No new hardware is released for fabrication.
 
-| Priority | Question | Proposed starting point / effect |
+## 2. Remaining questions
+
+There is no need to repeat the answered questions. The following affect the next
+engineering decisions; detailed load information can arrive later as planned.
+
+| Priority | Question | Recommendation / consequence |
 |---|---|---|
-| 1 | **What must control it: a particular chartplotter, Maretron display/keypad, another CAN device, or your own application?** Include model names if known. | Preserve an isolated NMEA 2000-capable interface. Actual display compatibility must be demonstrated; it is a significant firmware requirement. |
-| 2 | **Do you need the full 75 A total and 2 × 12 A / 6 × 10 A / 4 × 5 A arrangement?** A rough list of the twelve loads and their running/startup currents is enough initially. | Keep these targets for now. Lower simultaneous current can reduce copper, terminals, enclosure size, and cooling costs. |
-| 3 | **Is fuse-only protection in BYPASS acceptable, including a possible brief supply dip while a shorted branch's fuse clears?** | Recommend yes for a passive, inexpensive bypass. Guaranteed uninterrupted healthy outputs during a bypass short requires further protection and changes this architecture. |
-| 4 | **Can the supply be disconnected while moving a fuse, and will the module be installed in a dry, accessible location outside spaces requiring ignition protection?** | These are conditions of the inexpensive enclosure/fuse arrangement. A wet or ignition-protected installation changes the mechanical design and qualification effort. |
-| 5 | **How many units, what materials budget per unit, and who will assemble them?** | Cost table assumes one unit bought at ordinary distributor quantities and assembled by hand. No batch size or single-distributor restriction is assumed. |
-| 6 | **Are paralleled outputs actually needed for any load above 12 A?** | Recommend individual outputs in the first version; paralleling is a stated departure requiring your decision, not an assumed retained feature. |
-| 7 | **Do you need Wi-Fi/web configuration, or is a wired service connection sufficient?** | Use wired configuration initially. Add wireless only if it provides a needed control/configuration path. |
+| 1 | **Which Signal K server implementation/version and control dashboard will you use? Can it run a small eswitch server plugin?** | Propose the Node.js Signal K server with an open-source plugin that handles switching commands and telemetry. Dashboard choice can follow. |
+| 2 | **Which modules/channels power the Signal K host and access point, and is the listed Pi the Signal K host?** | One or both are confirmed to use eswitch. Identify their feeds so each can be commissioned for local automatic startup and intentional network interruption. No separate power supply is required by this proposal. |
+| 3 | **What simultaneous current should each module support?** | Keep the provisional 75 A envelope until the load list arrives. Reducing this may save more than changing the Wi-Fi MCU. |
+| 4 | **Does “NKE autopilot” include the drive motor, or only its instruments/computer? Which model?** | A 10 A channel cannot be assumed to support an unspecified drive's startup/stall current. Keep an oversized drive on its own protected feed if necessary. |
+| 5 | **Which cabin-light circuits actually need dimming, and are their LED drivers supply-PWM compatible?** | Retain dimming capability; default all equipment and navigation lights to ON/OFF. Do not PWM a charger, radar, Pi converter, or autopilot supply. |
+| 6 | **Where will the modules live: dry locker, damp/splash area, or enclosed metal cabinet? What enclosure size is practical?** | No ignition requirement does not establish water exposure or Wi-Fi coverage. A dry location and antenna clearance are preliminary assumptions. |
+| 7 | **What is the materials budget per finished unit?** | Current allowance excludes any live-transfer mechanism premium, external wiring, tools, shipping, and labor. |
 
-Before final component selection, also establish the acceptable operating voltage
-range, highest charging voltage, hot ambient temperature, maximum enclosure size,
-wire entry preference, and whether this is a personal build or a product for sale.
-Battery fault-current and feeder/fuse details can follow during protection sizing;
-they are not needed to answer the architecture questions above.
+Before selecting final protection values, collect minimum operating/charging
+voltage, hot ambient temperature, feeder and battery fault-current information,
+wire lengths/gauges, and manufacturer fuse recommendations. For the Pi and USB
+charger, include the **12 V input converter** model and input current. The board
+switches their 12 V supply; it does not supply a Pi directly with 12 V or include
+twelve regulated USB outputs.
 
-## 3. Functionality to retain, and explicit differences
+## 3. What is retained from the reference products
 
-The [CLMD12 product page](https://www.maretron.com/products/mpower-clmd12-12-channel-dc-load-controller-module/)
-sets the principal channel, input, and control functions. The
-[CLMD12 datasheet](https://www.maretron.com/products/pdf/CLMD12%20Datasheet.pdf)
-provides the numerical comparison below.
+The [CLMD12 datasheet](https://www.maretron.com/products/pdf/CLMD12%20Datasheet.pdf)
+provides the initial switching, measurement, and dimming reference. Its mixed
+5/10/12 A channels are replaced with our proposed uniform 10 A channels. Its
+[manual](https://www.maretron.com/support/manuals/CLMD12UM_1.9.pdf) describes
+opposing MOSFETs and hardware protection; those principles remain useful.
 
-| Function | Reference baseline | Proposed design |
-|---|---|---|
-| Load switching | 12 high-side channels; 2 × 12 A, 6 × 10 A, 4 × 5 A; 75 A total | Retain as targets; independently validate thermal limits. |
-| Supply | 6.5–32 V; 12/24 V systems | **12 V only.** Propose 9–16 V full operation; lower-voltage cranking operation is an open requirement. |
-| Dimming | 200 Hz PWM, 5–100%, 1% steps | Retain for compatible lighting; include true OFF. Motors/electronics default to ON/OFF. |
-| Current telemetry | Each channel; 0.1 A resolution; typical ±0.5 A accuracy | Target equal or better over the useful load range; calibrate the complete measurement path. |
-| Electronic breaker settings | Programmable trip levels in 1 A increments | Retain selectable thresholds/delays within each channel's qualified limits. |
-| Local inputs | Seven inputs with high/low activation | Retain; protected sensing of battery positive, ground, and open contact. |
-| Power-up and locks | ON/OFF/previous-state settings; command locks | Retain in firmware, with fault state taking priority. |
-| Network | Isolated NMEA 2000 | Retain hardware capability; verify protocol and chosen user interface. |
-| Manual recovery | Fused bypass module | Integrate into the same package using fuse relocation. |
+| Function | This design |
+|---|---|
+| Output switching | Twelve separate high-side channels; no paralleling |
+| Current measurement | Each AUTO channel; target 0.1 A reporting resolution and approximately ±0.5 A or better over the useful range, subject to calibration |
+| Programmable electronic protection | Per-channel trip threshold and timing within qualified hardware limits |
+| Dimming | Target 200 Hz, 5–100% with 1% command steps, plus true OFF; only enabled for suitable lighting |
+| Power-up behavior | Local OFF/ON/previous-state configuration, with fault state taking priority |
+| Command locks and status | Implement in firmware and the Signal K interface |
+| Fault isolation | Hardware shutdown of the faulty AUTO channel, independent of firmware |
+| Manual recovery | Integrated passive fuse bypass; live branch transfer must be engineered |
+| Local switch inputs | Removed at the owner's request |
+| NMEA 2000 and proprietary Maretron configuration | Removed; use Wi-Fi and Signal K |
 
-The [CLMD12 manual, sections on electronic breakers and paralleling](https://www.maretron.com/support/manuals/CLMD12UM_1.9.pdf)
-also identifies opposing MOSFETs, hardware fault protection, software load
-protection, and output paralleling. The first three inform this proposal;
-paralleling remains an explicit question.
+The [CBMD12](https://www.maretron.com/products/mpower-cbmd12-12-channel-optional-bypass-module/)
+provides fused manual operation without dimming. Our fuse selection replaces its
+rocker controls. BYPASS has no electronic trip setting, remote OFF, or guaranteed
+current measurement. A smaller electronic trip threshold does not change the
+protection provided by the physical fuse in BYPASS.
 
-The [CBMD12 product description](https://www.maretron.com/products/mpower-cbmd12-12-channel-optional-bypass-module/)
-specifies fused manual control, without dimming or paralleled outputs. Its
-[installation manual, pages 1 and 4](https://www.maretron.com/support/manuals/CBMD12UM_0.pdf)
-identifies IP53 with the cover closed and states that the bypass module is not
-ignition protected. The CLMD12's separate IP67/ignition-protection claims must
-therefore not be attributed to the entire combined arrangement.
+Neither an ingress rating nor ignition protection is claimed. The owner's
+acceptance of restart interruptions avoids adding a second processor or hardware
+command-retention system solely to keep loads on through an MCU restart.
 
-Explicit differences requiring acceptance:
-
-- Moving a fuse requires de-energizing the supply. Manual switching under load
-  is not retained.
-- The new assembly has no claimed IP or ignition-protection rating. A covered,
-  dry-location design is the cost baseline.
-- BYPASS has no electronic trip setting, dimming, remote OFF, or guaranteed
-  current telemetry. It remains fuse protected.
-- Generic network compatibility does not imply compatibility with Maretron's
-  proprietary configuration tools, automation formats, or every chartplotter.
-- Paralleled output operation is not included until its need and bypass behavior
-  are resolved.
-
-## 4. Power architecture and fuse selection
+## 4. Power architecture and live fuse transfer
 
 ```mermaid
 flowchart LR
@@ -105,364 +112,410 @@ flowchart LR
     FA --> P[Reverse-polarity protection and transient suppression]
     P --> A[AUTO supply bus]
     A --> C[Channel shunt and protected opposing MOSFETs]
-    C --> AC[AUTO clip]
-    R --> BC[BYPASS clip]
-    AC -. Fuse in AUTO .-> L[Common LOAD clip]
-    BC -. Same fuse moved to BYPASS .-> L
+    C --> AC[AUTO contact]
+    R --> BC[BYPASS contact]
+    AC -. Fuse in AUTO .-> L[Common LOAD contact]
+    BC -. Same fuse in BYPASS .-> L
     L --> O[Load positive terminal]
     R --> FL[Small logic fuse and protected regulator]
-    FL --> U[MCU and hardware fault latches]
+    FL --> U[ESP32 and hardware fault latches]
     U --> C
 ```
 
-The channel section repeats twelve times. Dashed paths are alternative physical
-fuse positions: **one fuse per channel, not two installed fuses**. Loads return
-to the vessel's existing negative bus; keeping twelve high-current negative
-returns off this PCB saves copper, terminals, and heat. The module needs a
-separate negative connection for its electronics and suppression circuits.
-
-Each selector uses three contacts in a row:
+The channel section repeats twelve times. The dashed paths are alternative fuse
+positions; only one fuse is installed per channel. Load negatives return to the
+existing vessel negative bus. The module has a negative connection sized for
+its electronics and suppression currents.
 
 ```text
       A                     L                     B
   AUTO output           LOAD terminal          raw battery +
-      o---------------------o---------------------o
+      o                     o                     o
 
-  AUTO:    fuse spans A–L
-  BYPASS:  fuse spans L–B
-  OFF:     fuse removed; store in an insulated parking position
-
-  The lines show physical spacing, not copper connections between contacts.
+  AUTO:    fuse connects A–L
+  BYPASS:  same fuse connects L–B
+  OFF:     fuse removed and stored in an insulated parking position
 ```
 
-The fuse belongs **after the electronic switch**, on the connection to the load.
-Moving it must remove the A–L connection. A fuse that merely bridges around the
-MOSFET leaves failed electronics connected to the load and is unsuitable here.
+Place the selector **after the electronic switch** so moving the fuse removes
+the AUTO-output connection. Do not simply bridge a fuse across the MOSFET: that
+leaves the load connected to potentially failed electronics.
 
-Use a shroud that prevents two fuses being fitted simultaneously, guards the
-unused live contact, and prevents an offset fuse bridging adjacent channels.
-Validate actual fuse-body dimensions, retention, and extraction force. The
-[Keystone 3557 clip](https://www.keyelco.com/product.cfm/product_id/1131)
-is a low-cost candidate, but three loose clips do not constitute a qualified
-selector assembly. Provide PCB support directly underneath each fuse row.
+### What “other channels stay powered” requires
 
-| Physical selection | Load behavior | Protection |
-|---|---|---|
-| AUTO, command OFF | Disconnected by opposing MOSFETs | Off-state reverse blocking within the specified voltage envelope |
-| AUTO, command ON/PWM | Controlled power | Hardware channel shutdown, software trip curve, physical fuse backup |
-| BYPASS | Full battery power whenever the feeder is live | Physical branch fuse; no dependency on logic or gate drivers |
-| Fuse removed | Positive feed disconnected | Also works around a switch failed ON; external load-side sources must be considered |
+The module's feeder remains energized during an individual fuse move. The
+removed fuse interrupts only that branch; this meets the requested electrical
+behavior. It also means the selector may make or break load current:
 
-The AUTO-bank service fuse allows the electronic power bank to be isolated if
-it develops an internal short. Its rating and selectivity against the feeder
-fuse need calculation; it is not simply assigned a 75 A fuse because the unit
-has a 75 A load target. The logic supply has its own small fuse. An internal
-short in either domain can then be disconnected while the passive bus remains
-available, provided the main feed and physical board remain intact.
+- Healthy AUTO can be commanded OFF first, reducing removal stress. This is an
+  operating aid, not the sole safety mechanism.
+- Inserting the fuse into BYPASS can connect a discharged input capacitor or a
+  running/startup load directly to battery power.
+- Removing a BYPASS fuse, or an AUTO fuse after a switch fails ON, can interrupt
+  the full branch current. Software cannot turn either condition off reliably.
 
-**Bypass independence has boundaries:** it tolerates an absent MCU, failed
-firmware, missing network, dead gate drive, and a failed channel switch after
-fuse relocation. It cannot overcome a lost battery feed, a shorted common bus,
-or destructive damage across the board. Combining both functions in one package
-also shares environmental and mechanical failure exposure.
+**The selector must be qualified for these live operations at the defined 12 V
+voltage envelope, up to 10 A operating load, and the specified inrush/inductive
+loads.** A clip's continuous-current rating alone does not establish load-making
+or load-breaking capability. Ignition protection is outside the requested scope;
+contact arcing, wear, and accidental shorts still determine whether the mechanism
+is suitable. Qualify for occasional emergency transfers, including an agreed
+service-life allowance; this is not a routine manual load switch.
 
-## 5. Electronics decisions
+The [Keystone 3557](https://www.keyelco.com/product.cfm/product_id/1131) remains a
+low-cost *candidate contact*, not an approved live-transfer assembly. Require
+manufacturer support for the intended duty or engineering qualification of the
+complete mechanism. If simple clips cannot meet it, prefer a passive fuse carrier
+whose movement operates suitable load-break contacts. An additional branch
+isolator would be a departure from the requested fuse-only interface and needs
+an explicit design decision. A shared upstream disconnect is not an acceptable
+routine transfer procedure because it would interrupt the other channels.
 
-### Channel power stage
+This is an unresolved design gate, not an assertion that a bare three-clip holder
+can be moved live. Do not freeze the PCB footprint or cost before resolving it.
+A firmware-dependent device in the BYPASS path would also change the promised
+independence and is not the proposed workaround.
 
-Use twelve repeated channels based initially on **TPS12110A-Q1**, each with two
-external N-channel MOSFETs in opposing orientation, a Kelvin-connected shunt,
-current-monitor scaling, and local output suppression. Keep the same controller
-across all channels; adjust shunts, protection settings, and MOSFET/copper sizing
-only where a real cost saving results.
+Use a guarded, break-before-make arrangement that prevents two installed fuses,
+misalignment into adjacent channels, and contact with unused live terminals.
+Provide retention and supports underneath the fuse area. Test AUTO→BYPASS,
+BYPASS→AUTO, fuse removal to OFF, and a failed-ON AUTO switch, with the other
+channels loaded. Contact bounce and load inrush must not reset healthy loads
+or the module logic during an ordinary transfer.
 
-The [TI controller documentation](https://www.ti.com/product/TPS1211-Q1)
-supports this combination of gate drive, current monitoring, fault detection,
-and voltage supervision. The load current flows through external MOSFETs;
-the distributor's “4 A” driver entry is not a 4 A channel-load limit.
+### Protection domains and limits
 
-A 3 mΩ shunt is a useful first calculation: at 12 A it develops 36 mV and
-dissipates 0.432 W. Select its package for hot operation and pulse energy,
-not just nominal wattage. Sample the integrated analog current monitor through
-a shared ADC/multiplexer. No twelve-channel collection of separate digital
-current sensors is needed.
+The AUTO-bank service fuse allows an internally shorted electronic power bank
+to be isolated; logic has its own small fuse. Size both and coordinate them with
+the feeder protection. Internal-fault recovery may require taking the module out
+of service; the live-transfer requirement does not make a damaged common bus
+independently repairable.
 
-Synchronize current sampling with each PWM on-period and allow analog settling
-time. Distinguish on-state current from duty-averaged telemetry; averaging must
-not conceal overloads. Stagger channel PWM phases where useful for measurement
-and supply ripple. Fixed hardware protection remains active independently of
-the programmable software trip curve and ADC scheduling.
+BYPASS operates with missing firmware, Wi-Fi, server, or gate drive, and can
+isolate a failed channel switch by removing the AUTO fuse connection. It cannot
+overcome a lost feeder, shorted common bus, or destructive PCB damage. Combining
+the functions in one enclosure shares physical failure exposure.
 
-Select 40–60 V MOSFETs only after establishing the worst clamped voltage,
-inductive turn-off stress, and safe operating area. A nominal 12 V supply does
-not justify 20 V power components. Account for maximum hot resistance and gate
-charge, including operation at minimum supply.
+## 5. Power electronics
 
-**Latch protection independently of PWM and MCU reset.** Use a hardware fault
-latch per channel to inhibit the driver until an explicit reset. PWM pulses
-must never clear it. The
-[TPS1211 datasheet](https://www.ti.com/lit/ds/symlink/tps1211-q1.pdf)
-describes clearing the controller's own overcurrent latch by toggling its input,
-and automatic temperature retry on the TPS12110 variant. Those behaviors make
-an additional persistent latch necessary for the proposed dimmable, no-retry
-channel. Its set input combines channel fault indications; power-up and loss of
-its supply must inhibit switching. A routine MCU reset must not reset it.
+Use twelve repeated **TPS12110A-Q1** controller circuits initially, each with two
+opposing N-channel MOSFETs, one Kelvin-connected shunt, and output suppression.
+The [TI controller family](https://www.ti.com/product/TPS1211-Q1) combines gate
+drive, protection, voltage supervision, and an analog current monitor. Its gate
+current rating is not the permitted load current through the external MOSFETs.
 
-Fit a local temperature-sensing element for each driver's hardware temperature
-input, placed near its power MOSFETs. Board temperature monitoring provides an
-earlier warning/shutdown policy. Validate that the hardware temperature trip and
-thermal lag protect the external parts; the driver IC's own temperature alone
-does not establish the temperature of a fuse contact or external MOSFET.
+At the new 10 A maximum, a 3 mΩ shunt develops 30 mV and dissipates 0.30 W.
+Select its package for hot operation and fault pulses. Share ADC/multiplexer
+resources instead of buying twelve separate current-monitor ICs. Synchronize
+PWM measurements with on-time and distinguish on-state current from averaged
+telemetry; averaging must not hide an overload.
 
-The controller shuts off on a fault; it is not permission to dissipate arbitrary
-startup energy in a MOSFET. Check short-circuit let-through energy and capacitor
-charging against device safe operating area. Add a precharge path only for a
-load that needs it, rather than fitting twelve by default.
+The fast hardware threshold protects the power stage. Lower configurable
+current/time thresholds protect the intended load in normal firmware operation;
+the physical fuse remains the independent backup sized for the actual wiring.
+Do not represent the firmware setting as a precision hardware current clamp.
 
-For PWM, check gate-charge demand as well as driver peak current. For example,
-120 nC total gate charge at 200 Hz is 24 µA average charging demand before
-leakage and margin. Validate the selected driver's charge-pump budget and the
-minimum pulse width on the actual circuit.
+**Use a persistent fault latch per channel.** The
+[TPS1211 datasheet](https://www.ti.com/lit/ds/symlink/tps1211-q1.pdf) describes
+input toggling clearing its internal overcurrent latch and temperature retry on
+the TPS12110 variant. Our external latch must prevent PWM or an MCU reset from
+causing repetitive retries. Default outputs OFF on loss of logic power and
+through boot; reset a fault only by a deliberate operation. Hardware protection
+continues without the ESP32 running.
 
-### Why not simply use six inexpensive dual smart switches?
+Fit local temperature sensing near each channel's power devices. Check sensor
+lag and trip temperature against the MOSFET, shunt, terminals, and PCB limits.
+Board-temperature telemetry provides earlier warning. Merely measuring the
+driver IC temperature does not establish external MOSFET/contact temperature.
 
-The [TPS2HCS10-Q1](https://www.ti.com/product/TPS2HCS10-Q1)
-is a credible cost alternative for a 12 V system: it integrates switches,
-measurement, PWM, and programmable protection. Its two outputs share a package,
-and adding off-state reverse blocking still needs circuit design. Compare the
-complete protected channel, including cooling, rather than IC prices alone.
+Select MOSFET voltage rating, hot resistance, gate charge, and safe operating
+area against the actual transient and startup envelope. For illustration,
+120 nC combined gate charge at 200 Hz needs 24 µA average charging current before
+leakage and margin. Verify both the driver's charge-pump budget and minimum PWM
+pulse width. Large capacitive loads may need precharge, but do not fit it to
+every channel without a demonstrated need.
 
-At this stage I prefer the external-MOSFET design for the retained 75 A target,
-reverse blocking, and separate channel fault behavior. Reconsider the integrated
-alternative if the load list shows a much lower continuous total, or a complete
-comparison proves it cheaper at the required thermal limits. The
-[lower-resistance TPS2HCS08 listing](https://www.digikey.com/en/products/detail/texas-instruments/TPS2HCS08AQPWPRQ1/26769137)
-showed no stock when reviewed, so it is not the purchasing basis.
-
-### Input power and inductive loads
-
-Use one AUTO-bank reverse-polarity stage, following the grouped arrangement in
+Use a shared AUTO-bank reverse-polarity stage, as illustrated in
 [TI's reverse-battery application note](https://www.ti.com/lit/pdf/SLUAAN7),
-and a separately protected low-power logic supply. Use channel voltage
-supervision for load disconnection. Do not add a shared electronic current
-limiter that turns every output off when one branch faults.
+and separately protect the low-power regulator. Select transient suppression
+against a defined source pulse and worst-case clamp voltage. Use a higher-voltage
+controller if protecting the 45 V absolute-maximum device is not economical.
+Do not use a shared electronic current limiter as the primary response to an
+ordinary branch short.
 
-The input transient suppressor must be selected against a defined source pulse,
-clamp tolerance, wiring inductance, and controller absolute maximum. A TVS part
-number alone does not establish load-dump survival. A higher-voltage controller
-is the fallback if a robust clamp cannot protect the 45 V absolute-maximum part
-economically. The BYPASS feed deliberately precedes this electronic protection:
-reverse connection or sustained overvoltage can reach bypassed loads.
+Provide an inductive suppression path compatible with the complete opposing-FET
+circuit. Check long-wire interruption, relay coils, motor startup/stall, and
+fuse transfer. Passive BYPASS deliberately precedes electronic reverse-polarity
+and overvoltage protection, so those conditions can reach bypassed loads.
 
-Provide a suppression path for each inductive output, designed for the complete
-opposing-MOSFET circuit. Include pump stall, long-wire turn-off, and relay-coil
-energy. Motor outputs are ON/OFF unless separately qualified for PWM. Direct
-pump support depends on startup and stall current, not only running current.
+### Alternative to compare before selecting the BOM
 
-### Control, inputs, and diagnostics
+Six [TPS2HCS10-Q1 dual smart switches](https://www.ti.com/product/TPS2HCS10-Q1)
+can reduce component count by integrating switches, sensing, PWM, and protection.
+Compare their **complete** cost, including output reverse blocking, heat removal,
+and fault interaction between channels in one package. The new 10 A maximum
+makes this comparison more attractive, but total simultaneous current is still
+unknown. Do not select on IC price alone or silently discard reverse blocking.
 
-Use an inexpensive CAN-capable MCU such as the
-[STM32G0B1 family](https://www.st.com/en/microcontrollers-microprocessors/stm32g0b1re.html).
-Choose the exact package after allocating twelve PWM signals, fault resets,
-input sensing, ADC multiplexing, CAN, and programming pins. A single controller
-is enough; radio hardware is optional.
+## 6. Wi-Fi controller and Signal K integration
 
-Provide seven protected inputs with selectable interpretation of positive,
-negative, and open connections. Use resistor networks, filtering, clamps, and
-appropriate sensing thresholds; do not connect 12 V switch wires directly to
-GPIO pins. Configure maintained switches, momentary toggles, and alarm inputs
-in software.
+### Hardware and network choice
 
-Measure input voltage, channel current in AUTO, output-terminal voltage, and
-board temperature. Give each load an output-powered indicator LED that works
-in BYPASS with the MCU dead. An illuminated LED means voltage is present, not
-that the load works or that AUTO is selected. Voltage/current observations alone
-cannot reliably distinguish every bypass, blown-fuse, and externally powered
-condition; report uncertainty rather than an invented fuse-position status.
+Use an **ESP32-S3-WROOM-1-N8** module initially, without PSRAM. It combines the
+processor, radio, flash, and antenna in an assembly suitable for hot-air reflow.
+See [Espressif's module documentation](https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.html).
+Size the regulator for Wi-Fi transmit bursts, not average idle draw, and keep
+radio supply/ground noise away from current measurement.
 
-Use a protected buck regulator and a watchdog. Default gate commands OFF until
-configuration is valid. Include service/programming pads and a wired service
-connection; an isolated service adapter is needed if a grounded computer would
-otherwise introduce a ground path in an installed system.
+Allocate twelve hardware PWM outputs using LEDC plus MCPWM resources; the S3 has
+eight LEDC channels, so twelve LEDC channels must not be assumed. Confirm the
+GPIO/timer map before schematic release. The
+[ESP32-S3 datasheet](https://documentation.espressif.com/esp32_s3_datasheet_en.pdf)
+documents these peripherals. Use ADC1 or a suitable external ADC with multiplexing
+and calibration; measure accuracy while Wi-Fi is transmitting. GPIO expansion
+may be used for fault readout/reset, never as the sole fast protection path.
 
-## 6. Network and firmware behavior
+No physical load-switch inputs, CAN transceiver, isolation supply, Micro-C
+connector, or NMEA protocol stack are included. Programming/reset access remains.
+Prefer a plastic enclosure or antenna window; use an external-antenna module
+variant if a metal cabinet prevents dependable reception.
 
-Keep galvanic isolation at the CAN interface. An
-[ISO1042-class isolated transceiver](https://www.ti.com/product/ISO1042)
-is a candidate. Power its network side from the protected NMEA backbone supply
-and its logic side from the module. This avoids an isolated DC/DC converter
-while maintaining separate grounds. Include appropriate network protection and
-Micro-C connection; the device is a network drop, with no permanently fitted
-backbone termination.
+**Wi-Fi is the recommended system choice here.** It connects directly to the
+requested server and avoids CAN cabling and a CAN-to-server adapter if those are
+not already installed. A bare CAN transceiver can be cheap, but that is not the
+cost of a working Signal K connection. Wired CAN would be worth reconsidering
+for poor radio coverage or a future requirement for wired distributed control,
+not simply to save a few dollars on this build.
 
-The MCU remains powered from the house supply if the network loses power.
-Local inputs and configured control continue. Per-channel network-loss behavior
-should be configurable; propose holding the last command while preserving local
-control and all fault protection. MCU/watchdog failure defaults AUTO outputs
-OFF. Those two failures must be treated differently.
+This module switches the power feeds of the radar and NKE equipment. It does
+not implement their radar-data, instrument-data, or autopilot-steering interfaces.
 
-Implement address claiming, identity, heartbeat, and documented switch/control
-messages before adding display-specific behavior. The
-[CLMD12 manual's interface appendix](https://www.maretron.com/support/manuals/CLMD12UM_1.9.pdf)
-describes 127500/127501 status and control through addressed 126208 commands;
-implementing an unrelated generic CAN switch message is insufficient. Current
-reporting and dimming need verification with the selected display.
+### Proposed software connection
 
-Configuration and firmware should support:
+```mermaid
+flowchart LR
+    UI[Chosen dashboard] -->|Switch request| SK[Signal K server and eswitch plugin]
+    E[ESP32 Wi-Fi client] <-->|Authenticated WebSocket| SK
+    E -->|Local command| P[Protected outputs]
+    P -->|Current, voltage, faults| E
+```
 
-- Channel names, current/time trip settings, inrush allowance, dimming enable,
-  duty cycle, startup OFF/ON/last-state, and command locks.
-- Local and network input mappings, multiple inputs controlling one output,
-  grouped actions, and timed/flashing behavior where required.
-- Fault logging and deliberate reset, with no automatic repetitive short-circuit
-  retries and no restoration of a known tripped channel as “previous ON.”
-- Validated, versioned settings with CRC, bounded values, and a usable default
-  after a corrupt configuration. Fault shutdown always overrides locks.
-- Software load shedding before exceeding the AUTO current budget. BYPASS is
-  outside software control, so software cannot enforce the whole-unit limit.
+Have each module open an outbound connection to a small open-source Signal K
+server plugin. The plugin registers switching command handlers and translates
+telemetry into Signal K deltas. This is a proposed application protocol on a
+plugin endpoint; a generic telemetry-only Signal K client is not automatically
+a remotely controllable actuator. Confirm compatibility with the installed
+server version before implementing it.
 
-Use our own configuration utility for the prototype. Maretron N2KAnalyzer or
-other proprietary tool compatibility is an additional requirement if wanted.
-For a product, budget standards access, identity allocation, and certification
-separately; [NMEA describes these requirements](https://www.nmea.org/nmea-2000.html).
-The prototype must not be represented as an NMEA-certified Maretron replacement.
+Signal K distinguishes **PUT commands** from **state-update deltas**. The plugin
+must wait for a device acknowledgement or a bounded timeout rather than report
+success because the server's data model changed. Use the documented
+[PUT semantics](https://signalk.org/specification/1.7.0/doc/put.html) and
+[request/response states](https://signalk.org/specification/1.7.0/doc/request_response.html).
+Keep desired state, acknowledged switch state, and measured output voltage
+separate. A passive bypass or external feed can make an output live while its
+AUTO switch is OFF.
 
-## 7. Protection, thermal design, and mechanics
+Use stable module IDs plus channel IDs so three modules do not overwrite each
+other. Map them to paths such as `electrical.switches.<stableChannelId>.state`;
+validate exact paths/types against the deployed schema. Store human circuit
+names separately. Include request IDs, reject stale or duplicate operations,
+bound reconnection queues, and do not replay historical ON/OFF commands after
+an outage. Publish a fresh state snapshot before accepting a new command session.
 
-There are three distinct current limits: the electronic trip setting, the
-physical channel's qualified capacity, and the replaceable fuse's time-current
-characteristic. They are not interchangeable. A 12 A electronic channel may
-need a 15 A fuse for its operating profile; the branch wiring and hardware must
-still survive the fuse's clearing curve in BYPASS. Do not simply fit fuses with
-the printed channel currents and assume continuous performance.
+Authenticate devices and authorized control clients; use TLS with provisioned
+server trust where available. The
+[Signal K plugin guide](https://demo.signalk.org/documentation/Developing/Plugins.html)
+explicitly assigns authentication of plugin WebSocket endpoints to the plugin.
+Do not assume registering an endpoint secures it. Signal K's
+[access-request mechanism](https://signalk.org/specification/1.7.0/doc/access_requests.html)
+can support enrollment where the chosen server permits it. Credentials remain
+local and are excluded from open-source releases.
 
-Specify fuse series, DC interrupt rating, thermal derating, and wire protection
-together. For example, the
-[Littelfuse ATOF series](https://www.littelfuse.com/assetdocs/littelfuse-datasheet-287-atof?assetguid=43dcdce8-8ca2-426f-8998-7e566f048d40)
-has a 1,000 A interrupt rating at 32 V DC. That cannot be assumed adequate for
-every battery installation. Evaluate prospective branch fault current and
-upstream coordination; a high-interrupt feeder fuse does not automatically
-increase a branch fuse's interrupt rating.
+Provide USB/service recovery and local Wi-Fi provisioning. Normal operation is
+Wi-Fi station mode; no cloud service or Internet connection is needed. Support
+OTA with image verification and rollback. Updating/rebooting may interrupt AUTO
+outputs, as accepted; an OTA operation must be deliberate and its interruption
+shown before it starts. BYPASS continues through an ESP32 restart.
 
-| Event | Expected response / limitation |
+### Operating policy
+
+| Event | Proposed behavior |
 |---|---|
-| Output short in AUTO, including at startup | Local hardware latch shuts the channel down. Validate that admissible healthy loads and logic stay operating. |
-| Output short in BYPASS | Branch fuse clears. Shared supply disturbance and selectivity depend on the battery, feeder, and fuse curves. |
-| MCU halted or rebooting | Hardware protection remains effective; uncommanded turn-on is inhibited. BYPASS stays powered. |
-| Output switch failed conducting | Remove its fuse to force OFF, or move the fuse to BYPASS for a healthy load after disconnecting supply. |
-| AUTO power-bank internal short | AUTO service fuse/feeder coordination determines what opens; manual isolation may be required. |
-| Network absent | Configured channel policy and local inputs remain available. |
-| Battery reversed or overvoltage | AUTO protection acts within its defined envelope; passive BYPASS does not provide those protections. |
+| Wi-Fi, server, or plugin disconnected | Hold the last commanded AUTO state; local protection remains active. Mark telemetry unavailable/stale. |
+| Connection restored | Report current state and faults; do not blindly apply a cached server state. |
+| ESP32 reset, watchdog trip, or firmware update | AUTO outputs OFF during restart; BYPASS unaffected. |
+| Successful boot | Apply each channel's stored OFF/ON/previous-state policy locally without waiting for Signal K; stagger starts where needed. |
+| Commissioned server/access-point supply | Use local ON-at-boot policy, with protection taking priority. These channels must not depend on a network command or a persisted previous-OFF state to recover after a restart. |
+| Invalid settings or unfinished commissioning | Default AUTO outputs OFF. |
+| Channel fault | Latch off; do not reinterpret it as an ordinary command or automatically restart it. |
+| Known fault before restart | Do not restore it as “previous ON”; define persistent fault/state storage and test interrupted writes. |
 
-The channel ratings sum to **104 A**, so all channels cannot simultaneously
-operate at their individual maxima under a 75 A aggregate rating. The same
-aggregate limit applies in mixed AUTO/BYPASS operation and all-BYPASS operation.
+Maintain command locks, names, trip curves, dimming settings, state persistence,
+and fault logs. Store versioned configuration with integrity checks. Protection
+always overrides a command lock. Software may shed AUTO loads against a configured
+budget, but cannot enforce the total when passive BYPASS channels are active.
 
-An illustrative heat calculation shows why copper and cooling remain important.
-Assume each AUTO path has 6 mΩ total hot MOSFET resistance plus a 3 mΩ shunt.
-The largest sum of squared channel currents at 75 A under the proposed channel
-limits is 789 A²: two 12 A loads, five 10 A loads, and one 1 A load. Those
-semiconductors/shunts would dissipate **7.1 W**. Another 1 mΩ in a common feed
-path adds **5.6 W**; a hypothetical average 0.1 V fuse drop adds **7.5 W**.
-These are design calculations, not measured component losses.
+### Boot and service when eswitch powers the network
 
-Allow roughly **20–30 W of enclosure heat in early mechanical planning**, then
-replace assumptions with worst-case component and connection data. Do not claim
-75 A continuous at an unspecified ambient or in an arbitrary sealed plastic box.
-Propose qualification at 55°C ambient; actual installation temperature remains
-an open input.
+The Signal K host, access point, or both **will be powered through eswitch**.
+Identify their module/channel assignments during commissioning and set those
+channels to local ON-at-boot, independent of Wi-Fi association or a server
+connection. Allow outputs to start before networking completes. Each module
+must recover independently, even when another module powers the network.
+Fault protection still takes priority; a faulted infrastructure channel must not
+retry indefinitely to restore connectivity.
 
-Start with one four-layer PCB, 2 oz outer copper, and a mechanically anchored
-copper bus strip where cheaper than thicker PCB copper. Use metal-to-metal
-power terminals so cable torque is not carried by solder joints. High-current
-branches need short routes, effective thermal spreading, and terminal/fuse
-temperature measurements. Compare a metal backplate against a larger board
-before fixing the enclosure.
+Ordinary dashboards should lock these feeds against accidental OFF commands.
+Provide an explicit maintenance action for deliberate shutdown. If a remote
+power cycle is wanted, the module must first accept the whole timed OFF/ON
+operation and execute it locally; never rely on a second command reaching a
+powered-off server or access point. A latched fault cancels the planned restart.
+Persisted commissioning settings identify these feeds; uncommissioned or corrupt
+settings still default OFF and require local service or passive bypass.
 
-Use two clearly labeled rows of six fuse selectors, a removable protective
-cover, accessible output terminals, and insulated fuse parking positions.
-Reserve approximately 250 × 150 mm PCB space for initial placement, not a fixed
-dimension or a requirement to match Maretron's enclosure. Keep the fuse/service
-area accessible and protect electronics from condensation. Conformal coating
-does not waterproof fuse contacts or confer an ingress rating.
+An ESP32 restart may interrupt these feeds, as accepted. For OTA, receive and
+verify the complete image locally before rebooting; boot, rollback, and load
+restoration must work with the server/access point unavailable. Tell the user
+which network services will drop before starting maintenance, and report final
+status after reconnection. Qualified passive BYPASS can keep a selected network
+feed on through controller maintenance; USB service remains available offline.
 
-## 8. Cost decisions
+If the Pi runs Signal K, define a graceful host shutdown/restart procedure before
+planned power interruptions. A simple output delay is not proof that its OS has
+shut down; watchdog resets or loss of battery power can still interrupt it.
+Power switching alone does not provide graceful OS shutdown.
 
-| Decision | Reason |
+## 7. Fuses, aggregate current, and mechanics
+
+Electronic trip threshold, qualified channel capacity, and fuse rating are
+separate values. A 10 A continuous load may require a higher nominal fuse after
+thermal derating, but the wiring and PCB must survive that fuse's clearing curve
+in BYPASS. The fuse must never become an undocumented permission to run more
+than the channel's 10 A maximum.
+
+For example, [Littelfuse ATOF fuses](https://www.littelfuse.com/assetdocs/littelfuse-datasheet-287-atof?assetguid=43dcdce8-8ca2-426f-8998-7e566f048d40)
+have a 1,000 A interrupt rating at 32 V DC. Confirm prospective branch fault
+current and upstream coordination for the installation. A feeder fuse does not
+automatically increase a branch fuse's interrupt rating. Fuse interruption of a
+fault and manually extracting a loaded fuse are different duties.
+
+| Fault | Required behavior / boundary |
 |---|---|
-| One shared PCB and enclosure | Removes duplicate power connectors, cable links, mounting hardware, and bypass housing. |
-| Three clips and one fuse per output | Provides selection and manual isolation with minimal power hardware. |
-| Integrated gate driver/protection/current monitor | Avoids separate current-monitor ICs and an elaborate discrete protection chain. |
-| Independent AUTO-channel protection | Avoids solving ordinary branch faults with a whole-bank shutdown. |
-| Passive BYPASS | Removes twelve additional active bypass protection stages, subject to question 3. |
-| External negative bus | Saves twelve power terminals and substantial PCB return copper. |
-| Direct wire outputs | Cheaper than twelve sealed high-current connector positions and mating harnesses for a dry installation. |
-| Shared ADC and MCU | Avoids duplicate processing and measurement parts. |
-| Stock enclosure; no display/radio initially | Keeps prototype mechanics and firmware manageable. |
-| No output paralleling initially | Avoids synchronized protection, current-sharing, harness, and bypass complications if no load needs it. |
+| AUTO load short, including at startup | Channel hardware shuts down; validate that healthy loads and logic remain operating. |
+| BYPASS short | Physical fuse clears; a temporary shared supply dip is accepted. |
+| Ordinary fuse transfer | Only the selected branch drops out; validate with the other branches loaded. |
+| AUTO switch fails ON | Qualified manual fuse mechanism must still disconnect or transfer that branch. |
+| Internal power-bank short | AUTO service fuse/feeder coordination and manual isolation govern recovery. |
+| Reversed battery or sustained overvoltage | AUTO protection works within its specified envelope; BYPASS exposes its load to the raw feed. |
 
-Do not remove reverse blocking, independent fault shutdown, required network
-isolation, or fuse-contact quality merely to lower an IC subtotal. Their removal
-would change the retained functionality.
+With twelve 10 A channels, the sum of individual maxima is **120 A**. Neither
+simultaneous capacity nor feeder sizing follows from that sum. For the provisional
+75 A assumption, the greatest sum of squared branch currents is 725 A²: seven
+10 A loads and one 5 A load. With an assumed 6 mΩ of hot MOSFET resistance plus
+a 3 mΩ shunt per path, that is **6.53 W** in channel MOSFETs/shunts. A further
+1 mΩ common-feed resistance adds **5.63 W**; a hypothetical average 0.1 V fuse
+drop adds **7.5 W**. These are illustrative calculations, not measured losses.
 
-## 9. Preliminary materials budget
+Reserve approximately **20–30 W of heat-removal capacity** in early mechanical
+planning if retaining 75 A. Replace these assumptions with maximum component
+and connection losses. Propose qualification at 55°C ambient, pending the actual
+installation. Reducing aggregate current could substantially reduce the enclosure
+and copper needed.
 
-USD per complete module at prototype quantities. Only the controller and clip
-lines currently have specific distributor price anchors; the remaining rows are
-engineering allowances pending exact parts and supplier quotes.
+Start with a four-layer PCB, 2 oz outer copper, and a mechanically anchored copper
+bus strip where economical. Support power terminals independently of solder
+joints. Keep branch routes short and provide thermal spreading. Compare a metal
+backplate with a larger PCB while preserving Wi-Fi antenna clearance.
 
-| Item | Installed quantity / scope | Allowance |
+Keep two accessible rows of six fuse positions as a layout objective. Initial
+PCB space allowance remains around 250 × 150 mm, subject to the live-transfer
+mechanism; do not lock this footprint now. Include an insulating shroud, clear
+AUTO/BYPASS markings, unused-contact guards, and fuse parking. Conformal coating
+does not waterproof contacts or establish an ingress rating.
+
+Use footprints suitable for stencil paste and hot air: castellated radio module,
+lead-accessible controller packages, sensible passive sizes, and power packages
+with achievable reflow inspection. Provide test points and space for rework.
+Validate one assembled board before populating the other two.
+
+## 8. Cost decisions and preliminary budget
+
+The confirmed savings are removal of CAN hardware/connectors, seven input
+circuits and their connector, and all paralleling support. Wi-Fi replaces the
+MCU rather than adding a second processor. Use shared measurement, inexpensive
+direct wire terminals, and an external negative bus. Preserve independent AUTO
+protection, off-state reverse blocking, and adequate contact/copper quality.
+
+Estimated USD **per unit**, using quantities appropriate to buying parts for
+three units. Each BOM will still list installed quantities for one module.
+These allowances assume the provisional 75 A envelope.
+
+| Item | Installed per module | Allowance |
 |---|---|---:|
-| TPS12110A-Q1 channel controllers | 12 | $38–45 |
+| TPS12110A-Q1 controllers | 12 | $35–40 |
 | Opposing channel MOSFETs | 24 | $24–40 |
 | Current shunts | 12 | $6–12 |
-| Channel latches, suppression, gate and timing parts | 12 channel sets | $14–26 |
-| Fuse clips | 36 | $6.50–9 |
+| Fault latches, channel suppression, gate/timing parts | 12 sets | $14–26 |
+| Basic fuse contacts, **not yet live-transfer qualified** | 36 | $5.50–8 |
 | Branch fuses | 12 | $8–14 |
-| AUTO service fuse/holder, input polarity/transient protection | Shared power bank | $18–32 |
-| MCU, regulator/logic fuse, analog multiplexing, inputs, indicators | Shared control section | $18–30 |
-| Isolated CAN, network-side supply, connector/protection | One interface | $12–22 |
-| Power terminals, output terminals, copper bus | One module | $15–28 |
-| PCB | One board, allocated prototype fabrication cost | $15–30 |
-| Enclosure, shroud, supports, and hardware | One set | $20–40 |
-| **Materials total** | **Rounded planning range: $200–330** | **$194.50–328** |
+| AUTO service fuse/holder and input protection | Shared | $18–32 |
+| ESP32-S3 radio/MCU module | 1 | $6–8 |
+| Logic power, ADC/multiplexing, indicators, service connection | Shared | $10–18 |
+| Power/output terminals and copper bus | One set | $15–28 |
+| PCB | One board allocation | $15–30 |
+| Basic enclosure, shroud, supports, hardware | One set | $20–40 |
+| **Base materials subtotal** | **Rounded allowance: $180–300 per unit** | **$176.50–296** |
+| **Live-transfer mechanism premium / extra qualification** | **Unresolved** | **TBD** |
+
+The base allowance for three units is roughly **$540–900**, **plus the unresolved
+live-transfer cost**. This supersedes the earlier $200–330 single-unit estimate;
+it must not be quoted as a completed, qualified product price.
 
 Price anchors reviewed on 20 September 2026:
 
-- [TPS12110AQDGXRQ1 at DigiKey](https://www.digikey.com/en/products/detail/texas-instruments/TPS12110AQDGXRQ1/17748310):
-  $3.11 at quantity 10; twelve installed devices cost $37.32 at that tier.
-- [Keystone 3557 at DigiKey](https://www.digikey.com/en/products/detail/keystone-electronics/3557/2092485):
-  $0.1796 at quantity 25; thirty-six installed clips cost about $6.47.
+- [TPS12110AQDGXRQ1](https://www.digikey.com/en/products/detail/texas-instruments/TPS12110AQDGXRQ1/17748310):
+  $2.8584 at the 25-piece tier; 36 controllers for three boards gives about
+  $34.30 installed per board.
+- [Keystone 3557](https://www.digikey.com/en/products/detail/keystone-electronics/3557/2092485):
+  $0.1518 at the 100-piece tier; 108 contacts gives about $5.46 per board.
+- [ESP32-S3-WROOM-1-N8](https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N8/15200089):
+  $5.66 at single-piece quantities; three modules cost $16.98 before extras.
 
-These observations are not reserved prices or a complete availability audit.
-The table excludes shipping, tax, feeder wiring/fuse/disconnect, mating network
-cable, tools, assembly labor, firmware development, test equipment, and formal
-certification. Minimum PCB orders and procurement spares can increase the cash
-needed to build one unit beyond its allocated materials cost.
+Other lines are engineering allowances. Refresh all prices and availability when
+selecting the exact BOM. Shipping, tax, tariffs, spares, tools, assembly labor,
+firmware/plugin development, tests, and external feeder wiring/protection are
+excluded. PCB minimum orders can increase cash outlay. Antenna changes or a more
+substantial fuse carrier may increase the enclosure/interface cost.
 
-Aim for **at most $225 for the populated board and $250 including enclosure**,
-but do not promise that before thermal design and quoting. A batch should reduce
-some unit costs; no production-volume price is claimed yet. If the budget must
-be materially below $200, the first productive choices are actual aggregate
-current, enclosure/connectors, and required network ecosystem—not removing
-branch protection.
+Likely open-source publication favors public component documentation, ordinary
+KiCad files, reproducible firmware/plugin builds, and available parts. Prepare
+those artifacts as the project develops, but choose hardware, firmware, and
+plugin licenses before publishing; no license or publication action is assumed
+from “most likely.”
 
-## 10. Work required after requirements review
+## 9. Next engineering work
 
-1. Freeze channel/load allocation, voltage envelope, network target, bypass fault
-   behavior, and mechanical conditions. Close the questions in section 2.
-2. Calculate trip settings, fuse coordination, transient energy, MOSFET safe
-   operating area, gate drive, measurement error, and worst-case heating.
-   Compare the complete integrated-switch alternative before fixing the BOM.
-3. Build a one-channel power-stage prototype and physical fuse-selector sample.
-   Test normal loading, 200 Hz dimming, startup into a short, hot short, induced
-   faults while the MCU is halted, reverse blocking, and deliberate latch reset.
-4. Develop the full schematic, costed one-module BOM, and PCB only after the
-   channel and fuse mechanism behave as required.
-5. Validate mixed AUTO/BYPASS startup, maximum admitted load combinations,
-   all-BYPASS heat, branch fault coordination, power cycling, fuse removal,
-   inductive turn-off, contact cycling, and the selected display/network.
+1. Select and qualify a live-transfer contact mechanism for occasional emergency
+   use. Identify the server/network feed assignments and Signal K software target;
+   establish the eventual aggregate load requirement when load details arrive.
+2. Define the actual voltage and fault envelope; calculate fuse coordination,
+   inrush, inductive suppression, MOSFET safe operating area, and hot losses.
+   Compare the complete integrated-smart-switch alternative before BOM selection.
+3. Prototype one power channel **and its transfer mechanism**. Test load-making,
+   load-breaking, bounce, wear, fault latch persistence during PWM/reboot, and
+   backfeed isolation before routing twelve copies.
+4. Verify a Signal K command/acknowledgement/telemetry round trip with a bench
+   device, three unique module identities, network loss/reconnect, and stale
+   command rejection. Keep this separate from power-stage qualification.
+5. Develop the schematic, one-module BOM, PCB, and assembly procedure; build and
+   validate one board, then assemble the other two.
+6. Test admitted simultaneous loads, all-BYPASS heating, startup into faults,
+   mixed AUTO/BYPASS startup, live transfer with healthy channels loaded, Wi-Fi
+   burst interference, MCU restart, OTA interruption/recovery, and cold startup
+   of all three modules with the host/access point initially unpowered. Verify
+   local network-feed power cycles and fault handling without server assistance.
 
-Schematic completion, clean PCB checks, and simulation are not substitutes for
-these measurements. This document is ready for decisions; no new hardware has
-been built, qualified, or released for fabrication.
+This revision records the owner's decisions and the resulting design changes.
+It does not claim that the new live-transfer mechanism, continuous-current
+rating, or complete hardware has been built or qualified.
