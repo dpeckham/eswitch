@@ -1,6 +1,6 @@
 # eswitch: 12 V Signal K load controller with integrated fuse bypass
 
-Design proposal · 20 September 2026 · Revision 0.2 · Requirements review
+Design proposal · 20 September 2026 · Revision 0.3 · Requirements agreed; hardware engineering pending
 
 ## 1. Recommendation and confirmed requirements
 
@@ -15,61 +15,79 @@ The owner has confirmed:
 | Item | Agreed requirement |
 |---|---|
 | Supply | Nominal 12 V only |
+| Battery bank | 300 Ah LiFePO₄ for house loads only; separate starting/charging bank; this house battery is charged by solar MPPT |
 | Channels | Retain twelve; maximum individual load 10 A; detailed load information will follow |
+| Aggregate current | 40 A continuous hardware capability, with upstream fuse and wiring selected to suit |
 | Loads | HALO20+ radar, USB charger, LED cabin and navigation lights, Raspberry Pi, NKE electronics, and NKE autopilot |
 | Network | Wireless client of a Signal K server; no NMEA 2000/CAN hardware required |
-| Network power | Signal K host, Wi-Fi access point, or both are powered through eswitch; exact channel/module assignments remain to be identified |
+| Software | Owner writes the code; current Signal K and WilhelmSK are the intended ecosystem. No custom server-plugin architecture is mandated by this hardware proposal. |
+| Network power | Server/access-point feeds supplied through eswitch stay in passive BYPASS so the network can start independently |
 | Local control inputs | None |
 | Bypass protection | Physical fuse only is acceptable, including possible supply disturbance while a fault clears |
 | Fuse transfer | The affected load may lose power; **other channels must stay powered** |
 | Fuse-transfer duty | Occasional emergency recovery, not routine manual switching |
 | Controller restarts | Outputs may turn off during an MCU restart or firmware update, including navigation lights and autopilot |
+| Startup state | All electronic outputs OFF, with no output-state memory or automatic ON-at-boot exceptions |
 | Ignition protection | Not required |
 | Paralleled outputs | Not required; do not implement |
 | Build | Three units, assembled by the owner using a hot-air soldering station |
+| Installation and enclosure | Dry interior; owner designs and prints a passively cooled, ventilated case, with $0 enclosure procurement allowance |
+| Materials target | Below $150 per board and components, excluding the owner's printed case |
+| Test equipment | DMM preferred aboard; oscilloscope available at the home bench |
 | Publication | Likely open source; licensing and publication timing remain undecided |
 
 Propose making all twelve channels capable of 10 A, with lower configurable
 trip settings for smaller loads. This does **not** mean 120 A simultaneously.
-The aggregate current requirement is still unknown. Retain **75 A only as a
-provisional sizing and cost assumption**, not an owner-confirmed requirement.
+Use **40 A aggregate as the revised design envelope**, replacing the earlier
+75 A assumption. This is confirmed as continuous hardware capability, not simply
+the upstream fuse's nominal rating. Select the feeder fuse and wiring accordingly.
 
 Use one integrated protection/driver/current-monitor IC and two opposing MOSFETs
 per channel. Use a shared ADC, one Wi-Fi module, direct wire terminals, an external
-negative bus, and a stock enclosure. The final power-stage choice remains subject
-to a complete comparison against integrated smart switches once loads are known.
+negative bus, and the owner's printed enclosure. The final power-stage choice
+remains subject to a complete comparison against integrated smart switches once
+loads are known.
 
-**Preliminary materials allowance: about $180–300 per unit in a three-unit build,
+**Preliminary board materials allowance: about $160–260 per unit in a three-unit build,
 plus any extra cost of a qualified live fuse-transfer mechanism.** This is not a
 complete quotation. The live-transfer requirement is now the main unresolved
 mechanical issue; section 4 explains why a cheap fuse-clip assembly is not yet
 an established solution.
 
+**The current allowance does not yet meet the owner's below-$150 target.**
+Rework the component and PCB cost before selecting a BOM, including a full
+integrated-smart-switch comparison. Do not claim savings from the enclosure twice
+or remove the agreed protection merely to make the subtotal fit.
+
 The old eight-channel hardware remains only in Git history at `d1de4a6`. Revision
 0.1 of this proposal is in commit `ad722bb`. Neither is the hardware specification
 for this revised design. No new hardware is released for fabrication.
 
-## 2. Remaining questions
+## 2. Requirements review outcome and later verification
 
-There is no need to repeat the answered questions. The following affect the next
-engineering decisions; detailed load information can arrive later as planned.
+**No further owner decisions are needed for this design brief.** Software
+implementation, dashboard integration, and enclosure design belong to the owner.
+Detailed load information remains deferred as previously agreed. This closes the
+requirements interview, not the component qualification or fabrication review.
 
-| Priority | Question | Recommendation / consequence |
+The following facts and measurements remain necessary at later stages. They are
+not invented specifications or outstanding requests for another design decision.
+
+| Stage | Information / work still needed | Effect |
 |---|---|---|
-| 1 | **Which Signal K server implementation/version and control dashboard will you use? Can it run a small eswitch server plugin?** | Propose the Node.js Signal K server with an open-source plugin that handles switching commands and telemetry. Dashboard choice can follow. |
-| 2 | **Which modules/channels power the Signal K host and access point, and is the listed Pi the Signal K host?** | One or both are confirmed to use eswitch. Identify their feeds so each can be commissioned for local automatic startup and intentional network interruption. No separate power supply is required by this proposal. |
-| 3 | **What simultaneous current should each module support?** | Keep the provisional 75 A envelope until the load list arrives. Reducing this may save more than changing the Wi-Fi MCU. |
-| 4 | **Does “NKE autopilot” include the drive motor, or only its instruments/computer? Which model?** | A 10 A channel cannot be assumed to support an unspecified drive's startup/stall current. Keep an oversized drive on its own protected feed if necessary. |
-| 5 | **Which cabin-light circuits actually need dimming, and are their LED drivers supply-PWM compatible?** | Retain dimming capability; default all equipment and navigation lights to ON/OFF. Do not PWM a charger, radar, Pi converter, or autopilot supply. |
-| 6 | **Where will the modules live: dry locker, damp/splash area, or enclosed metal cabinet? What enclosure size is practical?** | No ignition requirement does not establish water exposure or Wi-Fi coverage. A dry location and antenna clearance are preliminary assumptions. |
-| 7 | **What is the materials budget per finished unit?** | Current allowance excludes any live-transfer mechanism premium, external wiring, tools, shipping, and labor. |
+| Before final input/fuse selection | Battery/BMS and MPPT details, charging limits, available fault current, feeder length/gauge, fuse characteristics | Establish the actual operating/transient envelope and protection coordination. Battery capacity alone does not determine fault current. |
+| Before approving individual loads | Models, input converters, operating/inrush/stall currents, cable runs, and manufacturer fuse recommendations | Verify compatibility with the 10 A channel and chosen fuse; do not assume an unspecified autopilot motor or LED driver is suitable. |
+| Before final enclosure | Board dimensions, mounting/access clearances, measured losses/temperatures, and a suitable printing material | Give the owner requirements for the agreed passive, ventilated case. No firm size limit has been imposed. |
+| Before power testing | Suitable protected bench supply and test loads, in addition to the confirmed scope and DMM | Define and obtain/borrow the equipment needed for qualification; ownership of this equipment is not assumed. |
 
-Before selecting final protection values, collect minimum operating/charging
-voltage, hot ambient temperature, feeder and battery fault-current information,
-wire lengths/gauges, and manufacturer fuse recommendations. For the Pi and USB
-charger, include the **12 V input converter** model and input current. The board
-switches their 12 V supply; it does not supply a Pi directly with 12 V or include
-twelve regulated USB outputs.
+Minimize radio/logic idle consumption and report the measured value; no numerical
+standby-current limit has been specified. Licensing and publication remain with
+the owner and do not block this hardware proposal.
+
+The board switches 12 V inputs to the Pi converter and USB charger. It does not
+supply a Pi directly with 12 V or include twelve regulated USB outputs. Retain
+PWM capability for compatible lights, but use ON/OFF for other electronics and
+navigation lights unless their manufacturer explicitly supports supply PWM.
 
 ## 3. What is retained from the reference products
 
@@ -85,7 +103,7 @@ opposing MOSFETs and hardware protection; those principles remain useful.
 | Current measurement | Each AUTO channel; target 0.1 A reporting resolution and approximately ±0.5 A or better over the useful range, subject to calibration |
 | Programmable electronic protection | Per-channel trip threshold and timing within qualified hardware limits |
 | Dimming | Target 200 Hz, 5–100% with 1% command steps, plus true OFF; only enabled for suitable lighting |
-| Power-up behavior | Local OFF/ON/previous-state configuration, with fault state taking priority |
+| Power-up behavior | All electronic outputs OFF; no previous-state memory. Network feeds remain in passive BYPASS. |
 | Command locks and status | Implement in firmware and the Signal K interface |
 | Fault isolation | Hardware shutdown of the faulty AUTO channel, independent of firmware |
 | Manual recovery | Integrated passive fuse bypass; live branch transfer must be engineered |
@@ -254,8 +272,9 @@ Six [TPS2HCS10-Q1 dual smart switches](https://www.ti.com/product/TPS2HCS10-Q1)
 can reduce component count by integrating switches, sensing, PWM, and protection.
 Compare their **complete** cost, including output reverse blocking, heat removal,
 and fault interaction between channels in one package. The new 10 A maximum
-makes this comparison more attractive, but total simultaneous current is still
-unknown. Do not select on IC price alone or silently discard reverse blocking.
+makes this comparison more attractive. The 40 A aggregate requirement and
+below-$150 target require a complete cost comparison.
+Do not select on IC price alone or silently discard reverse blocking.
 
 ## 6. Wi-Fi controller and Signal K integration
 
@@ -290,101 +309,48 @@ not simply to save a few dollars on this build.
 This module switches the power feeds of the radar and NKE equipment. It does
 not implement their radar-data, instrument-data, or autopilot-steering interfaces.
 
-### Proposed software connection
+### Firmware ownership and hardware interface
 
-```mermaid
-flowchart LR
-    UI[Chosen dashboard] -->|Switch request| SK[Signal K server and eswitch plugin]
-    E[ESP32 Wi-Fi client] <-->|Authenticated WebSocket| SK
-    E -->|Local command| P[Protected outputs]
-    P -->|Current, voltage, faults| E
-```
+The owner will write the firmware and Signal K integration, using the current
+Signal K release and WilhelmSK. This proposal does not prescribe a server plugin,
+application protocol, provisioning interface, or dashboard implementation.
+Deliver a documented hardware interface: channel PWM/enable, fault status and
+explicit latch reset, current/voltage/temperature measurement, and programming
+and recovery connections.
 
-Have each module open an outbound connection to a small open-source Signal K
-server plugin. The plugin registers switching command handlers and translates
-telemetry into Signal K deltas. This is a proposed application protocol on a
-plugin endpoint; a generic telemetry-only Signal K client is not automatically
-a remotely controllable actuator. Confirm compatibility with the installed
-server version before implementing it.
+**All electronic outputs default OFF after restart; no output-state memory or
+previous-state restoration.** Hardware pulldowns and gate control enforce OFF
+through reset and boot. This does not prohibit storing Wi-Fi credentials or
+configuration in the owner's firmware. BYPASS remains powered independently.
 
-Signal K distinguishes **PUT commands** from **state-update deltas**. The plugin
-must wait for a device acknowledgement or a bounded timeout rather than report
-success because the server's data model changed. Use the documented
-[PUT semantics](https://signalk.org/specification/1.7.0/doc/put.html) and
-[request/response states](https://signalk.org/specification/1.7.0/doc/request_response.html).
-Keep desired state, acknowledged switch state, and measured output voltage
-separate. A passive bypass or external feed can make an output live while its
-AUTO switch is OFF.
+Hardware fast-fault latches must survive an MCU-only reset and must not be cleared
+by PWM transitions. Loss of all logic power may clear volatile latch state, but
+outputs still restart OFF; a deliberate new enable is needed. Nonvolatile output
+or fault-history storage is not required to enforce this startup policy.
 
-Use stable module IDs plus channel IDs so three modules do not overwrite each
-other. Map them to paths such as `electrical.switches.<stableChannelId>.state`;
-validate exact paths/types against the deployed schema. Store human circuit
-names separately. Include request IDs, reject stale or duplicate operations,
-bound reconnection queues, and do not replay historical ON/OFF commands after
-an outage. Publish a fresh state snapshot before accepting a new command session.
+Wi-Fi/Signal K loss by itself leaves the last commanded state unchanged, with
+local protection active. Restarting the MCU interrupts AUTO outputs and leaves
+them OFF until commanded. Exact command handling, alarms, dimming controls, and
+configuration UI belong to the owner.
 
-Authenticate devices and authorized control clients; use TLS with provisioned
-server trust where available. The
-[Signal K plugin guide](https://demo.signalk.org/documentation/Developing/Plugins.html)
-explicitly assigns authentication of plugin WebSocket endpoints to the plugin.
-Do not assume registering an endpoint secures it. Signal K's
-[access-request mechanism](https://signalk.org/specification/1.7.0/doc/access_requests.html)
-can support enrollment where the chosen server permits it. Credentials remain
-local and are excluded from open-source releases.
+### Network power and cold startup
 
-Provide USB/service recovery and local Wi-Fi provisioning. Normal operation is
-Wi-Fi station mode; no cloud service or Internet connection is needed. Support
-OTA with image verification and rollback. Updating/rebooting may interrupt AUTO
-outputs, as accepted; an OTA operation must be deliberate and its interruption
-shown before it starts. BYPASS continues through an ESP32 restart.
+**Keep the eswitch-fed server/access-point circuits in passive BYPASS.** They
+receive power whenever the feeder is energized, allowing the network to start
+while every AUTO output stays OFF. There are no ON-at-boot exceptions and no
+remembered output states. This also keeps those network feeds powered through
+an ESP32 reboot or firmware update without extra retention hardware.
 
-### Operating policy
+These bypassed feeds have physical-fuse protection and cannot be turned OFF,
+power-cycled, or measured through their AUTO current shunts while in BYPASS.
+Removing their fuse disconnects that feed; switching off the module feeder
+disconnects all of its loads. Routine recovery does not require moving a fuse
+back and forth to bootstrap the network. Other channels still use fuse transfer
+for occasional emergency recovery. No physical switch inputs are planned.
 
-| Event | Proposed behavior |
-|---|---|
-| Wi-Fi, server, or plugin disconnected | Hold the last commanded AUTO state; local protection remains active. Mark telemetry unavailable/stale. |
-| Connection restored | Report current state and faults; do not blindly apply a cached server state. |
-| ESP32 reset, watchdog trip, or firmware update | AUTO outputs OFF during restart; BYPASS unaffected. |
-| Successful boot | Apply each channel's stored OFF/ON/previous-state policy locally without waiting for Signal K; stagger starts where needed. |
-| Commissioned server/access-point supply | Use local ON-at-boot policy, with protection taking priority. These channels must not depend on a network command or a persisted previous-OFF state to recover after a restart. |
-| Invalid settings or unfinished commissioning | Default AUTO outputs OFF. |
-| Channel fault | Latch off; do not reinterpret it as an ordinary command or automatically restart it. |
-| Known fault before restart | Do not restore it as “previous ON”; define persistent fault/state storage and test interrupted writes. |
-
-Maintain command locks, names, trip curves, dimming settings, state persistence,
-and fault logs. Store versioned configuration with integrity checks. Protection
-always overrides a command lock. Software may shed AUTO loads against a configured
-budget, but cannot enforce the total when passive BYPASS channels are active.
-
-### Boot and service when eswitch powers the network
-
-The Signal K host, access point, or both **will be powered through eswitch**.
-Identify their module/channel assignments during commissioning and set those
-channels to local ON-at-boot, independent of Wi-Fi association or a server
-connection. Allow outputs to start before networking completes. Each module
-must recover independently, even when another module powers the network.
-Fault protection still takes priority; a faulted infrastructure channel must not
-retry indefinitely to restore connectivity.
-
-Ordinary dashboards should lock these feeds against accidental OFF commands.
-Provide an explicit maintenance action for deliberate shutdown. If a remote
-power cycle is wanted, the module must first accept the whole timed OFF/ON
-operation and execute it locally; never rely on a second command reaching a
-powered-off server or access point. A latched fault cancels the planned restart.
-Persisted commissioning settings identify these feeds; uncommissioned or corrupt
-settings still default OFF and require local service or passive bypass.
-
-An ESP32 restart may interrupt these feeds, as accepted. For OTA, receive and
-verify the complete image locally before rebooting; boot, rollback, and load
-restoration must work with the server/access point unavailable. Tell the user
-which network services will drop before starting maintenance, and report final
-status after reconnection. Qualified passive BYPASS can keep a selected network
-feed on through controller maintenance; USB service remains available offline.
-
-If the Pi runs Signal K, define a graceful host shutdown/restart procedure before
-planned power interruptions. A simple output delay is not proof that its OS has
-shut down; watchdog resets or loss of battery power can still interrupt it.
-Power switching alone does not provide graceful OS shutdown.
+The hardware switches power; it does not provide graceful Pi shutdown. Software
+and planned maintenance sequencing belong to the owner. USB programming/recovery
+and passive BYPASS remain available when the control network is unavailable.
 
 ## 7. Fuses, aggregate current, and mechanics
 
@@ -409,19 +375,21 @@ fault and manually extracting a loaded fuse are different duties.
 | Internal power-bank short | AUTO service fuse/feeder coordination and manual isolation govern recovery. |
 | Reversed battery or sustained overvoltage | AUTO protection works within its specified envelope; BYPASS exposes its load to the raw feed. |
 
-With twelve 10 A channels, the sum of individual maxima is **120 A**. Neither
-simultaneous capacity nor feeder sizing follows from that sum. For the provisional
-75 A assumption, the greatest sum of squared branch currents is 725 A²: seven
-10 A loads and one 5 A load. With an assumed 6 mΩ of hot MOSFET resistance plus
-a 3 mΩ shunt per path, that is **6.53 W** in channel MOSFETs/shunts. A further
-1 mΩ common-feed resistance adds **5.63 W**; a hypothetical average 0.1 V fuse
-drop adds **7.5 W**. These are illustrative calculations, not measured losses.
+With twelve 10 A channels, the sum of individual maxima is **120 A**. The proposed
+aggregate limit is **40 A**, including mixed AUTO/BYPASS and all-BYPASS operation.
+For 40 A total, the greatest sum of squared branch currents is 400 A²: four 10 A
+loads. With an assumed 6 mΩ of hot MOSFET resistance plus a 3 mΩ shunt per path,
+that is **3.6 W** in channel MOSFETs/shunts. A further 1 mΩ common-feed resistance
+adds **1.6 W**; a hypothetical average 0.1 V fuse drop adds **4 W**. These are
+illustrative calculations, not measured losses; the 9.2 W sum excludes logic and
+any additional protection, terminal, or interconnect losses.
 
-Reserve approximately **20–30 W of heat-removal capacity** in early mechanical
-planning if retaining 75 A. Replace these assumptions with maximum component
-and connection losses. Propose qualification at 55°C ambient, pending the actual
-installation. Reducing aggregate current could substantially reduce the enclosure
-and copper needed.
+Use roughly **10–15 W as an initial heat-removal planning allowance**, then replace
+it with maximum component and connection losses. Propose qualification at 55°C
+ambient as an engineering target; validate the actual installation and choose
+printed-case material against measured temperatures. The reduction from 75 A
+substantially reduces shared-path heating but does not remove the need
+to qualify the enclosure and individual 10 A channels.
 
 Start with a four-layer PCB, 2 oz outer copper, and a mechanically anchored copper
 bus strip where economical. Support power terminals independently of solder
@@ -430,9 +398,11 @@ backplate with a larger PCB while preserving Wi-Fi antenna clearance.
 
 Keep two accessible rows of six fuse positions as a layout objective. Initial
 PCB space allowance remains around 250 × 150 mm, subject to the live-transfer
-mechanism; do not lock this footprint now. Include an insulating shroud, clear
-AUTO/BYPASS markings, unused-contact guards, and fuse parking. Conformal coating
-does not waterproof contacts or establish an ingress rating.
+mechanism; do not lock this footprint now. Supply the owner with final dimensions,
+mounting points, wire/fuse access clearances, ventilation needs, and temperature
+limits for the printed case. Include an insulating shroud, clear AUTO/BYPASS
+markings, unused-contact guards, and fuse parking. Conformal coating does not
+waterproof contacts or establish an ingress rating.
 
 Use footprints suitable for stencil paste and hot air: castellated radio module,
 lead-accessible controller packages, sensible passive sizes, and power packages
@@ -449,7 +419,8 @@ protection, off-state reverse blocking, and adequate contact/copper quality.
 
 Estimated USD **per unit**, using quantities appropriate to buying parts for
 three units. Each BOM will still list installed quantities for one module.
-These allowances assume the provisional 75 A envelope.
+These allowances use the revised 40 A envelope. Most per-channel electronics
+costs remain unchanged; shared copper and terminals may offer further savings.
 
 | Item | Installed per module | Allowance |
 |---|---|---:|
@@ -464,13 +435,15 @@ These allowances assume the provisional 75 A envelope.
 | Logic power, ADC/multiplexing, indicators, service connection | Shared | $10–18 |
 | Power/output terminals and copper bus | One set | $15–28 |
 | PCB | One board allocation | $15–30 |
-| Basic enclosure, shroud, supports, hardware | One set | $20–40 |
-| **Base materials subtotal** | **Rounded allowance: $180–300 per unit** | **$176.50–296** |
+| Printed case and printed guards/supports | Supplied by owner | $0 |
+| **Base board materials subtotal** | **Rounded allowance: $160–260 per unit** | **$156.50–256** |
 | **Live-transfer mechanism premium / extra qualification** | **Unresolved** | **TBD** |
 
-The base allowance for three units is roughly **$540–900**, **plus the unresolved
-live-transfer cost**. This supersedes the earlier $200–330 single-unit estimate;
-it must not be quoted as a completed, qualified product price.
+The base allowance for three units is roughly **$480–780**, **plus the unresolved
+live-transfer cost**. The printed enclosure has no procurement allowance at the
+owner's request; any nonprinted mounting hardware or special carrier parts must
+still be counted in the final BOM. This supersedes earlier estimates and must
+not be quoted as a completed, qualified product price.
 
 Price anchors reviewed on 20 September 2026:
 
@@ -489,32 +462,34 @@ excluded. PCB minimum orders can increase cash outlay. Antenna changes or a more
 substantial fuse carrier may increase the enclosure/interface cost.
 
 Likely open-source publication favors public component documentation, ordinary
-KiCad files, reproducible firmware/plugin builds, and available parts. Prepare
-those artifacts as the project develops, but choose hardware, firmware, and
-plugin licenses before publishing; no license or publication action is assumed
-from “most likely.”
+KiCad files and available parts. Firmware and integration are the owner's work.
+License selection and publication timing remain with the owner and do not block
+the hardware proposal; no license or publication action is assumed from “most
+likely.”
 
 ## 9. Next engineering work
 
 1. Select and qualify a live-transfer contact mechanism for occasional emergency
-   use. Identify the server/network feed assignments and Signal K software target;
-   establish the eventual aggregate load requirement when load details arrive.
+   use. Cost the complete 40 A design against the below-$150 target, with the
+   owner's printed case excluded. Requirements decisions are recorded above.
 2. Define the actual voltage and fault envelope; calculate fuse coordination,
    inrush, inductive suppression, MOSFET safe operating area, and hot losses.
    Compare the complete integrated-smart-switch alternative before BOM selection.
 3. Prototype one power channel **and its transfer mechanism**. Test load-making,
    load-breaking, bounce, wear, fault latch persistence during PWM/reboot, and
    backfeed isolation before routing twelve copies.
-4. Verify a Signal K command/acknowledgement/telemetry round trip with a bench
-   device, three unique module identities, network loss/reconnect, and stale
-   command rejection. Keep this separate from power-stage qualification.
+4. Publish the pin map, measurement scaling/calibration, fault/reset behavior,
+   PWM constraints, and programming connections for the owner's firmware.
+   Coordinate a minimal hardware exercise with the owner before integration;
+   Signal K protocol and dashboard implementation are outside this hardware work.
 5. Develop the schematic, one-module BOM, PCB, and assembly procedure; build and
    validate one board, then assemble the other two.
 6. Test admitted simultaneous loads, all-BYPASS heating, startup into faults,
    mixed AUTO/BYPASS startup, live transfer with healthy channels loaded, Wi-Fi
-   burst interference, MCU restart, OTA interruption/recovery, and cold startup
-   of all three modules with the host/access point initially unpowered. Verify
-   local network-feed power cycles and fault handling without server assistance.
+   burst interference, MCU restart, and cold startup of all three modules with
+   their AUTO outputs OFF and network feeds powered through BYPASS. Verify that
+   MCU programming/restarts leave bypassed feeds operating. Confirm that a
+   hardware fault remains latched during PWM and an MCU-only reset.
 
 This revision records the owner's decisions and the resulting design changes.
 It does not claim that the new live-transfer mechanism, continuous-current
