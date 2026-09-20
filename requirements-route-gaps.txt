@@ -1,2 +1,0 @@
-# Compatible with KiCad 10's embedded Python 3.11.
-numpy==1.26.4

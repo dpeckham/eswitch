@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Shim: the KiCad AppImage dispatches to bundled tools by first argument.
-exec kicad kicad-cli "$@"
