@@ -411,6 +411,10 @@ Validate one assembled board before populating the other two.
 
 ## 8. Cost decisions and preliminary budget
 
+See the [cost breakdown and design choices](cost-review.md) for the price anchors,
+component-level comparisons, and quantified options. Those options are not yet
+changes to the agreed twelve-channel design.
+
 The confirmed savings are removal of CAN hardware/connectors, seven input
 circuits and their connector, and all paralleling support. Wi-Fi replaces the
 MCU rather than adding a second processor. Use shared measurement, inexpensive
