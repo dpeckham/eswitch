@@ -3,7 +3,7 @@
   "source_sha256": "aaf975bd192d32276b6941e4ddb6f7eb239e03d23213d66f63b2679f250cea11",
   "figure": 3,
   "page_1_based": 4,
-  "method": "Vector paths extracted from the black solid curves labelled DC, 100 ms, 10 ms, 1 ms; graph calibration x=93.6+204*log10(V), y=252.37898-40*log10(A). Published caption Tmb=25 C. Red curves are not used.",
+  "method": "Vector paths extracted from the black solid curves labelled DC, 100 ms, 10 ms, 1 ms, 100 us, 10 us; graph calibration x=93.6+204*log10(V), y=252.37898-40*log10(A). Published caption Tmb=25 C. Red curves are not used.",
   "temperature_method": "AN50006 current scaling k=(175-Tmb)/150; additional 10% graphical-reading reserve",
   "mounting_base_limit_c": 60,
   "curves": {
@@ -249,6 +249,46 @@
           "id_25c_a": 58.1971113170203,
           "id_60c_with_10pct_reserve_a": 40.156006808744
         }
+      ]
+    },
+    "100us": {
+      "vector_points_v_a": [
+        [
+          0.8331732788621197,
+          190.65566880838486
+        ],
+        [
+          5.2197182204356505,
+          1194.6741409709045
+        ],
+        [
+          79.99966520113408,
+          77.93811371237416
+        ]
+      ]
+    },
+    "10us": {
+      "vector_points_v_a": [
+        [
+          0.8331732788621197,
+          190.65566880838486
+        ],
+        [
+          5.912412789457049,
+          1352.8497163750408
+        ],
+        [
+          10.979644007435065,
+          1352.8497163750408
+        ],
+        [
+          20.38973686339091,
+          1352.8497163750408
+        ],
+        [
+          79.99966520113408,
+          344.7462532743298
+        ]
       ]
     }
   }

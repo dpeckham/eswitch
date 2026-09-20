@@ -89,14 +89,17 @@ def main():
         os.remove(SES)
     # Hide the outer GND pours while routing so freerouting drops real vias to the GND plane
     # for every GND pad instead of assuming the pour connects them.
-    hidden = [z for z in b.Zones() if z.GetNetname() == "GND" and z.GetLayer() in (pcbnew.F_Cu, pcbnew.B_Cu)]
+    # DSN exports zone outlines, not KiCad's priority-subtracted fill. Keep only
+    # the dedicated In1 ground plane; outer/In2 ground outlines otherwise cover
+    # and conflict with all power-plane outlines in the router's geometry.
+    hidden = [z for z in b.Zones() if z.GetNetname() == "GND" and z.GetLayer() != pcbnew.In1_Cu]
     for z in hidden:
         b.Remove(z)
     # Temporary keep-out rule areas over every explicit power zone (VS*, LOAD*, +12V) so the
     # router cannot cut them with foreign tracks or vias. Removed again after import.
     keepouts = []
     for z in list(b.Zones()):
-        if z.GetNetname().removeprefix("/").startswith(("VS", "LOAD", "+12V", "BATT_RAW", "BATT_MID")):
+        if z.GetNetname().removeprefix("/").startswith(("VS", "LOAD", "+12V", "BATT_RAW", "BATT_MID", "BATT_SENSE", "CHFEED", "BR_SENSE")):
             k = pcbnew.ZONE(b)
             k.SetIsRuleArea(True)
             k.SetDoNotAllowTracks(True)
@@ -142,19 +145,32 @@ def main():
     print("temporary keepouts:", len(keepouts))
     # drop any previous auto-routed tracks/vias (keep the explicitly generated ones: width 0.5 mm stubs)
     pcbnew.ExportSpecctraDSN(b, DSN)
+    if os.environ.get('ROUTE_SKIP_GROUND'):
+        # Ground pads already use reviewed pours; remaining ground islands are
+        # handled by the native checked stitching pass. Omit only their pin
+        # connectivity from this router job, retaining all existing obstacles.
+        # The actual KiCad pad nets and ground copper are never changed.
+        import re
+        doc,count=re.subn(r'(\(net GND\s*)\(pins [^()]*\)',r'\1',open(DSN).read())
+        assert count==1,'Expected one explicit ground pin list in Specctra network'
+        open(DSN,'w').write(doc)
     import shutil
     java = shutil.which("java")
     if java is None:
         r0 = subprocess.run(["mise", "which", "java"], cwd=ROOT, text=True, capture_output=True)
         java = r0.stdout.strip() or "java"
-    cmd = [java, "-Xmx2g", "-XX:ActiveProcessorCount=2", "-jar", JAR, "--gui.enabled=false", "-de", DSN, "-do", SES, "-mp", str(passes),
+    cmd = [java, "-Xmx1g", "-XX:ActiveProcessorCount=1", "-jar", JAR, "--gui.enabled=false", "-de", DSN, "-do", SES, "-mp", str(passes),
            "-mt", "1", "--router.layers.routable=true,false,true,true"]
+    if os.environ.get('ROUTE_KEEP_GROUND'):
+        cmd += ['--router.fanout.enabled=false', '--router.optimizer.enabled=false']
     print(" ".join(cmd))
-    r = subprocess.run(cmd, cwd=os.path.join(ROOT, "out"), text=True, capture_output=True)
-    tail = "\n".join(l for l in r.stdout.splitlines() if "nalytics" not in l)[-3000:]
+    log_path=os.path.join(ROOT, 'out', 'freeroute-revision-c.log')
+    with open(log_path,'w') as log:
+        r = subprocess.run(cmd, cwd=os.path.join(ROOT, "out"), text=True, stdout=log, stderr=subprocess.STDOUT)
+    tail = "\n".join(l for l in open(log_path).read().splitlines() if "nalytics" not in l)[-3000:]
     print(tail)
     if not os.path.exists(SES):
-        print("freerouting produced no session file"); print(r.stderr[-2000:])
+        print("freerouting produced no session file"); print(tail[-2000:])
         sys.exit(1)
     if not pcbnew.ImportSpecctraSES(b, SES):
         print("SES import failed"); sys.exit(1)

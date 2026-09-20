@@ -1,4 +1,4 @@
-# Revision B validation and production acceptance
+# Revision C validation and production acceptance
 
 Status: **not performed**. These tests require assembled hardware, instruments
 and a defined test fixture. Passing the saved-board CAD checks does not satisfy
@@ -6,16 +6,38 @@ them. Start with one assembled board; use the other two after the first passes.
 The test record must identify PCB/schematic hashes, fitted MPNs, firmware version,
 fixture protection, wiring, load models, ambient and measured waveforms.
 
+## Required channel-isolation acceptance for revision C
+
+With the revision-C circuit and a protected fault-test fixture,
+exercise each output in AUTO and BYPASS, with mixed healthy-channel settings.
+Include a short already present at power-up, a short applied during operation,
+and persistent resistive overloads. Repeat across the specified supply/load and
+temperature corners, including the maximum admissible healthy aggregate load.
+
+Capture branch current, shared-bus voltage, main/branch gate and fault signals,
+and 3V3/reset together. Pass requires the faulty branch to isolate without a
+shared protection latch, ESP32 reset, healthy-output shutdown or interruption of
+representative healthy loads. Record bus dip magnitude/duration against those
+loads' operating limits; no main latch alone is insufficient evidence.
+
+Verify hardware protection with firmware stopped and during MCU reset. Verify
+that the faulty branch remains latched and can be reset locally without cycling
+healthy outputs; a persistent short must trip it again. Otherwise admissible
+healthy loads must start when a different branch is shorted at power-up.
+Use the staged laboratory restrictions below; these are required tests, not
+a substitute for a protected fault-test fixture.
+
 ## Prototype release and initial limits
 
 [Prototype release](prototype-release.md) records the completed design screen,
 physical-fit confirmation and CAD/CAM basis for ordering. The startup validation
-target is 9.5–16 V, at most 220 µF actual total bus/load capacitance and either a
-20 A full-voltage resistor plus at most 2 A auxiliary current, or a 5 A aggregate
-active-current bound. Include the board's logic demand; measure it, since a fuse
-value does not guarantee a current ceiling. Initial TIMER must be at or below
-1.04 V for the success screen. Larger loads may start or latch; 20 A is not a
-precise trip threshold. Full-40-A startup is not required.
+target is 9.5–16 V, with 1000 µF maximum actual load capacitance per channel plus
+a full-voltage resistive load of 10 A on CH1/2/8 or 5 A on CH3–7. CH8's lower
+startup allowance does not change its 20 A fuse ceiling. The combined steady-load
+target remains 40 A. Electronic and constant-power loads require their own checks.
+The shared bus has 2880 µF nominal reservoir capacitance; MAIN_PG_N delays branch
+enable until that reservoir charges. Verify the PG interlock and all local resets.
+Initial TIMER must be at or below 1.04 V for the residual-time startup screen.
 
 Follow the [clamp review's staged laboratory procedure](input-clamp-review.md).
 Initially use a protected bench source, no external inductive loads and no live
@@ -32,12 +54,12 @@ energy. Review a high-current energized-short fixture before using it.
 
 ## Assembly inspection and logic
 
-1. Check the 253 x 75 mm outline, finished holes and all connector/fuse footprints
+1. Check the 334 x 172 mm outline, finished holes and all connector/fuse footprints
    against real parts and the 1:1 drawings. Confirm one fuse per three-clip cell;
    J1/J6–J12 pin 1 is GND and pin 2 is LOAD+. Check all nine pins of each input
    terminal and support the ESP32 overhang.
-2. Inspect solder joints and polarity before power. U1–U8 thermal pads are VS;
-   U9 PGND/output pads follow its separate land pattern. Q3/Q4 mounting bases
+2. Inspect solder joints and polarity before power. U1–U8 thermal pads are VS, including their thermal vias;
+   U21–U28 local controller grounds and clamps must be correct. U9 PGND/output pads follow its separate land pattern. Q3/Q4 and Q11–Q18 mounting bases
    are drains. Do not infer continuity from a 3D picture.
 3. Use a current-limited bench supply and external fixture protection. Start
    without branch fuses or external loads. Measure VIN and 3V3; confirm reset,
@@ -105,3 +127,16 @@ recorded bench, fault, USB and thermal results above, a defined operating/load
 rating, assembly inspection criteria and a functional check for each built board.
 `docs/release-status.json` must distinguish these two decisions. No test results
 or production rating exist yet.
+
+## Revision C monitoring and probe map
+
+Use TP1 ground; TP2/3 raw/intermediate battery; TP4/5 Kelvin VCC/SENSE;
+TP6 common TIMER; TP7 common gate; TP8 shared bus; TP9 VIN; TP10 3V3;
+TP11 IMON; TP12 common FLT; TP13 common PG; TP14 branch enable;
+TP15 ADC_IMON; TP16 ADC_BUS. TP17–24 are branch TIMER1–8.
+
+Update firmware IN1 to IO15 before AUTO tests. ADC IO5 is IMON, IO7 is bus;
+nominal scaling is 24 mV/A and 0.08 V/V. Calibrate against an external meter.
+Common fault is IO42; local faults use IO16/17/18/35/36/37/39/40.
+Check fault reporting with no load and during MCU reset. Hardware isolation must
+still work when reporting firmware is absent.

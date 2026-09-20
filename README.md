@@ -3,16 +3,21 @@
 ESP32-S3 controlled high-side switch with one ATO fuse per channel. Each three-clip
 holder accepts a fuse in AUTO (through the PROFET) or BYPASS (direct to the load).
 
-The **253 × 75 mm revision-B layout is now in the main KiCad project**. The
-latch-off input stage, schematic and PCB are reconciled. See the current
-[release record](docs/release-status.json) and [work completed](docs/pcb-resume-handoff.md).
+The main KiCad project contains the **334 × 172 mm revision-C design**, with an
+independent hardware latch in each channel ahead of both fuse positions. A short
+is handled locally; healthy outputs and logic retain their shared supply. See
+[circuit and limits](docs/channel-isolation-review.md), the authoritative
+[release status](docs/release-status.json), and [BOM cost per board](docs/bom-cost.md).
 
-**Ready to order three prototype PCBs.** The [prototype release](docs/prototype-release.md)
-records the startup/SOA screen, controlled bench limits and owner-confirmed
-physical fit. Use [the released package](fab/revision-b/eswitch-revB-gerbers.zip)
-and [per-board BOM](fab/digikey/eswitch-digikey-bom.csv). Assemble one first.
-Production qualification and the measured 40 A continuous rating require the
-[bring-up and thermal tests](docs/bring-up.md).
+**Revision C is released for prototype fabrication.** Use the
+[bare-board upload ZIP](fab/revision-c/eswitch-revC-gerbers.zip) and
+[complete build package](fab/revision-c/eswitch-revC-build-package.zip).
+[Order settings and release evidence](fab/revision-c/README.md) accompany them.
+ERC, DRC including warnings, routing and schematic parity are all clean;
+29 transient cases pass. Bench qualification remains required before service.
+
+The revision-B fabrication release is withdrawn. Its historical ZIP does not
+implement the new fault-isolation requirement.
 
 | Item | Requirement |
 |---|---|
@@ -22,7 +27,7 @@ Production qualification and the measured 40 A continuous rating require the
 | Main fuse | Upstream protection; no onboard main fuse; F9 is logic-only, maximum 2 A |
 | Outputs | Eight Wuerth 691218410002 direct-entry blocks; pin 1 GND, pin 2 LOAD+ |
 | Inputs | Two Wuerth 74650195 M5 ring-lug terminals |
-| PCB | 253 × 75 mm, JLCPCB JLC041622-3313, four layers, 2 oz outer/inner, 1.6 mm nominal, ENIG |
+| PCB | 334 × 172 mm, JLCPCB JLC041622-3313, four layers, 2 oz outer/inner, 1.6 mm nominal, ENIG |
 | Assembly | Three boards, manual paste + hot air/hot plate; validate one first |
 | Procurement | Exact DigiKey MPNs; dated stock is not a reservation and must be refreshed |
 
@@ -44,15 +49,16 @@ python3 -m unittest discover -s tools -p 'test_*.py'
 
 `out/verification/manifest.json` binds verification results to the exact source
 files and report hashes, including the engineering release documents. The
-released prototype ZIP is under `fab/revision-b/`. `out/review/` retains an
-unreleased review snapshot; do not upload that older ZIP. `fab/legacy-f76c39e/` and the old OSH Park upload are obsolete.
+withdrawn prototype ZIP is retained under `fab/revision-b/` for traceability.
+`out/review/` retains an unreleased review snapshot; do not upload it.
+`fab/legacy-f76c39e/` and the old OSH Park upload are obsolete.
 No order or purchase has been made.
 
 The saved PCB is the authoritative routed design. `just pcb` now creates an
 **unrouted candidate under out/**. `just libs` and `just sch` are explicit source
 regeneration operations. Checked finish/routing tools replace the old revision-A
 coordinate patches in the build recipes. Do not run legacy `finish.py`/`stitch.py`
-on revision B. Historical migration requires its documented 221 mm source snapshot.
+on revision C. Its one-time migration uses the explicitly saved revision-B snapshot.
 
-[Assembly instructions](docs/assembly.md) · [Input protection](docs/input-protection-review.md)
+[Assembly instructions](docs/assembly.md) · [Channel/input protection](docs/channel-isolation-review.md)
 · [Critical review/history](docs/critical-review.md) · [Per-board BOM](fab/digikey/eswitch-digikey-bom.csv)

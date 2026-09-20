@@ -7,6 +7,7 @@ current strips or USB reference corridor. Requires KiCad Python/NumPy.
 """
 import argparse
 import json
+import math
 from pathlib import Path
 import shutil
 
@@ -21,7 +22,7 @@ def ground_gaps(report):
                for gap in report["unconnected_items"])
 
 
-def proposals(board):
+def proposals(board,limit_per_island=5):
     """Find interior sites on islands with no existing through connection."""
     ground = board.FindNet("GND")
     _, blocked = router.obstacles(board, ground.GetNetCode(), .25, .6)
@@ -65,7 +66,7 @@ def proposals(board):
                     if distance >= .4:
                         best.append((distance, x, y))
             # Limit native DRC trials per island; never force a marginal site.
-            for _, x, y in sorted(best, reverse=True)[:5]:
+            for _, x, y in sorted(best, reverse=True)[:limit_per_island]:
                 yield x, y
 
 
@@ -83,6 +84,24 @@ def main():
     assert not any(v["severity"] == "error" for v in report["violations"])
     added = []
     while ground_gaps(report):
+        # One interior point per isolated pour can be checked as a transaction.
+        # Every via still undergoes the full native clearance/connectivity check.
+        points=[]
+        for p in proposals(board,1):
+            if all(math.dist(p,q)>.7 for q in points):points.append(p)
+        if len(points)>1:
+            for x,y in points:
+                via=pcbnew.PCB_VIA(board);via.SetPosition(V(x,y));via.SetWidth(pcbnew.FromMM(.6))
+                via.SetDrill(pcbnew.FromMM(.3));via.SetLayerPair(pcbnew.F_Cu,pcbnew.B_Cu)
+                via.SetNet(board.FindNet('GND'));board.Add(via)
+            after=router.drc(board)
+            if not any(v['severity']=='error' for v in after['violations']) and ground_gaps(after)<ground_gaps(report) and len(after['unconnected_items'])<len(report['unconnected_items']):
+                save_board(path,board);report=after;added.extend(points)
+                print(f'Accepted {len(points)} GND stitches; {ground_gaps(report)} ground gaps remain',flush=True)
+                board=pcbnew.LoadBoard(str(path));apply_rules(board)
+                continue
+            print('GND group rejected; retrying individual sites',flush=True)
+            board=pcbnew.LoadBoard(str(path));apply_rules(board)
         candidates = list(proposals(board))
         for x, y in candidates:
             via = pcbnew.PCB_VIA(board)

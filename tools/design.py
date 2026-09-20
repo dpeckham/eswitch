@@ -202,6 +202,8 @@ def build():
     for i, net in enumerate(["+12V", "GND", "VBUS", "VIN", "+3V3"]):
         add(f"#FLG{i + 1}", "power:PWR_FLAG", "PWR_FLAG", "", {1: net}, (406.4 + i * 10.16, 358.14))
     apply_revision_b()
+    from revision_c import apply as apply_revision_c
+    apply_revision_c(PARTS, add)
     apply_part_numbers()
     return PARTS
 

@@ -1,62 +1,21 @@
-# Revision B handoff — 2026-09-19
+# Revision C handoff — 2026-09-19
 
-**Ready to order three prototype PCBs. Production qualification remains open.**
-The [release record](release-status.json) binds the approval to verified sources.
-The [prototype release](prototype-release.md) records engineering assumptions,
-owner decisions and controlled bench limits. The September 16 checkpoint under
-`history/` describes a superseded state, not the current routed board.
+The owner requires single-channel fault isolation in AUTO and BYPASS, independent
+of firmware. The current schematic implements eight local TPS2492 breakers and
+coordinated shared startup. The board is 334 × 172 mm with twelve mounting holes.
+See [channel protection](channel-isolation-review.md) and the authoritative
+[release record](release-status.json) for implementation details and current status.
 
-## Completed
+The saved PCB is authoritative. Do not rerun legacy migration or board-generation
+scripts on it: that would replace completed placement and routing. Revision-B
+Gerbers remain withdrawn. Current manufacturing exports belong in `fab/revision-c`.
 
-- Main schematic and 253 × 75 mm PCB agree; the TPS2492 latch-off stage is routed.
-  The saved board is authoritative. Do not rerun migration or regenerate routing.
-- Saved-board verification covers ERC, DRC, parity, independent pin/value/MPN
-  checks, fuse silk, stackup, antenna keepout and sampled USB ground coverage.
-- Buck output capacitors are exact-model GCM32ER70J476KE19L: 59.05 µF screened
-  capacitance after tolerance/reserve against 40 µF required. Hardware tests follow.
-- Owner accepted lower-load startup latch-off with 40 A continuous target retained.
-  Fitted power/timer values remain unchanged. Analytical lower-envelope and
-  twelve transient sensitivity cases support the bounded prototype release.
-- Single-pass-FET SOA uses derated published curves, no equal sharing assumption,
-  a 60 °C mounting-base limit and complete event duration. Clamp coordination
-  and fixture restrictions are recorded; live-short/installation energy is unqualified.
-- Owner confirmed both actual fuse/clip positions and both connector types fit.
-  Four-layer CAM and separate 628 PTH/6 NPTH drills were independently reviewed.
-- The 55-line exact-MPN purchasing BOM is per board; the purchaser applies build
-  multiples. September 19 stock covered three builds and is not reserved.
-  Assembly PDFs show each component side at 1:1.
+The purchasing BOM contains 67 exact-MPN lines, with quantities for one assembly,
+eight fuses and twelve standoffs. The purchaser applies the desired build quantity.
+[BOM cost](bom-cost.md) records dated USD pricing and the optional spare-parts cart.
 
-## Order and validate
-
-Use `fab/revision-b/eswitch-revB-gerbers.zip` and the BOM under `fab/digikey/`.
-Order four layers, JLCPCB JLC041622-3313, ENIG, 2 oz outer AND inner, 1.6 mm nominal.
-Check the vendor upload preview against the package before checkout; no vendor
-preview, purchase or fabrication order has been completed here.
-
-Assemble one board first. Follow [bring-up.md](bring-up.md) and
-[input-clamp-review.md](input-clamp-review.md): protected laboratory source,
-staged current increases and captured waveforms before any high-energy test.
-Production gates are physical startup/fault/reset/clamp results, USB/regulator
-checks, measured 40 A thermal performance, and finished-board acceptance.
-Installation inputs deliberately deferred by the owner remain unspecified.
-
-## Reproduce
-
-```sh
-mise exec -- just verify
-python3 tools/buck_analysis.py --check
-python3 tools/input_stage_analysis.py --check
-python3 tools/input_stage_transient.py --check
-python3 -m unittest discover -s tools -p 'test_*.py'
-mise exec -- just package
-```
-
-The transient study can be rerun with `--run` using numpy and the locally
-configured ngspice/PSpice compatibility setup. The pinned TI controller model is
-fetched from TI when absent; the proprietary model itself is not redistributed.
-The saved result includes model/netlist hashes and assumptions.
-
-Verification hashes include engineering release documents, source files and
-reports. Review snapshots under `out/review/`, old OSH Park uploads and
-`fab/legacy-f76c39e/` are not current fabrication packages. Changes remain local;
-no commit, push, order or purchase was made in this continuation.
+Before packaging, run `just verify`; ERC, DRC including warnings, unrouted items
+and schematic parity must all be zero, with source-bound analytical and transient
+evidence. Packaging requires a matching approved prototype release record.
+Assemble one board first and complete [bring-up](bring-up.md) before assigning a
+40 A continuous or marine-service rating.

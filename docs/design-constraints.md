@@ -1,4 +1,4 @@
-# Confirmed scope — 2026-09-16
+# Confirmed scope — amended 2026-09-19
 
 - Nominal 12 V house-bank distribution; 40 A simultaneous continuous **target**.
 - Guaranteed operating-input design range: **9.5–16 V**, revised with the owner's
@@ -27,9 +27,20 @@
   load while retaining the 40 A continuous target**. Successful full-40-A BYPASS
   startup is not required. Select and document the lower startup envelope; do
   not weaken fault protection to force full-load startup.
-- Excessive startup current or an input-stage overcurrent fault must **latch the
-  whole board off until battery power is cycled** (owner decision, 2026-09-16).
-  No automatic retry, and no reliance on ESP32 firmware to enforce the latch.
+- On 2026-09-19, after reviewing branch/input protection coordination, the owner
+  selected: **"Isolate the faulty channel so healthy outputs keep operating."**
+  This supersedes accepting whole-board latch-off as the response to an output
+  short. It applies to both AUTO and BYPASS; the ESP32 and healthy outputs must
+  remain operating. Protection must work without firmware, including during
+  MCU reset. See [channel isolation review](channel-isolation-review.md).
+- The earlier acceptance of lower-load startup does not authorize one shorted
+  branch to prevent otherwise admissible healthy loads from starting. Include
+  a short present at power-up as well as a short applied during operation.
+- Retain hardware latch-off/no automatic retry as the fault-response design
+  basis, now local to the faulty branch. A genuine shared-input fault or
+  excessive aggregate healthy startup load can still require a common shutdown;
+  ordinary single-output shorts must not be reclassified as shared-input faults.
+  No reliance on ESP32 firmware to enforce protection or retain a fault latch.
 
 ## Deliberately outside this review's supplied inputs
 

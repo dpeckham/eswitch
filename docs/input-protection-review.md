@@ -1,8 +1,11 @@
 # Input protection — prototype review, 2026-09-19
 
-**Released for bounded prototype fabrication; production qualification remains
-open.** The replacement topology is implemented and routed in the main
-schematic/PCB. Read the [prototype release](prototype-release.md),
+**Fabrication release withdrawn: channel fault isolation redesign required.**
+The owner requires healthy outputs and the controller to keep operating during
+a single-output short in AUTO or BYPASS. See [the new decision and design work](channel-isolation-review.md).
+The TPS2492 topology below is implemented in revision B but does not establish
+that behavior. Its former release and required-behavior sections are historical.
+Read the [withdrawn prototype release](prototype-release.md),
 [power findings](power-review.md) and [clamp limits](input-clamp-review.md).
 Historical sections below explain the rejected stage and superseded candidates.
 
@@ -37,9 +40,10 @@ distinction and loaded UV/OV recovery during prototype qualification.
 - Startup with a mixture of AUTO and BYPASS positions is required. Include
   recovery after undervoltage/overvoltage; do not assume all loads are off.
 - Load models, total input capacitance and motor inrush are unspecified.
-- On excessive startup current or an input overcurrent fault, latch the entire
-  board off until battery power is cycled. This is the owner's confirmed choice;
-  automatic retry and firmware-dependent protection are not acceptable.
+- Historical revision-B choice: latch the entire board on excessive startup
+  current or an input overcurrent fault. The later channel-isolation decision
+  supersedes treating an output short as an acceptable cause of whole-board
+  latch-off. Automatic retry and firmware-dependent protection remain excluded.
 - Preserve the separate USB-only bench supply; never require the battery for
   initial programming and never connect battery and USB together in this mode.
 
@@ -87,8 +91,9 @@ not a microsecond/millisecond MOSFET SOA limiter.
 The owner accepted lower-load startup latch-off. The selected envelope,
 analytical checks, twelve gate/transient sensitivity cases and derated single-FET
 SOA comparison are recorded in [prototype-release.md](prototype-release.md).
-Schematic, layout, Kelvin sensing, stock, CAD/CAM and owner-confirmed physical
-fit reviews support fabrication of three controlled bench prototypes.
+Those reviews supported the earlier three-prototype release, now withdrawn.
+The branch/common coordination and layout work in the channel-isolation review
+must be completed before a replacement fabrication release.
 
 The clamp review establishes voltage coordination and initial test restrictions;
 it does not qualify unspecified cable/load energy. Physical startup, hot restart,

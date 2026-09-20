@@ -22,7 +22,8 @@ sys.path.insert(0, str(ROOT / "out" / "py311"))
 import numpy as np
 import pcbnew
 
-from gen_pcb import V, W, H, apply_rules
+from gen_pcb import V, apply_rules
+from revision_c import W, H
 from pcb_nets import short_name
 from pcb_io import save_board, fill_zones
 
@@ -103,7 +104,17 @@ def obstacles(board, code, width, diameter):
     half = width / 2 + 0.2 + GUARD
     via_radius = diameter / 2 + 0.2 + GUARD
     layers = {layer: Raster() for layer in LAYERS}
+    power_layers = {layer: Raster() for layer in LAYERS}
     via = Raster()
+    # Preserve the reference plane under the existing controlled-impedance USB
+    # pair. These guards are derived from actual tracks; the bulk autorouter's
+    # temporary rule areas are not present in the saved PCB.
+    if board.FindNet('GND').GetNetCode()!=code:
+        for track in board.GetTracks():
+            if track.GetClass()=='PCB_TRACK' and short_name(track) in ('USB_D+','USB_D-','USB_MCU_D+','USB_MCU_D-'):
+                a,b=xy(track.GetStart()),xy(track.GetEnd())
+                layers[pcbnew.In2_Cu].segment(a,b,.9+half)
+                via.segment(a,b,.9+via_radius)
     for track in board.GetTracks():
         is_via = track.GetClass() == "PCB_VIA"
         start, end = xy(track.GetStart()), xy(track.GetEnd())
@@ -146,13 +157,24 @@ def obstacles(board, code, width, diameter):
             continue
         for polygon in polygons(zone.Outline()):
             if not rule or zone.GetDoNotAllowTracks():
-                for layer, raster in layers.items():
+                for layer, raster in (layers if rule else power_layers).items():
                     if zone.IsOnLayer(layer):
                         raster.polygon(polygon, half)
             # A sparse signal via is allowed through the broad power spreaders.
             # KiCad clears it from foreign pours. Tracks still cannot cut a pour.
             if rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_")):
                 via.polygon(polygon, via_radius)
+    # A signal pad inside a power-zone outline already has a clearance opening
+    # in the filled copper. Permit a via escape within that pad's copper area;
+    # keep the surrounding power strip protected against routed tracks. This
+    # does not relax any rule area, foreign pad/trace or native DRC clearance.
+    for layer, power in power_layers.items():
+        own_pads=Raster()
+        for fp in board.GetFootprints():
+            for pad in fp.Pads():
+                if pad.GetNetCode()==code and pad.IsOnLayer(layer):
+                    for polygon in pad_polygons(pad,layer):own_pads.polygon(polygon)
+        layers[layer].data |= power.data & ~own_pads.data
     for raster in layers.values():
         raster.edge(0.4 + width / 2 + GUARD)
     via.edge(0.4 + diameter / 2 + GUARD)
@@ -161,6 +183,16 @@ def obstacles(board, code, width, diameter):
 
 def component(board, item):
     conn = board.GetConnectivity()
+    if item.GetClass() == 'ZONE':
+        # Native DRC can name a filled pour as the endpoint. Use real copper
+        # terminals inside that fill, not the unfilled zone-outline corner.
+        layer=item.GetLayer();filled=item.GetFilledPolysList(layer)
+        candidates=list(board.GetTracks())+[p for fp in board.GetFootprints() for p in fp.Pads()]
+        found=[]
+        for candidate in candidates:
+            if candidate.GetNetCode()!=item.GetNetCode() or not candidate.IsOnLayer(layer):continue
+            if filled.Contains(candidate.GetPosition()):found.append(candidate)
+        return found
     found, pending = {}, [item]
     while pending:
         current = pending.pop()
@@ -198,6 +230,29 @@ def anchors(items, blocked):
 
 
 def search(blocked, via_blocked, starts, goals):
+    # Optional compiled equivalent makes full-board searches practical. The
+    # original implementation below is retained for systems without a compiler.
+    native = ROOT / 'out/grid_search.so'
+    source = ROOT / 'tools/grid_search.cpp'
+    if shutil.which('g++'):
+        import ctypes
+        if not native.exists() or native.stat().st_mtime < source.stat().st_mtime:
+            subprocess.run(['g++','-O3','-std=c++17','-shared','-fPIC',str(source),'-o',str(native)],check=True)
+        library = ctypes.CDLL(str(native))
+        byteptr = ctypes.POINTER(ctypes.c_uint8)
+        intptr = ctypes.POINTER(ctypes.c_int32)
+        library.grid_search.argtypes = [ctypes.c_int,ctypes.c_int,byteptr,byteptr,
+            intptr,ctypes.c_int,intptr,ctypes.c_int,intptr,ctypes.c_int]
+        library.grid_search.restype = ctypes.c_int
+        start_array=np.asarray(list(starts),dtype=np.int32)
+        goal_array=np.asarray(list(goals),dtype=np.int32)
+        output=np.empty(3*SIZE,dtype=np.int32)
+        length=library.grid_search(NX,NY,blocked.ctypes.data_as(byteptr),via_blocked.ctypes.data_as(byteptr),
+            start_array.ctypes.data_as(intptr),len(start_array),goal_array.ctypes.data_as(intptr),len(goal_array),
+            output.ctypes.data_as(intptr),len(output))
+        assert length>=0,'Native route exceeded board node count'
+        print(f'  native search: {length} path nodes',flush=True)
+        return output[:length].tolist() if length else None
     # Euclidean distance to the closest target bounding rectangle is admissible.
     target_xy = [(node % SIZE % NX, node % SIZE // NX) for node in goals]
     x0, y0 = map(min, zip(*target_xy))
@@ -304,7 +359,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--board", type=Path, default=PCB,
                         help="Working board to repair; defaults to the tracked PCB")
+    parser.add_argument('--batch',type=int,default=4,
+                        help='Maximum routes in a native-DRC transaction; rejected groups retry individually')
+    parser.add_argument('--signal-width',type=float,default=.25,choices=(.18,.2,.25),
+                        help='Signal trace width in mm; native clearance rules always apply')
+    parser.add_argument('--via-diameter',type=float,default=.6,choices=(.5,.55,.6),
+                        help='Signal via diameter; 0.30 mm drill and >=0.10 mm annular ring')
     args = parser.parse_args()
+    assert 1<=args.batch<=8
     PCB = args.board.resolve()
     CANDIDATE = ROOT / "out" / f"{PCB.stem}-route-candidate.kicad_pcb"
     REPORT = ROOT / "out" / f"{PCB.stem}-route-drc.json"
@@ -314,15 +376,16 @@ def main():
     report = drc(board)
     assert not any(v["severity"] == "error" for v in report["violations"]), "Resolve existing copper errors first"
     failed = set()
+    batch_limit=args.batch
     def signal_gaps(result):
         # Routing can divide an outer GND pour into islands. Those still must be
         # stitched before release, but must not hide genuine signal progress.
         return sum(not all("[GND]" in i["description"] for i in gap["items"])
                    for gap in result["unconnected_items"])
-    for attempt in range(100):
+    for attempt in range(300):
         if not report["unconnected_items"]:
             break
-        progress = False
+        pending=[]
         for gap in report["unconnected_items"]:
             key = tuple(sorted(item["uuid"] for item in gap["items"]))
             if key in failed:
@@ -331,6 +394,7 @@ def main():
             # into the previous board when considering the next gap.
             items = {item.m_Uuid.AsString(): item for item in board.GetTracks()}
             items.update({pad.m_Uuid.AsString(): pad for fp in board.GetFootprints() for pad in fp.Pads()})
+            items.update({zone.m_Uuid.AsString():zone for zone in board.Zones() if not zone.GetIsRuleArea()})
             if any(item["uuid"] not in items for item in gap["items"]):
                 continue  # ground-plane island stitching is a separate step
             a, b = [items[item["uuid"]] for item in gap["items"]]
@@ -338,9 +402,24 @@ def main():
             assert a.GetNetCode() == b.GetNetCode()
             if name == "GND":
                 continue  # Ground connections require separate reviewed stitching.
-            assert name.startswith(("IN", "IS", "DEN", "UGND", "+3V3")), f"Not a permitted signal repair: {name}"
+            signal=name.startswith(('IN','IS','DEN','UGND','+3V3','BR_EN','BR_PROG','BR_REF',
+                'BR_TIMER','BR_FLT','BR_GATE','BR_GS','BR_PULL','BR_OUT','ADC_','MAIN_',
+                'BUS_DIV','HS_REF','HS_TIMER','HGATE_MAIN','LEDK','TXD','RXD'))
+            # Only low-current measurement/decoupling/test spurs may use
+            # this router on a power net. Main and branch feeds use pours.
+            auxiliary=any(item.GetClass()=='PAD' and
+                (item.GetParentFootprint().GetReference().startswith('TP') or
+                 item.GetParentFootprint().GetReference()=='R26' or
+                 (item.GetParentFootprint().GetReference().startswith('C') and
+                  item.GetParentFootprint().GetReference().endswith('13')) or
+                 (item.GetParentFootprint().GetReference().startswith('R') and
+                  item.GetParentFootprint().GetReference().endswith(('16','17')))) for item in (a,b))
+            if not signal and not auxiliary:
+                failed.add(key)
+                print(f'Separate power-route review required: {name}',flush=True)
+                continue
             print(f"Routing {name}; {len(report['unconnected_items'])} gaps remain", flush=True)
-            width, diameter, drill = (0.5, 0.8, 0.4) if name == "+3V3" else (0.25, 0.6, 0.3)
+            width, diameter, drill = (0.5, 0.8, 0.4) if name == "+3V3" else (args.signal_width, args.via_diameter, 0.3)
             blocked, via_blocked = obstacles(board, a.GetNetCode(), width, diameter)
             starts = anchors(component(board, a), blocked)
             goals = anchors(component(board, b), blocked)
@@ -348,28 +427,36 @@ def main():
             if not starts or not goals:
                 failed.add(key)
                 continue
+            if starts.keys() & goals.keys():
+                continue  # An earlier route in this transaction joined it.
             path = search(blocked, via_blocked, starts, goals)
             if path is None:
                 failed.add(key)
                 continue
             add_route(board, a.GetNet(), path, starts, goals, width, diameter, drill)
-            candidate_report = drc(board)
-            errors = [v for v in candidate_report["violations"] if v["severity"] == "error"]
-            if errors or signal_gaps(candidate_report) >= signal_gaps(report):
-                print("Candidate rejected; original board preserved:", errors[:2], flush=True)
-                board = pcbnew.LoadBoard(str(PCB))
-                apply_rules(board)
-                failed.add(key)
-                continue
-            save_board(PCB, board)
-            print("  DRC accepted; saved", flush=True)
+            pending.append(key)
+            board.BuildConnectivity()
+            if len(pending)>=batch_limit:
+                break
+        if not pending:
+            break
+        candidate_report = drc(board)
+        errors = [v for v in candidate_report["violations"] if v["severity"] == "error"]
+        if errors or signal_gaps(candidate_report) >= signal_gaps(report):
+            print("Candidate rejected; original board preserved:", errors[:2], flush=True)
             board = pcbnew.LoadBoard(str(PCB))
             apply_rules(board)
-            report = candidate_report
-            progress = True
-            break
-        if not progress:
-            break
+            if len(pending)>1:
+                batch_limit=1
+            else:
+                failed.add(pending[0])
+            continue
+        save_board(PCB, board)
+        print(f"  DRC accepted {len(pending)} routes; saved", flush=True)
+        board = pcbnew.LoadBoard(str(PCB))
+        apply_rules(board)
+        report = candidate_report
+        batch_limit=args.batch
     print("Remaining gaps:", len(report["unconnected_items"]), flush=True)
 
 

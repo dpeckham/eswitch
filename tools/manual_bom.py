@@ -18,14 +18,14 @@ EXTRAS = [
     (5, "0287005.PXCN", "Littelfuse", "F3-F7 inserts", "5 A ATO fuse; ambient derating applies"),
     (2, "0287010.PXCN", "Littelfuse", "F1-F2 inserts", "10 A ATO fuse; ambient derating applies"),
     (1, "0287020.PXCN", "Littelfuse", "F8 insert", "20 A ATO fuse; NOT 20 A continuous at all ambients"),
-    (4, "R30-1001002", "Harwin", "H1-H4 standoffs", "M3 x 10 mm; verify enclosure clearance"),
+    (12, "R30-1001002", "Harwin", "H1-H12 standoffs", "M3 x 10 mm; verify enclosure clearance"),
 ]
 
 
 def rows():
     grouped = defaultdict(list)
     for p in design.build():
-        if not p.footprint or p.ref.startswith(("H", "NT")):
+        if not p.footprint or p.ref.startswith(("H", "NT", "TP")):
             continue
         if not p.fields.get("MPN") or not p.fields.get("Manufacturer"):
             raise ValueError(f"Missing exact manufacturer/MPN: {p.ref}")

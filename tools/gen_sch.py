@@ -83,6 +83,10 @@ def load_symbol(lib_id):
                 rename(c)
     rename(sym)
     sym[1] = lib_id
+    # Flattened inherited symbols must use the child's unit names. KiCad rejects
+    # a cache entry named MMBT3906 containing Q_PNP_BEC_0_1 / _1_1 units.
+    for unit in find_all(sym, "symbol"):
+        unit[1] = name + "_" + "_".join(unit[1].rsplit("_", 2)[-2:])
     if not find(sym, "extends"):
         pass
     _symcache[lib_id] = sym
@@ -152,7 +156,7 @@ def symbol_instance(lib_id, ref, value, footprint, at, rot, pins, extra_fields=N
                     hide_value=False, sym=None):
     x, y = at
     node = S("symbol", S("lib_id", lib_id), S("at", x, y, rot), S("unit", 1),
-             S("exclude_from_sim", Sym("no")), S("in_bom", Sym("no" if ref.startswith(("H", "NT")) else "yes")), S("on_board", Sym("yes")),
+             S("exclude_from_sim", Sym("no")), S("in_bom", Sym("no" if ref.startswith(("H", "NT", "TP")) else "yes")), S("on_board", Sym("yes")),
              S("dnp", Sym("no")), S("uuid", uid()))
     rx, ry, rr = text_pos(sym, "Reference", at, rot) if sym else (x + 2.54, y - 2.54, 0)
     vx, vy, vr = text_pos(sym, "Value", at, rot) if sym else (x + 2.54, y, 0)
@@ -269,7 +273,7 @@ def main():
         c, r = (n - 1) % 4, (n - 1) // 4
         bx, by = 12.7 + c * 72.39, 22.86 + r * 82.55
         items.append(text(f"CHANNEL {n}", (bx, by - 1.27), 2.5))
-    items.append(text("MCU: ESP32-S3-WROOM-1  (IS1-8 -> ADC1 IO1,3,4,2,6,10,8,9; IN1-8 -> IO7,11,12,13,14,21,47,48; DEN -> IO38; STAT LED -> IO41)",
+    items.append(text("MCU: IS1-8 -> ADC1 IO1,3,4,2,6,10,8,9; IN1 -> IO15; IMON -> IO5; BUS -> IO7; see pin map",
                       (330.2, 34.29), 2.0))
     items.append(text("LOGIC: protected +12V -> F9 -> D1 -> VIN; USB -> Q5 ideal diode -> VIN; TPSM63603V3 -> 3V3", (330.2, 226.06), 1.5))
     items.append(text("INPUT: 9.5-16V; U12 reverse block; U14 current/power limit + latch-off; U12/U13 RTN FLOAT", (12.7, 207.01), 1.5))
@@ -278,9 +282,9 @@ def main():
     items.append(text("8-channel PROFET+2 12 V load switch with 3-position ATO fuse bypass", (12.7, 12.7), 3.5))
 
     doc = S("kicad_sch", S("version", SCH_VERSION), S("generator", "eeschema"), S("generator_version", "9.0"),
-            S("uuid", ROOT_UUID), S("paper", "A2"),
-            S("title_block", S("title", "eswitch - 8ch PROFET load switch"), S("date", "2026-09-15"),
-              S("rev", "B"), S("company", "dpeckham")),
+            S("uuid", ROOT_UUID), S("paper", "A0"),
+            S("title_block", S("title", "eswitch - 8 independent latching channels"), S("date", "2026-09-19"),
+              S("rev", "C"), S("company", "dpeckham")),
             lib_symbols, *items,
             S("sheet_instances", S("path", "/", S("page", "1"))),
             S("embedded_fonts", Sym("no")))

@@ -26,12 +26,16 @@ def source_hashes(root=ROOT):
     files += sorted((root / "lib").rglob("*.kicad_mod"))
     files += sorted((root / "lib").glob("*.kicad_sym"))
     files += sorted((root / "tools").glob("*.py"))
+    files += sorted((root / "tools").glob("*.cpp"))
     files += sorted((root / "docs/evidence").glob("*.json"))
     files += sorted((root / "docs").glob("*-calculations.json"))
     files += sorted((root / "docs").glob("prototype-*.md"))
     files += [root / "docs" / name for name in
               ("power-review.md", "input-clamp-review.md", "input-startup-explained.md",
-               "bring-up.md", "assembly.md", "design-constraints.md")
+               "bring-up.md", "assembly.md", "design-constraints.md",
+               "channel-isolation-review.md", "channel-isolation-transients.json",
+               "all-channels-transients.json",
+               "digikey-stock.json", "digikey-prices.json", "bom-cost.md")
               if (root / "docs" / name).exists()]
     return {str(p.relative_to(root)): sha256(p) for p in files}
 
@@ -56,8 +60,9 @@ def main():
             "kicadsexpr", "-o", "out/eswitch.net", "eswitch.kicad_sch")
         run("circuit-netlist", sys.executable, "tools/check_netlist.py", "out/eswitch.net")
         run("buck-capacitance", sys.executable, "tools/buck_analysis.py", "--check")
-        run("input-stage-calculation", sys.executable, "tools/input_stage_analysis.py", "--check")
-        run("input-transient-evidence", sys.executable, "tools/input_stage_transient.py", "--check")
+        run("channel-isolation-calculation", sys.executable, "tools/channel_isolation_analysis.py", "--check")
+        run("channel-transient-evidence", sys.executable, "tools/channel_isolation_transient.py", "--check")
+        run("all-channel-transient-evidence", sys.executable, "tools/all_channels_transient.py", "--check")
         run("erc", "kicad-cli", "sch", "erc", "--severity-all", "--exit-code-violations",
             "--format", "json", "-o", str(OUT / "erc.json"), "eswitch.kicad_sch")
         for name, script in (("board-netlist", "check_board_netlist.py"),

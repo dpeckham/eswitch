@@ -5,6 +5,7 @@ import argparse
 
 import design
 from gen_pcb import OUT_PCB, V, fuse_silk_labels
+from revision_c import CX
 
 
 def main():
@@ -13,7 +14,9 @@ def main():
     args = parser.parse_args()
     board = pcbnew.LoadBoard(args.board)
     text = [item for item in board.GetDrawings() if item.GetClass() == "PCB_TEXT"]
-    expected = fuse_silk_labels()
+    expected = [(f'CH{n} MAX FUSE {design.CHANNELS[n][0]}A',CX[n-1]+10.6,100,pcbnew.F_SilkS,.8,90)
+                for n in range(1,9)] + [fuse_silk_labels()[-1]]
+    expected=[(*item[:4],max(1.0,item[4]),item[5]) for item in expected]
     assert len(expected) == 9, "Eight branch fuses plus the logic fuse"
     for content, x, y, layer, size, rot in expected:
         matches = [item for item in text if item.GetText() == content]

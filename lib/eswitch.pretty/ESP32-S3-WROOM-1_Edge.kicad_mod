@@ -119,7 +119,10 @@
 	)
 	(fp_poly
 		(pts
-			(xy -9.2 -6.025) (xy -9.7 -6.025) (xy -9.2 -6.525) (xy -9.2 -6.025)
+			(xy -9.2 -6.025)
+			(xy -9.7 -6.025)
+			(xy -9.2 -6.525)
+			(xy -9.2 -6.025)
 		)
 		(stroke
 			(width 0.12)
@@ -498,7 +501,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -2.9 1.76 90)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -508,7 +511,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -2.9 3.16)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -518,7 +521,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -2.2 1.06)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -528,7 +531,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -2.2 2.46)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -538,7 +541,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -2.2 3.86)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -548,7 +551,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -1.5 1.76)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -566,7 +569,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -1.5 3.16)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -576,7 +579,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -0.8 1.06)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -586,7 +589,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -0.8 2.46)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -596,7 +599,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -0.8 3.86)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -606,7 +609,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -0.1 1.76)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -616,7 +619,7 @@
 	)
 	(pad "41" thru_hole circle
 		(at -0.1 3.16)
-		(size 0.6 0.6)
+		(size 0.82 0.82)
 		(drill 0.3)
 		(property pad_prop_heatsink)
 		(layers "*.Cu" "F.Mask")
@@ -625,12 +628,7 @@
 		(uuid "c85df0cc-2071-46b7-9039-965ce6a3d5bc")
 	)
 	(zone
-		(layers "F.Cu" "B.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "In5.Cu" "In6.Cu"
-			"In7.Cu" "In8.Cu" "In9.Cu" "In10.Cu" "In11.Cu" "In12.Cu" "In13.Cu" "In14.Cu"
-			"In15.Cu" "In16.Cu" "In17.Cu" "In18.Cu" "In19.Cu" "In20.Cu" "In21.Cu"
-			"In22.Cu" "In23.Cu" "In24.Cu" "In25.Cu" "In26.Cu" "In27.Cu" "In28.Cu"
-			"In29.Cu" "In30.Cu"
-		)
+		(layers "F.Cu" "B.Cu" "In1.Cu" "In2.Cu" "In3.Cu" "In4.Cu" "In5.Cu" "In6.Cu" "In7.Cu" "In8.Cu" "In9.Cu" "In10.Cu" "In11.Cu" "In12.Cu" "In13.Cu" "In14.Cu" "In15.Cu" "In16.Cu" "In17.Cu" "In18.Cu" "In19.Cu" "In20.Cu" "In21.Cu" "In22.Cu" "In23.Cu" "In24.Cu" "In25.Cu" "In26.Cu" "In27.Cu" "In28.Cu" "In29.Cu" "In30.Cu")
 		(uuid "fb74ed8e-c5fc-49fc-9a5d-a4df85174117")
 		(hatch full 0.508)
 		(connect_pads
@@ -655,7 +653,10 @@
 		)
 		(polygon
 			(pts
-				(xy -24 -6.75) (xy 24 -6.75) (xy 24 -27.75) (xy -24 -27.75)
+				(xy -24 -6.75)
+				(xy 24 -6.75)
+				(xy 24 -27.75)
+				(xy -24 -27.75)
 			)
 		)
 	)

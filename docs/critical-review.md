@@ -1,22 +1,17 @@
-# Critical review — revision B, 2026-09-19
+# Critical review — revision C, 2026-09-19
 
-**Prototype fabrication released; production qualification remains open.**
-The main 253 × 75 mm PCB matches the latch-off schematic. Review closure and
-limits are in [prototype-release.md](prototype-release.md), quantitative findings
-in [power-review.md](power-review.md), and exact source hashes/status in
-[release-status.json](release-status.json).
+The current implementation is described in [channel protection](channel-isolation-review.md).
+It adds independent hardware breakers ahead of every AUTO/BYPASS fuse, coordinated
+common startup, a shared reservoir, monitoring, test points and the mechanical/
+thermal layout corrections. Current verification and fabrication status are in
+[release-status.json](release-status.json). Revision-B Gerbers are withdrawn.
 
-The owner accepted lower-load startup latch-off and confirmed actual fuse/clip
-and connector fit. A bounded startup envelope, twelve transient sensitivity
-cases and a derated single-FET SOA screen support controlled bench prototypes.
-The buck bank passes its exact-part model screen. Live-short/clamp, recovery,
-USB/regulator and 40 A thermal measurements remain production gates.
+[Power review](power-review.md), [assembly](assembly.md) and [bring-up](bring-up.md)
+describe the current prototype scope. No measured continuous-current or marine
+service rating is assigned before the first assembly is tested. The dated
+[BOM cost](bom-cost.md) distinguishes installed quantities from optional spares.
 
-Build/package tools preserve the routed board, require current verification and
-stock evidence, and identify the selected JLCPCB stackup. No tested continuous
-current or marine-service rating is assigned. See [bring-up.md](bring-up.md).
-
-The following revision-A material is history; its old implementation status and
+The following revision-A material is historical; its implementation status and
 check counts do not describe the current board.
 
 ## Historical revision-A review (2026-09-15)

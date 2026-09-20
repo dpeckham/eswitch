@@ -1,5 +1,10 @@
 # DigiKey BOM — quantities for ONE module
 
+This is the revision-C BOM, including independent channel breakers. Check
+[current release status](../../docs/release-status.json) for fabrication readiness.
+[Cost per board](../../docs/bom-cost.md) includes a priced breakdown and an optional
+cart with spares where price breaks reduce the total cash cost.
+
 `eswitch-digikey-bom.csv` lists the exact parts needed to assemble **one board**.
 Apply your desired number of modules when ordering. No batch multiplier or spare
 allowance is included, even though the prototype plan is to build three modules.

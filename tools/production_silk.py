@@ -8,6 +8,10 @@ from pcb_io import save_board
 
 
 def apply_silk(board):
+    if pcbnew.ToMM(board.GetBoardEdgesBoundingBox().GetWidth())>300:
+        from finish_revision_c import silk
+        silk(board)
+        return []
     detached = []
     for ref in ("SW1", "C2", "C17"):
         board.FindFootprintByReference(ref).Reference().SetVisible(False)

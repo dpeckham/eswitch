@@ -80,7 +80,7 @@ def apply_rules(b):
     ds.m_ViasMinSize = FromMM(0.5)
     ds.m_MinThroughDrill = FromMM(0.3)
     ds.m_CopperEdgeClearance = FromMM(0.4)
-    ds.m_HoleClearance = FromMM(0.15)
+    ds.m_HoleClearance = FromMM(0.2)
     ds.m_HoleToHoleMin = FromMM(0.25)
     ns = ds.m_NetSettings
     dflt = ns.GetDefaultNetclass()

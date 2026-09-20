@@ -1,5 +1,8 @@
 # Three-board manual assembly
 
+The current circuit is revision C. Use its matching Gerbers and BOM only; check
+[release status](release-status.json) before fabrication. Assemble one board first.
+
 Agreed method: solder paste with hot air or a hot plate is available. Exposed-pad
 devices remain on the BOM; this is not an iron-only design. Procurement is through
 DigiKey, with enough stock for three complete boards at the recorded check date.
@@ -10,7 +13,8 @@ multiplier. The purchaser chooses how many modules to order. Quantities are
 minimum build quantities, **without spares**. For
 small passives, ordering a few extra is sensible. No purchase has been made.
 The dated audit is not an inventory reservation; refresh it at checkout and after
-any circuit changes. The BOM matches the prototype release; installation hardware is listed separately below.
+any circuit changes. The BOM describes the revision-C circuit;
+installation hardware is listed separately below.
 
 ## Assembly sequence
 
@@ -21,16 +25,19 @@ any circuit changes. The BOM matches the prototype release; installation hardwar
    a sound underside joint. Follow the component moisture/reflow requirements and
    the paste manufacturer's measured temperature profile. Hot-plate dial temperature
    is not the solder-joint temperature. Support the overhanging ESP32 antenna.
-3. Inspect pin bridges and polarity under magnification. Assemble the top-side
-   BOOT/RESET switches without remelting unsupported bottom-side parts.
-4. Fit through-hole connectors, fuse clips and input terminals last. Large copper
+3. Fit the 24 top-side 35SVPF120M reservoir capacitors with correct polarity. Their
+   F12 case is 12.6 mm high. Follow Panasonic's measured reflow profile or its
+   iron-soldering limits; support the populated underside.
+4. Inspect pin bridges and polarity under magnification. Assemble the top-side
+   BOOT/RESET and eight channel-reset switches without remelting unsupported bottom-side parts.
+5. Fit through-hole connectors, fuse clips and input terminals last. Large copper
    pours and REDCUBE terminals require board preheat and a sufficiently powerful,
    temperature-controlled process. Wuerth 74650195 is a THR terminal: use its
    specified solder process and verify full barrel wetting on all nine pins.
    A hand-solder process on this heavy-copper board must be demonstrated on the
    first assembly; a surface fillet does not establish hole fill. Do not increase
    temperature/dwell indefinitely.
-5. Use a current-limited bench supply for initial logic bring-up, with no branch
+6. Use a current-limited bench supply for initial logic bring-up, with no branch
    fuses/loads installed. Verify 3V3, reset, programming and all OFF states first.
    Do not perform initial short-circuit or reverse-battery tests on a house bank.
 
@@ -62,9 +69,9 @@ if the footprints change. The clip footprint uses **1.7 mm finished
 holes**, not the old README's 1.6 mm claim. Generated 3D bodies are inspection
 envelopes, not dimensionally complete manufacturer models.
 
-## Revision B details
+## Revision C details
 
-The PCB is **253 × 75 mm**, four layers using JLCPCB JLC041622-3313 with 2 oz
+The PCB is **334 × 172 mm**, four layers using JLCPCB JLC041622-3313 with 2 oz
 outer and inner copper. Do not use the obsolete OSH Park files. CAM review packages
 include `assembly-F-1to1.pdf` and `assembly-B-1to1.pdf`; print at actual size,
 without fit-to-page. Each assembly drawing is viewed from its component side:
@@ -76,7 +83,7 @@ U9 is the fixed-3.3 V TPSM63603V3 module, not the superseded discrete buck.
 Follow its pin-1 orientation and separated VIN, PGND and output lands. U1–U8
 exposed pads are VS. Q3/Q4 LFPAK88 drains are their mounting bases. R20's small
 Kelvin terminals are sense connections, not alternate power terminals. Inspect
-their isolation and continuity. Never substitute TPS2493 for latch-off U14.
+their isolation and continuity. Never substitute TPS2493 for latch-off U14 or U21–U28.
 
 C7/C8/C12/C13 are now GCM32ER70J476KE19L (47 µF, 6.3 V X7R), not the
 old 22 µF/10 V parts. These are 3.3 V output capacitors; never fit them on the
@@ -100,3 +107,8 @@ for the actual bank and installation. A 50 A upstream fuse is only a candidate,
 not approved merely because the total-load target is 40 A. Battery fault interrupt
 rating, conductor protection, temperature and clearing time still need review.
 Do not use this unqualified board for bilge pumps or other life/safety-critical loads.
+
+Fit all twelve M3 standoffs. Hardware must fit inside the 4 mm clearance radius.
+The component BOM includes twelve standoffs; enclosure-specific screws are separate.
+Thermal vias under exposed pads can wick paste: use controlled paste volume and
+inspect the underside joint on the first assembly. See [BOM cost](bom-cost.md).

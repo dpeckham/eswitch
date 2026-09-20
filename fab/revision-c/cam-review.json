@@ -1,0 +1,52 @@
+{
+  "checked_utc": "2026-09-19T23:32:00.764714+00:00",
+  "independent_parser": "Gerbonara",
+  "copper_layers": [
+    [
+      "top",
+      "copper"
+    ],
+    [
+      "inner_1",
+      "copper"
+    ],
+    [
+      "inner_2",
+      "copper"
+    ],
+    [
+      "bottom",
+      "copper"
+    ]
+  ],
+  "outline_extent_mm": [
+    334.04999999999995,
+    172.05
+  ],
+  "plated_drill_objects": 1579,
+  "nonplated_drill_objects": 14,
+  "separate_plating_verified": true,
+  "files": {
+    "README-fab.txt": "c4abd554b1c5273eeee96c09e88522b8d096479578f48d0be224a2c0277ba860",
+    "USB-impedance-request.jpg": "2e2245006f0c4251e2a8468d1d531b7a31d489c48520220103082e82c798b7d6",
+    "eswitch-B_Cu.gbl": "be9c37253e5d97e58c0fb30e5f56fbff9b41fbc2a01bf940295a6daeb0122f46",
+    "eswitch-B_Mask.gbs": "9fa1fcf48444724566ccb5466982f9b00a66b9bdab6e9b1fb33f02014c6bbf78",
+    "eswitch-B_Paste.gbp": "59ed10158840b4cc0b6d754ea302b618eab4662b4800cfde3c3fbb14908ab68d",
+    "eswitch-B_Silkscreen.gbo": "4e13d564c4d895c19013c93e1fdc13dd7257c64819d04adc1edf6ac8d0de7b54",
+    "eswitch-Edge_Cuts.gm1": "a1a77fc37d8cd56c10dba406d84522a781048825fec38853d39c227aae0e2695",
+    "eswitch-F_Cu.gtl": "48290d14fd17f44e7edcdee8aa288cb813925d434beed576c91f3ac10ce8f41b",
+    "eswitch-F_Mask.gts": "014a110940e60d7f07efba23906c4f8ddb49d66f40b3c7dbd217b26d7401a34d",
+    "eswitch-F_Paste.gtp": "12f6f216adcc1fc4bed5d026aab2664d42f39f1e9b3a85a833d371d95b819e88",
+    "eswitch-F_Silkscreen.gto": "f7b3ee2bfe1b04e125125f55f3bbf35305106b47e48616550e2dc1ff1da5054d",
+    "eswitch-GND.g1": "3e7314c95c06d837dd44d57fd55c6577d025b2891eddc55c492702cda00a05fd",
+    "eswitch-NPTH-drl_map.pdf": "50f129a33c04bc8967e9e05a6abb3ab089988d20282d4361ed358711ad0c4343",
+    "eswitch-NPTH.drl": "b84a6610736e9a39edbbbf8b63feb9408c6e07ff2103f07d740679a029d0803b",
+    "eswitch-PTH-drl_map.pdf": "37a66bffeead850d6f8c85204be6cc688e58aa81362fa7b96409f1279084af77",
+    "eswitch-PTH.drl": "e6ca3724562e753045528ea3c5b14c5464739ce0ca29fc4fda479b1f7c5e5f74",
+    "eswitch-PWR.g2": "054cb04e82101969a3ceddced2584356f7ca3fe39b10cbcfd7ca60efb6f17e28",
+    "eswitch-job.gbrjob": "e222dcb81b957598c8b10f057ac00da9a68953e381213166ffe1bb5a496b59c9"
+  },
+  "plating_metadata_adapter": "Verified KiCad X2 FileFunction translated to Gerbonara TYPE comment in memory only",
+  "upload_zip_sha256": "06c32f26536db5b284e891db73062bf83192c4e1df760693eab4dbc002b0f082",
+  "limitation": "Independent CAM parsing/rendering; visual inspection and fabricator upload/DFM review are separate"
+}

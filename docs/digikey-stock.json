@@ -1,5 +1,5 @@
 {
-  "note": "DigiKey exact product pages retrieved through web reader; pages may be cached. This is a displayed inventory observation, not a checkout reservation. All 55 current BOM lines were rechecked 2026-09-19; historical unused parts retain their original dates.",
+  "note": "Exact DigiKey displayed inventory, retrieved 2026-09-19. Cached pages are not a stock reservation.",
   "parts": [
     {
       "mpn": "TPS2492PWR",
@@ -9,7 +9,7 @@
     },
     {
       "mpn": "PSMN1R8-80SSEJ",
-      "stock": 1802,
+      "stock": 242,
       "url": "https://www.digikey.com/en/products/detail/nexperia-usa-inc/PSMN1R8-80SSEJ/27351652",
       "checked": "2026-09-19"
     },
@@ -33,7 +33,7 @@
     },
     {
       "mpn": "RT0603BRD0756K2L",
-      "stock": 29293,
+      "stock": 29193,
       "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD0756K2L/1072581",
       "checked": "2026-09-19"
     },
@@ -45,7 +45,7 @@
     },
     {
       "mpn": "RC0603FR-0710RL",
-      "stock": 5764,
+      "stock": 3050,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0710RL/726879",
       "checked": "2026-09-19"
     },
@@ -81,164 +81,164 @@
     },
     {
       "mpn": "3557",
-      "url": "https://www.digikey.com/en/products/detail/keystone-electronics/3557/2092485",
       "stock": 180115,
+      "url": "https://www.digikey.com/en/products/detail/keystone-electronics/3557/2092485",
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-074K7L",
+      "stock": 4663856,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-074K7L/727212",
-      "stock": 4693197,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0805FR-0747RL",
+      "stock": 134792,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0747RL/730919",
-      "stock": 135279,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-072K2L",
+      "stock": 424954,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-072K2L/727016",
-      "stock": 458413,
       "checked": "2026-09-19"
     },
     {
       "mpn": "CL10C221JB8NFNC",
-      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL10C221JB8NFNC/3890321",
       "stock": 984,
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL10C221JB8NFNC/3890321",
       "checked": "2026-09-19"
     },
     {
       "mpn": "BAT54S-QR",
+      "stock": 26989,
       "url": "https://www.digikey.com/en/products/detail/nexperia-usa-inc/BAT54S-QR/15196086",
-      "stock": 15255,
       "checked": "2026-09-19"
     },
     {
       "mpn": "CL21B104KBCNNNC",
+      "stock": 4670830,
       "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B104KBCNNNC/3886661",
-      "stock": 4889635,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-0747KL",
-      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0747KL/727253",
       "stock": 1837173,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0747KL/727253",
       "checked": "2026-09-19"
     },
     {
       "mpn": "CL21B103KBANNNC",
+      "stock": 2197992,
       "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B103KBANNNC/3886673",
-      "stock": 2202435,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-0710KL",
+      "stock": 1411869,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0710KL/726880",
-      "stock": 1413260,
       "checked": "2026-09-19"
     },
     {
       "mpn": "150060GS75000",
+      "stock": 329725,
       "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150060GS75000/4489896",
-      "stock": 298703,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-073K3L",
+      "stock": 771662,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-073K3L/727126",
-      "stock": 773218,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-071K2L",
+      "stock": 65721,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-071K2L/726852",
-      "stock": 66321,
       "checked": "2026-09-19"
     },
     {
       "mpn": "ESP32-S3-WROOM-1-N8",
-      "url": "https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N8/15200089",
       "stock": 1353,
+      "url": "https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N8/15200089",
       "checked": "2026-09-19"
     },
     {
       "mpn": "CC0805KKX5R6BB106",
-      "url": "https://www.digikey.com/en/products/detail/yageo/CC0805KKX5R6BB106/2833625",
       "stock": 19160,
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0805KKX5R6BB106/2833625",
       "checked": "2026-09-19"
     },
     {
       "mpn": "CC0603JRX7R9BB104",
+      "stock": 128729,
       "url": "https://www.digikey.com/en/products/detail/yageo/CC0603JRX7R9BB104/5195681",
-      "stock": 142694,
       "checked": "2026-09-19"
     },
     {
       "mpn": "CC0603KRX7R7BB105",
+      "stock": 4273528,
       "url": "https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R7BB105/2833752",
-      "stock": 4299908,
       "checked": "2026-09-19"
     },
     {
       "mpn": "PTS645SM43SMTR92 LFS",
+      "stock": 154446,
       "url": "https://www.digikey.com/en/products/detail/c-k/PTS645SM43SMTR92-LFS/1146840",
-      "stock": 172006,
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-071KL",
+      "stock": 4571738,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-071KL/726843",
-      "stock": 4571898,
       "checked": "2026-09-19"
     },
     {
       "mpn": "150060BS75000",
+      "stock": 150194,
       "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150060BS75000/4489895",
-      "stock": 154625,
       "checked": "2026-09-19"
     },
     {
       "mpn": "USB4105-GF-A",
+      "stock": 131990,
       "url": "https://www.digikey.com/en/products/detail/gct/USB4105-GF-A/11198510",
-      "stock": 138077,
       "checked": "2026-09-19"
     },
     {
       "mpn": "SRV05-4HTG-D",
+      "stock": 40506,
       "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SRV05-4HTG-D/10230852",
-      "stock": 59216,
       "checked": "2026-09-19"
     },
     {
       "mpn": "ERJ-3EKF5101V",
+      "stock": 418212,
       "url": "https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERJ-3EKF5101V/1746427",
-      "stock": 419442,
       "checked": "2026-09-19"
     },
     {
       "mpn": "61300411121",
+      "stock": 138883,
       "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/61300411121/4846827",
-      "stock": 143431,
       "checked": "2026-09-19"
     },
     {
       "mpn": "0466002.NR",
+      "stock": 9902,
       "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0466002-NR/521355",
-      "stock": 9915,
       "checked": "2026-09-19"
     },
     {
       "mpn": "B360A-13-F",
+      "stock": 296575,
       "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/B360A-13-F/724980",
-      "stock": 306959,
       "checked": "2026-09-19"
     },
     {
       "mpn": "GRM32ER71H475KA88L",
-      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GRM32ER71H475KA88L/586595",
       "stock": 812354,
+      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GRM32ER71H475KA88L/586595",
       "checked": "2026-09-19"
     },
     {
@@ -249,62 +249,62 @@
     },
     {
       "mpn": "691218410002",
-      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/691218410002/11478586",
       "stock": 864,
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/691218410002/11478586",
       "checked": "2026-09-19"
     },
     {
       "mpn": "74650195",
-      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74650195/16608622",
       "stock": 4352,
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74650195/16608622",
       "checked": "2026-09-19"
     },
     {
       "mpn": "0287005.PXCN",
-      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287005-PXCN/2519811",
       "stock": 75706,
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287005-PXCN/2519811",
       "checked": "2026-09-19"
     },
     {
       "mpn": "0287010.PXCN",
+      "stock": 51247,
       "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287010-PXCN/2519807",
-      "stock": 54580,
       "checked": "2026-09-19"
     },
     {
       "mpn": "0287020.PXCN",
+      "stock": 61776,
       "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287020-PXCN/2519821",
-      "stock": 62278,
       "checked": "2026-09-19"
     },
     {
       "mpn": "R30-1001002",
-      "url": "https://www.digikey.com/en/products/detail/harwin-inc/R30-1001002/3728277",
       "stock": 9688,
+      "url": "https://www.digikey.com/en/products/detail/harwin-inc/R30-1001002/3728277",
       "checked": "2026-09-19"
     },
     {
       "mpn": "BSC016N06NSATMA1",
+      "stock": 27503,
       "url": "https://www.digikey.com/en/products/detail/infineon-technologies/BSC016N06NSATMA1/3719792",
-      "stock": 27513,
       "checked": "2026-09-19"
     },
     {
       "mpn": "LM74800QDRRRQ1",
+      "stock": 8158,
       "url": "https://www.digikey.com/en/products/detail/texas-instruments/lm74800qdrrrq1/13627158",
-      "stock": 8304,
       "checked": "2026-09-19"
     },
     {
       "mpn": "SMCJ24CA",
-      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SMCJ24CA/762395",
       "stock": 35243,
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SMCJ24CA/762395",
       "checked": "2026-09-19"
     },
     {
       "mpn": "SMCJ16A",
+      "stock": 14728,
       "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SMCJ16A/762384",
-      "stock": 14733,
       "checked": "2026-09-19"
     },
     {
@@ -315,8 +315,8 @@
     },
     {
       "mpn": "RT0603BRD0710KL",
+      "stock": 334524,
       "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD0710KL/1072198",
-      "stock": 334729,
       "checked": "2026-09-19"
     },
     {
@@ -327,34 +327,129 @@
     },
     {
       "mpn": "RC0603FR-0716K5L",
+      "stock": 157781,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0716K5L/726969",
-      "stock": 158031,
       "checked": "2026-09-19"
     },
     {
       "mpn": "CL21B473KBCNNNC",
+      "stock": 86830,
       "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B473KBCNNNC/3886908",
-      "stock": 59830,
       "checked": "2026-09-19"
     },
     {
       "mpn": "ERJ-3EKF22R0V",
-      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/ERJ-3EKF22R0V/1746340",
       "stock": 258971,
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/ERJ-3EKF22R0V/1746340",
       "checked": "2026-09-19"
     },
     {
       "mpn": "RC0603FR-07100RL",
+      "stock": 602238,
       "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-07100RL/726888",
-      "stock": 766943,
-      "checked": "2026-09-16"
+      "checked": "2026-09-19"
     },
     {
       "mpn": "GCM32ER70J476KE19L",
       "stock": 106406,
       "url": "https://www.digikey.com/en/products/detail/murata-electronics/GCM32ER70J476KE19L/1763982",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "WSLP25122L000FEA",
+      "stock": 4026,
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25122L000FEA/9758585",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "CSS4J-4026R-L500F",
+      "stock": 3137,
+      "url": "https://www.digikey.com/en/products/detail/bourns-inc/CSS4J-4026R-L500F/6023729",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "MMBT3906LT1G",
+      "stock": 1134023,
+      "url": "https://www.digikey.com/en/products/detail/onsemi/MMBT3906LT1G/919605",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "C1206C104J5JACAUTO",
+      "stock": 1978,
+      "url": "https://www.digikey.com/en/products/detail/kemet/C1206C104J5JACAUTO/7419365",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RC0603FR-0717K4L",
+      "stock": 67636,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0717K4L/726981",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "EEU-FR1V471L",
+      "stock": 6499,
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/EEU-FR1V471L/2433574",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "FMMT720TA",
+      "stock": 12344,
+      "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/FMMT720TA/152510",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "35SVPF120M",
+      "stock": 56325,
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/35SVPF120M/4204891",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "C0805C123J5GACTU",
+      "stock": 3104,
+      "url": "https://www.digikey.com/en/products/detail/kemet/C0805C123J5GACTU/7382128",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RT0603BRD078K25L",
+      "stock": 27388,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD078K25L/1072671",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RT0603BRD071KL",
+      "stock": 140034,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD071KL/1072344",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RT0603BRD074K7L",
+      "stock": 41215,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD074K7L/5139124",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RT0603BRD077K5L",
+      "stock": 43215,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD077K5L/5252425",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "RG1608P-222-B-T5",
+      "stock": 36377,
+      "url": "https://www.digikey.com/en/products/detail/susumu/RG1608P-222-B-T5/1240901",
+      "checked": "2026-09-19"
+    },
+    {
+      "mpn": "WSLP25124L000FEA",
+      "stock": 4845,
       "checked": "2026-09-19",
-      "note": "Displayed product-page observation; web cache may lag live inventory. Replaces four buck-output capacitors per board."
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25124L000FEA/9758589"
+    },
+    {
+      "mpn": "WSLP25128L000FEA",
+      "stock": 3658,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25128L000FEA/9758424"
     }
   ]
 }

@@ -49,4 +49,4 @@ def sync_metadata(board, netlist_path):
         path = pcbnew.KIID_PATH()
         path.push_back(pcbnew.KIID(find(comp, "tstamps")[1]))
         fp.SetPath(path)
-        fp.SetExcludedFromBOM(fp.GetReference().startswith(("H", "NT")))
+        fp.SetExcludedFromBOM(fp.GetReference().startswith(("H", "NT", "TP")))

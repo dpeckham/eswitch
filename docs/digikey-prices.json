@@ -1,0 +1,2780 @@
+{
+  "currency": "USD",
+  "retrieved_utc_date": "2026-09-19",
+  "note": "Displayed DigiKey cut-tape/bulk pricing. Excludes tax, tariff, shipping, assembly, PCB and reeling fees. Cached pages; not a reserved quote.",
+  "parts": [
+    {
+      "mpn": "3557",
+      "stock": 180115,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/keystone-electronics/3557/2092485",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.27,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.201,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.1796,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.1518,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.12574,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.11619,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 2500,
+          "usd": 0.11,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5000,
+          "usd": 0.1,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-074K7L",
+      "stock": 4663856,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-074K7L/727212",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0805FR-0747RL",
+      "stock": 134792,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0747RL/730919",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.034,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0256,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0208,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0171,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.01344,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01136,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00973,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-072K2L",
+      "stock": 424954,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-072K2L/727016",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CL10C221JB8NFNC",
+      "stock": 984,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL10C221JB8NFNC/3890321",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.042,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0282,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0242,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01742,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "BAT54S-QR",
+      "stock": 26989,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/nexperia-usa-inc/BAT54S-QR/15196086",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.16,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.098,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0694,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0601,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.04354,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CL21B104KBCNNNC",
+      "stock": 4670830,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B104KBCNNNC/3886661",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.045,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0308,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0263,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01904,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-0747KL",
+      "stock": 1837173,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0747KL/727253",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CL21B103KBANNNC",
+      "stock": 2197992,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B103KBANNNC/3886673",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.044,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0298,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0255,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01844,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-0710KL",
+      "stock": 1411869,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0710KL/726880",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "150060GS75000",
+      "stock": 329725,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150060GS75000/4489896",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.15,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.142,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.1239,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "BTS70081EPRXUMA1",
+      "stock": 2980,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/infineon-technologies/BTS70081EPRXUMA1/25880108",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.85,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.363,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.2396,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.1043,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 1.03984,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.00094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.99863,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-073K3L",
+      "stock": 771662,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-073K3L/727126",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "BTS70021EPPXUMA1",
+      "stock": 27810,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/infineon-technologies/BTS70021EPPXUMA1/9829548",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2.9,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 2.163,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.9796,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.7776,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 1.6814,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.64826,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-071K2L",
+      "stock": 65721,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-071K2L/726852",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "ESP32-S3-WROOM-1-N8",
+      "stock": 1353,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N8/15200089",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 5.66,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 4.897,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 4.6324,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 4.2691,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 4.05136,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CC0805KKX5R6BB106",
+      "stock": 19160,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0805KKX5R6BB106/2833625",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.57,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.341,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.2526,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2254,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.1795,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CC0603JRX7R9BB104",
+      "stock": 128729,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0603JRX7R9BB104/5195681",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.12,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.046,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0395,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.02884,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CC0603KRX7R7BB105",
+      "stock": 4273528,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0603KRX7R7BB105/2833752",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.24,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.135,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0958,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0837,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.06352,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "PTS645SM43SMTR92 LFS",
+      "stock": 154446,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/c-k/PTS645SM43SMTR92-LFS/1146840",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.36,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.313,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.2924,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2616,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.24244,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.22878,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-071KL",
+      "stock": 4571738,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-071KL/726843",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "150060BS75000",
+      "stock": 150194,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/150060BS75000/4489895",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.16,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.155,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.1346,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "USB4105-GF-A",
+      "stock": 131990,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/gct/USB4105-GF-A/11198510",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.8,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.676,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.6336,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.6034,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.5745,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.53848,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "SRV05-4HTG-D",
+      "stock": 40506,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SRV05-4HTG-D/10230852",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.51,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.953,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.7092,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.6303,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.49152,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "ERJ-3EKF5101V",
+      "stock": 418212,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERJ-3EKF5101V/1746427",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.039,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0288,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0236,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0195,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.01544,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01314,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.01131,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "61300411121",
+      "stock": 138883,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/61300411121/4846827",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.18,
+          "packaging": "Bag"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.155,
+          "packaging": "Bag"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.1284,
+          "packaging": "Bag"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.1074,
+          "packaging": "Bag"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.1047,
+          "packaging": "Bag"
+        }
+      ]
+    },
+    {
+      "mpn": "0466002.NR",
+      "stock": 9902,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0466002-NR/521355",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.25,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 5,
+          "usd": 1.032,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.952,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.7902,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.729,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.65524,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.60424,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.55698,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "B360A-13-F",
+      "stock": 296575,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/B360A-13-F/724980",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.54,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.333,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.2764,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.2408,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2109,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "SMCJ24CA",
+      "stock": 35243,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SMCJ24CA/762395",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.97,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.606,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.4458,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.3938,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.30218,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "GRM32ER71H475KA88L",
+      "stock": 812354,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GRM32ER71H475KA88L/586595",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.74,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.15,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.9156,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.8434,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.72128,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "TPSM63603V3RDHR",
+      "stock": 1820,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/texas-instruments/TPSM63603V3RDHR/16585661",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 8.99,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 5,
+          "usd": 8.656,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 8.517,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 8.3348,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 8.1996,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 8.0663,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 7.89324,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 7.7646,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-0716K5L",
+      "stock": 157781,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0716K5L/726969",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "GCM32ER70J476KE19L",
+      "stock": 106406,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GCM32ER70J476KE19L/1763982",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.08,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.686,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.5318,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.4843,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.4041,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "691218410002",
+      "stock": 864,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/691218410002/11478586",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.5,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.369,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.293,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.1875,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 510,
+          "usd": 0.98041,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "74650195",
+      "stock": 4352,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/w%C3%BCrth-elektronik/74650195/16608622",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 4.65,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 3.879,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 3.4134,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 3.0989,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 500,
+          "usd": 2.78446,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "ERJ-3EKF22R0V",
+      "stock": 258971,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/ERJ-3EKF22R0V/1746340",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.039,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0288,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0236,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0195,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.01544,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01314,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.01131,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "BSC016N06NSATMA1",
+      "stock": 27503,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/infineon-technologies/BSC016N06NSATMA1/3719792",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 3.01,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.944,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.486,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.3383,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.07926,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "LM74800QDRRRQ1",
+      "stock": 8158,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/texas-instruments/lm74800qdrrrq1/13627158",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 3,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 2.244,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 2.0544,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.8462,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 1.74688,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.71512,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "PSMN1R8-80SSEJ",
+      "stock": 242,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/nexperia-usa-inc/PSMN1R8-80SSEJ/27351652",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 6.84,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 4.598,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 3.6358,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 3.3264,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 3.11554,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "TPS2492PWR",
+      "stock": 5217,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/texas-instruments/TPS2492PWR/2600475",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 4.45,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 3.373,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 3.104,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 2.808,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 2.66688,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 2.6622,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD07115KL",
+      "stock": 20140,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD07115KL/1072207",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0592,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0491,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD0710KL",
+      "stock": 334524,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD0710KL/1072198",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0592,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0491,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD0756K2L",
+      "stock": 29193,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD0756K2L/1072581",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0592,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0491,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-0717K4L",
+      "stock": 67636,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0717K4L/726981",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "C0805C103J5GACTU",
+      "stock": 33371,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/kemet/C0805C103J5GACTU/2211711",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.93,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.579,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.4406,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.3981,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.32616,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "SMCJ16A",
+      "stock": 14728,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/SMCJ16A/762384",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.99,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.617,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.453,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.3998,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.30634,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "STPS41L60CG-TR",
+      "stock": 6464,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/stmicroelectronics/STPS41L60CG-TR/1865307",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 3.41,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 2.218,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.703,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.5372,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.24638,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CL21B473KBCNNNC",
+      "stock": 86830,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B473KBCNNNC/3886908",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.041,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0276,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0237,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01704,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "MMBT3906LT1G",
+      "stock": 1134023,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/onsemi/MMBT3906LT1G/919605",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.15,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.091,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.04042,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.03538,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "EEU-FR1V471L",
+      "stock": 6499,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/EEU-FR1V471L/2433574",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.94,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.592,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.4482,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 200,
+          "usd": 0.36435,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 600,
+          "usd": 0.31665,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.2988,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 2600,
+          "usd": 0.27129,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5000,
+          "usd": 0.25613,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "WSLP25122L000FEA",
+      "stock": 4026,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25122L000FEA/9758585",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2.09,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.438,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.2892,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.203,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.1344,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 1.06476,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.02444,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.99231,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "C1206C104J5JACAUTO",
+      "stock": 1978,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/kemet/C1206C104J5JACAUTO/7419365",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.7,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.5396,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.4902,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.40678,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "0287005.PXCN",
+      "stock": 75706,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287005-PXCN/2519811",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.44,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5,
+          "usd": 0.36,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.333,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.2762,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2548,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.22912,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.21134,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 2000,
+          "usd": 0.17966,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 6000,
+          "usd": 0.15776,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "0287010.PXCN",
+      "stock": 51247,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287010-PXCN/2519807",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.44,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5,
+          "usd": 0.36,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.333,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.2762,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2548,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.22912,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.21134,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 2000,
+          "usd": 0.17966,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 6000,
+          "usd": 0.15776,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "0287020.PXCN",
+      "stock": 61776,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/littelfuse-inc/0287020-PXCN/2519821",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.44,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5,
+          "usd": 0.36,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.333,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.2762,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.2548,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.22912,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.21134,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 2000,
+          "usd": 0.19142,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "R30-1001002",
+      "stock": 9688,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/harwin-inc/R30-1001002/3728277",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.61,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 5,
+          "usd": 0.504,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.468,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.4272,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.4002,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 200,
+          "usd": 0.35425,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 400,
+          "usd": 0.3349,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 600,
+          "usd": 0.32455,
+          "packaging": "Bulk"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.31243,
+          "packaging": "Bulk"
+        }
+      ]
+    },
+    {
+      "mpn": "FMMT720TA",
+      "stock": 12344,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/FMMT720TA/152510",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.82,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.508,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.4236,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.371,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.3265,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-078K25L",
+      "stock": 132942,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-078K25L/730338",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.027,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0196,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0158,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0129,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.00996,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0083,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00701,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "BTS70041EPPXUMA1",
+      "stock": 23292,
+      "url": "https://www.digikey.com/en/products/detail/infineon-technologies/BTS70041EPPXUMA1/7791523",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2.41,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.781,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.6244,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.4524,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 1.37044,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 1.32874,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "CSS4J-4026R-L500F",
+      "stock": 3137,
+      "url": "https://www.digikey.com/en/products/detail/bourns-inc/CSS4J-4026R-L500F/6023729",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2.32,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.538,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.3256,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.193,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.0801,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.95648,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.87906,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-0710RL",
+      "stock": 3050,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-0710RL/726879",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.039,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0296,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.024,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0198,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.01564,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.01326,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.01139,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RC0603FR-07100RL",
+      "stock": 602238,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-07100RL/726888",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.025,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 0.0188,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.015,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0122,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.0094,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.00782,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.00661,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "35SVPF120M",
+      "stock": 56325,
+      "url": "https://www.digikey.com/en/products/detail/panasonic-industry/35SVPF120M/4204891",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2.79,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.852,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.4622,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.3394,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "C0805C123J5GACTU",
+      "stock": 3104,
+      "url": "https://www.digikey.com/en/products/detail/kemet/C0805C123J5GACTU/7382128",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.91,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.57,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.435,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.3933,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.323,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD078K25L",
+      "stock": 27388,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD078K25L/1072671",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0592,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0491,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD071KL",
+      "stock": 140034,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD071KL/1072344",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.072,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0628,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0593,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.05206,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD074K7L",
+      "stock": 41215,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD074K7L/5139124",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.072,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0628,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0593,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.05206,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RT0603BRD077K5L",
+      "stock": 43215,
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD077K5L/5252425",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.1,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.067,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0592,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0559,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.0491,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "RG1608P-222-B-T5",
+      "stock": 36377,
+      "url": "https://www.digikey.com/en/products/detail/susumu/RG1608P-222-B-T5/1240901",
+      "checked": "2026-09-19",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 0.11,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 0.082,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 0.0716,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 0.0677,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.05942,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "WSLP25124L000FEA",
+      "stock": 4845,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25124L000FEA/9758589",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 1.97,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.342,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.1992,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.117,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.0516,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.98508,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.94658,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.91592,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    },
+    {
+      "mpn": "WSLP25128L000FEA",
+      "stock": 3658,
+      "checked": "2026-09-19",
+      "url": "https://www.digikey.com/en/products/detail/vishay-dale/WSLP25128L000FEA/9758424",
+      "price_breaks": [
+        {
+          "quantity": 1,
+          "usd": 2,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 10,
+          "usd": 1.354,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 25,
+          "usd": 1.2076,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 50,
+          "usd": 1.1234,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 100,
+          "usd": 1.0562,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 250,
+          "usd": 0.98804,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 500,
+          "usd": 0.94856,
+          "packaging": "Cut Tape (CT)"
+        },
+        {
+          "quantity": 1000,
+          "usd": 0.91713,
+          "packaging": "Cut Tape (CT)"
+        }
+      ]
+    }
+  ]
+}
