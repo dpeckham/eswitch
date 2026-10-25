@@ -1,0 +1,134 @@
+{
+  "status": "analytical_screen_requires_transient_and_bench_validation",
+  "input_scope": "Correct polarity, 9.5\u201316V continuous; no electronic reverse/OV disconnect",
+  "logic_shunt": {
+    "part": "TLA431AIDBZR",
+    "nominal_v": 2.495,
+    "screened_min_v": 2.438,
+    "screened_max_v": 2.552,
+    "minimum_quiescent_cathode_bias_a": 0.00026693584252042223,
+    "adc_high_voltage_screen_v": 3.202,
+    "continuous_injection_bound_a": 0.023317429615301956,
+    "clamp_dissipation_bound_w": 0.05950608037825059,
+    "bias_input_power_at_3v3_w": 0.0012074999999999996,
+    "caveats": [
+      "DC screen only; startup/dynamic overshoot must be measured",
+      "OFF-state ADC safety also depends on local DEN pull-downs and disabled IS leakage",
+      "An abnormally driven sense pin can still feed an unpowered MCU through its internal pin clamp",
+      "Diode cold forward-drop allowance is a screening assumption, not a guaranteed device limit",
+      "No claim that arbitrary dead hardware is isolated by this clamp"
+    ]
+  },
+  "channels": [
+    {
+      "channel": 1,
+      "fuse_max_a": 10,
+      "screen_current_a": 10,
+      "profet_hot_rds_max_ohm": 0.008,
+      "profet_loss_at_screen_a_w": 0.8,
+      "disabled_is_voltage_screen_v": 0.0011109999999999998,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 2,
+      "fuse_max_a": 10,
+      "screen_current_a": 10,
+      "profet_hot_rds_max_ohm": 0.008,
+      "profet_loss_at_screen_a_w": 0.8,
+      "disabled_is_voltage_screen_v": 0.0011109999999999998,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 3,
+      "fuse_max_a": 5,
+      "screen_current_a": 5,
+      "profet_hot_rds_max_ohm": 0.016,
+      "profet_loss_at_screen_a_w": 0.4,
+      "disabled_is_voltage_screen_v": 0.0016665,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 4,
+      "fuse_max_a": 5,
+      "screen_current_a": 5,
+      "profet_hot_rds_max_ohm": 0.016,
+      "profet_loss_at_screen_a_w": 0.4,
+      "disabled_is_voltage_screen_v": 0.0016665,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 5,
+      "fuse_max_a": 5,
+      "screen_current_a": 5,
+      "profet_hot_rds_max_ohm": 0.016,
+      "profet_loss_at_screen_a_w": 0.4,
+      "disabled_is_voltage_screen_v": 0.0016665,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 6,
+      "fuse_max_a": 5,
+      "screen_current_a": 5,
+      "profet_hot_rds_max_ohm": 0.016,
+      "profet_loss_at_screen_a_w": 0.4,
+      "disabled_is_voltage_screen_v": 0.0016665,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 7,
+      "fuse_max_a": 5,
+      "screen_current_a": 5,
+      "profet_hot_rds_max_ohm": 0.016,
+      "profet_loss_at_screen_a_w": 0.4,
+      "disabled_is_voltage_screen_v": 0.0016665,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    },
+    {
+      "channel": 8,
+      "fuse_max_a": 20,
+      "screen_current_a": 20,
+      "profet_hot_rds_max_ohm": 0.0048,
+      "profet_loss_at_screen_a_w": 1.92,
+      "disabled_is_voltage_screen_v": 0.000606,
+      "fitted_vs_capacitance_max_f": 1.617e-07,
+      "fitted_vs_capacitor_energy_at_16v_j": 2.06976e-05
+    }
+  ],
+  "trunk_screen": {
+    "copper_temperature_c": 80,
+    "board_mm": [
+      136,
+      104
+    ],
+    "raw_spine_length_m": 0.03,
+    "raw_spine_width_mm": 4.5,
+    "raw_bus_length_m": 0.075,
+    "raw_bus_width_mm": 14,
+    "return_length_m": 0.1,
+    "return_effective_width_mm": 20,
+    "raw_single_layer_r_ohm": 0.0037147559523809525,
+    "ground_plane_r_ohm": 0.0017726639344262298,
+    "drop_at_40a_v": 0.2194967954722873,
+    "full_length_40a_loss_w": 8.779871818891491,
+    "caveats": [
+      "Conservative full 40A over full length, actual current is distributed",
+      "Excludes contact, fuse, via, spreading and unsampled local neck resistance",
+      "No inner-layer current-sharing credit; inner raw copper has signal crossings",
+      "Compact VS heat-spreader area is smaller; junction temperature remains unqualified",
+      "Final filled geometry must preserve the assumed conductor paths"
+    ]
+  },
+  "sources": [
+    "https://www.ti.com/lit/ds/symlink/tla431.pdf",
+    "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7004-1epp-datasheet-en.pdf",
+    "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+    "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7002-1epp-datasheet-en.pdf"
+  ]
+}

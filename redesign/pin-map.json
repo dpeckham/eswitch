@@ -1,0 +1,74 @@
+[
+  {
+    "channel": 1,
+    "adc_gpio": 1,
+    "in_gpio": 15,
+    "den_gpio": 21,
+    "adc_module_pad": 39,
+    "in_module_pad": 8,
+    "den_module_pad": 23
+  },
+  {
+    "channel": 2,
+    "adc_gpio": 2,
+    "in_gpio": 16,
+    "den_gpio": 35,
+    "adc_module_pad": 38,
+    "in_module_pad": 9,
+    "den_module_pad": 28
+  },
+  {
+    "channel": 3,
+    "adc_gpio": 3,
+    "in_gpio": 17,
+    "den_gpio": 36,
+    "adc_module_pad": 15,
+    "in_module_pad": 10,
+    "den_module_pad": 29
+  },
+  {
+    "channel": 4,
+    "adc_gpio": 4,
+    "in_gpio": 18,
+    "den_gpio": 37,
+    "adc_module_pad": 4,
+    "in_module_pad": 11,
+    "den_module_pad": 30
+  },
+  {
+    "channel": 5,
+    "adc_gpio": 5,
+    "in_gpio": 11,
+    "den_gpio": 38,
+    "adc_module_pad": 5,
+    "in_module_pad": 19,
+    "den_module_pad": 31
+  },
+  {
+    "channel": 6,
+    "adc_gpio": 6,
+    "in_gpio": 12,
+    "den_gpio": 39,
+    "adc_module_pad": 6,
+    "in_module_pad": 20,
+    "den_module_pad": 32
+  },
+  {
+    "channel": 7,
+    "adc_gpio": 7,
+    "in_gpio": 13,
+    "den_gpio": 40,
+    "adc_module_pad": 7,
+    "in_module_pad": 21,
+    "den_module_pad": 33
+  },
+  {
+    "channel": 8,
+    "adc_gpio": 8,
+    "in_gpio": 14,
+    "den_gpio": 41,
+    "adc_module_pad": 12,
+    "in_module_pad": 22,
+    "den_module_pad": 34
+  }
+]

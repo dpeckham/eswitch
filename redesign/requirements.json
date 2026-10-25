@@ -1,0 +1,34 @@
+{
+  "status": "routed_compact_prototype_not_bench_qualified",
+  "pcb_layout": {"width_mm": 136, "height_mm": 104, "channel_banks": 2, "channels_per_bank": 4, "output_edges": "opposite", "layers": 4},
+  "architecture": "eight_profets_with_passive_fuse_bypass",
+  "input_voltage_v": {"nominal": 12, "minimum": 9.5, "maximum": 16},
+  "aggregate_continuous_target_a": 40,
+  "channel_fuse_maxima_a": [10, 10, 5, 5, 5, 5, 5, 20],
+  "fuse_type": "ATO blade",
+  "clips_per_channel": 3,
+  "fuses_per_channel": 1,
+  "controller": "ESP32-S3-WROOM-1-N8",
+  "communications": ["Wi-Fi", "Bluetooth LE", "USB for battery-disconnected programming"],
+  "manual_modes": ["AUTO", "BYPASS", "OFF (fuse removed)"],
+  "fuse_changes_require_battery_disconnected": true,
+  "recovery": {
+    "all_channels_may_be_changed_to_bypass_or_removed": true,
+    "continued_automatic_operation_during_fault_not_required": true,
+    "failed_channel_may_be_sacrificed_by_removing_fuse": true,
+    "bypass_has_no_series_electronic_switch": true,
+    "healthy_profet_inverse_current_allowed_subject_to_validation": true,
+    "bypass_does_not_isolate_profet_output": true,
+    "recovery_from_every_internal_short_not_guaranteed": true
+  },
+  "procurement": {"boards": 3, "bom_quantities": "per_board", "supplier": "DigiKey", "assembly": "manual"},
+  "protection": {
+    "upstream_battery_fuse_required": true,
+    "logic_supply_separately_fused": true,
+    "branch_auto_protection": "PROFET native overload/temperature latch; blade fuse",
+    "branch_bypass_protection": "blade fuse",
+    "no_relay_coils": true,
+    "no_firmware_automatic_fault_retry": true,
+    "no_claim_of_40a_electronic_aggregate_limit": true
+  }
+}

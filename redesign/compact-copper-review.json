@@ -1,0 +1,136 @@
+{
+  "board_mm": [
+    136,
+    104
+  ],
+  "board_area_reduction_percent": 31.072124756335285,
+  "vs_filled_area_comparison": {
+    "VS1": {
+      "front": {
+        "large_mm2": 471.01,
+        "compact_mm2": 166.73
+      },
+      "inner2": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.3
+      },
+      "back": {
+        "large_mm2": 219.06,
+        "compact_mm2": 102.11
+      }
+    },
+    "VS2": {
+      "front": {
+        "large_mm2": 473.88,
+        "compact_mm2": 164.93
+      },
+      "inner2": {
+        "large_mm2": 218.86,
+        "compact_mm2": 102.09
+      },
+      "back": {
+        "large_mm2": 218.86,
+        "compact_mm2": 102.3
+      }
+    },
+    "VS3": {
+      "front": {
+        "large_mm2": 472.96,
+        "compact_mm2": 167.81
+      },
+      "inner2": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.3
+      },
+      "back": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.31
+      }
+    },
+    "VS4": {
+      "front": {
+        "large_mm2": 473.92,
+        "compact_mm2": 167.75
+      },
+      "inner2": {
+        "large_mm2": 219.06,
+        "compact_mm2": 102.3
+      },
+      "back": {
+        "large_mm2": 219.06,
+        "compact_mm2": 102.3
+      }
+    },
+    "VS5": {
+      "front": {
+        "large_mm2": 440.88,
+        "compact_mm2": 168.61
+      },
+      "inner2": {
+        "large_mm2": 204.69,
+        "compact_mm2": 102.29
+      },
+      "back": {
+        "large_mm2": 204.89,
+        "compact_mm2": 102.29
+      }
+    },
+    "VS6": {
+      "front": {
+        "large_mm2": 474.88,
+        "compact_mm2": 168.61
+      },
+      "inner2": {
+        "large_mm2": 219.06,
+        "compact_mm2": 102.29
+      },
+      "back": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.29
+      }
+    },
+    "VS7": {
+      "front": {
+        "large_mm2": 476.06,
+        "compact_mm2": 168.61
+      },
+      "inner2": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.29
+      },
+      "back": {
+        "large_mm2": 218.87,
+        "compact_mm2": 102.29
+      }
+    },
+    "VS8": {
+      "front": {
+        "large_mm2": 475.01,
+        "compact_mm2": 168.93
+      },
+      "inner2": {
+        "large_mm2": 218.79,
+        "compact_mm2": 102.31
+      },
+      "back": {
+        "large_mm2": 218.98,
+        "compact_mm2": 102.3
+      }
+    }
+  },
+  "raw_spine_width_screen": {
+    "front": {
+      "minimum_total_filled_width_mm": 4.923077973828683,
+      "sample_y_at_min_mm": 29.0
+    },
+    "inner2": {
+      "minimum_total_filled_width_mm": 0.7995000000000019,
+      "sample_y_at_min_mm": 37.5
+    }
+  },
+  "limitations": [
+    "Cross-section samples total copper width, not a full resistance/current-density solution",
+    "Reduced VS copper area changes PROFET thermal impedance; no 40A thermal qualification is implied",
+    "Board outline excludes enclosure and cable bend clearances"
+  ]
+}
