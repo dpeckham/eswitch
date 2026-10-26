@@ -1,2 +1,3 @@
-# Compatible with KiCad 10's embedded Python 3.11.
+# Compatible with the installed KiCad embedded Python (3.9 or 3.11).
 numpy==1.26.4
+shapely==2.0.7

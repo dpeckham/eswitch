@@ -1,22 +1,38 @@
-# Eight-channel redesign — routed prototype
+# Eight-channel redesign — power-layout rework
 
 Start with [`eswitch-simple.kicad_pro`](eswitch-simple.kicad_pro).
-The completed **136 × 104 mm, four-layer PCB** is
-[`eswitch-simple.kicad_pcb`](eswitch-simple.kicad_pcb). Native KiCad 10 reports
-**zero DRC violations, zero unconnected nets and zero schematic-parity findings**.
+The **176 × 116 mm, four-layer PCB** is
+[`eswitch-simple.kicad_pcb`](eswitch-simple.kicad_pcb).
 See [build notes](BUILD.md) for dimensions, stackup, assembly and qualification status.
 
 Current exports are in `../fab/`: `eswitch-simple-project.zip`,
 `eswitch-simple-fabrication.zip`, `board-top.png` and `board-bottom.png`.
 The electrical/thermal bench qualification described below remains open.
 
-The compact layout places four channels on each of two opposite output edges.
-It is **31.1% smaller in PCB area** and **40.4% shorter in its longest dimension**
-than the earlier 228 × 90 mm layout, retaining the same components and eight mounts.
-Old releases and backups have been removed from this worktree.
-`compact-copper-review.json` compares the filled VS heat-spreader areas and raw
-spine widths. The reduced heat-spreader area needs thermal validation at the
-retained 40 A aggregate target; PCB size does not include cable/enclosure clearance.
+The layout places four channels on each of two opposite output edges, at 26 mm
+pitch. It deliberately grows the former 136 × 104 mm board to provide room for
+power distribution. A 36 × 6 mm top-left notch preserves the ESP32 antenna's
+original board-edge relationship. Components and eight mounting holes are retained.
+
+The rework moves signal circuitry out of the battery feeds, reserves F.Cu/In2
+battery corridors, widens three-layer load bars, adds outer-layer return corridors
+and ground stitching, and uses twelve 0.3 mm-drill vias in each PROFET exposed pad.
+**Output polarity changed: J11–J18 pin 1 is LOAD+, pin 2 is GND.** Schematic and
+silkscreen identify the new assignment; do not reuse the old wiring convention.
+
+`power-copper-review.json` checks connected paths in actual saved copper on each
+layer and records thermal copper areas. It is not a resistance, current-sharing
+or thermal solution. Terminal landings are exempt from erosion, and drilled-hole,
+barrel and contact restrictions need separate assessment. The historical line-width
+report is retained only as `../docs/compact-copper-review-136x104.json`; its former
+lumped 4.5 mm feed / 20 mm return resistance estimate has been withdrawn.
+
+**Released for prototype fabrication and controlled bench testing.** Keep the
+ATO fuse architecture. F9 and ATO battery-fault coordination, TVS energy handling,
+physical clip fit and thermal performance are open qualification items. This
+release authorizes making first articles; it does not assert battery-fault safety
+or a 40 A continuous rating. Order JLC041622-3313 with 2 oz outer AND inner copper
+and filled/capped vias as specified in `BUILD.md` and `JLCPCB-ORDER.txt`.
 
 ## Agreed architecture
 
@@ -153,9 +169,16 @@ filling runs through `native.py` using the native KiCad CLI, because the Python
 zone-filling API crashes in this environment. The transactional router retains
 only batches passing native copper DRC; its intermediate boards can still have
 unconnected nets. A clean placement DRC is not a completed routing check.
-`compact.py` generates a compact placement candidate; it does not replace the
-finished PCB. Subsequent routing and local corrections are retained in the
-authoritative PCB. Obsolete layout generators and intermediate boards were removed.
+`compact.py` generates the historical compact placement candidate; it does not replace
+the finished PCB. `rework_power.py` migrates a 136 × 104 mm source board into an
+expanded candidate, and the power finishing scripts operate only on explicit
+candidate paths. Subsequent checked routing and local corrections are retained in
+the authoritative PCB. Install `requirements-route-gaps.txt` into `out/py39` using
+the same KiCad Python interpreter used for routing/geometry checks.
+`just verify` and packaging both run the source-hashed power-geometry regression.
+Its width floors are regression guards, not a declaration of current capacity.
+`prune_power.py` uses native, connectivity-guarded pruning for abandoned signal
+stubs; do not promote a candidate based only on a router's unconnected-net count.
 `python3 redesign/export.py` rechecks final PCB parity/DRC and recreates both ZIPs.
 
 ### Manufacturer references

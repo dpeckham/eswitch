@@ -58,11 +58,11 @@ def schematic():
             end = tuple(round(v + d * sch.STUB, 4) for v, d in zip(pos, direction))
             items.extend([sch.wire(pos, end), sch.label(net, end, direction)])
     annotations = [
-        ('ESWITCH SIMPLE — ENGINEERING DRAFT / NOT FOR FABRICATION', (12.7, 17.78), 3),
+        ('ESWITCH SIMPLE — PROTOTYPE / BENCH QUALIFICATION REQUIRED', (12.7, 17.78), 3),
         ('ESP32-S3: independent IN and DEN for every channel; ADC1 current sense', (330.2, 25.4), 1.5),
         ('USB: battery disconnected for programming. Wi-Fi / BLE / OTA in service.', (330.2, 222.25), 1.5),
         ('LOGIC: separately fused; no common series switch in branch power paths', (12.7, 232.41), 1.5),
-        ('OUTPUTS: pin 1 GND, pin 2 LOAD+; direct-entry screw terminals', (330.2, 246.38), 1.5),
+        ('OUTPUTS: pin 1 LOAD+, pin 2 GND; direct-entry screw terminals', (330.2, 246.38), 1.5),
         ('9.5–16 V / 40 A aggregate TARGET. Upstream battery fuse required.', (330.2, 370.84), 1.5),
         ('BYPASS connects raw battery through ONE fuse. Move fuses ONLY unpowered.', (12.7, 365.76), 1.5),
         ('Recovery: all usable channels BYPASS; failed/unused channels fuse REMOVED.', (12.7, 373.38), 1.5),
@@ -74,7 +74,7 @@ def schematic():
     document = S('kicad_sch', S('version', sch.SCH_VERSION), S('generator', 'eeschema'),
                  S('generator_version', '10.0'), S('uuid', sch.ROOT_UUID), S('paper', 'A2'),
                  S('title_block', S('title', 'eswitch simple — passive fuse bypass'),
-                   S('date', '2026-10-25'), S('rev', 'DRAFT-1')),
+                    S('date', '2026-10-26'), S('rev', 'DRAFT-PWR2')),
                  S('lib_symbols', *used.values()), *items,
                  S('sheet_instances', S('path', '/', S('page', '1'))), S('embedded_fonts', Sym('no')))
     (HERE / f'{PROJECT}.kicad_sch').write_text(dump(document) + '\n')
@@ -133,7 +133,7 @@ def bom():
                     unpriced=[r['mpn'] for r in result if r['exact_1_board_usd'] is None])
     (HERE / 'cost-estimate.json').write_text(json.dumps(estimate, indent=2) + '\n')
     with (HERE / 'bom-draft.csv').open('w', newline='') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator='\n')
         writer.writerow(['Quantity per board', 'MPN', 'References'])
         writer.writerows((r['quantity'], r['mpn'], r['references']) for r in result)
     print(f"Draft components: ${estimate['one_board_usd']:.2f} one board; "

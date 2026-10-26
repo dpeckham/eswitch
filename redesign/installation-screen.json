@@ -1,0 +1,65 @@
+{
+  "status": "wire_drop_screened_fuse_coordination_unresolved",
+  "requirements_sha256": "41c9daf1bd7c5243bb4a71717c4a3888eac13f6d28c00a384b565a572d26d80d",
+  "input": {
+    "supply_loop_m": 2,
+    "pump_loop_m": 6,
+    "supply_area_mm2": 8.37,
+    "pump_area_mm2": 4.0,
+    "common_current_a": 40,
+    "pump_current_a": 4.8
+  },
+  "drops": [
+    {
+      "copper_temperature_c": 20,
+      "supply_loop_resistance_ohm": 0.0041194743130227,
+      "pump_loop_resistance_ohm": 0.025859999999999998,
+      "supply_drop_at_40a_v": 0.164778972520908,
+      "pump_drop_at_4_8a_v": 0.12412799999999999,
+      "total_wire_only_drop_v": 0.288906972520908
+    },
+    {
+      "copper_temperature_c": 75,
+      "supply_loop_resistance_ohm": 0.005009898685782557,
+      "pump_loop_resistance_ohm": 0.031449639,
+      "supply_drop_at_40a_v": 0.2003959474313023,
+      "pump_drop_at_4_8a_v": 0.1509582672,
+      "total_wire_only_drop_v": 0.3513542146313023
+    }
+  ],
+  "ideal_source_fault_scenarios": [
+    {
+      "source_voltage_v": 14.6,
+      "copper_temperature_c": 0,
+      "ideal_source_wire_only_fault_current_a": 3846.4744207971626
+    },
+    {
+      "source_voltage_v": 16,
+      "copper_temperature_c": 0,
+      "ideal_source_wire_only_fault_current_a": 4215.314433750315
+    },
+    {
+      "source_voltage_v": 14.6,
+      "copper_temperature_c": 20,
+      "ideal_source_wire_only_fault_current_a": 3544.1415313225057
+    },
+    {
+      "source_voltage_v": 16,
+      "copper_temperature_c": 20,
+      "ideal_source_wire_only_fault_current_a": 3883.9907192575406
+    }
+  ],
+  "installed_fuse_interrupting_ratings_a": {
+    "logic_0466002_NR": 50,
+    "branch_287_ATOF": 1000
+  },
+  "conclusion": "Cable lengths alone do not establish fault current below either onboard fuse interrupting rating. Require a documented source bound/series combination, or change protection architecture.",
+  "exclusions": [
+    "cable ampacity certification",
+    "fuse/terminal/PCB voltage drop",
+    "pump startup and locked-rotor current",
+    "transient voltage and inductance",
+    "BMS protection timing",
+    "fuse let-through energy and selectivity"
+  ]
+}

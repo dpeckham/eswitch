@@ -34,6 +34,7 @@ def circuit_checks():
     assert refs['F9'].pins == {'1': 'BATT_RAW', '2': 'LOGIC_FUSED'}
     for n in range(1, 9):
         assert refs[f'F{n}'].pins == {'1': f'VS{n}', '2': 'BATT_RAW', '3': f'LOAD{n}'}
+        assert refs[f'J{n+10}'].pins == {'1': f'LOAD{n}', '2': 'GND'}
         assert refs[f'U{n}'].pins['15'] == f'VS{n}'
         assert refs[f'U{n}'].pins['8'] == f'LOAD{n}'
         assert refs[f'R{n}08'].pins == {'1': f'INR{n}', '2': f'UGND{n}'}
@@ -167,7 +168,10 @@ def main():
     violations = [v for sheet in report['sheets'] for v in sheet['violations']]
     assert not violations
     inputs = [HERE / n for n in ('circuit.py', 'generate.py', 'verify.py', 'requirements.json',
-                                'eswitch-simple.kicad_sch', 'eswitch-simple.kicad_pro')]
+                                'eswitch-simple.kicad_sch', 'eswitch-simple.kicad_pro',
+                                'BUILD.md', 'JLCPCB-ORDER.txt', 'jlc-stackup-evidence.json',
+                                'jlc_feature_screen.py', 'installation_screen.py',
+                                'installation-screen.json', 'export.py')]
     inputs.extend([ROOT / 'tools/gen_sch.py', ROOT / 'lib/eswitch.kicad_sym'])
     board=HERE/'eswitch-simple.kicad_pcb'
     layout=None
@@ -178,6 +182,12 @@ def main():
         assert not layout['violations'],layout['violations']
         assert not layout['unconnected_items'],layout['unconnected_items']
         assert not layout.get('schematic_parity'),layout.get('schematic_parity')
+        python=os.environ.get('KICAD_PYTHON','/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9')
+        geometry=subprocess.run([python,str(HERE/'power_geometry.py'),str(board),'--check',
+                                 '--output',str(HERE/'power-copper-review.json')],capture_output=True,text=True)
+        (out/'power-geometry.log').write_text(geometry.stdout+geometry.stderr)
+        if geometry.returncode:raise RuntimeError('Power geometry regression failed; see out/redesign/power-geometry.log')
+        inputs.extend([HERE/'power_geometry.py',HERE/'power-copper-review.json'])
         inputs.append(board)
     summary = dict(status='layout_and_schematic_checks_passed_not_electrical_qualification' if layout else 'schematic_checks_passed_not_electrical_qualification',
                     erc_violations=len(violations), mode_switch_combinations=count,
@@ -185,6 +195,7 @@ def main():
                     pcb_drc_violations=len(layout['violations']) if layout else None,
                     pcb_unconnected=len(layout['unconnected_items']) if layout else None,
                     pcb_schematic_parity=len(layout.get('schematic_parity',[])) if layout else None,
+                    connected_power_geometry='passed_not_ampacity_qualification' if layout else None,
                     source_sha256={str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs})
     (out / 'verification.json').write_text(json.dumps(summary, indent=2) + '\n')
     print('Schematic'+(' and PCB layout' if layout else '')+' checks passed. Electrical/thermal qualification remains open.')

@@ -1,0 +1,720 @@
+{
+  "board_sha256": "f3307b27002d69030800ea5b96d8613724d483ac9b39608daa9aadeca9511fec",
+  "method": "Per-layer morphological erosion between same-net pad-group centroids; null means no same-layer path; terminal landings exempt",
+  "layer_names": {
+    "front": "F.Cu",
+    "ground": "GND",
+    "inner2": "PWR",
+    "back": "B.Cu"
+  },
+  "limitations": [
+    "Not an ampacity, resistance or thermal solution",
+    "Does not establish via-barrel capacity or layer current sharing",
+    "Pads modeled solid; drilled-hole/contact constrictions require separate assessment",
+    "Widest surviving path does not measure parallel paths or neck length"
+  ],
+  "paths": [
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "central_bus",
+      "target_xy_mm": [
+        100,
+        58
+      ],
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 10.49,
+        "GND": null,
+        "PWR": 10.49,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F1",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.65,
+        "GND": null,
+        "PWR": 4.65,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD1",
+      "source": "F1",
+      "target": "J11",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.7,
+        "GND": null,
+        "PWR": 3.17,
+        "B.Cu": 2.7
+      }
+    },
+    {
+      "net": "LOAD1",
+      "source": "U1",
+      "target": "J11",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.93,
+        "GND": null,
+        "PWR": 4.93,
+        "B.Cu": 4.58
+      }
+    },
+    {
+      "net": "VS1",
+      "source": "F1",
+      "target": "U1",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 6.13,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J11",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 3.54,
+        "GND": 5.3,
+        "PWR": null,
+        "B.Cu": 3.11
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F2",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.65,
+        "GND": null,
+        "PWR": 4.65,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD2",
+      "source": "F2",
+      "target": "J12",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.17,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD2",
+      "source": "U2",
+      "target": "J12",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.93,
+        "GND": null,
+        "PWR": 4.93,
+        "B.Cu": 4.58
+      }
+    },
+    {
+      "net": "VS2",
+      "source": "F2",
+      "target": "U2",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.71,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J12",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.33,
+        "GND": 5.65,
+        "PWR": null,
+        "B.Cu": 3.11
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F3",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.65,
+        "GND": null,
+        "PWR": 4.65,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD3",
+      "source": "F3",
+      "target": "J13",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.17,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD3",
+      "source": "U3",
+      "target": "J13",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.93,
+        "GND": null,
+        "PWR": 4.93,
+        "B.Cu": 4.58
+      }
+    },
+    {
+      "net": "VS3",
+      "source": "F3",
+      "target": "U3",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 7.13,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J13",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 3.37,
+        "GND": 5.65,
+        "PWR": null,
+        "B.Cu": 3.11
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F4",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.65,
+        "GND": null,
+        "PWR": 4.65,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD4",
+      "source": "F4",
+      "target": "J14",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.17,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD4",
+      "source": "U4",
+      "target": "J14",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.29,
+        "GND": null,
+        "PWR": 5.29,
+        "B.Cu": 5.13
+      }
+    },
+    {
+      "net": "VS4",
+      "source": "F4",
+      "target": "U4",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 7.14,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J14",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 3.71,
+        "GND": 5.65,
+        "PWR": null,
+        "B.Cu": 3.11
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F5",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.39,
+        "GND": null,
+        "PWR": 4.39,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD5",
+      "source": "F5",
+      "target": "J15",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.17,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD5",
+      "source": "U5",
+      "target": "J15",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.29,
+        "GND": null,
+        "PWR": 5.29,
+        "B.Cu": 5.13
+      }
+    },
+    {
+      "net": "VS5",
+      "source": "F5",
+      "target": "U5",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.71,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J15",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 7.6,
+        "GND": 10.74,
+        "PWR": null,
+        "B.Cu": 4.17
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F6",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.39,
+        "GND": null,
+        "PWR": 4.39,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD6",
+      "source": "F6",
+      "target": "J16",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.14,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD6",
+      "source": "U6",
+      "target": "J16",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.29,
+        "GND": null,
+        "PWR": 5.29,
+        "B.Cu": 5.13
+      }
+    },
+    {
+      "net": "VS6",
+      "source": "F6",
+      "target": "U6",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.71,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J16",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 6.61,
+        "GND": 10.73,
+        "PWR": null,
+        "B.Cu": 4.17
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F7",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.39,
+        "GND": null,
+        "PWR": 4.39,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD7",
+      "source": "F7",
+      "target": "J17",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.14,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD7",
+      "source": "U7",
+      "target": "J17",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.29,
+        "GND": null,
+        "PWR": 5.29,
+        "B.Cu": 5.13
+      }
+    },
+    {
+      "net": "VS7",
+      "source": "F7",
+      "target": "U7",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.71,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J17",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 7.6,
+        "GND": 10.74,
+        "PWR": null,
+        "B.Cu": 4.17
+      }
+    },
+    {
+      "net": "BATT_RAW",
+      "source": "J2",
+      "target": "F8",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 4.39,
+        "GND": null,
+        "PWR": 4.39,
+        "B.Cu": null
+      }
+    },
+    {
+      "net": "LOAD8",
+      "source": "F8",
+      "target": "J18",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 2.8,
+        "GND": null,
+        "PWR": 3.14,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "LOAD8",
+      "source": "U8",
+      "target": "J18",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.29,
+        "GND": null,
+        "PWR": 5.29,
+        "B.Cu": 5.13
+      }
+    },
+    {
+      "net": "VS8",
+      "source": "F8",
+      "target": "U8",
+      "landing_exempt_radius_mm": [
+        3,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 5.71,
+        "GND": null,
+        "PWR": 2.8,
+        "B.Cu": 2.8
+      }
+    },
+    {
+      "net": "GND",
+      "source": "J3",
+      "target": "J18",
+      "landing_exempt_radius_mm": [
+        8,
+        3
+      ],
+      "connected_width_mm": {
+        "F.Cu": 7.6,
+        "GND": 10.74,
+        "PWR": null,
+        "B.Cu": 4.17
+      }
+    }
+  ],
+  "thermal_geometry": [
+    {
+      "channel": 1,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 244.21,
+        "GND": 18.98,
+        "PWR": 124.59,
+        "B.Cu": 146.13
+      }
+    },
+    {
+      "channel": 2,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 243.48,
+        "GND": 18.98,
+        "PWR": 124.5,
+        "B.Cu": 146.04
+      }
+    },
+    {
+      "channel": 3,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 244.28,
+        "GND": 18.98,
+        "PWR": 124.59,
+        "B.Cu": 146.13
+      }
+    },
+    {
+      "channel": 4,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 244.21,
+        "GND": 18.98,
+        "PWR": 124.59,
+        "B.Cu": 146.13
+      }
+    },
+    {
+      "channel": 5,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 244.28,
+        "GND": 18.98,
+        "PWR": 124.59,
+        "B.Cu": 146.13
+      }
+    },
+    {
+      "channel": 6,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 243.1,
+        "GND": 18.98,
+        "PWR": 124.58,
+        "B.Cu": 146.11
+      }
+    },
+    {
+      "channel": 7,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 243.02,
+        "GND": 18.98,
+        "PWR": 124.57,
+        "B.Cu": 146.11
+      }
+    },
+    {
+      "channel": 8,
+      "exposed_pad_vias": 12,
+      "vs_planar_copper_mm2": {
+        "F.Cu": 243.62,
+        "GND": 18.98,
+        "PWR": 124.58,
+        "B.Cu": 146.11
+      }
+    }
+  ],
+  "geometric_regression_failures": []
+}

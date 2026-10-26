@@ -1,0 +1,33 @@
+{
+  "checked": "2026-10-26",
+  "source": "https://jlcpcb.com/impedance",
+  "public_query_endpoint": "https://jlcpcb.com/api/overseas-core-platform/shoppingCart/getImpedanceTemplateSettings",
+  "query": {"stencilLayer": 4, "stencilPly": 1.6, "cuprumThickness": 2, "insideCuprumThickness": 2},
+  "selected_template": "JLC041622-3313",
+  "impedanceTemplateCode": "20220513021946",
+  "enableFlag": true,
+  "published_compressionThickness_mm": 1.589,
+  "outer_copper_mm": 0.07,
+  "inner_copper_mm": 0.061,
+  "top_prepreg_mm": [0.107, 0.0765],
+  "core_dielectric_mm": 0.96,
+  "bottom_prepreg_mm": [0.0765, 0.107],
+  "published_layer_sum_mm": 1.689,
+  "thickness_discrepancy": "Manufacturer response labels compressionThickness 1.589 mm but listed copper plus dielectric thicknesses sum to 1.689 mm. Do not silently adjust dielectric dimensions to force the sum. Both lie within nominal 1.6 mm +/-10%; order by exact named stackup, confirm finished thickness on CAM stackup.",
+  "historical_usb_calculator": {
+    "checked": "2026-09-16",
+    "source": "https://jlcpcb.com/pcb-impedance-calculator",
+    "repository_evidence": "13d0567^:docs/fabrication-stackup-evidence.json",
+    "target_ohms": 90,
+    "type": "Differential Pair (Non coplanar)",
+    "signal_layer": "L4",
+    "reference_layer": "L3",
+    "width_mm": 0.2334,
+    "gap_mm": 0.2141,
+    "saved_layout_width_mm": 0.235,
+    "saved_layout_straight_gap_mm": 0.215,
+    "fresh_impedance_calculation_performed": false
+  },
+  "order_process_selection": "ENIG; green mask; epoxy filled and capped vias, including thermal and diode-pad vias; preserve component PTH and NPTH holes",
+  "manufacturer_order_accepted": false
+}

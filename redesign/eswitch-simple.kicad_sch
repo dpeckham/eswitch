@@ -6,8 +6,8 @@
 	(paper "A2")
 	(title_block
 		(title "eswitch simple — passive fuse bypass")
-		(date "2026-10-25")
-		(rev "DRAFT-1")
+		(date "2026-10-26")
+		(rev "DRAFT-PWR2")
 	)
 	(lib_symbols
 		(symbol "eswitch:FuseHolder_ATO_3pos"
@@ -32940,7 +32940,7 @@
 		)
 		(uuid "b29612a7-fa33-52a6-8d4b-15ddae1b7bb5")
 	)
-	(label "GND"
+	(label "LOAD1"
 		(at 332.74 269.24 180)
 		(effects
 			(font
@@ -32961,7 +32961,7 @@
 		)
 		(uuid "d3593a5e-ab79-56ef-aed5-85062fa4a6a4")
 	)
-	(label "LOAD1"
+	(label "GND"
 		(at 332.74 271.78 180)
 		(effects
 			(font
@@ -33058,7 +33058,7 @@
 		)
 		(uuid "639738b0-859b-5d5a-bb8f-111ff0edf1e0")
 	)
-	(label "GND"
+	(label "LOAD2"
 		(at 363.22 269.24 180)
 		(effects
 			(font
@@ -33079,7 +33079,7 @@
 		)
 		(uuid "f7f1f8d2-d47a-5915-9612-5d4f7ca0df94")
 	)
-	(label "LOAD2"
+	(label "GND"
 		(at 363.22 271.78 180)
 		(effects
 			(font
@@ -33176,7 +33176,7 @@
 		)
 		(uuid "ac7785b0-37a1-5ec6-a51f-11d3ff690e06")
 	)
-	(label "GND"
+	(label "LOAD3"
 		(at 393.7 269.24 180)
 		(effects
 			(font
@@ -33197,7 +33197,7 @@
 		)
 		(uuid "cf8fdbab-0fb5-5b86-baf6-5091a0eb3d7f")
 	)
-	(label "LOAD3"
+	(label "GND"
 		(at 393.7 271.78 180)
 		(effects
 			(font
@@ -33294,7 +33294,7 @@
 		)
 		(uuid "dd929244-1c5c-52dd-8810-51ae8c9e9e40")
 	)
-	(label "GND"
+	(label "LOAD4"
 		(at 424.18 269.24 180)
 		(effects
 			(font
@@ -33315,7 +33315,7 @@
 		)
 		(uuid "cb8b97fb-062c-58f4-8df5-71d8b44e14bf")
 	)
-	(label "LOAD4"
+	(label "GND"
 		(at 424.18 271.78 180)
 		(effects
 			(font
@@ -33412,7 +33412,7 @@
 		)
 		(uuid "1204fed6-0404-5ddb-b8ff-0cd0298bb216")
 	)
-	(label "GND"
+	(label "LOAD5"
 		(at 332.74 294.64 180)
 		(effects
 			(font
@@ -33433,7 +33433,7 @@
 		)
 		(uuid "309ad4d2-0374-56c5-9d62-1e4614960ae8")
 	)
-	(label "LOAD5"
+	(label "GND"
 		(at 332.74 297.18 180)
 		(effects
 			(font
@@ -33530,7 +33530,7 @@
 		)
 		(uuid "b5586a27-9ac2-51cd-914c-5956ac429dc2")
 	)
-	(label "GND"
+	(label "LOAD6"
 		(at 363.22 294.64 180)
 		(effects
 			(font
@@ -33551,7 +33551,7 @@
 		)
 		(uuid "f583a952-3d21-5133-8c3c-009e937a0470")
 	)
-	(label "LOAD6"
+	(label "GND"
 		(at 363.22 297.18 180)
 		(effects
 			(font
@@ -33648,7 +33648,7 @@
 		)
 		(uuid "7bdf1b73-7f03-5cae-824c-48ccb19dcaa6")
 	)
-	(label "GND"
+	(label "LOAD7"
 		(at 393.7 294.64 180)
 		(effects
 			(font
@@ -33669,7 +33669,7 @@
 		)
 		(uuid "2f06e703-c579-544a-912b-b5b8accebe64")
 	)
-	(label "LOAD7"
+	(label "GND"
 		(at 393.7 297.18 180)
 		(effects
 			(font
@@ -33766,7 +33766,7 @@
 		)
 		(uuid "a221cf8d-49d2-5315-84e5-c7982ad81d2e")
 	)
-	(label "GND"
+	(label "LOAD8"
 		(at 424.18 294.64 180)
 		(effects
 			(font
@@ -33787,7 +33787,7 @@
 		)
 		(uuid "98fb4f56-08f8-5300-9fcc-7d7628c1c6b4")
 	)
-	(label "LOAD8"
+	(label "GND"
 		(at 424.18 297.18 180)
 		(effects
 			(font
@@ -35748,7 +35748,7 @@
 		)
 		(uuid "8a914b74-8c27-5039-8452-7f263dfd9584")
 	)
-	(text "ESWITCH SIMPLE — ENGINEERING DRAFT / NOT FOR FABRICATION"
+	(text "ESWITCH SIMPLE — PROTOTYPE / BENCH QUALIFICATION REQUIRED"
 		(exclude_from_sim no)
 		(at 12.7 17.78 0)
 		(effects
@@ -35796,7 +35796,7 @@
 		)
 		(uuid "ed94bb21-0dc4-5200-8ab1-e8e65b7ba8c5")
 	)
-	(text "OUTPUTS: pin 1 GND, pin 2 LOAD+; direct-entry screw terminals"
+	(text "OUTPUTS: pin 1 LOAD+, pin 2 GND; direct-entry screw terminals"
 		(exclude_from_sim no)
 		(at 330.2 246.38 0)
 		(effects

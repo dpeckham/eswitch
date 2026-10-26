@@ -102,27 +102,13 @@
     }
   ],
   "trunk_screen": {
-    "copper_temperature_c": 80,
-    "board_mm": [
-      136,
-      104
-    ],
-    "raw_spine_length_m": 0.03,
-    "raw_spine_width_mm": 4.5,
-    "raw_bus_length_m": 0.075,
-    "raw_bus_width_mm": 14,
-    "return_length_m": 0.1,
-    "return_effective_width_mm": 20,
-    "raw_single_layer_r_ohm": 0.0037147559523809525,
-    "ground_plane_r_ohm": 0.0017726639344262298,
-    "drop_at_40a_v": 0.2194967954722873,
-    "full_length_40a_loss_w": 8.779871818891491,
+    "status": "requires_resistance_current_sharing_and_thermal_solution",
+    "geometry_report": "power-copper-review.json",
     "caveats": [
-      "Conservative full 40A over full length, actual current is distributed",
-      "Excludes contact, fuse, via, spreading and unsampled local neck resistance",
-      "No inner-layer current-sharing credit; inner raw copper has signal crossings",
-      "Compact VS heat-spreader area is smaller; junction temperature remains unqualified",
-      "Final filled geometry must preserve the assumed conductor paths"
+      "The former 4.5mm feed / 20mm return lumped model is withdrawn",
+      "Connected-path widths do not establish current capacity",
+      "Include pad lands, plated barrels, fuse/contact resistance and simultaneous channel loads",
+      "40A aggregate and 20A CH8 remain unqualified targets"
     ]
   },
   "sources": [

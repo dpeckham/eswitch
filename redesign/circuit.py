@@ -189,7 +189,7 @@ def build():
     cap("C24", "100nF 50V", "ADC_CLAMP_2V5", "GND", (279.4, 320.04))
     for n in range(1, 9):
         add(f"J{n+10}", "Connector:Screw_Terminal_01x02", f"CH{n} OUTPUT",
-            "eswitch:TerminalBlock_1x02_P7.62mm_Wuerth_2184", {1: "GND", 2: f"LOAD{n}"},
+            "eswitch:TerminalBlock_1x02_P7.62mm_Wuerth_2184", {1: f"LOAD{n}", 2: "GND"},
             (340.36 + (n-1) % 4 * 30.48, 269.24 + (n-1) // 4 * 25.4), "691218410002")
     for ref, net, y in (("J2", "BATT_RAW", 330.2), ("J3", "GND", 350.52)):
         add(ref, "Connector:Screw_Terminal_01x01", net, "eswitch:ScrewTerminal_Wuerth_74650195_M5",

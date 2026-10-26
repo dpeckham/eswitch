@@ -16,7 +16,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parent
 OUT=ROOT/'out/redesign'
-sys.path.insert(0,str(OUT/'py39'))
+sys.path.insert(0,str(ROOT/'out/py39'))
 sys.path.insert(0,str(ROOT/'tools'))
 os.environ.setdefault('KICAD_STOCK_DATA_HOME','/Applications/KiCad/KiCad.app/Contents/SharedSupport')
 import wx

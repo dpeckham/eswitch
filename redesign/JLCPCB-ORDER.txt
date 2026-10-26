@@ -1,0 +1,28 @@
+ESWITCH DRAFT-PWR2 -- PROTOTYPE FABRICATION
+
+Upload: eswitch-simple-jlcpcb-gerbers.zip
+Quantity: 5 bare boards (3 planned manual assemblies, 2 spares)
+Envelope: 176 x 116 mm; use supplied Edge.Cuts, including antenna corner notch.
+Layers: 4, ordered F.Cu / In1.Cu (GND) / In2.Cu / B.Cu.
+Material: FR4; 1.6 mm nominal; JLCPCB stackup JLC041622-3313.
+Copper: 2 oz OUTER and 2 oz INNER; do not use the default 0.5 oz inner copper.
+Finish: ENIG. Soldermask: green. Silkscreen: white. Electrical test required.
+Via process: EPOXY FILLED AND COPPER CAPPED, including exposed-pad thermal
+vias and diode-pad vias. Soldermask plugging/tenting is not a substitute.
+Minimum via drill: 0.30 mm. Keep component PTH and mounting NPTH holes open.
+USB impedance: 90 ohm differential +/-10%, L4 referenced to L3.
+Supplied USB straight-pair width 0.235 mm, gap 0.215 mm.
+No copper-weight or stackup substitutions without design review.
+Minimum routed signal width 0.18 mm; CAD clearance 0.20 mm.
+PTH and NPTH drill files are separate: preserve plating classification.
+This is a bare-board order; BOM/placement/paste files are for manual assembly.
+
+CAM note: JLC041622-3313 is listed in JLCPCB's public template response as
+1.589 mm compressed thickness; its listed copper + dielectric dimensions sum
+to 1.689 mm. Please confirm the finished thickness for this exact stackup.
+Both values are within the nominal 1.6 mm +/-10% envelope. Do not change the
+dielectrics merely to force a sum. Refer to jlc-stackup-evidence.json.
+
+Engineering status: first articles for controlled testing, not production or
+battery-fault qualification. F9/ATO coordination, TVS behavior, physical fit
+and thermal/current capability remain test/review items. See BUILD.md.

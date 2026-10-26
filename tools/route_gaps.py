@@ -153,7 +153,8 @@ def obstacles(board, code, width, diameter):
     zones = list(board.Zones()) + [zone for fp in board.GetFootprints() for zone in fp.Zones()]
     for zone in zones:
         rule = zone.GetIsRuleArea()
-        if not rule and (zone.GetNetCode() == code or short_name(zone) == "GND"):
+        protected = zone.GetZoneName().startswith("protected_power_")
+        if not rule and (zone.GetNetCode() == code or (short_name(zone) == "GND" and not protected)):
             continue
         for polygon in polygons(zone.Outline()):
             if not rule or zone.GetDoNotAllowTracks():
@@ -162,7 +163,7 @@ def obstacles(board, code, width, diameter):
                         raster.polygon(polygon, half)
             # A sparse signal via is allowed through the broad power spreaders.
             # KiCad clears it from foreign pours. Tracks still cannot cut a pour.
-            if rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_")):
+            if protected or (rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_"))):
                 via.polygon(polygon, via_radius)
     # A signal pad inside a power-zone outline already has a clearance opening
     # in the filled copper. Permit a via escape within that pad's copper area;
