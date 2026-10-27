@@ -1,6 +1,6 @@
 {
   "status": "analytical_screen_requires_transient_and_bench_validation",
-  "input_scope": "Correct polarity, 9.5\u201316V continuous; no electronic reverse/OV disconnect",
+  "input_scope": "9.5\u201316V continuous; shared LM74800 AUTO/logic cutoff; raw passive BYPASS is unprotected against overvoltage/reversal",
   "logic_shunt": {
     "part": "TLA431AIDBZR",
     "nominal_v": 2.495,

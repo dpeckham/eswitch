@@ -1,0 +1,68 @@
+{
+  "status": "candidate_static_screen_not_transient_or_thermal_qualification",
+  "sources": {
+    "controller": "TI LM7480-Q1 SNOSD95C, sections 7.5, 7.6, 10.3",
+    "high_fet": "Infineon IPT067N20NM6, rev 2.1, 2023-10-10",
+    "shared_fuse": "Mersen FR14GG50V40: 40A, 250VDC, 100kA at L/R=15ms; MR14SPRING clips 63A"
+  },
+  "cutoff_rising_v": [
+    16.299,
+    17.386
+  ],
+  "cutoff_falling_v": [
+    14.878,
+    15.906
+  ],
+  "nominal_cutoff_v": 16.841,
+  "nominal_80v_controller_feed": {
+    "current_a": 0.00617,
+    "resistor_w": 0.179,
+    "zener_w": 0.315
+  },
+  "controller_zener_screen": {
+    "mpn": "BZG03B51-M3_A-08",
+    "source": "Vishay 86573 rev 1.0, 2025-10-24, pages 1-2",
+    "conditional_150c_voltage_v": 59.823,
+    "margin_to_65v_operating_limit_v": 5.177,
+    "max_available_zener_power_at_80v_w": 0.358,
+    "assumed_rthja_k_per_w": 150,
+    "conditional_85c_ambient_junction_c": 138.8,
+    "assumptions": "80 V DC, 4.7k resistor at -5%, nonnegative controller current, no other feed into clamp. Temperature extrapolation uses datasheet coefficient at test current; actual below-test-current clamp voltage and board thermal resistance require confirmation."
+  },
+  "mosfet_40a_conduction_screen_25c_10v_gate": {
+    "high_bank_w": 2.68,
+    "low_bank_w": 1.28,
+    "total_w": 3.96,
+    "assumptions": "Equal parallel current sharing; max datasheet RDS(on) at 25C. No hot resistance or copper loss included."
+  },
+  "high_bank_gate_charge_screen": {
+    "max_charge_nc": 428,
+    "minimum_driver_source_ua": 39,
+    "charge_time_ms": 10.974,
+    "note": "Charge/current estimate, not a startup/SOA simulation."
+  },
+  "charge_pump_capacitance_screen": {
+    "source": "TI SNOSD95C section 10.3.2.1; IPT067N20NM6 Table 5; BSC016N06NS dynamic characteristics",
+    "high_bank_max_ciss_nf": 29.2,
+    "low_bank_max_ciss_nf": 13.0,
+    "recommended_effective_capacitance_nf": 422.0,
+    "selected_c27_nominal_nf": 1000,
+    "required_minimum_fraction_of_nominal": 0.422,
+    "note": "C27 increased from 100nF to 1uF 50V X7R. Verify >=422nF effective capacitance at 15V including bias, temperature and tolerance; startup scope check remains part of first article."
+  },
+  "source_sha256": {
+    "redesign/input_protection.py": "3c7fe201202d3d68e33325cdfe159e56873d8cf6c86eb4688cb507c4b99bd8f2",
+    "redesign/circuit.py": "e382738d12ba41dc3100ac2f439432254925ccd8b03f8d3880d3f82facc0410c",
+    "redesign/requirements.json": "ff0fc05aace0a2481f629d7e48ed796dd8c30094e5df34404585c1757798a2e6",
+    "redesign/protection_screen.py": "610342f12c1531324c7ae8b5fcbfe4397c1c561432e331d0099198fbdce56039"
+  },
+  "pending": [
+    "first-article fuse fit, fastener engagement and contact heating",
+    "supply zener limits including temperature and PCB cooling",
+    "surge rise time, cutoff overshoot and MOSFET SOA",
+    "gate-drive startup, recovery and current sharing",
+    "PCB/terminal/fuse thermal tests and aggregate current",
+    "upstream-fuse selectivity is not established",
+    "current distributor stock and complete pricing"
+  ]
+}

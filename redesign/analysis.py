@@ -33,7 +33,7 @@ def analyze():
                              fitted_vs_capacitance_max_f=cap,
                              fitted_vs_capacitor_energy_at_16v_j=.5*cap*16**2))
     return dict(status='analytical_screen_requires_transient_and_bench_validation',
-                input_scope='Correct polarity, 9.5–16V continuous; no electronic reverse/OV disconnect',
+                input_scope='9.5–16V continuous; shared LM74800 AUTO/logic cutoff; raw passive BYPASS is unprotected against overvoltage/reversal',
                 logic_shunt=dict(part='TLA431AIDBZR',nominal_v=2.495,
                                  screened_min_v=low,screened_max_v=high,
                                  minimum_quiescent_cathode_bias_a=bias_min,

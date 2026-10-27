@@ -1,0 +1,229 @@
+{
+  "status": "normal_current_static_screen_passed_values_retained",
+  "circuit_sha256": "e382738d12ba41dc3100ac2f439432254925ccd8b03f8d3880d3f82facc0410c",
+  "resistor_tolerance_fraction": 0.01,
+  "channels": [
+    {
+      "channel": 1,
+      "device": "BTS7004-1EPP",
+      "resistor_ref": "R104",
+      "resistance_ohm": 2200.0,
+      "nominal_volts_per_amp": 0.11,
+      "nominal_voltage_at_fuse_max_v": 1.1,
+      "sense_mpn": "ERJ-PA3F2201V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1165,
+        "series_resistor_w": 0.0354,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 10,
+      "voltage_bounds_at_published_test_current_v": [
+        1.0371,
+        1.1695
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7004-1epp-datasheet-en.pdf",
+        "revision": "1.11, 2024-07-29",
+        "page": 49,
+        "table": 21
+      }
+    },
+    {
+      "channel": 2,
+      "device": "BTS7004-1EPP",
+      "resistor_ref": "R204",
+      "resistance_ohm": 2200.0,
+      "nominal_volts_per_amp": 0.11,
+      "nominal_voltage_at_fuse_max_v": 1.1,
+      "sense_mpn": "ERJ-PA3F2201V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1165,
+        "series_resistor_w": 0.0354,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 10,
+      "voltage_bounds_at_published_test_current_v": [
+        1.0371,
+        1.1695
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7004-1epp-datasheet-en.pdf",
+        "revision": "1.11, 2024-07-29",
+        "page": 49,
+        "table": 21
+      }
+    },
+    {
+      "channel": 3,
+      "device": "BTS7008-1EPR",
+      "resistor_ref": "R304",
+      "resistance_ohm": 3300.0,
+      "nominal_volts_per_amp": 0.227586,
+      "nominal_voltage_at_fuse_max_v": 1.1379,
+      "sense_mpn": "ERJ-PA3F3301V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1295,
+        "series_resistor_w": 0.066,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 5.5,
+      "voltage_bounds_at_published_test_current_v": [
+        1.1474,
+        1.3742
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+        "revision": "1.00, 2024-10-01",
+        "page": 48,
+        "table": 21
+      }
+    },
+    {
+      "channel": 4,
+      "device": "BTS7008-1EPR",
+      "resistor_ref": "R404",
+      "resistance_ohm": 3300.0,
+      "nominal_volts_per_amp": 0.227586,
+      "nominal_voltage_at_fuse_max_v": 1.1379,
+      "sense_mpn": "ERJ-PA3F3301V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1295,
+        "series_resistor_w": 0.066,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 5.5,
+      "voltage_bounds_at_published_test_current_v": [
+        1.1474,
+        1.3742
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+        "revision": "1.00, 2024-10-01",
+        "page": 48,
+        "table": 21
+      }
+    },
+    {
+      "channel": 5,
+      "device": "BTS7008-1EPR",
+      "resistor_ref": "R504",
+      "resistance_ohm": 3300.0,
+      "nominal_volts_per_amp": 0.227586,
+      "nominal_voltage_at_fuse_max_v": 1.1379,
+      "sense_mpn": "ERJ-PA3F3301V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1295,
+        "series_resistor_w": 0.066,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 5.5,
+      "voltage_bounds_at_published_test_current_v": [
+        1.1474,
+        1.3742
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+        "revision": "1.00, 2024-10-01",
+        "page": 48,
+        "table": 21
+      }
+    },
+    {
+      "channel": 6,
+      "device": "BTS7008-1EPR",
+      "resistor_ref": "R604",
+      "resistance_ohm": 3300.0,
+      "nominal_volts_per_amp": 0.227586,
+      "nominal_voltage_at_fuse_max_v": 1.1379,
+      "sense_mpn": "ERJ-PA3F3301V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1295,
+        "series_resistor_w": 0.066,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 5.5,
+      "voltage_bounds_at_published_test_current_v": [
+        1.1474,
+        1.3742
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+        "revision": "1.00, 2024-10-01",
+        "page": 48,
+        "table": 21
+      }
+    },
+    {
+      "channel": 7,
+      "device": "BTS7008-1EPR",
+      "resistor_ref": "R704",
+      "resistance_ohm": 3300.0,
+      "nominal_volts_per_amp": 0.227586,
+      "nominal_voltage_at_fuse_max_v": 1.1379,
+      "sense_mpn": "ERJ-PA3F3301V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.1295,
+        "series_resistor_w": 0.066,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 5.5,
+      "voltage_bounds_at_published_test_current_v": [
+        1.1474,
+        1.3742
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf",
+        "revision": "1.00, 2024-10-01",
+        "page": 48,
+        "table": 21
+      }
+    },
+    {
+      "channel": 8,
+      "device": "BTS7002-1EPP",
+      "resistor_ref": "R804",
+      "resistance_ohm": 1200.0,
+      "nominal_volts_per_amp": 0.052402,
+      "nominal_voltage_at_fuse_max_v": 1.048,
+      "sense_mpn": "ERJ-PA3F1201V",
+      "fault_screen": {
+        "max_is_current_ma": 10,
+        "assumed_clamp_v": 3.25,
+        "sense_resistor_w": 0.0873,
+        "series_resistor_w": 0.0106,
+        "note": "Conservative 0.25W at 70C ERJ-PA3 rating used; linear derating to 155C, screened at 85C. Clamp active, no external pin short."
+      },
+      "published_test_current_a": 22,
+      "voltage_bounds_at_published_test_current_v": [
+        1.0767,
+        1.2387
+      ],
+      "source": {
+        "url": "https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7002-1epp-datasheet-en.pdf",
+        "revision": "1.11, 2024-07-29",
+        "page": 49,
+        "table": 21
+      }
+    }
+  ],
+  "limitations": [
+    "Tolerance bounds apply only at the listed datasheet test currents; no interpolation guarantee at fuse ratings",
+    "Nominal conversion ignores ADC error, ground offsets, filter loading and clamp leakage",
+    "Low-current ratio errors are larger; calibrate each assembled channel",
+    "Fault screen assumes active clamp; clamp dynamics, reverse polarity and transient behavior require bench tests"
+  ]
+}

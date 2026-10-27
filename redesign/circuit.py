@@ -30,6 +30,7 @@ R_MPN = {
     "1k": "RC0603FR-071KL", "22R": "ERJ-3EKF22R0V",
     "5.1k": "ERJ-3EKF5101V", "16.5k": "RC0603FR-0716K5L",
 }
+SENSE_MPN = {'2.2k': 'ERJ-PA3F2201V', '3.3k': 'ERJ-PA3F3301V', '1.2k': 'ERJ-PA3F1201V'}
 C_PARTS = {
     "100nF 50V": (C0805, "CL21B104KBCNNNC"),
     "10nF 50V": (C0805, "CL21B103KBANNNC"),
@@ -71,11 +72,11 @@ def build():
 
     for n, (rating, device, mpn, sense) in enumerate(CHANNELS, 1):
         x, y = 12.7 + ((n - 1) % 4) * 76.2, 25.4 + ((n - 1) // 4) * 93.98
-        vs, load, ugnd = f"VS{n}", f"LOAD{n}", f"UGND{n}"
+        vs, load, ugnd = "AUTO_PROTECTED", f"PROFET_OUT{n}", f"UGND{n}"
         add(f"F{n}", "eswitch:FuseHolder_ATO_3pos", f"ATO {rating}A MAX",
-            "eswitch:Fuseholder_ATO_3pos_Keystone_3557", {1: vs, 2: "BATT_RAW", 3: load},
+            "eswitch:Fuseholder_ATO_3pos_Keystone_3557", {1: load, 2: f"LOAD{n}", 3: "BATT_RAW"},
             (x + 12.7, y + 12.7), "3557", Quantity="3",
-            Note="ONE fuse: AUTO COM-SW; BYPASS COM-LOAD; remove for OFF. Change unpowered.")
+            Note="ONE fuse: AUTO OUT-LOAD; BYPASS RAW-LOAD; remove for OFF. Common clip is LOAD. Change unpowered.")
         add(f"U{n}", f"eswitch:{device}", device, "Package_SO:Infineon_PG-TSDSO-14-22",
             {1: ugnd, 2: f"INR{n}", 3: f"DENR{n}", 4: f"ISP{n}", 8: load, 15: vs},
             (x + 50.8, y + 12.7), mpn,
@@ -87,6 +88,9 @@ def build():
             (5, "4.7k", f"ISP{n}", f"IS{n}", 45.72),
         ):
             resistor(f"R{n}{k:02}", value, a, b, (x + dx, y + 35.56))
+            if k == 4:
+                parts[-1].fields['MPN'] = SENSE_MPN[value]
+                parts[-1].fields['Note'] = 'High-power 0603 sense resistor; retain value, use ERJ-PA3 pulse-rated series for sustained IS fault current.'
         add(f"R{n}03", "Device:R", "47R", "Resistor_SMD:R_0805_2012Metric",
             {1: ugnd, 2: "GND"}, (x + 25.4, y + 35.56), "RC0805FR-0747RL")
         # 47 us nominal filtering, above Infineon's recommended 1 us minimum.
@@ -102,11 +106,9 @@ def build():
         cap(f"C{n}04", "47nF 50V", vs, ugnd, (x + 5.08, y + 78.74))
         resistor(f"R{n}08", "47k", f"INR{n}", ugnd, (x + 20.32, y + 78.74))
         resistor(f"R{n}09", "47k", f"DENR{n}", ugnd, (x + 35.56, y + 78.74))
-        # No shunt suppressor shared across the raw bus. Individual VS clamp is
-        # behind the movable fuse; an internally shorted channel can be removed.
-        add(f"D{n}04", "Device:D_TVS", "SMCJ16A", "Diode_SMD:D_SMC",
-            {1: vs, 2: "GND"}, (x + 50.8, y + 78.74), "SMCJ16A",
-            Note="Candidate local clamp; transient energy and inductive turn-off coordination OPEN")
+        # D10 suppresses local transients on the shared protected supply.
+        # All channel shunts stay on the PROFET side of the movable fuse:
+        # no capacitor, indicator or TVS is connected to a raw BYPASS load.
         # LED negative-voltage clamp: second BAT54S diode GND -> LED anode;
         # first diode shorted. Normal positive LED voltage is not clamped.
         add(f"D{n}03", "Diode:BAT54S", "BAT54S", SOT23,
@@ -148,7 +150,7 @@ def build():
     # Independent logic branch. Retain the already researched wide-input module
     # and USB ideal diode for this first draft; cost-optimize after power review.
     add("F9", "Device:Fuse", "2A LOGIC", "Fuse:Fuse_1206_3216Metric",
-        {1: "BATT_RAW", 2: "LOGIC_FUSED"}, (25.4, 254), "0466002.NR")
+        {1: "AUTO_PROTECTED", 2: "LOGIC_FUSED"}, (25.4, 254), "0466002.NR")
     add("D1", "Device:D_Schottky", "B360A", "Diode_SMD:D_SMA",
         {2: "LOGIC_FUSED", 1: "VIN"}, (45.72, 254), "B360A-13-F", rot=90)
     add("D3", "Device:D_TVS", "SMCJ16A", "Diode_SMD:D_SMC",
@@ -199,7 +201,9 @@ def build():
             "MountingHole:MountingHole_3.2mm_M3", {}, (355.6 + (i-1)*12.7, 350.52),
             "R30-1001002", Note="BOM item is the M3 standoff; hole itself is unplated")
     # PWR_FLAG documents external supply and passive paths, not additional parts.
-    for i, net in enumerate(["BATT_RAW", "GND", "VBUS", "VIN", "AGND_BUCK", *[f"UGND{n}" for n in range(1, 9)]]):
+    from input_protection import build as protection_parts
+    parts.extend(protection_parts())
+    for i, net in enumerate(["BATT_RAW", "GND", "VBUS", "VIN", "AGND_BUCK", "AUTO_PROTECTED", "AUTO_FUSED", "PROTECTION_COMMON_SOURCE", "VS_CONTROLLER", *[f"UGND{n}" for n in range(1, 9)]]):
         add(f"#FLG{i+1}", "power:PWR_FLAG", "PWR_FLAG", "", {1: net},
             (12.7 + i * 20.32, 386.08))
     return parts

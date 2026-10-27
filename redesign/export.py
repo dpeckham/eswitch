@@ -8,6 +8,7 @@ import zipfile
 import shutil
 import os
 import subprocess
+import csv
 
 from native import OUT, drc, run
 
@@ -17,10 +18,15 @@ FAB=HERE.parent/'fab'
 
 
 def main():
+    requirements=json.loads((HERE/'requirements.json').read_text())
+    if requirements.get('hardware_revision_pending'):
+        raise SystemExit('Power-protection hardware revision is pending; the saved PCB is not the accepted new topology. Export disabled.')
     OUT.mkdir(parents=True,exist_ok=True)
     FAB.mkdir(parents=True,exist_ok=True)
     if not BOARD.exists():
         raise SystemExit('Authoritative routed board is not available yet.')
+    if not (OUT/'verification.json').exists():
+        raise SystemExit('Run just verify before exporting fabrication files.')
     report=drc(BOARD,parity=True)
     if report['violations'] or report['unconnected_items'] or report.get('schematic_parity'):
         raise SystemExit('Resolve DRC, routing and schematic parity before export.')
@@ -29,6 +35,10 @@ def main():
                              '--output',str(HERE/'power-copper-review.json')],capture_output=True,text=True)
     (OUT/'export-power-geometry.log').write_text(geometry.stdout+geometry.stderr)
     if geometry.returncode:raise RuntimeError('Power geometry regression failed; see out/redesign/export-power-geometry.log')
+    transitions=subprocess.run([python,str(HERE/'power_transitions.py'),str(BOARD),
+                                '--output',str(HERE/'power-transition-review.json')],capture_output=True,text=True)
+    (OUT/'export-power-transitions.log').write_text(transitions.stdout+transitions.stderr)
+    if transitions.returncode:raise RuntimeError('Power transition regression failed')
     feature_screen=OUT/'jlc-feature-screen.json'
     result=subprocess.run([python,str(HERE/'jlc_feature_screen.py'),str(BOARD),
                            '--output',str(feature_screen)],capture_output=True,text=True)
@@ -40,7 +50,7 @@ def main():
     verification_path=OUT/'verification.json'
     if verification_path.exists():
         verification=json.loads(verification_path.read_text())
-        refreshed={str(p.relative_to(HERE.parent)):p for p in (BOARD,HERE/'power-copper-review.json')}
+        refreshed={str(p.relative_to(HERE.parent)):p for p in (BOARD,HERE/'power-copper-review.json',HERE/'power-transition-review.json')}
         for name,digest in verification['source_sha256'].items():
             if name not in refreshed and hashlib.sha256((HERE.parent/name).read_bytes()).hexdigest()!=digest:
                 raise RuntimeError(f'Verified source changed: {name}; run just verify before packaging')
@@ -50,6 +60,15 @@ def main():
     result=subprocess.run([python,str(HERE/'assembly.py')],capture_output=True,text=True)
     (OUT/'export-assembly.log').write_text(result.stdout+result.stderr)
     if result.returncode:raise RuntimeError('Assembly plotting copy failed; see out/redesign/export-assembly.log')
+    with (HERE/'bom-draft.csv').open(newline='') as f:
+        bom=list(csv.DictReader(f))
+    assert len({row['MPN'] for row in bom})==len(bom)
+    with (FAB/'eswitch-digikey-qty1.csv').open('w',newline='') as f:
+        writer=csv.writer(f,lineterminator='\n')
+        writer.writerow(['Quantity','Manufacturer Part Number','Reference Designator'])
+        for row in bom:
+            assert int(row['Quantity per board'])>0
+            writer.writerow([row['Quantity per board'],row['MPN'],row['References']])
     # Stage a complete new set, avoiding stale files from previous exports.
     with tempfile.TemporaryDirectory(prefix='fabrication-',dir=OUT) as temp:
         stage=Path(temp)
@@ -73,9 +92,11 @@ def main():
                  '--output',stage/f'{name}.svg',drawing],OUT/f'export-{name}.log')
         for name in ('bom-draft.csv','BUILD.md','JLCPCB-ORDER.txt','jlc-stackup-evidence.json',
                      'installation-screen.json','requirements.json',
-                     'electrical-screen.json','power-copper-review.json'):
+                      'electrical-screen.json','power-copper-review.json','power-transition-review.json',
+                      'protection-screen.json','sense-screen.json','PROTECTION-REVIEW.md'):
             shutil.copyfile(HERE/name,stage/name)
         shutil.copyfile(feature_screen,stage/'jlc-feature-screen.json')
+        shutil.copyfile(FAB/'eswitch-digikey-qty1.csv',stage/'eswitch-digikey-qty1.csv')
         shutil.copyfile(verification_path,stage/'verification.json')
         shutil.copyfile(OUT/'eswitch-simple-drc.json',stage/'layout-check.json')
         manifest={str(p.relative_to(stage)):hashlib.sha256(p.read_bytes()).hexdigest()
@@ -104,7 +125,8 @@ def main():
     destination=FAB/'eswitch-simple-project.zip'
     files=[*HERE.glob('eswitch-simple.kicad_*'),HERE/'fp-lib-table',HERE/'sym-lib-table',
            *[HERE/name for name in ('README.md','BUILD.md','bom-draft.csv','pin-map.json',
-                                    'requirements.json','electrical-screen.json','cost-estimate.json','power-copper-review.json',
+                                     'requirements.json','electrical-screen.json','cost-estimate.json','power-copper-review.json',
+                                     'power-transition-review.json','protection-screen.json','sense-screen.json','PROTECTION-REVIEW.md',
                                     'JLCPCB-ORDER.txt','jlc-stackup-evidence.json','installation-screen.json')],
            *[p for p in (HERE/'lib').rglob('*') if p.is_file()]]
     with zipfile.ZipFile(destination,'w',zipfile.ZIP_DEFLATED) as archive:

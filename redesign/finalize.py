@@ -3,9 +3,15 @@
 from route_checked import *
 from sexp import parse_one,find,find_all
 
-target=HERE/'eswitch-simple.kicad_pcb'
-b=pcbnew.LoadBoard(str(target));apply_rules(b)
-doc=parse_one((OUT/'netlist.net').read_text())
+p=argparse.ArgumentParser()
+p.add_argument('--board',type=Path,default=HERE/'eswitch-simple.kicad_pcb')
+p.add_argument('--output',type=Path)
+p.add_argument('--netlist',type=Path,default=OUT/'netlist.net')
+a=p.parse_args();target=a.output or a.board
+if target!=a.board:
+    target.with_suffix('.kicad_pro').write_text(a.board.with_suffix('.kicad_pro').read_text())
+b=pcbnew.LoadBoard(str(a.board));apply_rules(b)
+doc=parse_one(a.netlist.read_text())
 fps={fp.GetReference():fp for fp in b.GetFootprints()}
 for entry in find_all(find(doc,'nets'),'net'):
     name=find(entry,'name')[1]
@@ -16,7 +22,10 @@ for entry in find_all(find(doc,'nets'),'net'):
     for node in find_all(entry,'node'):
         ref,pin=find(node,'ref')[1],find(node,'pin')[1]
         for pad in fps[ref].Pads():
-            if pad.GetNumber()==pin:pad.SetNet(net)
+            if pad.GetNumber()==pin:
+                if pad.GetNetCode() and not pad.GetNetname().startswith('unconnected-'):
+                    raise ValueError(f'{ref}.{pin} has a functional net; cannot assign NC metadata')
+                pad.SetNet(net)
 for z in b.Zones():
     if not z.GetIsRuleArea():z.UnFill()
 if not any(item.GetClass()=='PCB_DIM_ALIGNED' for item in b.GetDrawings()):

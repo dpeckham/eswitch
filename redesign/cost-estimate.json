@@ -3,10 +3,10 @@
   "price_observation_date": "2026-09-19",
   "exclusions": [
     "PCB",
-    "enclosure screws/washers",
+    "enclosure and F10 screws/washers/shims",
     "assembly",
     "shipping/taxes",
-    "changes arising from open electrical reviews"
+    "unpriced BOM lines"
   ],
   "fresh_stock_checked": false,
   "lines": [
@@ -75,10 +75,10 @@
     },
     {
       "mpn": "74650195",
-      "quantity": 2,
-      "references": "J2, J3",
-      "exact_1_board_usd": 9.3,
-      "exact_3_board_usd": 27.9
+      "quantity": 4,
+      "references": "J2, J3, F10 mounting terminals",
+      "exact_1_board_usd": 18.6,
+      "exact_3_board_usd": 46.55
     },
     {
       "mpn": "B360A-13-F",
@@ -96,10 +96,10 @@
     },
     {
       "mpn": "BSC016N06NSATMA1",
-      "quantity": 1,
-      "references": "Q5",
-      "exact_1_board_usd": 3.01,
-      "exact_3_board_usd": 9.03
+      "quantity": 3,
+      "references": "Q5, Q10, Q11",
+      "exact_1_board_usd": 9.03,
+      "exact_3_board_usd": 27.09
     },
     {
       "mpn": "BTS70021EPPXUMA1",
@@ -121,6 +121,27 @@
       "references": "U3, U4, U5, U6, U7",
       "exact_1_board_usd": 9.25,
       "exact_3_board_usd": 20.45
+    },
+    {
+      "mpn": "BZG03B51-M3_A-08",
+      "quantity": 1,
+      "references": "D8",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "BZG03C82-M3_A-08",
+      "quantity": 1,
+      "references": "D9",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "C3225X7R2E104K200AA",
+      "quantity": 1,
+      "references": "C25",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
     },
     {
       "mpn": "CC0603KRX7R7BB105",
@@ -172,11 +193,46 @@
       "exact_3_board_usd": 0.6
     },
     {
+      "mpn": "ERJ-PA3F1201V",
+      "quantity": 1,
+      "references": "R804",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "ERJ-PA3F2201V",
+      "quantity": 2,
+      "references": "R104, R204",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "ERJ-PA3F3301V",
+      "quantity": 5,
+      "references": "R304, R404, R504, R604, R704",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
       "mpn": "ESP32-S3-WROOM-1-N8",
       "quantity": 1,
       "references": "U10",
       "exact_1_board_usd": 5.66,
       "exact_3_board_usd": 16.98
+    },
+    {
+      "mpn": "FR14GG50V40",
+      "quantity": 1,
+      "references": "F10",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "G098170",
+      "quantity": 2,
+      "references": "F10 spring clips",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
     },
     {
       "mpn": "GCM32ER70J476KE19L",
@@ -186,18 +242,46 @@
       "exact_3_board_usd": 8.23
     },
     {
+      "mpn": "GRM21BR71H105KA12L",
+      "quantity": 1,
+      "references": "C27",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "GRM32CR72A105KA35L",
+      "quantity": 2,
+      "references": "C26, C28",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
       "mpn": "GRM32ER71H475KA88L",
-      "quantity": 3,
-      "references": "C1, C2, C22",
-      "exact_1_board_usd": 5.22,
-      "exact_3_board_usd": 15.66
+      "quantity": 4,
+      "references": "C1, C2, C22, C29",
+      "exact_1_board_usd": 6.96,
+      "exact_3_board_usd": 13.8
+    },
+    {
+      "mpn": "IPT067N20NM6ATMA1",
+      "quantity": 4,
+      "references": "Q6, Q7, Q8, Q9",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
     },
     {
       "mpn": "LM74800QDRRRQ1",
+      "quantity": 2,
+      "references": "U13, U15",
+      "exact_1_board_usd": 6.0,
+      "exact_3_board_usd": 18.0
+    },
+    {
+      "mpn": "PR02000204701JA100",
       "quantity": 1,
-      "references": "U13",
-      "exact_1_board_usd": 3.0,
-      "exact_3_board_usd": 9.0
+      "references": "R26",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
     },
     {
       "mpn": "PTS645SM43SMTR92 LFS",
@@ -228,13 +312,6 @@
       "exact_3_board_usd": 0.3
     },
     {
-      "mpn": "RC0603FR-071K2L",
-      "quantity": 1,
-      "references": "R804",
-      "exact_1_board_usd": 0.1,
-      "exact_3_board_usd": 0.3
-    },
-    {
       "mpn": "RC0603FR-071KL",
       "quantity": 1,
       "references": "R9",
@@ -243,17 +320,10 @@
     },
     {
       "mpn": "RC0603FR-072K2L",
-      "quantity": 3,
-      "references": "R104, R204, R14",
-      "exact_1_board_usd": 0.3,
-      "exact_3_board_usd": 0.9
-    },
-    {
-      "mpn": "RC0603FR-073K3L",
-      "quantity": 5,
-      "references": "R304, R404, R504, R604, R704",
-      "exact_1_board_usd": 0.5,
-      "exact_3_board_usd": 0.38
+      "quantity": 1,
+      "references": "R14",
+      "exact_1_board_usd": 0.1,
+      "exact_3_board_usd": 0.3
     },
     {
       "mpn": "RC0603FR-0747KL",
@@ -270,6 +340,13 @@
       "exact_3_board_usd": 1.08
     },
     {
+      "mpn": "RC0805FR-0710RL",
+      "quantity": 6,
+      "references": "R20, R21, R22, R23, R24, R25",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
       "mpn": "RC0805FR-0747RL",
       "quantity": 8,
       "references": "R103, R203, R303, R403, R503, R603, R703, R803",
@@ -277,11 +354,39 @@
       "exact_3_board_usd": 0.82
     },
     {
+      "mpn": "RT0805BRD0749K9L",
+      "quantity": 2,
+      "references": "R27, R28",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "RT0805BRD077K87L",
+      "quantity": 1,
+      "references": "R29",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "SMBJ150A",
+      "quantity": 1,
+      "references": "D6",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
+      "mpn": "SMBJ33CA",
+      "quantity": 1,
+      "references": "D7",
+      "exact_1_board_usd": null,
+      "exact_3_board_usd": null
+    },
+    {
       "mpn": "SMCJ16A",
-      "quantity": 9,
-      "references": "D104, D204, D304, D404, D504, D604, D704, D804, D3",
-      "exact_1_board_usd": 8.91,
-      "exact_3_board_usd": 16.66
+      "quantity": 2,
+      "references": "D3, D10",
+      "exact_1_board_usd": 1.98,
+      "exact_3_board_usd": 5.94
     },
     {
       "mpn": "SRV05-4HTG-D",
@@ -312,9 +417,26 @@
       "exact_3_board_usd": 2.4
     }
   ],
-  "one_board_usd": 104.04,
-  "three_board_usd": 278.29,
+  "one_board_usd": 116.37,
+  "three_board_usd": 310.14,
   "unpriced": [
+    "BZG03B51-M3_A-08",
+    "BZG03C82-M3_A-08",
+    "C3225X7R2E104K200AA",
+    "ERJ-PA3F1201V",
+    "ERJ-PA3F2201V",
+    "ERJ-PA3F3301V",
+    "FR14GG50V40",
+    "G098170",
+    "GRM21BR71H105KA12L",
+    "GRM32CR72A105KA35L",
+    "IPT067N20NM6ATMA1",
+    "PR02000204701JA100",
+    "RC0805FR-0710RL",
+    "RT0805BRD0749K9L",
+    "RT0805BRD077K87L",
+    "SMBJ150A",
+    "SMBJ33CA",
     "TLA431AIDBZR"
   ]
 }

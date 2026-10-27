@@ -1,191 +1,84 @@
-# Eight-channel redesign — power-layout rework
+# Eight-channel eswitch — PROTO-PWR3
 
-Start with [`eswitch-simple.kicad_pro`](eswitch-simple.kicad_pro).
-The **176 × 116 mm, four-layer PCB** is
-[`eswitch-simple.kicad_pcb`](eswitch-simple.kicad_pcb).
-See [build notes](BUILD.md) for dimensions, stackup, assembly and qualification status.
+212 × 116 mm, four-layer prototype with shared LM74800-Q1 AUTO/logic protection
+and unconditional passive fuse-selected BYPASS. Open `eswitch-simple.kicad_pro`.
 
-Current exports are in `../fab/`: `eswitch-simple-project.zip`,
-`eswitch-simple-fabrication.zip`, `board-top.png` and `board-bottom.png`.
-The electrical/thermal bench qualification described below remains open.
+The release is for **bare-board first articles and controlled bench testing**.
+See [BUILD.md](BUILD.md) for assembly and ordering, and
+[PROTECTION-REVIEW.md](PROTECTION-REVIEW.md) for the engineering review and
+hardware tests. Neither 40 A continuous operation nor surge survival has been
+qualified on hardware. Firmware is not supplied.
 
-The layout places four channels on each of two opposite output edges, at 26 mm
-pitch. It deliberately grows the former 136 × 104 mm board to provide room for
-power distribution. A 36 × 6 mm top-left notch preserves the ESP32 antenna's
-original board-edge relationship. Components and eight mounting holes are retained.
-
-The rework moves signal circuitry out of the battery feeds, reserves F.Cu/In2
-battery corridors, widens three-layer load bars, adds outer-layer return corridors
-and ground stitching, and uses twelve 0.3 mm-drill vias in each PROFET exposed pad.
-**Output polarity changed: J11–J18 pin 1 is LOAD+, pin 2 is GND.** Schematic and
-silkscreen identify the new assignment; do not reuse the old wiring convention.
-
-`power-copper-review.json` checks connected paths in actual saved copper on each
-layer and records thermal copper areas. It is not a resistance, current-sharing
-or thermal solution. Terminal landings are exempt from erosion, and drilled-hole,
-barrel and contact restrictions need separate assessment. The historical line-width
-report is retained only as `../docs/compact-copper-review-136x104.json`; its former
-lumped 4.5 mm feed / 20 mm return resistance estimate has been withdrawn.
-
-**Released for prototype fabrication and controlled bench testing.** Keep the
-ATO fuse architecture. F9 and ATO battery-fault coordination, TVS energy handling,
-physical clip fit and thermal performance are open qualification items. This
-release authorizes making first articles; it does not assert battery-fault safety
-or a 40 A continuous rating. Order JLC041622-3313 with 2 oz outer AND inner copper
-and filled/capped vias as specified in `BUILD.md` and `JLCPCB-ORDER.txt`.
-
-## Agreed architecture
-
-Eight ESP32-controlled PROFET high-side switches, with one ATO blade fuse and
-three individual clips per channel. The middle clip connects directly to the
-raw battery distribution bus. A fuse connects it either to the PROFET supply
-(AUTO) or to the load (BYPASS). Removing the fuse is OFF. Battery power is
-disconnected before moving fuses. Fuse maxima are 10/10/5/5/5/5/5/20 A;
-40 A simultaneous operation is the design target, not an established rating.
+## Power paths
 
 ```
-AUTO:    BATT_RAW -- fuse -- VS -- PROFET -- LOAD
-BYPASS:  BATT_RAW -- fuse ------------------ LOAD
-                                  PROFET OUT remains connected
+AUTO:   BATT_RAW -- F10 -- LM74800 cutoff -- shared VS -- PROFET -- ATO fuse -- LOAD
+BYPASS: BATT_RAW ----------------------------------------------- ATO fuse -- LOAD
 ```
 
-During recovery, ALL usable channels may be put in BYPASS; faulty/unused channels
-may have their fuses removed. Automatic operation and uninterrupted healthy-load
-ride-through during the fault are not requirements of this redesign. A destructive
-short can require abandoning the affected channel. Common copper/terminal damage
-and an externally backpowered load are outside this fuse-only recovery promise.
+One movable ATO fuse per channel, three clips. Pins 1/2/3 are PROFET_OUT/LOAD/RAW.
+Move the fuse between AUTO and BYPASS only with power disconnected; remove it for
+OFF. BYPASS/OFF disconnects the load from the PROFET output, avoiding body-diode
+backfeed. BYPASS has no series electronics and receives raw surges/reversed polarity.
 
-The logic converter has its own F9 fuse. Neither branch mode depends on a shared
-electronic input switch. Branch VS nets are separate; no reservoir, clamp, supply,
-or copper connection is allowed to join them together. The bypass path contains
-no diode, relay, MOSFET, electronic breaker, or detachable jumper in series.
+For electronics-fault recovery, disconnect battery and USB, remove F10, move usable
+channel fuses to BYPASS, then restore power. All AUTO channels may be lost; no extra
+fixed per-channel fuses are required. Upstream-fuse selectivity and uninterrupted
+operation are not promised. Shared copper/terminal damage is outside the model.
 
-## First-pass component decisions
+F10 is a removable Mersen FR14GG50V40 with two MR14SPRING clips and M5 terminals.
+F9 remains the 2 A logic fuse. AUTO uses BTS7004 on CH1/2, BTS7008 on CH3–7 and
+BTS7002 on CH8. Maximum ATO fuses: **10/10/5/5/5/5/5/20 A**. These are fuse maxima,
+not validated continuous channel currents. LEDs show AUTO output voltage; BYPASS
+current is not measured. J11–J18 pin 1 is LOAD+, pin 2 is GND. J5 is 3.3 V bench UART.
 
-- Retain BTS7004-1EPP on CH1/2, BTS7008-1EPR on CH3–7, BTS7002-1EPP on CH8.
-  These eight ICs cost about $14.54 per board at the recorded three-board prices.
-  They integrate switching, current diagnosis, and overload/temperature latch-off.
-- Remove the nine TPS2492 controllers, ten enhanced-SOA pass FETs, branch shunts,
-  24-capacitor shared reservoir, gate boosters, and separate latch-reset buttons.
-- Give each channel independent IN and DEN signals, with local pull-downs on both.
-  A shared DEN pulse could reset an OFF channel's internal fault latch. Firmware
-  must respect the native latch-reset timing and must not automatically retry faults.
-- Keep eight ADC1 current-sense inputs and output LEDs. Current measurement is
-  valid for AUTO, not BYPASS. Backpowered VS cannot reliably identify fuse position;
-  firmware must not infer AUTO from VS voltage or pretend to measure bypass current.
-- Retain ESP32-S3, USB-C programming, boot/reset, UART, Wi-Fi/BLE and OTA capability.
-  Firmware is not implemented in this repository. Initial USB use remains
-  battery-disconnected. The new pin map is in `pin-map.json`.
-- Retain the previously researched TPSM63603 converter and USB ideal-diode circuit
-  for the first draft. This is a deliberate reuse of a functional subcircuit,
-  not an assertion that these are the cheapest possible logic-supply components.
-- Use individually fused local VS TVS candidates rather than an unfused suppressor
-  across the raw shared bus. Suppressor sizing/coordination is still open.
-- Keep direct-entry output blocks and M5 input terminals. The board uses
-  eight mounting holes and the heavy-copper four-layer stackup.
-- Route the ADC clamp diodes to an independent 2.495 V TLA431 shunt reference,
-  biased through 2.2 kΩ, rather than dumping fault current directly into 3V3.
-  `electrical-screen.json` records the DC assumptions; power-down and dynamic
-  behavior still require measurement.
+The common-source protection targets a +80 V, several-second input event using
+overvoltage cutoff, not fuse operation or continuous linear clamping. Nominal cutoff
+is 16.841 V. The four 200 V and two 60 V MOSFETs use individual gate resistors.
+C27 is 1 µF for the parallel-bank charge pump. The existing sense resistance values
+remain; R104–R804 use high-power ERJ-PA3 parts for fault-reporting dissipation.
 
-## Inverse current: allow it, bound it
+## Verification and fabrication
 
-All three selected PROFET datasheets, section 7.3.1 (pp. 23–24), describe inverse
-current. With OUT above VS, an OFF device conducts through its body diode; an ON
-device can conduct through its channel. Overload/overtemperature protection is
-not active for inverse current. The stated InverseON capability is not an OFF-state
-body-diode continuous-current rating or a qualification of output-powered startup.
+- Native ERC, PCB DRC, unconnected and schematic-parity checks must all be zero.
+- Topology model: 52,488 mode/supply combinations and 54 fault/removal cases.
+- `power-copper-review.json`: 60 planar power paths with explicit regression floors.
+- `power-transition-review.json`: real pad-layer connections and local via arrays.
+- `protection-screen.json` and `sense-screen.json`: reproducible static screens.
+- `out/redesign/verification.json`: source hashes and checks for the packaged revision.
 
-In BYPASS, normal load current flows directly through the fuse. Only local VS
-capacitance and local electronics are fed backward. Each channel presently has
-100 nF VS-to-board-ground and 47 nF VS-to-device-ground, not a shared millifarad
-reservoir. Bounds on the startup charging pulse still need evaluation.
-
-The new local DEN pull-down is important. The BTS7008 datasheet specifies at most
-0.5 uA disabled IS leakage under its stated conditions (section 9.5), versus up to
-3.5 mA open-load/OFF diagnostic current and 10 mA fault-report current. Simply
-leaving DEN active with a dead ESP32 could therefore feed the logic rail through
-the ADC clamps. Healthy unpowered-control behavior must be checked through the
-entire ramp/brownout, not inferred just from the 0 V endpoint. The GPIO pull-downs
-do not protect against arbitrary internal chip damage.
-
-## Electrical work still required
-
-1. **Healthy bypass:** measure/bound OUT-to-VS charging, local inverse current,
-   DEN/IN levels, IS voltage and 3V3 injection for all-bypass and mixed modes;
-   controller running, held reset, power absent, and logic rail shorted.
-2. **Input protection:** raw BYPASS deliberately has no electronic reverse-polarity
-   or overvoltage disconnection. This first AUTO draft also does NOT reproduce
-    revision C's reverse-blocking stage or approximately 17 V disconnect. The
-    agreed scope is correctly connected 9.5–16 V operation; native PROFET reverse-battery
-   robustness is not reverse-voltage protection for connected loads.
-3. **Transients/inductance:** verify local SMCJ16A clamp voltage AND energy,
-   connection inductance, switch avalanche limits, negative output stress, and
-   reverse-biased LED protection. No installation surge envelope has been supplied.
-4. **Fault recovery:** confirm a removed branch fuse stops battery-fed power into
-   a grounded faulty branch, and assess signal-interface coupling to other
-   channels. A damaged shared bus or arbitrary GPIO short is not covered by a
-   simple power-net connectivity model.
-5. **Load/thermal:** check fuse/contact derating, 40 A common copper, 20 A branch
-   heating, native PROFET trip thresholds, load inrush, and inductive turn-off.
-   Fuse maxima do not specify guaranteed continuous load currents.
-6. **Logic/USB:** converter layout/stability, current budget, reset behavior,
-   power-down injection, and USB headroom/startup on the new layout.
-
-## Cost and reproducibility
-
-The priced draft component subtotal is **$104.04 for one board**, or **$92.76 per
-board** when buying exactly three sets together, **excluding the unpriced
-TLA431AIDBZR**. These are historical-price
-estimates of the present draft, not final build prices. The previous design's
-three-board component/fuse subtotal excluding standoffs was approximately
-$261.64 per board. The reduction follows the newly agreed recovery requirements;
-it is not a claim of equivalent revision-C protection behavior.
-
-`bom-draft.csv` contains per-board fitted quantities (including individual clips
-and eight fuse inserts). `cost-estimate.json` applies the **2026-09-19 historical
-price observations** to these new quantities. It is a component subtotal, not an
-order quote. Eight standoffs are included; PCB fabrication, assembly, additional
-installation hardware and unpriced parts are excluded. Current stock and prices
-have not been refreshed.
+The two-layer LOAD corridors, protected supply spine and raw BYPASS feed are
+explicitly reserved before routing signals. Geometry checks are not thermal solvers.
+Manufacturing uses JLC041622-3313, 2 oz inner and outer copper, filled/capped vias
+and 90 Ω USB differential control. Follow `JLCPCB-ORDER.txt` exactly.
 
 ```
-python3 redesign/generate.py
-python3 redesign/verify.py
-python3 redesign/analysis.py
+python3 redesign/generate.py  # explicitly regenerate schematic/BOM after changes
+just verify                  # ERC/topology/parity/geometry/physical transitions
+just package                 # verified fabrication and portable project ZIPs
+just render                  # board views
 ```
 
-`just schematic` runs both commands. Native KiCad on macOS is discovered directly;
-set `KICAD_CLI` elsewhere if needed. Review exports and a source-hashed check summary
-are written to `out/redesign/`, including `eswitch-simple.pdf` and `erc.json`.
+The saved PCB is authoritative. Routing scripts and `out/redesign/protection-*`
+files are development history, not alternative ordering files. Some intermediate
+candidates intentionally contain errors or disconnected nets. Do not regenerate
+placement over the finished board. KiCad's Python environment is required for
+layout scripts; `requirements-route-gaps.txt` dependencies live in `out/py39`.
 
-Generation uses shared symbol/footprint assets and drawing utilities, but never
-calls the revision-C circuit builder. Verification compares exported KiCad
-connectivity and checks the passive power-path mode/fault model. These checks
-do not establish transient, thermal, reverse-current or installation qualification.
+## Procurement and installation
 
-`compact.py` and `route_checked.py` require KiCad's Python (`pcbnew` and `wx`). Copper
-filling runs through `native.py` using the native KiCad CLI, because the Python
-zone-filling API crashes in this environment. The transactional router retains
-only batches passing native copper DRC; its intermediate boards can still have
-unconnected nets. A clean placement DRC is not a completed routing check.
-`compact.py` generates the historical compact placement candidate; it does not replace
-the finished PCB. `rework_power.py` migrates a 136 × 104 mm source board into an
-expanded candidate, and the power finishing scripts operate only on explicit
-candidate paths. Subsequent checked routing and local corrections are retained in
-the authoritative PCB. Install `requirements-route-gaps.txt` into `out/py39` using
-the same KiCad Python interpreter used for routing/geometry checks.
-`just verify` and packaging both run the source-hashed power-geometry regression.
-Its width floors are regression guards, not a declaration of current capacity.
-`prune_power.py` uses native, connectivity-guarded pruning for abandoned signal
-stubs; do not promote a candidate based only on a router's unconnected-net count.
-`python3 redesign/export.py` rechecks final PCB parity/DRC and recreates both ZIPs.
+`bom-draft.csv` is the fitted one-board BOM despite its historical filename.
+`../fab/eswitch-digikey-qty1.csv` contains exact MPN/quantity upload rows, without
+spares. F10 screws, washers and shims are separate mechanical purchases detailed
+in BUILD.md. Stock and cart acceptance must be checked when ordering.
 
-### Manufacturer references
+`cost-estimate.json` applies historical prices only where known and explicitly
+lists unpriced parts. Its subtotal is **not a complete build price or current quote**.
+Fabrication, assembly, hardware, shipping and taxes are excluded.
 
-- [BTS7008-1EPR, rev 1.00, 2024-10-01](https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7008-1epr-datasheet-en.pdf)
-- [BTS7004-1EPP, rev 1.11, 2024-07-29](https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7004-1epp-datasheet-en.pdf)
-- [BTS7002-1EPP, rev 1.11, 2024-07-29](https://www.infineon.com/assets/row/public/documents/10/49/infineon-bts7002-1epp-datasheet-en.pdf)
-
-Use section 7.3.1 for inverse current, 8.3 for intelligent latch behavior, 9 for
-diagnosis, and 10 for the application interface. Retrieved 2026-10-25.
+Intended installation: Vatrer 300 Ah LiFePO4, separate Victron Orion XS 12/12-70A
+charger branch, 40 A MRBF eswitch feed and 75 A MRBF charger feed. Use 8 AWG copper
+positive/negative for the 1 m battery run and 4 mm² positive/negative for the 3 m
+pump run. CH1/2 with a provisional 10 A fuse is appropriate for the standard 12 V
+Rule 1500 GPH model; confirm the actual pump. Direct-battery fault coordination,
+thermal limits, pump transients and surge performance remain hardware tests.

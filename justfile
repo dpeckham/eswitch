@@ -1,4 +1,4 @@
-# Work only on the saved compact design; generation is always explicit.
+# Work only on the saved prototype design; generation is always explicit.
 default:
     @just --list
 
@@ -9,6 +9,7 @@ redesign-check: verify
 
 package:
     python3 redesign/export.py
+    python3 redesign/check_package.py
 
 fab: package
 

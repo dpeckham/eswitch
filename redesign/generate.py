@@ -58,23 +58,25 @@ def schematic():
             end = tuple(round(v + d * sch.STUB, 4) for v, d in zip(pos, direction))
             items.extend([sch.wire(pos, end), sch.label(net, end, direction)])
     annotations = [
-        ('ESWITCH SIMPLE — PROTOTYPE / BENCH QUALIFICATION REQUIRED', (12.7, 17.78), 3),
+        ('ESWITCH — PROTECTION REVISION CANDIDATE / NOT FOR FABRICATION', (12.7, 17.78), 3),
         ('ESP32-S3: independent IN and DEN for every channel; ADC1 current sense', (330.2, 25.4), 1.5),
         ('USB: battery disconnected for programming. Wi-Fi / BLE / OTA in service.', (330.2, 222.25), 1.5),
-        ('LOGIC: separately fused; no common series switch in branch power paths', (12.7, 232.41), 1.5),
+        ('AUTO + LOGIC: shared fused LM74800 cutoff. BYPASS: raw battery, no electronics.', (12.7, 232.41), 1.5),
         ('OUTPUTS: pin 1 LOAD+, pin 2 GND; direct-entry screw terminals', (330.2, 246.38), 1.5),
         ('9.5–16 V / 40 A aggregate TARGET. Upstream battery fuse required.', (330.2, 370.84), 1.5),
         ('BYPASS connects raw battery through ONE fuse. Move fuses ONLY unpowered.', (12.7, 365.76), 1.5),
-        ('Recovery: all usable channels BYPASS; failed/unused channels fuse REMOVED.', (12.7, 373.38), 1.5),
+        ('Recovery: REMOVE F10 to isolate AUTO electronics; move load fuses to BYPASS.', (12.7, 373.38), 1.5),
+        ('SHARED AUTO/LOGIC PROTECTION — BYPASS remains raw battery', (12.7, 406.4), 2),
+        ('Channel LEDs indicate PROFET output, not the BYPASS load terminal.', (330.2, 386.08), 1.5),
     ]
     for n in range(1, 9):
         x, y = 12.7 + (n-1) % 4 * 76.2, 25.4 + (n-1) // 4 * 93.98
         annotations.append((f'CH{n}: AUTO / BYPASS / REMOVE = OFF', (x, y), 1.5))
     items.extend(sch.text(t, xy, size) for t, xy, size in annotations)
     document = S('kicad_sch', S('version', sch.SCH_VERSION), S('generator', 'eeschema'),
-                 S('generator_version', '10.0'), S('uuid', sch.ROOT_UUID), S('paper', 'A2'),
+                 S('generator_version', '10.0'), S('uuid', sch.ROOT_UUID), S('paper', 'A1'),
                  S('title_block', S('title', 'eswitch simple — passive fuse bypass'),
-                    S('date', '2026-10-26'), S('rev', 'DRAFT-PWR2')),
+                     S('date', '2026-10-27'), S('rev', 'PROTO-PWR3')),
                  S('lib_symbols', *used.values()), *items,
                  S('sheet_instances', S('path', '/', S('page', '1'))), S('embedded_fonts', Sym('no')))
     (HERE / f'{PROJECT}.kicad_sch').write_text(dump(document) + '\n')
@@ -105,6 +107,16 @@ def bom():
         row = parts.setdefault(mpn, dict(mpn=mpn, quantity=0, references=[]))
         row['quantity'] += int(part.fields.get('Quantity', 1))
         row['references'].append(part.ref)
+        if 'HardwareMPN' in part.fields:
+            hardware = part.fields['HardwareMPN']
+            row = parts.setdefault(hardware, dict(mpn=hardware, quantity=0, references=[]))
+            row['quantity'] += int(part.fields['HardwareQuantity'])
+            row['references'].append(part.ref + ' mounting terminals')
+        if 'ClipMPN' in part.fields:
+            hardware = part.fields['ClipMPN']
+            row = parts.setdefault(hardware, dict(mpn=hardware, quantity=0, references=[]))
+            row['quantity'] += int(part.fields['ClipQuantity'])
+            row['references'].append(part.ref + ' spring clips')
     for rating, qty in ((5, 5), (10, 2), (20, 1)):
         mpn = f'02870{rating:02}.PXCN'
         parts[mpn] = dict(mpn=mpn, quantity=qty, references=[f'{rating} A fuse inserts'])
@@ -125,8 +137,8 @@ def bom():
         result.append(item)
     estimate = dict(status='PROVISIONAL_COMPONENT_SUBTOTAL_NOT_ORDER_BOM',
                     price_observation_date=audit['retrieved_utc_date'],
-                    exclusions=['PCB', 'enclosure screws/washers', 'assembly', 'shipping/taxes',
-                                'changes arising from open electrical reviews'],
+                    exclusions=['PCB', 'enclosure and F10 screws/washers/shims', 'assembly', 'shipping/taxes',
+                                'unpriced BOM lines'],
                     fresh_stock_checked=False, lines=result,
                     one_board_usd=float(sum(Decimal(str(r['exact_1_board_usd'] or 0)) for r in result)),
                     three_board_usd=float(sum(Decimal(str(r['exact_3_board_usd'] or 0)) for r in result)),

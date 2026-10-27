@@ -106,6 +106,8 @@ def obstacles(board, code, width, diameter):
     layers = {layer: Raster() for layer in LAYERS}
     power_layers = {layer: Raster() for layer in LAYERS}
     via = Raster()
+    power_vias = Raster()
+    own_via_escapes = Raster()
     # Preserve the reference plane under the existing controlled-impedance USB
     # pair. These guards are derived from actual tracks; the bulk autorouter's
     # temporary rule areas are not present in the saved PCB.
@@ -163,7 +165,9 @@ def obstacles(board, code, width, diameter):
                         raster.polygon(polygon, half)
             # A sparse signal via is allowed through the broad power spreaders.
             # KiCad clears it from foreign pours. Tracks still cannot cut a pour.
-            if protected or (rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_"))):
+            if protected and not rule and getattr(board,'power_pad_escapes',False):
+                power_vias.polygon(polygon, via_radius)
+            elif protected or (rule and (zone.GetDoNotAllowVias() or zone.GetZoneName().startswith("usb_reference_"))):
                 via.polygon(polygon, via_radius)
     # A signal pad inside a power-zone outline already has a clearance opening
     # in the filled copper. Permit a via escape within that pad's copper area;
@@ -174,8 +178,11 @@ def obstacles(board, code, width, diameter):
         for fp in board.GetFootprints():
             for pad in fp.Pads():
                 if pad.GetNetCode()==code and pad.IsOnLayer(layer):
-                    for polygon in pad_polygons(pad,layer):own_pads.polygon(polygon)
+                    for polygon in pad_polygons(pad,layer):
+                        own_pads.polygon(polygon)
+                        own_via_escapes.polygon(polygon)
         layers[layer].data |= power.data & ~own_pads.data
+    via.data |= power_vias.data & ~own_via_escapes.data
     for raster in layers.values():
         raster.edge(0.4 + width / 2 + GUARD)
     via.edge(0.4 + diameter / 2 + GUARD)
